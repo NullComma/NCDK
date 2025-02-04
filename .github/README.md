@@ -1,4 +1,4 @@
-![Project Thumbnail](https://chrisdbhr.github.io/images/thumbs/enigmacore.png)
+![Project Thumbnail](https://chrisdbhr.github.io/images/thumbs/EnigmaCore.png)
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/chrisdbhr/cdk)
 [![GitHub license](https://img.shields.io/github/license/chrisdbhr/cdk)](https://github.com/chrisdbhr/cdk/blob/master/LICENSE)
