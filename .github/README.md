@@ -1,26 +1,26 @@
 ![Project Thumbnail](https://chrisdbhr.github.io/images/thumbs/EnigmaCore.png)
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/chrisdbhr/cdk)
-[![GitHub license](https://img.shields.io/github/license/chrisdbhr/cdk)](https://github.com/chrisdbhr/cdk/blob/master/LICENSE)
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/unity/chrisdbhr/cdk)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/chrisdbhr/cdk)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/EnigmaticComma/EnigmaCore)
+[![GitHub license](https://img.shields.io/github/license/EnigmaticComma/EnigmaCore)](https://github.com/EnigmaticComma/EnigmaCore/blob/master/LICENSE)
+![GitHub package.json dynamic](https://img.shields.io/github/package-json/unity/EnigmaticComma/EnigmaCore)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/EnigmaticComma/EnigmaCore)
 
 
-CDK (Chris Development Kit) is a useful set of tools to speedup development of core Unity games mechanics.
+Enigma Core for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.
 
 It's being used in my main current game project "[Resultarias](https://chrisjogos.com/resultarias)", a surrealist game about dream exploration.
 Check more information about my other projects on [my website](https://chrisjogos.com)!
 
 ### What is this repository for? ###
 
-* Host the latest version of the CDK.
+* Host the latest version of the EnigmaCore.
 * Track issues.
 
 ### How do I get set up? ###
 
-* [Recommended] Install from UPM using the git URL ``https://github.com/Chrisdbhr/CDK.git``
+* [Recommended] Install from UPM using the git URL ``https://github.com/EnigmaticComma/EnigmaCore.git``
 
-* Import this as a submodule inside ``Assets/CDK/`` folder OR download [this](https://github.com/Chrisdbhr/CDK/archive/master.zip) and put inside ``Assets/CDK/`` folder.
+* Import this as a submodule inside ``Assets/EnigmaCore/`` folder OR download [this](https://github.com/EnigmaticComma/EnigmaCore/archive/master.zip) and put inside ``Assets/EnigmaCore/`` folder.
 
 ### Dependencies
 
