@@ -1,7 +1,6 @@
 ![Project Thumbnail](https://chrisdbhr.github.io/images/thumbs/EnigmaCore.png)
 
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/EnigmaticComma/EnigmaCore)
-[![GitHub license](https://img.shields.io/github/license/EnigmaticComma/EnigmaCore)](https://github.com/EnigmaticComma/EnigmaCore/blob/master/LICENSE)
 ![GitHub package.json dynamic](https://img.shields.io/github/package-json/unity/EnigmaticComma/EnigmaCore)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/EnigmaticComma/EnigmaCore)
 
