@@ -166,8 +166,8 @@ namespace EnigmaCore {
 			this.DrawDefaultInspector();
 
 			if (!(target is CChildrenPositionAndRotationRandomizer myScript)) return;
-			if(GUILayout.Button(nameof(CTransformExtensions.CDestroyAllChildren))) {
-				myScript.transform.CDestroyAllChildren();
+			if(GUILayout.Button(nameof(TransformExtensions.DestroyAllChildren))) {
+				myScript.transform.DestroyAllChildren();
 			}
             if(GUILayout.Button(nameof(CChildrenPositionAndRotationRandomizer.RandomizeScalesEditor))) {
                 myScript.RandomizeScalesEditor();

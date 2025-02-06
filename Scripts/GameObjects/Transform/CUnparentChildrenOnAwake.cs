@@ -8,7 +8,7 @@ namespace EnigmaCore {
 
         void Unparent() {
             transform.SetAsLastSibling();
-            transform.CUnparentAllChildren();
+            transform.UnparentAllChildren();
         }
     }
 }

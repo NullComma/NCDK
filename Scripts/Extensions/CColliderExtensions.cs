@@ -28,7 +28,7 @@ namespace EnigmaCore {
                     break;
             }
             
-            go.transform.CResetTransform();
+            go.transform.ResetTransform();
 
         }
         

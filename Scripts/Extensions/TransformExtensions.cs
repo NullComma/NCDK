@@ -5,9 +5,9 @@ using UnityEditor;
 #endif
 
 namespace EnigmaCore {
-	public static class CTransformExtensions {
+	public static class TransformExtensions {
 
-        public static void CRotateTowardsDirection(this Transform t, Vector3 dir, float maxDegreesDelta, float timeScale = 1f) {
+        public static void RotateTowardsDirection(this Transform t, Vector3 dir, float maxDegreesDelta, float timeScale = 1f) {
             if (timeScale == 0f) return;
             dir.y = 0f;
             if (dir == Vector3.zero) return;
@@ -20,18 +20,18 @@ namespace EnigmaCore {
             );
         }
 
-		public static void CDestroyAllChildren(this Transform t)
+		public static void DestroyAllChildren(this Transform t)
         {
             if (t == null) return;
 			t.gameObject.CDestroyAllChildren();
 		}
 
-        public static Transform CGetParentOrSelf(this Transform t) {
+        public static Transform GetParentOrSelf(this Transform t) {
             var target = t.parent;
             return target != null ? target : t;
         }
         
-        public static void CSetRotationToInverseNormal(this Transform t, Vector3 checkDirection, float checkDistance, LayerMask layerMask) {
+        public static void SetRotationToInverseNormal(this Transform t, Vector3 checkDirection, float checkDistance, LayerMask layerMask) {
             if (t == null) return;
             if (!Physics.Raycast(t.position, checkDirection, out var hit, checkDistance, layerMask)) return;
             var target = Quaternion.FromToRotation(t.up, hit.normal);
@@ -39,12 +39,12 @@ namespace EnigmaCore {
             t.rotation = target;
         }
 
-        public static void CAssertIfScaleIsNotOne(this Transform t) {
+        public static void AssertIfScaleIsNotOne(this Transform t) {
             if (t.localScale.CIsOne()) return;
             Debug.LogError($"Transform '{t.name}' is not one!");
         }
         
-        public static bool CAssertIfNotRoot(this Transform t, string message = null) {
+        public static bool AssertIfNotRoot(this Transform t, string message = null) {
             var isRoot = t.parent == null;
             if (!isRoot) {
                 Debug.LogError($"Transform is not root ({message})");
@@ -52,7 +52,7 @@ namespace EnigmaCore {
             return !isRoot;
         }
         
-        public static bool CAssertLocalPositionIsNotZero(this Transform t, string message = null) {
+        public static bool AssertLocalPositionIsNotZero(this Transform t, string message = null) {
             var isZero = t.localPosition.CIsZero();
             if (!isZero) {
                 Debug.LogError($"Transform local position is not zero ({message})");
@@ -60,18 +60,18 @@ namespace EnigmaCore {
             return !isZero;
         }
 
-        public static void CUnparentAllChildren(this Transform t) {
+        public static void UnparentAllChildren(this Transform t) {
             if (t == null) return;
             t.gameObject.CUnparentAllChildren();
         }
 
-        public static void CResetTransform(this Transform t) {
+        public static void ResetTransform(this Transform t) {
             if (t == null) return;
             t.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
             t.localScale = Vector3.one;
         }
 
-        public static Vector3 CGetRelative3dPlanarDirection(this Transform t, Vector3 dir)
+        public static Vector3 GetRelative3dPlanarDirection(this Transform t, Vector3 dir)
         {
             var forward = t.forward;
             var right = t.right;
