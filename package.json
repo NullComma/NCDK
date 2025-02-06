@@ -1,26 +1,26 @@
 {
-    "name": "com.chrisdbhr.cdk",
-    "displayName": "CDK - Chris Development Kit",
-    "version": "5.0.9",
-    "unity": "2022.3",
-    "description": "Chris Development Kit is a useful set of tools to speedup development of core Unity games mechanics. This code is shared between all my projects and it is in active update and improvement.",
-    "licensesUrl": "https://github.com/Chrisdbhr/CDK/blob/master/LICENSE",
-    "author": {
-        "name": "Christopher Hernandez",
-        "url": "https://github.com/chrisdbhr"
-    },
-    "dependencies": {
-      "com.unity.nuget.newtonsoft-json" : "3.2.1",
-      "jillejr.newtonsoft.json-for-unity.converters": "1.6.3",
-      "com.gustavopsantos.reflex": "9.0.1"
-    },
-    "keywords": [
-        "devkit",
-		"tools",
-		"prototyping",
-		"fast",
-		"base",
-		"toolkit",
-		"extensions"
-    ]
+  "name": "com.enigmaticcomma.core",
+  "displayName": "Enigma Core",
+  "version": "5.0.10",
+  "unity": "2022.3",
+  "description": "Enigma Core for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.",
+  "licensesUrl": "https://github.com/EnigmaticComma/EnigmaCore/blob/master/.github/LICENSE",
+  "author": {
+    "name": "Christopher Ravailhe - Enigmatic Comma",
+    "url": "https://github.com/EnigmaticComma"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "jillejr.newtonsoft.json-for-unity.converters": "1.6.3",
+    "com.gustavopsantos.reflex": "9.0.1"
+  },
+  "keywords": [
+    "devkit",
+    "tools",
+    "prototyping",
+    "fast",
+    "base",
+    "toolkit",
+    "extensions"
+  ]
 }
