@@ -1,4 +1,4 @@
-namespace CDK {
+namespace EnigmaCore {
 	public static partial class CInputKeys {
 		public const string MOV_X = "Horizontal";
 		public const string MOV_Y = "Vertical";

@@ -5,7 +5,7 @@ using UnityEditor.SceneManagement;
 using UnityEditor;
 using System.Linq;
 
-namespace CDK.Editor {
+namespace EnigmaCore.Editor {
     [CustomEditor(typeof(CMultiSceneSetup))]
     public class CCMultiSceneSetupEditor : UnityEditor.Editor
     {

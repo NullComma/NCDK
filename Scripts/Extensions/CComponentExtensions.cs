@@ -1,7 +1,7 @@
 ﻿using Unity.Linq;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CComponentExtensions {
 
         public static T CGetComponentInChildrenOrInParent<T>(this Component comp, bool includeInactive = false) {

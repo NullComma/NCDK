@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace CDK
+namespace EnigmaCore
 {
     public class CMonoBehaviour : MonoBehaviour
     {

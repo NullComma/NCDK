@@ -1,10 +1,10 @@
 using System;
 using System.Collections;
-using CDK.Damage;
-using CDK.Data;
+using EnigmaCore.Damage;
+using EnigmaCore.Data;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	/// <summary>
 	/// Makes something have health, can be hit and die.
 	/// </summary>

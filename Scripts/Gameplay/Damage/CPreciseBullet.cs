@@ -1,8 +1,8 @@
 ﻿using System;
-using CDK.Damage;
+using EnigmaCore.Damage;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CPreciseBullet : CDamageDealerTrigger {
 
         [Range(1, 20), SerializeField] float autoDestroyAfter = 3f;

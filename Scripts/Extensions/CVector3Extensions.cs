@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CVector3Extensions {
 
 		public static float GetAbsBiggerValue(this Vector3 vec) {

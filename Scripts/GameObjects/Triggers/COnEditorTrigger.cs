@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class COnEditorTrigger : CAutoTriggerCompBase {
 
 		[SerializeField] CUnityEventBool _isOnEditorEvent;

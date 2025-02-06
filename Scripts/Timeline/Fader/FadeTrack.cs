@@ -2,7 +2,7 @@
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace CDK.Timeline {
+namespace EnigmaCore.Timeline {
     [TrackClipType(typeof(FadeData))]
     [TrackBindingType(typeof(FadeController))]
     [TrackColor(0f,0f,0f)]

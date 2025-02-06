@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CGameObjectSineLocalMovement : CMonoBehaviourUpdateExecutionLoopTime {
 		
 		[SerializeField] private Vector3 _sineDirectionAndMagnitude = Vector3.up * 0.5f;

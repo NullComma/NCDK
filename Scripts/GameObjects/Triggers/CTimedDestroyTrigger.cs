@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CTimedDestroyTrigger : CAutoTriggerCompBase {
 		[SerializeField][Range(0f, 600f)] float _secondsToDestroy = 5f;
         [SerializeField] bool _shouldLog = true;

@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CEventSystemExtensions {
 		
 		public static EventSystem GetFirstActiveEventSystem() {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CRandomTorque : CAutoTriggerCompBase {
 		
 		[SerializeField] private Vector3 _torqueRangeMin = new Vector3(0f,-1f,0f);

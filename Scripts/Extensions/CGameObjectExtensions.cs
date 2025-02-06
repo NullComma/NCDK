@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CGameObjectExtensions {
         
         public static T CGetOrAddComponent<T>(this GameObject go) where T : Component {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CTransformExtensions {
 
         public static void CRotateTowardsDirection(this Transform t, Vector3 dir, float maxDegreesDelta, float timeScale = 1f) {

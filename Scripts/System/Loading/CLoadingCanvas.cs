@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CLoadingCanvas : MonoBehaviour {
 
         #region <<---------- Properties and Fields ---------->>

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	[RequireComponent(typeof(Rigidbody))]
 	public class CRigidbodySetVelocityTrigger : CAutoTriggerCompBase {
 		[SerializeField] Vector3 _setVelocityAmount = Vector3.forward;

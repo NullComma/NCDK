@@ -1,7 +1,7 @@
 ﻿using UnityEditor.Timeline;
 using UnityEngine.Timeline;
 
-namespace CDK.Timeline {
+namespace EnigmaCore.Timeline {
     [CustomTimelineEditor(typeof(FadeData))]
     public class FadeDataEditor : ClipEditor {
 

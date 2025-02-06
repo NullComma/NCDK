@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 using FMODUnity;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     [RequireComponent(typeof(PlayableDirector))]
     public class CSplashScreen : CMonoBehaviour {
 

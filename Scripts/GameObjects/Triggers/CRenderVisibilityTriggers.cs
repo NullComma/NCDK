@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CRenderVisibilityTriggers : MonoBehaviour
 	{
 		[SerializeField] bool _debug;

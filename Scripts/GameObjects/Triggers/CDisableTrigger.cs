@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CDisableTrigger : MonoBehaviour {
 		[SerializeField] UnityEvent TriggerEvent;
 

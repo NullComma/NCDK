@@ -1,8 +1,8 @@
-using CDK.UI;
+using EnigmaCore.UI;
 using Reflex.Attributes;
 using UnityEngine;
 
-namespace CDK.Interaction {
+namespace EnigmaCore.Interaction {
 	public class CInteractable : MonoBehaviour, ICInteractable {
 
 		#region <<---------- Properties and Fields ---------->>

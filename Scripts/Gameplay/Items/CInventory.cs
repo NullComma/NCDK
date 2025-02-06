@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.AddressableAssets;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CInventory : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

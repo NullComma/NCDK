@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CClockGameObject : MonoBehaviour {
 	
 		public int seconds = 0;

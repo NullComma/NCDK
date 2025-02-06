@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	[RequireComponent(typeof(TextMeshProUGUI))]
 	public class CSetGameObjectNameFromTMProInputTextEditor : MonoBehaviour {
 

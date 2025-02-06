@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     /// <summary>
     /// Makes an object be a selection base.
     /// </summary>

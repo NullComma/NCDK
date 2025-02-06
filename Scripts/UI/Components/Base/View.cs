@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Object = UnityEngine.Object;
 
-namespace CDK.UI {
+namespace EnigmaCore.UI {
 	public abstract class View : CMonoBehaviour {
 
 		#region <<---------- Properties and Fields ---------->>

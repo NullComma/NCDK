@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	[JsonObject(MemberSerialization.OptIn)]
 	public abstract class CPersistentData {
 

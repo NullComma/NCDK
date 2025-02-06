@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using CDK.Damage;
-using CDK.Data;
+using EnigmaCore.Damage;
+using EnigmaCore.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CDamageDealerTrigger : MonoBehaviour, ICDamageDealer {
 
 		#region <<---------- Initializers ---------->>

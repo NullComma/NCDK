@@ -18,7 +18,7 @@ using UnityEditor;
 using FMODUnity;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     [DefaultExecutionOrder(-100)]
     public static class CApplication {
 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     [DefaultExecutionOrder(350)]
 	public class CTransformFollower : MonoBehaviour {
 

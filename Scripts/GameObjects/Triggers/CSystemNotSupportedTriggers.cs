@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CSystemNotSupportedTriggers : MonoBehaviour {
         
         [Header("Event will be invoked if feature is not supported")]

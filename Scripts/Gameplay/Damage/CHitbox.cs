@@ -1,10 +1,10 @@
 ﻿using System;
-using CDK.Damage;
-using CDK.Data;
+using EnigmaCore.Data;
+using EnigmaCore.Damage;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CHitbox : MonoBehaviour, ICDamageable {
 
 		public const float CriticalMultiplier = 1.5f;

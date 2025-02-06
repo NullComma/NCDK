@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public abstract class CEquipableBaseScriptableObject : CItemBaseScriptableObject {
 		public enum AnimEquipStringType {
 			noEquip, equipPistol, equipShotgun

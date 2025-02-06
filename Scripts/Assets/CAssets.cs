@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CAssets {
 
         #region <<---------- Load From Resources ---------->>

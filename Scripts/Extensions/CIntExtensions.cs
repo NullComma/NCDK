@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CIntExtensions {
         
         public static int CAbs(this int value) {

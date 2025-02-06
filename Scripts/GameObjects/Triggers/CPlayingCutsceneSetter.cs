@@ -2,7 +2,7 @@
 using Reflex.Attributes;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     [Obsolete("Use PlayableHelper instead")]
 	public class CPlayingCutsceneSetter : MonoBehaviour {
 

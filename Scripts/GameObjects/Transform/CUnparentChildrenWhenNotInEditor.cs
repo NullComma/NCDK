@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CUnparentChildrenWhenNotInEditor : CUnparentChildrenOnAwake {
         protected override void Awake() {
             if (Application.isEditor) return;

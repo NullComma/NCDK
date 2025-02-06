@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using Sirenix.OdinInspector;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CStartTrigger : MonoBehaviour{
         
         [SerializeField, Min(0f)] float _delay;

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CSnapToRaycastPointOnAwake : CAutoTriggerCompBase {
 
         [SerializeField] private Vector3 _globalDirection = Vector3.down;

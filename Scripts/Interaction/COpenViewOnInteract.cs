@@ -1,9 +1,9 @@
-﻿using CDK.Interaction;
-using CDK.UI;
+﻿using EnigmaCore.Interaction;
+using EnigmaCore.UI;
 using Reflex.Attributes;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class COpenViewOnInteract : CInteractable {
 
         [SerializeField] View _viewToOpen;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace CDK.GameObjects {
+namespace EnigmaCore.GameObjects {
     public class CRandomizeScaleOnEnable : MonoBehaviour {
 
         [SerializeField, Min(0.01f)] private float _minValue = 0.01f;

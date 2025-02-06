@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CTexture2DExtensions {
 
 		private static int _windowSize;

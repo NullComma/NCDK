@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CDestroyOnContact : CPhysicsTrigger {
 
         [SerializeField] private GameObject[] _otherGameObjectsToDestroy;

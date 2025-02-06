@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CTaskExtensions {
 
 		public static async void CAwait(this Task task, bool continueOnCapturedContext = true)

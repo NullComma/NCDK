@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CColliderExtensions {
 
         public static void CCloneColliderAsChild(this Collider col, LayerMask newLayer) {

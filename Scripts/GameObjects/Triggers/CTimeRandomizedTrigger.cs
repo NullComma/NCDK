@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CTimeRandomizedTrigger : MonoBehaviour {
 
         [SerializeField, Min(0f)] float _firstMinTime = 5f;

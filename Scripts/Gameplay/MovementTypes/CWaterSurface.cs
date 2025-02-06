@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CWaterSurface : CPhysicsTrigger {
         protected override void StartedCollisionOrTrigger(Transform transf) {
             base.StartedCollisionOrTrigger(transf);

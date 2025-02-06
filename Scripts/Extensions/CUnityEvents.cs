@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CDK {
+namespace EnigmaCore {
     
     [Serializable]
     public class CUnityEvent : UnityEvent {}

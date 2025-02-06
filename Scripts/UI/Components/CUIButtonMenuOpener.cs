@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace CDK.UI {
+namespace EnigmaCore.UI {
     public class CUIButtonMenuOpener : CUIButton {
 
         [SerializeField] View _menuToOpen;

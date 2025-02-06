@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CCollectableAmmoGameObject : CCollectableItemGameObject{
 	
 		[SerializeField] CAmmoData AmmoHere;

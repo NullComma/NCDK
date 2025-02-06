@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CDK
+namespace EnigmaCore
 {
     public static class Disposables {
         public static IDisposable Empty { get; } = new EmptyDisposable();

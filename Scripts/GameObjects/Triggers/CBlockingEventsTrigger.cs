@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     public class CBlockingEventsTrigger : MonoBehaviour {
 
         #if ODIN_INSPECTOR

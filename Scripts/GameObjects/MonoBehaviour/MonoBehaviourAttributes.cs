@@ -1,4 +1,4 @@
-﻿namespace CDK
+﻿namespace EnigmaCore
 {
     [System.AttributeUsage(System.AttributeTargets.All, Inherited = false)]
     public class GetComponentAttribute : System.Attribute { }

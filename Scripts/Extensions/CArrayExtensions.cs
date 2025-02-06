@@ -1,6 +1,6 @@
 using System;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CArrayExtensions {
 		
 		public static bool ContainsIndex(this Array array, int index, int dimension) {

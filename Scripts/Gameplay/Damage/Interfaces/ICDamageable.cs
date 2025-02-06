@@ -1,7 +1,7 @@
-using CDK.Data;
+using EnigmaCore.Data;
 using UnityEngine;
 
-namespace CDK.Damage {
+namespace EnigmaCore.Damage {
 	public interface ICDamageable {
 		public CHealthComponent Health { get; }
 		/// <summary>

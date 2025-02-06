@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using CDK.UI;
+using EnigmaCore.UI;
 using Reflex.Core;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     [AddComponentMenu("CDK/DI/CDK ProjectInstaller")]
     public class ProjectInstaller : MonoBehaviour, IInstaller
     {

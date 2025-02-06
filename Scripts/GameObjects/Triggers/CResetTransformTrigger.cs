@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CResetTransformTrigger : MonoBehaviour {
 
 		public void ResetRotation(Transform target) {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEditor;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CEditorPlayerSettings {
 
         public static void RaiseBuildVersion() {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CDK {
+namespace EnigmaCore {
 	
 	/// <summary>
 	/// All values are normalized.

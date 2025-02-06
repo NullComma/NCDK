@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     [ExecuteInEditMode]
     public class CBakeSceneOnOpenEditor : MonoBehaviour {
         private void Awake() {

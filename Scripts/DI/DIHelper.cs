@@ -4,7 +4,7 @@ using Reflex.Injectors;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace CDK {
+namespace EnigmaCore {
     /// <summary>
     /// Dependency Injection helper.
     /// </summary>

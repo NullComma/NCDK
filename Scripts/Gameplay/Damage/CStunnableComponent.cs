@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using CDK.Enums;
+using EnigmaCore.Enums;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	/// <summary>
 	/// Game object with this component can be stunned.
 	/// </summary>

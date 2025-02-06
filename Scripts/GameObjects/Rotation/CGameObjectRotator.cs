@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CGameObjectRotator : CMonoBehaviourUpdateExecutionLoopTime {
 
 		#region <<---------- Properties and Fields ---------->>

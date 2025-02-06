@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CSingletonHelper {
         
         public static T CreateInstance<T>(string gameObjectName) where T : MonoBehaviour {

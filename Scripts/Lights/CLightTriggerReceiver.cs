@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK.Lights {
+namespace EnigmaCore.Lights {
 	[RequireComponent(typeof(Collider))]
 	public class CLightTriggerReceiver : MonoBehaviour {
 		

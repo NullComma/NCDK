@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CBooleanReverseTrigger : MonoBehaviour {
 
 		[SerializeField] CUnityEventBool _reversedBoolEvent;

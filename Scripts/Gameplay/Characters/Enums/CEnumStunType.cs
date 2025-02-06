@@ -1,4 +1,4 @@
-namespace CDK.Characters.Enums {
+namespace EnigmaCore.Characters.Enums {
 	public enum CEnumStunType {
 		light, medium, heavy
 	}

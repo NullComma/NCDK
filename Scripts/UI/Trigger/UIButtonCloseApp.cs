@@ -1,4 +1,4 @@
-namespace CDK.UI
+namespace EnigmaCore.UI
 {
     public class UIButtonCloseApp : CUIButton
     {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEditor;
 #endif
 
-namespace CDK.UI {
+namespace EnigmaCore.UI {
 	[RequireComponent(typeof(Button))]
 	public class CUIButton : CUIInteractable {
 		public Button Button;

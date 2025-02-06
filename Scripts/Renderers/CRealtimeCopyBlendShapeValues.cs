@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CDK.Renderers {
+namespace EnigmaCore.Renderers {
     [ExecuteInEditMode]
     [RequireComponent(typeof(SkinnedMeshRenderer))]
     public class CRealtimeCopyBlendShapeValues : MonoBehaviour {

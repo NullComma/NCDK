@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     [DefaultExecutionOrder(351)]
     public class CCopyTransformRotation : CMonoBehaviourUpdateExecutionLoopTime {
 

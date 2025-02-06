@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CMonoBehaviourExtensions {
 		
 		public static Coroutine CStartCoroutine(this MonoBehaviour monoBehaviour, IEnumerator coroutine) {

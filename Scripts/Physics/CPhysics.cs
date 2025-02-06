@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public abstract class CPhysics {
         
         public const float DefaultGravityY = -9.81f;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CAvatarIKGoalExtensions {
 		public static bool IsFoot(this AvatarIKGoal value) {
 			return value == AvatarIKGoal.LeftFoot || value == AvatarIKGoal.RightFoot;

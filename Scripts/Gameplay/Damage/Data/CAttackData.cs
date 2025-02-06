@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace CDK.Data {
+namespace EnigmaCore.Data {
 	[System.Serializable]
 	public class CAttackData {
 

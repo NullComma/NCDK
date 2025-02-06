@@ -3,7 +3,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CDK.Editor {
+namespace EnigmaCore.Editor {
     public class AvatarMaker {
         [MenuItem("Tools/Avatar Mask/Make Avatar Mask")]
         private static void MakeAvatarMask() {

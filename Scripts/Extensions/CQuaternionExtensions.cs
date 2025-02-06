@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CQuaternionExtensions {
 
         public static Quaternion CLerp(this Quaternion a, Quaternion b, float t) {

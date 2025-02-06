@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace CDK.Timeline {
+namespace EnigmaCore.Timeline {
 
     [System.Serializable]
     public class FadeDataPlayable : PlayableBehaviour {

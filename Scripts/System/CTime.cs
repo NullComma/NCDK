@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CTime {
 		
 		/// <summary>

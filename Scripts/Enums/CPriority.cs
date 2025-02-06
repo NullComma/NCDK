@@ -1,4 +1,4 @@
-namespace CDK {
+namespace EnigmaCore {
 	public enum CPriority {
 		/// <summary>
 		///   <para>Lowest priority.</para>

@@ -14,7 +14,7 @@ using FMOD.Studio;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 #endif
 
-namespace CDK.UI {
+namespace EnigmaCore.UI {
 	public class CUIInteractable : MonoBehaviour, ISelectHandler, ISubmitHandler, ICancelHandler,
 	                               IPointerEnterHandler, IPointerClickHandler, IDeselectHandler {
        

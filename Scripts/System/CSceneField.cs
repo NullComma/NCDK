@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace CDK {
+namespace EnigmaCore {
 	[Serializable]
 	public class CSceneField : ISerializationCallbackReceiver {
         

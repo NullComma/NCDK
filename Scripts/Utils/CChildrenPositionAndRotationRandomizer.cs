@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CChildrenPositionAndRotationRandomizer : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

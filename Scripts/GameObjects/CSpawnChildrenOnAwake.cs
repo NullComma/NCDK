@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CSpawnChildrenOnAwake : MonoBehaviour {
         
         [SerializeField] private int _amount = 10;

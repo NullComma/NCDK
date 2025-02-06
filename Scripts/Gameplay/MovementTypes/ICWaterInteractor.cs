@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public interface ICWaterInteractor {
         void OnEnterWater(Transform waterTransform);
         void OnExitWater(Transform waterTransform);

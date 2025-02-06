@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CDK.Editor {
+namespace EnigmaCore.Editor {
     public static class CPrintSelectedObjectLayer {
         [MenuItem("CONTEXT/Component/Print this object layer int value")]
         private static void RenameGameObjectWithThisComponentName(MenuCommand data) {

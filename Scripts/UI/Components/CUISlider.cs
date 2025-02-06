@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace CDK.UI {
+namespace EnigmaCore.UI {
 	[RequireComponent(typeof(Slider))]
 	public class CUISlider : CUIInteractable, IMoveHandler {
 

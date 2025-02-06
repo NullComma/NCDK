@@ -2,7 +2,7 @@ using System;
 using Reflex.Core;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	[Obsolete("This class will be removed in future versions, was only used with Rewired.")]
 	public class CInputManager {
 

@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 
-namespace CDK.Editor {
+namespace EnigmaCore.Editor {
     public class CFindScenesToOpenEditor : EditorWindow {
                
         #region <<---------- Properties and Fields ---------->>

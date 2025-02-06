@@ -4,7 +4,7 @@
 using UnityEditor;
 #endif
 
-namespace CDK
+namespace EnigmaCore
 {
     public static class CScriptableObjectExtensions
     {

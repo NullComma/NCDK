@@ -7,7 +7,7 @@ using System.Linq;
 using FMODUnity;
 #endif
 
-namespace CDK.Audio {
+namespace EnigmaCore.Audio {
 	#if FMOD
 	[RequireComponent(typeof(StudioEventEmitter))]
 	#endif

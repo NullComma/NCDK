@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CConst {
 		public const string EDITOR_SCRIPTABLEOBJECT_CREATION_PREFIX = "ScriptableObject/";
 

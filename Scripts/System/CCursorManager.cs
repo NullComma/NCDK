@@ -1,7 +1,7 @@
 using UnityEngine;
 using Reflex.Core;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CCursorManager {
 
         #region <<---------- Properties and Fields ---------->>

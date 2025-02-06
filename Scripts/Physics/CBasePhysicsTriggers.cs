@@ -5,7 +5,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	public abstract class CBasePhysicsTriggers : MonoBehaviour {
 	
 		[SerializeField] [CTagSelector] protected string _tag = "Player";

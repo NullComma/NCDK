@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CDK
+namespace EnigmaCore
 {
     [RequireComponent(typeof(TMP_Text))]
     public class CTextStringFromFloatTrigger : MonoBehaviour

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	
 	[ExecuteInEditMode]
 	public class CVersionNumberGetter : MonoBehaviour {

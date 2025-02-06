@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CObjectExtensions {
 
         public static string CGetNameSafe(this Object o, string fallback = "null") {

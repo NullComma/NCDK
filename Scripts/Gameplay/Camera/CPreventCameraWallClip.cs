@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CPreventCameraWallClip : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

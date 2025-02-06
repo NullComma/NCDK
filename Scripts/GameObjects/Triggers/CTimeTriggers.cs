@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CTimeTriggers : MonoBehaviour {
 
 		[Header("Booleans")]

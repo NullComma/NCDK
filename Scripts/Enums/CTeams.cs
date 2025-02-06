@@ -1,6 +1,6 @@
 using System;
 
-namespace CDK {
+namespace EnigmaCore {
 	public enum Teams {
 		NEUTRAL_GAYA = 0,
 		PLAYER = 1,

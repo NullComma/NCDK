@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CAnimatorExtensions {
 
         /// <summary>

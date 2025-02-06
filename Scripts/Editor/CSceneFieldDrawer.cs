@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace CDK {
+namespace EnigmaCore {
 	[CustomPropertyDrawer(typeof(CSceneField))]
 	public class CSceneFieldPropertyDrawer : PropertyDrawer {
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {

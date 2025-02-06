@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Playables;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CPlayableDirectorExtensions {
 
 		public static void CSetAsActiveAndPlay(this PlayableDirector p) {

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CInventoryViewItemOptionsMenu : MonoBehaviour {
 
 		[SerializeField] RectTransform _viewItensParent;

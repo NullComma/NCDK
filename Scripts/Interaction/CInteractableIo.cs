@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CDK.Interaction {
+namespace EnigmaCore.Interaction {
     [Obsolete("This script needs revision")]
 	public class CInteractableIo : CInteractable {
 

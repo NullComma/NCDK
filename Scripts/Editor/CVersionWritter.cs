@@ -5,7 +5,7 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEditor.Callbacks;
 
-namespace CDK {
+namespace EnigmaCore {
 	
 	/// <summary>
 	/// From https://forum.unity.com/threads/how-can-i-get-bundle-version-and-bundle-version-code-through-script.68331/#post-6497023

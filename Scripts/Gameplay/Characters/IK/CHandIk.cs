@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CHandIk : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

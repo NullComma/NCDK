@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CBlockingEventsManager {
                 
 		public bool InMenuOrPlayingCutscene => IsInMenu || IsPlayingCutscene;

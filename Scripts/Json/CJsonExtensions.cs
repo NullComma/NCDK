@@ -6,7 +6,7 @@ using Newtonsoft.Json.UnityConverters.Math;
 using UnityEngine;
 using UnityEngine.Scripting;
 
-namespace CDK {
+namespace EnigmaCore {
     [Preserve]
 	public static class CJsonExtensions {
 	

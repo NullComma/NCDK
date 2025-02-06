@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CGameObjectLinearForwardMove : CMonoBehaviourUpdateExecutionLoopTime {
 
 		[SerializeField] private float _moveSpeed = 8f;

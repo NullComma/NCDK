@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CDK
+namespace EnigmaCore
 {
     public class GameObjectCreatorTrigger : CAutoTriggerCompBase
     {

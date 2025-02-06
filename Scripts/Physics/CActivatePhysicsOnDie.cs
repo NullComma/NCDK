@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     [RequireComponent(typeof(Rigidbody))]
     public class CActivatePhysicsOnDie : CHealthComponent {
 

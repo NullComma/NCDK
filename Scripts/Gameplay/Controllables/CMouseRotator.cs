@@ -2,7 +2,7 @@
 using Reflex.Attributes;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CMouseRotator : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

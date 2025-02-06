@@ -12,7 +12,7 @@ using FMODUnity;
 using UnityEditor;
 #endif
 
-namespace CDK.Scripts.Lights {
+namespace EnigmaCore.Scripts.Lights {
     [RequireComponent(typeof(Light))]
     public class CFlickeringLight : MonoBehaviour {
         

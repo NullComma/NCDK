@@ -5,7 +5,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CBuildProcessMethods : IPostprocessBuildWithReport {
 
         public int callbackOrder => 1;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CInventoryView : MonoBehaviour {
 
 		#region <<---------- Properties and Fields ---------->>

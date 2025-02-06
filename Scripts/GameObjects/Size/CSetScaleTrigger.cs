@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK.GameObjects {
+namespace EnigmaCore.GameObjects {
     public class CSetScaleTrigger : MonoBehaviour {
 
         [SerializeField] private Vector3 _targetLocalScale = Vector3.one;

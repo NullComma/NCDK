@@ -1,5 +1,5 @@
 
-namespace CDK {
+namespace EnigmaCore {
 	public interface CIItemBase {
 
 		CItemBaseScriptableObject GetScriptableObject();

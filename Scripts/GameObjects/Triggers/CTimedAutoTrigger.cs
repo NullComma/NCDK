@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CTimedAutoTrigger : CAutoTriggerCompBase {
 
         [SerializeField, Min(0f)] float _secondsToTrigger = 5f;

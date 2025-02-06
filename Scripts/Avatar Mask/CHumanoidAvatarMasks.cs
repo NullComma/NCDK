@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace CDK.AvatarMask {
+namespace EnigmaCore.AvatarMask {
     public static class CHumanoidAvatarMasks {
 
         static AvatarMaskBodyPart[] AllAvatarMaskBodyPart = Enum.GetValues(typeof(AvatarMaskBodyPart)).Cast<AvatarMaskBodyPart>().ToArray();

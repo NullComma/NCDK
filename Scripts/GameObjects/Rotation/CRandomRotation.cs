@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CRandomRotation : CAutoTriggerCompBase {
 
         [SerializeField] private Vector3 _rotationMin;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CEnumExtensions {
 
 		public static IEnumerable<T> CGetValues<T>() {

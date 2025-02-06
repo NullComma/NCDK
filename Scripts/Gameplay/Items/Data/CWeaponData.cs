@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	[System.Serializable]
 	public class CWeaponData : CIItemBase {
 		

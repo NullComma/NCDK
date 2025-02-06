@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CDK
+namespace EnigmaCore
 {
     [RequireComponent(typeof(Animator))]
     public class CRootMotionReceiver : MonoBehaviour

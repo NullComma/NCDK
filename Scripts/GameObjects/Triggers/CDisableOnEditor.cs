@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CDisableOnEditor : MonoBehaviour {
         #if UNITY_EDITOR
         void Awake() {

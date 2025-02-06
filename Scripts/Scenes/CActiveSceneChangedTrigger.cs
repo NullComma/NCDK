@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CActiveSceneChangedTrigger : CEventTrigger{
 
 		public void OnEnable() {

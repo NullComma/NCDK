@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace CDK {
+namespace EnigmaCore {
     // From https://stackoverflow.com/a/53954045/7485017
     [Serializable]
     [DebuggerDisplay("Count = {" + nameof(Count) + "}, Limit = {" + nameof(Limit) + "}")]

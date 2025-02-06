@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace CDK {
+namespace EnigmaCore {
 	[CreateAssetMenu(fileName = "Hit info", menuName = CConst.EDITOR_SCRIPTABLEOBJECT_CREATION_PREFIX + "Hit info data", order = 51)]
 	public class CHitInfoData : ScriptableObject {
 		

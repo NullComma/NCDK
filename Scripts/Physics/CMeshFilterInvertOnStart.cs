@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CMeshFilterInvertOnStart : MonoBehaviour {
 
         [SerializeField] private MeshFilter[] _meshesToInvert;

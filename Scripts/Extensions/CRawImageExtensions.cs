@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CRawImageExtensions {
         
        

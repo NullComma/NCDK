@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CReflectionHelpers {
 		
 		// Code by @Bunny83 from this Unity Answer: https://answers.unity.com/questions/983125/c-using-reflection-to-automate-finding-classes.html

@@ -1,9 +1,9 @@
-using CDK.Damage;
-using CDK.Data;
+using EnigmaCore.Damage;
+using EnigmaCore.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace CDK {
+namespace EnigmaCore {
 	[CreateAssetMenu(fileName = "ammo_", menuName = CConst.EDITOR_SCRIPTABLEOBJECT_CREATION_PREFIX + "Ammo data", order = 51)]
 	public class CAmmoScriptableObject : CItemBaseScriptableObject, ICDamageDealer {
 		public CAttackData AttackData {

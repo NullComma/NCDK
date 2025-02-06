@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     [RequireComponent(typeof(Collider))]
     public class CWaterReceiver : MonoBehaviour, ICWaterInteractor {
 

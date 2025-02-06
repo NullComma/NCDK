@@ -1,7 +1,7 @@
-using CDK;
+using EnigmaCore;
 using UnityEngine;
 
-namespace CDK.Lights {
+namespace EnigmaCore.Lights {
 	[RequireComponent(typeof(Collider))]
 	public class CLightTriggerSensor : MonoBehaviour {
 		private void OnTriggerEnter(Collider other) {

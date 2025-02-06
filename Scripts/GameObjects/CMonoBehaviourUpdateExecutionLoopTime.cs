@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public abstract class CMonoBehaviourUpdateExecutionLoopTime : MonoBehaviour {
 
 		

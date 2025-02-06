@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 #endif
 
-namespace CDK.Graphics {
+namespace EnigmaCore.Graphics {
     public class CRandomSkyboxSetter : MonoBehaviour {
 
         [SerializeField] private bool _updateGiToo = true;

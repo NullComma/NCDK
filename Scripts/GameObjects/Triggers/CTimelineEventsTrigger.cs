@@ -9,7 +9,7 @@ using UnityEditor;
 #endif
 
 
-namespace CDK {
+namespace EnigmaCore {
     [Obsolete("Callbacks not working as expected.")]
 	public class CTimelineEventsTrigger : MonoBehaviour {
 

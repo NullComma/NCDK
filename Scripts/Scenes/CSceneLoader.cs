@@ -1,10 +1,10 @@
 using System;
-using CDK;
+using EnigmaCore;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CSceneLoader : MonoBehaviour {
 		
 		public CSceneField sceneToLoad;

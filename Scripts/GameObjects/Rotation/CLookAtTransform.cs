@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CLookAtTransform : CMonoBehaviourUpdateExecutionLoopTime {
 
 		[SerializeField] private Transform _lookAtTarget;

@@ -1,8 +1,8 @@
 using System;
-using CDK.Interaction;
+using EnigmaCore.Interaction;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	[SelectionBase]
 	public abstract class CCollectableItemGameObject : CInteractable {
 

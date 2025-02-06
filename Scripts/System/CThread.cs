@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CThread {
 
         public static Thread MainThread { get; private set; } 

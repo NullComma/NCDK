@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace CDK {
+namespace EnigmaCore {
     [RequireComponent(typeof(Animator))]
     public class CAnimatorFrameRate : MonoBehaviour {
 

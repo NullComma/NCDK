@@ -2,7 +2,7 @@
 using Unity.Linq;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CDestroyIfNotEditor : MonoBehaviour {
         void Awake() {
             if (Application.isEditor) return;

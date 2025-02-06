@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CRetainable {
         class ReleaseHelper : IDisposable {
             readonly CRetainable _retainable;

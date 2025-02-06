@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CTransformMove : MonoBehaviour {
 		
 		[SerializeField] Vector3 _localDirectionAndSpeed = Vector3.forward;

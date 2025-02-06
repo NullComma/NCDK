@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace CDK {
+namespace EnigmaCore {
 	[Obsolete("Use Fader on timeline instead")]
 	public class CFader : MonoBehaviour {
 

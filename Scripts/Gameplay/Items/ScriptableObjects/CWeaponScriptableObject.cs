@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	[CreateAssetMenu(fileName = "weapon_", menuName = CConst.EDITOR_SCRIPTABLEOBJECT_CREATION_PREFIX + "Weapon data", order = 51)]
 	public class CWeaponScriptableObject : CEquipableBaseScriptableObject {
 		

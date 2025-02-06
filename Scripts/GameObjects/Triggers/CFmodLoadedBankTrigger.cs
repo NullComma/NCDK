@@ -4,7 +4,7 @@ using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CFmodLoadedBankTrigger : StudioBankLoader {
         
         [SerializeField] GameObject[] SetActiveOnBankLoaded;

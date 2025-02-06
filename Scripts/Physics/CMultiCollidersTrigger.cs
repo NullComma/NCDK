@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CMultiCollidersTrigger : CPhysicsTrigger {
 
 		[NonSerialized] private List<Transform> _transformsInside;

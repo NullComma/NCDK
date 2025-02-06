@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
     [JsonObject(MemberSerialization.OptIn)]
     [Serializable]
     public abstract class CGameStateBase : CPersistentData {

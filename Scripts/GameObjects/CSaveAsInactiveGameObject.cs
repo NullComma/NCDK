@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	[ExecuteInEditMode]
 	public class CSaveAsInactiveGameObject : MonoBehaviour {
 

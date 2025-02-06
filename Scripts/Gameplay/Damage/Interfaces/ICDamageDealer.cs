@@ -1,6 +1,6 @@
-using CDK.Data;
+using EnigmaCore.Data;
 
-namespace CDK.Damage {
+namespace EnigmaCore.Damage {
 	public interface ICDamageDealer {
 		CAttackData AttackData { get; } 
 	}

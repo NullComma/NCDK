@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
     public class CFixedWorldRotation : CMonoBehaviourUpdateExecutionLoopTime {
 
         [SerializeField] private Vector3 _axis = new Vector3(90f,0f,0f);

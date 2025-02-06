@@ -5,7 +5,7 @@ using UnityEditorInternal;
 
 //Original by DYLAN ENGELMAN http://jupiterlighthousestudio.com/custom-inspectors-unity/
 //Altered by Brecht Lecluyse http://www.brechtos.com/tagselectorattribute/
-namespace CDK.Editor {
+namespace EnigmaCore.Editor {
     
     [CustomPropertyDrawer(typeof(CTagSelectorAttribute))]
     public class CTagSelectorPropertyDrawer : PropertyDrawer {

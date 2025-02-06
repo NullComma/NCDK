@@ -1,5 +1,5 @@
 using System;
-using CDK.UI;
+using EnigmaCore.UI;
 using UnityEngine;
 
 #if FMOD
@@ -7,7 +7,7 @@ using FMODUnity;
 #endif
 
 
-namespace CDK {
+namespace EnigmaCore {
 	public class UISoundsBankSO : ScriptableObject
 	{
 		#if FMOD

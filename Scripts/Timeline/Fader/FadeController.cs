@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CDK.Timeline {
+namespace EnigmaCore.Timeline {
     [RequireComponent(typeof(Image), typeof(Canvas))]
     public class FadeController : MonoBehaviour {
 

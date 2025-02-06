@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CInventoryViewItem : MonoBehaviour, ISubmitHandler {
 
 		#region <<---------- Properties and Fields ---------->>

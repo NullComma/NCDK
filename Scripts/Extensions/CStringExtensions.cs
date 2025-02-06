@@ -1,7 +1,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace CDK {
+namespace EnigmaCore {
 	public static class CStringExtensions {
 
 		private static StringBuilder sb = new StringBuilder();

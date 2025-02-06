@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace CDK.Editor {
+namespace EnigmaCore.Editor {
     public class CRenameSelectedComponent {
         [MenuItem("CONTEXT/Component/Rename GameObject with this component name")]
         private static void RenameGameObjectWithThisComponentName(MenuCommand data) {

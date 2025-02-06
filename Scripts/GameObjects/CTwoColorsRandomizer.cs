@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace CDK {
+namespace EnigmaCore {
 	public class CTwoColorsRandomizer : MonoBehaviour {
 
 		[SerializeField] private Color _colorOne = Color.magenta;

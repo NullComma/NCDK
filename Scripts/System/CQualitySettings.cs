@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Screen = UnityEngine.Device.Screen;
 
-namespace CDK {
+namespace EnigmaCore {
     public static class CQualitySettings {
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
