@@ -8,7 +8,6 @@ namespace EnigmaCore
     {
         public static CBlockingEventsManager BlockingEventsManager { get; set; }
         public static CCursorManager CursorManager { get; set; }
-        public static CLoadingCanvas LoadingCanvas { get; set; }
         public static CInputManager InputManager { get; set; }
         public static UISoundsBankSO UISoundsBankSO { get; set; }
 
@@ -17,7 +16,6 @@ namespace EnigmaCore
             BlockingEventsManager = new CBlockingEventsManager();
             InputManager = new CInputManager();
             CursorManager = new CCursorManager();
-            LoadingCanvas = CAssets.LoadResourceAndInstantiate<CLoadingCanvas>("System/Loading Canvas");
             UISoundsBankSO = GetUISoundsBankSO();
             UISoundsBankSO GetUISoundsBankSO()
             {
@@ -35,7 +33,6 @@ namespace EnigmaCore
             BlockingEventsManager = null;
             CursorManager = null;
             InputManager = null;
-            LoadingCanvas.CDestroyGameObject();
             Resources.UnloadAsset(UISoundsBankSO);
             UISoundsBankSO = null;
         }
