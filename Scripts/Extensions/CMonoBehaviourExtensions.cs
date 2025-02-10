@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace EnigmaCore {
-	public static class CMonoBehaviourExtensions {
+	public static class MonoBehaviourExtensions {
 		
 		public static Coroutine CStartCoroutine(this MonoBehaviour monoBehaviour, IEnumerator coroutine) {
 			if(CApplication.IsQuitting) {

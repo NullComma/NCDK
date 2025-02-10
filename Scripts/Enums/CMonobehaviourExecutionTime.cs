@@ -1,6 +1,6 @@
 namespace EnigmaCore
 {
-    public enum CMonobehaviourExecutionTime
+    public enum MonoBehaviourExecutionTime
     {
         Awake, OnEnable, Start
     }

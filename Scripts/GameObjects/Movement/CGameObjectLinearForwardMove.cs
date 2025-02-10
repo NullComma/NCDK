@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 namespace EnigmaCore {
-	public class CGameObjectLinearForwardMove : CMonoBehaviourUpdateExecutionLoopTime {
+	public class CGameObjectLinearForwardMove : MonoBehaviourUpdateExecutionLoopTime {
 
 		[SerializeField] private float _moveSpeed = 8f;
 		[SerializeField] private float _timeToAutoDestroy = 10f;

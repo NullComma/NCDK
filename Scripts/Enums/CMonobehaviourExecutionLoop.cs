@@ -1,5 +1,5 @@
 namespace EnigmaCore {
-	public enum CMonobehaviourExecutionLoop {
+	public enum MonoBehaviourExecutionLoop {
 		Update, FixedUpdate, LateUpdate
 	}
 }

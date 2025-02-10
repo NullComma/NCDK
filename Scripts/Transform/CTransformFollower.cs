@@ -10,7 +10,7 @@ namespace EnigmaCore {
 
 		#region <<---------- Properties and Fields ---------->>
         
-		[SerializeField] CMonobehaviourExecutionLoop executionLoop = CMonobehaviourExecutionLoop.LateUpdate;
+		[SerializeField] MonoBehaviourExecutionLoop executionLoop = MonoBehaviourExecutionLoop.LateUpdate;
 		[Obsolete("OBSOLETE, use public property instead.")]
 		[SerializeField]
 		Transform _transformToFollow;
@@ -60,17 +60,17 @@ namespace EnigmaCore {
 		}
 
         protected virtual void Update() {
-			if (executionLoop != CMonobehaviourExecutionLoop.Update) return;
+			if (executionLoop != MonoBehaviourExecutionLoop.Update) return;
             Execute(_ignoreTimeScale ? Time.unscaledDeltaTime : CTime.DeltaTimeScaled);
         }
 
 		protected virtual void FixedUpdate() {
-			if (executionLoop != CMonobehaviourExecutionLoop.FixedUpdate) return;
+			if (executionLoop != MonoBehaviourExecutionLoop.FixedUpdate) return;
             Execute(_ignoreTimeScale ? Time.fixedUnscaledDeltaTime : CTime.DeltaTimeScaled);
 		}
 
         protected virtual void LateUpdate() {
-			if (executionLoop != CMonobehaviourExecutionLoop.LateUpdate) return;
+			if (executionLoop != MonoBehaviourExecutionLoop.LateUpdate) return;
             Execute(_ignoreTimeScale ? Time.unscaledDeltaTime : CTime.DeltaTimeScaled);
 		}
 

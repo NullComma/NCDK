@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 namespace EnigmaCore {
-	public class CLookAtTransform : CMonoBehaviourUpdateExecutionLoopTime {
+	public class CLookAtTransform : MonoBehaviourUpdateExecutionLoopTime {
 
 		[SerializeField] private Transform _lookAtTarget;
 		[SerializeField] private float _speed = 1f;

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 namespace EnigmaCore {
-	public class CGameObjectSineLocalMovement : CMonoBehaviourUpdateExecutionLoopTime {
+	public class CGameObjectSineLocalMovement : MonoBehaviourUpdateExecutionLoopTime {
 		
 		[SerializeField] private Vector3 _sineDirectionAndMagnitude = Vector3.up * 0.5f;
 		[SerializeField] private float _sineSpeed = 4f;

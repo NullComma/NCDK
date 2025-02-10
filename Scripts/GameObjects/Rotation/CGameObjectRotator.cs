@@ -2,7 +2,7 @@
 using UnityEngine;
 
 namespace EnigmaCore {
-	public class CGameObjectRotator : CMonoBehaviourUpdateExecutionLoopTime {
+	public class CGameObjectRotator : MonoBehaviourUpdateExecutionLoopTime {
 
 		#region <<---------- Properties and Fields ---------->>
 

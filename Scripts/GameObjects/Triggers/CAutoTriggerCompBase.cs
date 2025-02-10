@@ -3,22 +3,22 @@ using UnityEngine;
 namespace EnigmaCore {
 	public abstract class CAutoTriggerCompBase : MonoBehaviour {
 
-		[SerializeField] CMonobehaviourExecutionTime executionTime = CMonobehaviourExecutionTime.Awake;
+		[SerializeField] MonoBehaviourExecutionTime executionTime = MonoBehaviourExecutionTime.Awake;
 
 		protected virtual void Awake() {
-			if (executionTime != CMonobehaviourExecutionTime.Awake) return;
+			if (executionTime != MonoBehaviourExecutionTime.Awake) return;
 			TriggerEvent();
 		}
 
 		protected virtual  void Start() {
 			if (!enabled) return;
-			if (executionTime != CMonobehaviourExecutionTime.Start) return;
+			if (executionTime != MonoBehaviourExecutionTime.Start) return;
 			TriggerEvent();
 		}
 
 		protected virtual  void OnEnable() {
 			if (!enabled) return;
-			if (executionTime != CMonobehaviourExecutionTime.OnEnable) return;
+			if (executionTime != MonoBehaviourExecutionTime.OnEnable) return;
 			TriggerEvent();
 		}
 

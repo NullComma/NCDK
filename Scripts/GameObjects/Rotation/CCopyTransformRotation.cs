@@ -2,7 +2,7 @@
 
 namespace EnigmaCore {
     [DefaultExecutionOrder(351)]
-    public class CCopyTransformRotation : CMonoBehaviourUpdateExecutionLoopTime {
+    public class CCopyTransformRotation : MonoBehaviourUpdateExecutionLoopTime {
 
         public Transform TransformToCopy {
             get {
