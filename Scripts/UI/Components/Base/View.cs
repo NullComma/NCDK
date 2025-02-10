@@ -1,19 +1,18 @@
 using System;
 
-using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Object = UnityEngine.Object;
 
 namespace EnigmaCore.UI {
-	public abstract class View : CMonoBehaviour {
+	public abstract class View : MonoBehaviour {
 
 		#region <<---------- Properties and Fields ---------->>
 
 		public GameObject FirstSelectedObject => _eventSystem.firstSelectedGameObject;
 
 		[Header("Setup")]
-		[NonSerialized, GetComponentInChildren] protected EventSystem _eventSystem;
+		[NonSerialized] protected EventSystem _eventSystem;
         protected CUIButton ButtonReturn => _buttonReturn;
         [SerializeField] CUIButton _buttonReturn;
 
@@ -31,9 +30,6 @@ namespace EnigmaCore.UI {
 		public event Action<View> OpenEvent;
 		public event Action<View> CloseEvent;
 
-		[Inject][NonSerialized] protected UISoundsBankSO _soundsBank;
-		[Inject][NonSerialized] protected readonly CBlockingEventsManager _blockingEventsManager;
-
 		#endregion <<---------- Properties and Fields ---------->>
 
 
@@ -41,10 +37,15 @@ namespace EnigmaCore.UI {
 
 		#region <<---------- MonoBehaviour ---------->>
 
+		protected virtual void Awake()
+		{
+			_eventSystem = GetComponentInChildren<EventSystem>();
+		}
+
 		protected virtual void OnEnable() {
 			UpdateEventSystemAndCheckForObjectSelection(_eventSystem.firstSelectedGameObject);
             if(_buttonReturn) _buttonReturn.ClickEvent += CloseView;
-            _blockingEventsManager.MenuRetainable.Retain(this);
+            Static.BlockingEventsManager.MenuRetainable.Retain(this);
         }
 
 		void LateUpdate()
@@ -60,7 +61,7 @@ namespace EnigmaCore.UI {
 		}
 
 		protected virtual void OnDisable() {
-            _blockingEventsManager.MenuRetainable.Release(this);
+			Static.BlockingEventsManager.MenuRetainable.Release(this);
             if(_buttonReturn) _buttonReturn.ClickEvent -= CloseView;
 		}
 
@@ -96,7 +97,7 @@ namespace EnigmaCore.UI {
 			_previousButton = originButton;
             _canCloseByReturnButton = canCloseByReturnButton;
             CTime.TimeScale = ShouldPauseTheGame ? 0f : 1f;
-			_blockingEventsManager.MenuRetainable.Retain(this);
+            Static.BlockingEventsManager.MenuRetainable.Retain(this);
 			OpenEvent?.Invoke(this);
             gameObject.SetActive(true);
 		}
@@ -121,7 +122,7 @@ namespace EnigmaCore.UI {
 			else {
 				CTime.TimeScale = 1f;
 			}
-			_blockingEventsManager.MenuRetainable.Release(this);
+			Static.BlockingEventsManager.MenuRetainable.Release(this);
 			#if UNITY_ADDRESSABLES_EXIST
 			if (!CAssets.UnloadAsset(this.gameObject)) {
 				Debug.LogError($"Error releasing instance of object '{this.gameObject.name}'", this);

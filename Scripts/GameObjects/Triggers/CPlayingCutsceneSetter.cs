@@ -1,5 +1,4 @@
 ﻿using System;
-using Reflex.Attributes;
 using UnityEngine;
 
 namespace EnigmaCore {
@@ -7,22 +6,21 @@ namespace EnigmaCore {
 	public class CPlayingCutsceneSetter : MonoBehaviour {
 
 		[SerializeField] bool _setOnEnableDisable = true;
-		[Inject] readonly CBlockingEventsManager _blockingEventsManager;
 
 
 		void OnEnable() {
 			if (!_setOnEnableDisable) return;
-            _blockingEventsManager.PlayingCutsceneRetainable.Retain(this);
+            Static.BlockingEventsManager.PlayingCutsceneRetainable.Retain(this);
 		}
 
 		void OnDisable() {
 			if (!_setOnEnableDisable) return;
-            _blockingEventsManager.PlayingCutsceneRetainable.Release(this);
+			Static.BlockingEventsManager.PlayingCutsceneRetainable.Release(this);
 		}
 
 		public void SetPlayingState(bool isPlaying) {
-			if(isPlaying) _blockingEventsManager.PlayingCutsceneRetainable.Retain(this);
-            else _blockingEventsManager.PlayingCutsceneRetainable.Release(this);
+			if(isPlaying) Static.BlockingEventsManager.PlayingCutsceneRetainable.Retain(this);
+            else Static.BlockingEventsManager.PlayingCutsceneRetainable.Release(this);
 		}
 	}
 }

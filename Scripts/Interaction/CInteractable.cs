@@ -1,5 +1,4 @@
 using EnigmaCore.UI;
-using Reflex.Attributes;
 using UnityEngine;
 
 namespace EnigmaCore.Interaction {
@@ -11,7 +10,6 @@ namespace EnigmaCore.Interaction {
 		[SerializeField] bool onlyWorkOneTimePerSceneLoad;
         [SerializeField] Transform _interactionPromptPoint;
 		[SerializeField] CUnityEventTransform InteractEvent;
-		[Inject] protected readonly CBlockingEventsManager _blockingEventsManager;
 
 		#endregion <<---------- Properties and Fields ---------->>
 
@@ -41,7 +39,7 @@ namespace EnigmaCore.Interaction {
         /// Returns TRUE if interacted sucesfull.
         /// </summary>
 		public virtual bool OnInteract(Transform interactingTransform) {
-			if (!enabled || gameObject == null || !gameObject.activeInHierarchy || _blockingEventsManager.InMenuOrPlayingCutscene) return false;
+			if (!enabled || gameObject == null || !gameObject.activeInHierarchy || Static.BlockingEventsManager.InMenuOrPlayingCutscene) return false;
 			InteractEvent?.Invoke(interactingTransform);
 			if (onlyWorkOneTimePerSceneLoad) {
 				Destroy(this);

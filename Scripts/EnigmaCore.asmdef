@@ -1,14 +1,13 @@
 {
-    "name": "CDK",
-    "rootNamespace": "",
+    "name": "EnigmaCore",
+    "rootNamespace": "EnigmaCore",
     "references": [
         "Unity.TextMeshPro",
         "LINQtoGameObject",
         "Newtonsoft.Json.UnityConverters",
         "FMODUnity",
         "Unity.Timeline",
-        "Unity.Timeline.Editor",
-        "Reflex"
+        "Unity.Timeline.Editor"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

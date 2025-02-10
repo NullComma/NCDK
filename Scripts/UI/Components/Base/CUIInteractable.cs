@@ -1,8 +1,5 @@
 using System;
 
-using Reflex.Attributes;
-using Reflex.Extensions;
-using Reflex.Injectors;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -27,8 +24,6 @@ namespace EnigmaCore.UI {
 		EventInstance _soundEventInstance;
 		#endif
 
-        [Inject] protected UISoundsBankSO _soundsBank;
-
         [SerializeField] UnityEvent _interactEvent;
 
         #endregion <<---------- Properties and Fields ---------->>
@@ -38,9 +33,7 @@ namespace EnigmaCore.UI {
         
         #region <<---------- Mono Behaviour ---------->>
 
-        protected virtual void Awake() {
-	        gameObject.Inject();
-        }
+        protected virtual void Awake() { }
 
         protected virtual void OnEnable() { }
 
@@ -83,7 +76,7 @@ namespace EnigmaCore.UI {
 		public virtual void Selected(bool playSound = true) {
 			if(_debug) Debug.Log($"Selected: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
-			if(playSound) PlaySound(_soundsBank.SoundSelect);
+			if(playSound) PlaySound(Static.UISoundsBankSO.SoundSelect);
 			#endif
 		}
 
@@ -92,7 +85,7 @@ namespace EnigmaCore.UI {
 			if(_debug) Debug.Log($"SUBMIT: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
             if (!(this is CUIButton b && !b.Button.interactable)) {
-                PlaySound(_soundsBank.SoundSubmit);
+                PlaySound(Static.UISoundsBankSO.SoundSubmit);
             }
 			#endif
 		}
@@ -100,7 +93,7 @@ namespace EnigmaCore.UI {
 		public virtual void Canceled() {
 			if(_debug) Debug.Log($"CANCEL: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
-			PlaySound(_soundsBank.SoundCancel);
+			PlaySound(Static.UISoundsBankSO.SoundCancel);
 			#endif
 		}
 		

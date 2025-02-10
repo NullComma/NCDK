@@ -1,5 +1,4 @@
 ﻿using System;
-using Reflex.Attributes;
 using UnityEngine;
 
 namespace EnigmaCore {
@@ -14,7 +13,6 @@ namespace EnigmaCore {
 		Vector2 _inputLook;
 		Transform _transform;
 		Quaternion _initialRotation;
-		[Inject] readonly CBlockingEventsManager _blockingEventsManager;
 
 		#endregion <<---------- Properties and Fields ---------->>
 
@@ -25,7 +23,7 @@ namespace EnigmaCore {
 		}
 
 		void Update() {
-			if (_blockingEventsManager.InMenuOrPlayingCutscene) return;
+			if (Static.BlockingEventsManager.InMenuOrPlayingCutscene) return;
 			
 			_inputLook = new Vector2(Input.GetAxisRaw(CInputKeys.LOOK_X), Input.GetAxisRaw(CInputKeys.LOOK_Y));
 

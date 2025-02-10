@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -11,14 +10,13 @@ using FMODUnity;
 
 namespace EnigmaCore {
     [RequireComponent(typeof(PlayableDirector))]
-    public class CSplashScreen : CMonoBehaviour {
+    public class CSplashScreen : MonoBehaviour {
 
         #region <<---------- Properties and Fields ---------->>
         
         [SerializeField] CSceneField _sceneToLoad;
         [SerializeField] GameObject _noHardwareAccelerationWarning;
-        [NonSerialized] [GetComponent] PlayableDirector _playableDirector;
-        [NonSerialized] [Inject] readonly CCursorManager cursorManager;
+        [NonSerialized] PlayableDirector _playableDirector;
         [NonSerialized] bool _splashEnded;
 
         #endregion <<---------- Properties and Fields ---------->>
@@ -27,7 +25,12 @@ namespace EnigmaCore {
         
         
         #region <<---------- MonoBehaviour ---------->>
-        
+
+        void Awake()
+        {
+            TryGetComponent(out _playableDirector);
+        }
+
         IEnumerator Start() {
             yield return null;
 
@@ -38,7 +41,7 @@ namespace EnigmaCore {
             }
             #endif
             
-            cursorManager.ShowMouseIfNeeded();
+            Static.CursorManager.ShowMouseIfNeeded();
             
             _playableDirector.Play();
             _playableDirector.stopped += OnPlayableDirectorStopped;

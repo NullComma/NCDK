@@ -10,7 +10,8 @@
         "CDK",
         "Unity.Timeline",
         "Unity.Timeline.Editor",
-        "UnityEditor.PackageManager"
+        "UnityEditor.PackageManager",
+        "EnigmaCore"
     ],
     "includePlatforms": [
         "Editor"

@@ -1,5 +1,4 @@
 ﻿using System;
-using Reflex.Extensions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -47,26 +46,23 @@ namespace EnigmaCore {
         #endif
         [FormerlySerializedAs("NotOnMenuOrNotPlayingCutsceneEvent")] [SerializeField] CUnityEventBool NotOnMenuAndNotPlayingCutsceneEvent;
 
-        [NonSerialized] CBlockingEventsManager _blockingEventsManager;
-
         void Awake() {
-            _blockingEventsManager = gameObject.scene.GetSceneContainer().Resolve<CBlockingEventsManager>();
-            BlockingEvent(_blockingEventsManager.InMenuOrPlayingCutscene);
+            BlockingEvent(Static.BlockingEventsManager.InMenuOrPlayingCutscene);
         }
 
         void OnEnable()
         {
-            _blockingEventsManager.InMenuOrPlayingCutsceneEvent += BlockingEvent;
+            Static.BlockingEventsManager.InMenuOrPlayingCutsceneEvent += BlockingEvent;
         }
 
         void OnDisable()
         {
-            _blockingEventsManager.InMenuOrPlayingCutsceneEvent -= BlockingEvent;
+            Static.BlockingEventsManager.InMenuOrPlayingCutsceneEvent -= BlockingEvent;
         }
 
         void BlockingEvent(bool inMenuOrPlayingCutscene) {
-            var isInMenu = _blockingEventsManager.IsInMenu;
-            var isPlayingCutscene = _blockingEventsManager.IsPlayingCutscene;
+            var isInMenu = Static.BlockingEventsManager.IsInMenu;
+            var isPlayingCutscene = Static.BlockingEventsManager.IsPlayingCutscene;
 
             AnyBlockingEvent.Invoke(inMenuOrPlayingCutscene);
             OnMenuOrPlayingCutsceneEvent.Invoke(isInMenu || isPlayingCutscene);

@@ -38,6 +38,12 @@ namespace EnigmaCore {
             _loadingUI.enabled = shouldShow;
         }
 
+        void Reset()
+        {
+            if(!_loadingUI) _loadingUI = GetComponentInChildren<Canvas>();
+            if(!_imageProgress) _imageProgress = GetComponentInChildren<Image>();
+        }
+
         #endregion <<---------- MonoBehaviour ---------->>
 
 

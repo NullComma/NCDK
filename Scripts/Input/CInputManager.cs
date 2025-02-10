@@ -1,5 +1,4 @@
 using System;
-using Reflex.Core;
 using UnityEngine;
 
 namespace EnigmaCore {
@@ -21,8 +20,7 @@ namespace EnigmaCore {
         #endregion <<---------- Enums ---------->>
 
 
-        public CInputManager(CBlockingEventsManager blockingEventsManager) {
-			this._blockingEventsManager = blockingEventsManager;
+        public CInputManager() {
 			SetControllerTypeBasedOnPlatform();
 	        #if REWIRED
 	        if (ReInput.isReady) Initialize();
@@ -45,8 +43,6 @@ namespace EnigmaCore {
 		InputType _activeInputType;
 
 		public EventHandler<InputType> InputTypeChanged = delegate { };
-
-		readonly CBlockingEventsManager _blockingEventsManager;
 
         #endregion <<---------- Properties and Fields ---------->>
 

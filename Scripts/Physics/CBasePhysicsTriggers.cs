@@ -37,7 +37,6 @@ namespace EnigmaCore {
 
 
         protected virtual void Awake() {
-			gameObject.Inject();
 	        TryGetComponent(out _collider);
         }
 

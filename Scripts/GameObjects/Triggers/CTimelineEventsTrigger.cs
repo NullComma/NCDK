@@ -1,5 +1,4 @@
 ﻿using System;
-using Reflex.Attributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -31,8 +30,6 @@ namespace EnigmaCore {
         [SerializeField] protected UnityEvent _cutsceneStopped;
         [SerializeField] protected CUnityEventBool _cutscenePlayingStateChanged;
 		
-        [Inject] protected readonly CBlockingEventsManager _blockingEventsManager;
-
 		#endregion <<---------- Properties ---------->>
 
 		
@@ -75,7 +72,7 @@ namespace EnigmaCore {
 		
         protected virtual void OnCutscenePlayed() {
             if (_autoSetIsPlayingCutsceneOnBlockingEventsManager) {
-                _blockingEventsManager.PlayingCutsceneRetainable.Retain(this);
+	            Static.BlockingEventsManager.PlayingCutsceneRetainable.Retain(this);
             }
             _cutscenePlayed?.Invoke();
             _cutscenePlayingStateChanged?.Invoke(true);
@@ -85,7 +82,7 @@ namespace EnigmaCore {
 
         protected virtual void OnCutsceneStopped(PlayableDirector playableDirector) {
             if (_autoSetIsPlayingCutsceneOnBlockingEventsManager) {
-                _blockingEventsManager.PlayingCutsceneRetainable.Release(this);
+	            Static.BlockingEventsManager.PlayingCutsceneRetainable.Release(this);
             }
             _cutsceneStopped?.Invoke();
             _cutscenePlayingStateChanged?.Invoke(false);
