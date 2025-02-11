@@ -1,13 +1,11 @@
 {
-    "name": "CDK.Editor",
+    "name": "EnigmaCore.Editor",
     "rootNamespace": "",
     "references": [
         "Unity.TextMeshPro",
-        "UniRx",
         "FMODUnity",
         "Unity.Localization",
         "Unity.Localization.Editor",
-        "CDK",
         "Unity.Timeline",
         "Unity.Timeline.Editor",
         "UnityEditor.PackageManager",
