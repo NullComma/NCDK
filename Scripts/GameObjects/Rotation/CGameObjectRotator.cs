@@ -36,7 +36,7 @@ namespace EnigmaCore {
 		}
 
         private Vector3 GetRotation() {
-            return this._rotateDirectionAndSpeed * (_ignoreTimescale ? Time.unscaledDeltaTime : CTime.DeltaTimeScaled);
+            return this._rotateDirectionAndSpeed * (_ignoreTimescale ? Time.unscaledDeltaTime : ETime.DeltaTimeScaled);
         }
 	}
 }

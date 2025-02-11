@@ -79,7 +79,7 @@ namespace EnigmaCore {
             }
             float currentAlpha = _fadeCanvasGroup.alpha.CImprecise();
 			if (Mathf.Approximately(TargetAlpha, currentAlpha)) return;
-			float delta = IgnoreTimeScale ? Time.unscaledDeltaTime : CTime.DeltaTimeScaled;
+			float delta = IgnoreTimeScale ? Time.unscaledDeltaTime : ETime.DeltaTimeScaled;
 			float step = delta / TargetFadeTime;
 			if (currentAlpha > TargetAlpha) step *= -1f;
 			_fadeCanvasGroup.alpha = currentAlpha + step;

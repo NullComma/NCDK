@@ -1,4 +1,5 @@
 ﻿using System;
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 
 namespace EnigmaCore {
@@ -10,17 +11,17 @@ namespace EnigmaCore {
 
 		void OnEnable() {
 			if (!_setOnEnableDisable) return;
-            Static.BlockingEventsManager.PlayingCutsceneRetainable.Retain(this);
+            DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Retain(this);
 		}
 
 		void OnDisable() {
 			if (!_setOnEnableDisable) return;
-			Static.BlockingEventsManager.PlayingCutsceneRetainable.Release(this);
+			DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Release(this);
 		}
 
 		public void SetPlayingState(bool isPlaying) {
-			if(isPlaying) Static.BlockingEventsManager.PlayingCutsceneRetainable.Retain(this);
-            else Static.BlockingEventsManager.PlayingCutsceneRetainable.Release(this);
+			if(isPlaying) DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Retain(this);
+            else DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Release(this);
 		}
 	}
 }

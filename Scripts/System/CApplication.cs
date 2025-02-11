@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 using ThreadPriority = UnityEngine.ThreadPriority;
 
@@ -19,7 +20,7 @@ using FMODUnity;
 #endif
 
 namespace EnigmaCore {
-    [DefaultExecutionOrder(-100)]
+    [DefaultExecutionOrder(int.MinValue)]
     public static class CApplication {
 
         #region <<---------- Initialization ---------->>

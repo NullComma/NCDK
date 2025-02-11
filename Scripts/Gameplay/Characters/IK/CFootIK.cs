@@ -57,11 +57,11 @@ namespace EnigmaCore {
 			)) {
 				if (feetPos.y - _footSize < _hitInfo.point.y) {
 
-					if (ikGoal == AvatarIKGoal.LeftFoot) leftFootIkWeight += CTime.DeltaTimeScaled;
-					else leftFootIkWeight -= CTime.DeltaTimeScaled;
+					if (ikGoal == AvatarIKGoal.LeftFoot) leftFootIkWeight += ETime.DeltaTimeScaled;
+					else leftFootIkWeight -= ETime.DeltaTimeScaled;
 					
-					if (ikGoal == AvatarIKGoal.RightFoot) rightFootIkWeight += CTime.DeltaTimeScaled;
-					else rightFootIkWeight -= CTime.DeltaTimeScaled;
+					if (ikGoal == AvatarIKGoal.RightFoot) rightFootIkWeight += ETime.DeltaTimeScaled;
+					else rightFootIkWeight -= ETime.DeltaTimeScaled;
 					
 					animator.SetIKPosition(ikGoal, _hitInfo.point + (_hitInfo.normal.normalized * _footSize));
 					animator.SetIKRotation(ikGoal,  Quaternion.LookRotation(_transform.forward, _hitInfo.normal));

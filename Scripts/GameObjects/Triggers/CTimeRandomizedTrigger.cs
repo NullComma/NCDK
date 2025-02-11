@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace EnigmaCore {
-    public class CTimeRandomizedTrigger : MonoBehaviour {
+    public class ETimeRandomizedTrigger : MonoBehaviour {
 
         [SerializeField, Min(0f)] float _firstMinTime = 5f;
         [SerializeField, Min(0f)] float _firstMaxTime = 15f;

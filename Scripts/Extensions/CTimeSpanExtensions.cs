@@ -2,7 +2,7 @@
 using System.Text;
 
 namespace EnigmaCore {
-    public static class CTimeSpanExtensions {
+    public static class ETimeSpanExtensions {
         
         public static string CGetTimeSpanFormattedVerbose(this TimeSpan timeSpan) {
             var sb = new StringBuilder();

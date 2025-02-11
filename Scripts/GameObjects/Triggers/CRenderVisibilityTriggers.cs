@@ -53,7 +53,7 @@ namespace EnigmaCore {
 			BecameVisibleAction?.Invoke();
 			_visibleEvent?.Invoke(true);
 			_invisibleEvent?.Invoke(false);
-			if(_debug) Debug.Log($"{this.name} became visible by some camera.");
+			if(_debug) Debug.Log($"{this.name} became visible by some camera.",this);
 		}
 
 		void BecameInvisibleInvoke() {
@@ -61,7 +61,7 @@ namespace EnigmaCore {
 			BecameInvisibleAction?.Invoke();
 			_visibleEvent?.Invoke(false);
 			_invisibleEvent?.Invoke(true);
-			if(_debug) Debug.Log($"{this.name} became invisible by all cameras.");
+			if(_debug) Debug.Log($"{this.name} became invisible by all cameras.",this);
 		}
 		
 		#endregion <<---------- Events Invoke ---------->>

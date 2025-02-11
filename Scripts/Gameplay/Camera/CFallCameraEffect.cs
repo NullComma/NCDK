@@ -36,7 +36,7 @@ public class CFallCameraEffect : MonoBehaviour {
 				}
 				else {
 					// continued falling
-					TimeFalling += CTime.DeltaTimeScaled;
+					TimeFalling += ETime.DeltaTimeScaled;
 				}
 			}
 			

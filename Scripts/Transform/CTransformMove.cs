@@ -15,9 +15,9 @@ namespace EnigmaCore {
 
 		void Update() {
 			_newPosition = _transform.position;
-			_newPosition += _transform.forward * (_localDirectionAndSpeed.z * CTime.DeltaTimeScaled);
-			_newPosition += _transform.right * (_localDirectionAndSpeed.x * CTime.DeltaTimeScaled);
-			_newPosition += _transform.up * (_localDirectionAndSpeed.y * CTime.DeltaTimeScaled);
+			_newPosition += _transform.forward * (_localDirectionAndSpeed.z * ETime.DeltaTimeScaled);
+			_newPosition += _transform.right * (_localDirectionAndSpeed.x * ETime.DeltaTimeScaled);
+			_newPosition += _transform.up * (_localDirectionAndSpeed.y * ETime.DeltaTimeScaled);
 			_transform.position = _newPosition;
 		}
 		

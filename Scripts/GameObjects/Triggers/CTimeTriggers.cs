@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace EnigmaCore {
-	public class CTimeTriggers : MonoBehaviour {
+	public class ETimeTriggers : MonoBehaviour {
 
 		[Header("Booleans")]
 		[SerializeField] CUnityEventBool _timeStoppedEvent;
@@ -12,10 +12,10 @@ namespace EnigmaCore {
 
 
 		void OnEnable() {
-			CTime.OnTimeScaleChanged += TimeScaleChanged;
+			ETime.OnTimeScaleChanged += TimeScaleChanged;
 		}
 		void OnDisable() {
-			CTime.OnTimeScaleChanged -= TimeScaleChanged;
+			ETime.OnTimeScaleChanged -= TimeScaleChanged;
 		}
 
 

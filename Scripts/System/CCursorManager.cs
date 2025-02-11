@@ -1,3 +1,4 @@
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 
 namespace EnigmaCore {
@@ -6,7 +7,7 @@ namespace EnigmaCore {
         #region <<---------- Initializers ---------->>
 
         public CCursorManager() {
-            Static.BlockingEventsManager.MenuRetainable.StateEvent += (onMenu) => {
+            DIContainer.Resolve<CBlockingEventsManager>().MenuRetainable.StateEvent += (onMenu) => {
                 if (!onMenu) {
                     SetCursorState(false);
                     return;
@@ -14,7 +15,7 @@ namespace EnigmaCore {
                 ShowMouseIfNeeded();
             };
 
-            Static.InputManager.InputTypeChanged += OnInputTypeChanged;
+            DIContainer.Resolve<CInputManager>().InputTypeChanged += OnInputTypeChanged;
         }
 
         #if UNITY_EDITOR
@@ -27,7 +28,7 @@ namespace EnigmaCore {
 
 
 		void OnInputTypeChanged(object sender, CInputManager.InputType inputType) {
-			SetCursorState(Static.InputManager.ActiveInputType.IsMouseOrKeyboard() && Static.BlockingEventsManager.IsInMenu);
+			SetCursorState(DIContainer.Resolve<CInputManager>().ActiveInputType.IsMouseOrKeyboard() && DIContainer.Resolve<CBlockingEventsManager>().IsInMenu);
 		}
 
 		static void SetCursorState(bool visible)
@@ -37,7 +38,7 @@ namespace EnigmaCore {
 		}
 
         public void ShowMouseIfNeeded() {
-            if (!Static.InputManager.ActiveInputType.IsMouseOrKeyboard()) return;
+            if (!DIContainer.Resolve<CInputManager>().ActiveInputType.IsMouseOrKeyboard()) return;
             SetCursorState(true);
         }
 

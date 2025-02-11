@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 namespace EnigmaCore {
-	public static class CTime {
+	public static class ETime {
 		
 		/// <summary>
 		/// Returns Time.deltaTime scaled with Time.timeScale.

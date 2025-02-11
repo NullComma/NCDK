@@ -1,3 +1,4 @@
+using EnigmaCore.DependecyInjection;
 using EnigmaCore.UI;
 using UnityEngine;
 
@@ -39,7 +40,7 @@ namespace EnigmaCore.Interaction {
         /// Returns TRUE if interacted sucesfull.
         /// </summary>
 		public virtual bool OnInteract(Transform interactingTransform) {
-			if (!enabled || gameObject == null || !gameObject.activeInHierarchy || Static.BlockingEventsManager.InMenuOrPlayingCutscene) return false;
+			if (!enabled || gameObject == null || !gameObject.activeInHierarchy || DIContainer.Resolve<CBlockingEventsManager>().InMenuOrPlayingCutscene) return false;
 			InteractEvent?.Invoke(interactingTransform);
 			if (onlyWorkOneTimePerSceneLoad) {
 				Destroy(this);

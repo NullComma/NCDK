@@ -36,7 +36,7 @@ namespace EnigmaCore {
 
 			float elapsedTime = 0f;
 			while (elapsedTime <= animationCurve[animationCurve.length - 1].time) {
-				elapsedTime += CTime.DeltaTimeScaled;
+				elapsedTime += ETime.DeltaTimeScaled;
 				this._transform.localPosition = this._startLocalPosition + (direction * (animationCurve.Evaluate(elapsedTime) * shakeMultiplier));
 				yield return null;
 			}

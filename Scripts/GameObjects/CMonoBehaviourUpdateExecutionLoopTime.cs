@@ -11,17 +11,17 @@ namespace EnigmaCore {
 
 		private void Update() {
 			if (this._executionTime != MonoBehaviourExecutionLoop.Update) return;
-			this.Execute(CTime.DeltaTimeScaled);
+			this.Execute(ETime.DeltaTimeScaled);
 		}
 
 		private void FixedUpdate() {
 			if (this._executionTime != MonoBehaviourExecutionLoop.FixedUpdate) return;
-			this.Execute(CTime.DeltaTimeScaled);
+			this.Execute(ETime.DeltaTimeScaled);
 		}
 
 		private void LateUpdate() {
 			if (this._executionTime != MonoBehaviourExecutionLoop.LateUpdate) return;
-			this.Execute(CTime.DeltaTimeScaled);
+			this.Execute(ETime.DeltaTimeScaled);
 		}
 
 		#endregion <<---------- MonoBehaviour ---------->>

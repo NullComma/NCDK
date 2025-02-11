@@ -1,4 +1,5 @@
 ﻿using System;
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 
 namespace EnigmaCore {
@@ -23,16 +24,16 @@ namespace EnigmaCore {
 		}
 
 		void Update() {
-			if (Static.BlockingEventsManager.InMenuOrPlayingCutscene) return;
+			if (DIContainer.Resolve<CBlockingEventsManager>().InMenuOrPlayingCutscene) return;
 			
 			_inputLook = new Vector2(Input.GetAxisRaw(CInputKeys.LOOK_X), Input.GetAxisRaw(CInputKeys.LOOK_Y));
 
 			// rotate camera
 			_transform.Rotate(Vector3.up,
-				_inputLook.x * _rotationSpeed.x * CTime.DeltaTimeScaled,
+				_inputLook.x * _rotationSpeed.x * ETime.DeltaTimeScaled,
 				Space.World);
 			_transform.Rotate(_transform.right,
-				_inputLook.y * -1 * _rotationSpeed.y * CTime.DeltaTimeScaled,
+				_inputLook.y * -1 * _rotationSpeed.y * ETime.DeltaTimeScaled,
 				Space.World);
 
 			// clamp rotation

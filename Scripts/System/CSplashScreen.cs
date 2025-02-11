@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
@@ -41,7 +42,7 @@ namespace EnigmaCore {
             }
             #endif
             
-            Static.CursorManager.ShowMouseIfNeeded();
+            DIContainer.Resolve<CCursorManager>().ShowMouseIfNeeded();
             
             _playableDirector.Play();
             _playableDirector.stopped += OnPlayableDirectorStopped;

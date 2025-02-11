@@ -35,7 +35,7 @@ namespace EnigmaCore {
 
         private void Update() {
             SetColor(
-                this._targetMaterial.GetColor(this._shaderKeywordId).CLerp(this._initialColor, this._colorReturnSpeed * CTime.DeltaTimeScaled)
+                this._targetMaterial.GetColor(this._shaderKeywordId).CLerp(this._initialColor, this._colorReturnSpeed * ETime.DeltaTimeScaled)
             );
         }
         

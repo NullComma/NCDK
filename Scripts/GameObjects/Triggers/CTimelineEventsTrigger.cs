@@ -1,4 +1,5 @@
 ﻿using System;
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -10,7 +11,7 @@ using UnityEditor;
 
 namespace EnigmaCore {
     [Obsolete("Callbacks not working as expected.")]
-	public class CTimelineEventsTrigger : MonoBehaviour {
+	public class ETimelineEventsTrigger : MonoBehaviour {
 
 		#region <<---------- Properties ---------->>
 
@@ -72,7 +73,7 @@ namespace EnigmaCore {
 		
         protected virtual void OnCutscenePlayed() {
             if (_autoSetIsPlayingCutsceneOnBlockingEventsManager) {
-	            Static.BlockingEventsManager.PlayingCutsceneRetainable.Retain(this);
+	            DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Retain(this);
             }
             _cutscenePlayed?.Invoke();
             _cutscenePlayingStateChanged?.Invoke(true);
@@ -82,7 +83,7 @@ namespace EnigmaCore {
 
         protected virtual void OnCutsceneStopped(PlayableDirector playableDirector) {
             if (_autoSetIsPlayingCutsceneOnBlockingEventsManager) {
-	            Static.BlockingEventsManager.PlayingCutsceneRetainable.Release(this);
+	            DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Release(this);
             }
             _cutsceneStopped?.Invoke();
             _cutscenePlayingStateChanged?.Invoke(false);

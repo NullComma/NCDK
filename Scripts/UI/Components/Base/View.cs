@@ -1,5 +1,5 @@
 using System;
-
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Object = UnityEngine.Object;
@@ -45,7 +45,7 @@ namespace EnigmaCore.UI {
 		protected virtual void OnEnable() {
 			UpdateEventSystemAndCheckForObjectSelection(_eventSystem.firstSelectedGameObject);
             if(_buttonReturn) _buttonReturn.ClickEvent += CloseView;
-            Static.BlockingEventsManager.MenuRetainable.Retain(this);
+            DIContainer.Resolve<CBlockingEventsManager>().MenuRetainable.Retain(this);
         }
 
 		void LateUpdate()
@@ -61,7 +61,7 @@ namespace EnigmaCore.UI {
 		}
 
 		protected virtual void OnDisable() {
-			Static.BlockingEventsManager.MenuRetainable.Release(this);
+			DIContainer.Resolve<CBlockingEventsManager>().MenuRetainable.Release(this);
             if(_buttonReturn) _buttonReturn.ClickEvent -= CloseView;
 		}
 
@@ -96,8 +96,8 @@ namespace EnigmaCore.UI {
 			}
 			_previousButton = originButton;
             _canCloseByReturnButton = canCloseByReturnButton;
-            CTime.TimeScale = ShouldPauseTheGame ? 0f : 1f;
-            Static.BlockingEventsManager.MenuRetainable.Retain(this);
+            ETime.TimeScale = ShouldPauseTheGame ? 0f : 1f;
+            DIContainer.Resolve<CBlockingEventsManager>().MenuRetainable.Retain(this);
 			OpenEvent?.Invoke(this);
             gameObject.SetActive(true);
 		}
@@ -120,9 +120,9 @@ namespace EnigmaCore.UI {
 				else _previous.ShowIfHidden(_previousButton);
 			}
 			else {
-				CTime.TimeScale = 1f;
+				ETime.TimeScale = 1f;
 			}
-			Static.BlockingEventsManager.MenuRetainable.Release(this);
+			DIContainer.Resolve<CBlockingEventsManager>().MenuRetainable.Release(this);
 			#if UNITY_ADDRESSABLES_EXIST
 			if (!CAssets.UnloadAsset(this.gameObject)) {
 				Debug.LogError($"Error releasing instance of object '{this.gameObject.name}'", this);
@@ -159,7 +159,7 @@ namespace EnigmaCore.UI {
 		public void ShowIfHidden(CUIInteractable buttonToSelect) {
 			gameObject.SetActive(true);
 			if(buttonToSelect) UpdateEventSystemAndCheckForObjectSelection(buttonToSelect);
-			CTime.TimeScale = ShouldPauseTheGame ? 0f : 1f;
+			ETime.TimeScale = ShouldPauseTheGame ? 0f : 1f;
 		}
 
 		#endregion <<---------- Visibility ---------->>

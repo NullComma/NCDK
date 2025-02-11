@@ -1,5 +1,5 @@
 using System;
-
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -76,7 +76,7 @@ namespace EnigmaCore.UI {
 		public virtual void Selected(bool playSound = true) {
 			if(_debug) Debug.Log($"Selected: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
-			if(playSound) PlaySound(Static.UISoundsBankSO.SoundSelect);
+			if(playSound) PlaySound(DIContainer.Resolve<UISoundsBankSO>().SoundSelect);
 			#endif
 		}
 
@@ -85,7 +85,7 @@ namespace EnigmaCore.UI {
 			if(_debug) Debug.Log($"SUBMIT: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
             if (!(this is CUIButton b && !b.Button.interactable)) {
-                PlaySound(Static.UISoundsBankSO.SoundSubmit);
+                PlaySound(DIContainer.Resolve<UISoundsBankSO>().SoundSubmit);
             }
 			#endif
 		}
@@ -93,7 +93,7 @@ namespace EnigmaCore.UI {
 		public virtual void Canceled() {
 			if(_debug) Debug.Log($"CANCEL: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
-			PlaySound(Static.UISoundsBankSO.SoundCancel);
+			PlaySound(DIContainer.Resolve<UISoundsBankSO>().SoundCancel);
 			#endif
 		}
 		
