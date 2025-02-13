@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace EnigmaCore.DependecyInjection
 {
@@ -56,8 +57,18 @@ namespace EnigmaCore.DependecyInjection
         }
 
         public static T Resolve<T>() {
+            if (CApplication.IsQuitting)
+            {
+                Debug.LogError($"Tried to Resolve a '{typeof(T).Name}' dependency while quitting application! Will not be resolved.");
+                return default;
+            }
             if (_instances.TryGetValue(typeof(T), out var instance)) return (T)instance;
             throw new Exception($"Instance of type {typeof(T)} not registered.");
+        }
+
+        public static void Resolve<T>(out T instance)
+        {
+            instance = Resolve<T>();
         }
 
         public static object Resolve(Type serviceType)
