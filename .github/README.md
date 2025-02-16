@@ -26,7 +26,7 @@ Check more information about my other projects on [my website](https://chrisjogo
 
 ### Dependencies
 
-* Recommended: [Unity Converters for Newtonsoft.Json](https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters) to fix some Unity Json Serialization issues. 
+* [Recommended] [Unity Converters for Newtonsoft.Json](https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters) to fix some Unity Json Serialization issues. 
 * If not already in Unity: [Newtonsoft-Json](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@3.0/manual/index.html), include **NEWTONSOFT_JSON_FOR_UNITY** on define symbols.
 * [FMOD](https://www.fmod.com) (for advanced audio processing), include **FMOD** on define symbols.
 
