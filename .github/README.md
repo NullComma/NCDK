@@ -1,9 +1,12 @@
-![Project Thumbnail](https://chrisdbhr.github.io/images/thumbs/EnigmaCore.png)
+<p align="center">
+  <img src="https://chrisdbhr.github.io/images/thumbs/EnigmaCore.png" />
+</p>
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/EnigmaticComma/EnigmaCore)
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/unity/EnigmaticComma/EnigmaCore)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/EnigmaticComma/EnigmaCore)
-
+<p align="center">
+  <img src="https://img.shields.io/github/package-json/v/EnigmaticComma/EnigmaCore" />
+  <img src="https://img.shields.io/github/package-json/unity/EnigmaticComma/EnigmaCore" />
+  <img src="https://img.shields.io/github/languages/code-size/EnigmaticComma/EnigmaCore" />
+</p>
 
 Enigma Core for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.
 
@@ -37,4 +40,4 @@ Check more information about my other projects on [my website](https://chrisjogo
 
 ### Special thanks to ###
 
-* [Jetbrains](https://www.jetbrains.com/?from=ChrisDevelopmentKit) and their wonderful tools.
+* [Jetbrains](https://www.jetbrains.com/?from=ChrisDevelopmentKit) who powered the development until 2024.
