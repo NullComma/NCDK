@@ -23,6 +23,11 @@
             "define": "NEWTONSOFT_JSON"
         },
         {
+            "name": "jillejr.newtonsoft.json-for-unity.converters",
+            "expression": "0.0.0",
+            "define": "JSON_FOR_UNITY_CONVERTERS"
+        },
+        {
             "name": "com.unity.addressables",
             "expression": "0.0.0",
             "define": "UNITY_ADDRESSABLES_EXIST"

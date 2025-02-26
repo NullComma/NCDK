@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using AsyncOperation = UnityEngine.AsyncOperation;
 
+#if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+#endif
+	
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;

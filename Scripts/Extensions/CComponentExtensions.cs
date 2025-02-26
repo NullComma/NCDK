@@ -1,8 +1,13 @@
-﻿using Unity.Linq;
+﻿using EnigmaCore.DependecyInjection;
+using Unity.Linq;
 using UnityEngine;
 
 namespace EnigmaCore {
     public static class CComponentExtensions {
+
+        public static void Inject(this Component c) {
+            DIContainer.InjectDependencies(c);
+        }
 
         public static T CGetComponentInChildrenOrInParent<T>(this Component comp, bool includeInactive = false) {
             return comp.gameObject.CGetComponentInChildrenOrInParent<T>(includeInactive);

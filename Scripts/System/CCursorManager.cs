@@ -1,13 +1,18 @@
+using System;
 using EnigmaCore.DependecyInjection;
 using UnityEngine;
 
 namespace EnigmaCore {
-	public class CCursorManager {
+	public class CCursorManager
+	{
+		[NonSerialized] readonly CBlockingEventsManager _blockingEventsManager;
+		[NonSerialized] readonly CInputManager _inputManager;
 
-        #region <<---------- Initializers ---------->>
+        public CCursorManager(CBlockingEventsManager blockingEventsManager, CInputManager inputManager) {
+	        _blockingEventsManager = blockingEventsManager;
+			_inputManager = inputManager;
 
-        public CCursorManager() {
-            DIContainer.Resolve<CBlockingEventsManager>().MenuRetainable.StateEvent += (onMenu) => {
+	        _blockingEventsManager.MenuRetainable.StateEvent += (onMenu) => {
                 if (!onMenu) {
                     SetCursorState(false);
                     return;
@@ -15,7 +20,7 @@ namespace EnigmaCore {
                 ShowMouseIfNeeded();
             };
 
-            DIContainer.Resolve<CInputManager>().InputTypeChanged += OnInputTypeChanged;
+	        _inputManager.InputTypeChanged += OnInputTypeChanged;
         }
 
         #if UNITY_EDITOR
@@ -24,11 +29,9 @@ namespace EnigmaCore {
 		}
 		#endif
 
-		#endregion <<---------- Initializers ---------->>
-
 
 		void OnInputTypeChanged(object sender, CInputManager.InputType inputType) {
-			SetCursorState(DIContainer.Resolve<CInputManager>().ActiveInputType.IsMouseOrKeyboard() && DIContainer.Resolve<CBlockingEventsManager>().IsInMenu);
+			SetCursorState(_inputManager.ActiveInputType.IsMouseOrKeyboard() && DIContainer.Resolve<CBlockingEventsManager>().IsInMenu);
 		}
 
 		static void SetCursorState(bool visible)
@@ -38,7 +41,7 @@ namespace EnigmaCore {
 		}
 
         public void ShowMouseIfNeeded() {
-            if (!DIContainer.Resolve<CInputManager>().ActiveInputType.IsMouseOrKeyboard()) return;
+            if (!_inputManager.ActiveInputType.IsMouseOrKeyboard()) return;
             SetCursorState(true);
         }
 
