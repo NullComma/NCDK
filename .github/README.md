@@ -1,9 +1,12 @@
-![Project Thumbnail](https://chrisdbhr.github.io/images/thumbs/EnigmaCore.png)
+<p align="center">
+  <img src="https://chrisdbhr.github.io/images/thumbs/EnigmaCore.png" />
+</p>
 
-![GitHub package.json version](https://img.shields.io/github/package-json/v/EnigmaticComma/EnigmaCore)
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/unity/EnigmaticComma/EnigmaCore)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/EnigmaticComma/EnigmaCore)
-
+<p align="center">
+  <img src="https://img.shields.io/github/package-json/v/EnigmaticComma/EnigmaCore" />
+  <img src="https://img.shields.io/github/package-json/unity/EnigmaticComma/EnigmaCore" />
+  <img src="https://img.shields.io/github/languages/code-size/EnigmaticComma/EnigmaCore" />
+</p>
 
 Enigma Core for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.
 
@@ -23,13 +26,9 @@ Check more information about my other projects on [my website](https://chrisjogo
 
 ### Dependencies
 
-#### Required
-* [Reflex](https://github.com/gustavopsantos/Reflex) for Dependency Injection, instructions of how to install this package [here](https://github.com/gustavopsantos/Reflex?tab=readme-ov-file#-installation)
-
-#### Optional
-* [Newtonsoft-Json](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@3.0/manual/index.html), include **NEWTONSOFT_JSON_FOR_UNITY** on define symbols.
-* [Unity Converters for Newtonsoft.Json](https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters) to fix some Unity Json Serialization issues. 
-* [FMOD](https://www.fmod.com) (for audio processing), include **FMOD** on define symbols.
+* [Recommended] [Unity Converters for Newtonsoft.Json](https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters) to fix some Unity Json Serialization issues. 
+* If not already in Unity: [Newtonsoft-Json](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@3.0/manual/index.html), include **NEWTONSOFT_JSON_FOR_UNITY** on define symbols.
+* [FMOD](https://www.fmod.com) (for advanced audio processing), include **FMOD** on define symbols.
 
 ### Contribution guidelines ###
 
@@ -41,4 +40,4 @@ Check more information about my other projects on [my website](https://chrisjogo
 
 ### Special thanks to ###
 
-* [Jetbrains](https://www.jetbrains.com/?from=ChrisDevelopmentKit) and their wonderful tools.
+* [Jetbrains](https://www.jetbrains.com/?from=ChrisDevelopmentKit) who powered the development until 2024.
