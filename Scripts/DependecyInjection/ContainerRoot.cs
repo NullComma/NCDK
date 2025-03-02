@@ -10,8 +10,7 @@ namespace EnigmaCore.DependecyInjection
         static void InitializeSubsystemRegistration()
         {
             DIContainer.Register(typeof(CBlockingEventsManager));
-            DIContainer.Register(typeof(CInputManager));
-            DIContainer.Register(typeof(CCursorManager));
+            DIContainer.Register(typeof(CursorManager));
             DIContainer.Register(GetUISoundsBankSO());
             DIContainer.Register(GameObjectCreate.WithComponent<CFader>("Fader"));
         }

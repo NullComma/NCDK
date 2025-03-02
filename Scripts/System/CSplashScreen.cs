@@ -42,7 +42,7 @@ namespace EnigmaCore {
             }
             #endif
             
-            DIContainer.Resolve<CCursorManager>().ShowMouseIfNeeded();
+            DIContainer.Resolve<CursorManager>().ShowMouseIfNeeded();
             
             _playableDirector.Play();
             _playableDirector.stopped += OnPlayableDirectorStopped;

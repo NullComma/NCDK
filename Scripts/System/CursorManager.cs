@@ -1,16 +1,14 @@
 using System;
-using EnigmaCore.DependecyInjection;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace EnigmaCore {
-	public class CCursorManager
+	public class CursorManager
 	{
 		[NonSerialized] readonly CBlockingEventsManager _blockingEventsManager;
-		[NonSerialized] readonly CInputManager _inputManager;
 
-        public CCursorManager(CBlockingEventsManager blockingEventsManager, CInputManager inputManager) {
+		public CursorManager(CBlockingEventsManager blockingEventsManager) {
 	        _blockingEventsManager = blockingEventsManager;
-			_inputManager = inputManager;
 
 	        _blockingEventsManager.MenuRetainable.StateEvent += (onMenu) => {
                 if (!onMenu) {
@@ -20,18 +18,15 @@ namespace EnigmaCore {
                 ShowMouseIfNeeded();
             };
 
-	        _inputManager.InputTypeChanged += OnInputTypeChanged;
+            CApplication.QuittingEvent += OnAppQuitting;
         }
-
-        #if UNITY_EDITOR
-		~CCursorManager() {
+		
+		void OnAppQuitting()
+		{
+			CApplication.QuittingEvent -= OnAppQuitting;
+			#if UNITY_EDITOR
 			SetCursorState(true);
-		}
-		#endif
-
-
-		void OnInputTypeChanged(object sender, CInputManager.InputType inputType) {
-			SetCursorState(_inputManager.ActiveInputType.IsMouseOrKeyboard() && DIContainer.Resolve<CBlockingEventsManager>().IsInMenu);
+			#endif
 		}
 
 		static void SetCursorState(bool visible)
@@ -41,7 +36,7 @@ namespace EnigmaCore {
 		}
 
         public void ShowMouseIfNeeded() {
-            if (!_inputManager.ActiveInputType.IsMouseOrKeyboard()) return;
+            if (Gamepad.current != null && Gamepad.current.enabled) return;
             SetCursorState(true);
         }
 

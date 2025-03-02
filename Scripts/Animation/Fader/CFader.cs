@@ -13,6 +13,7 @@ namespace EnigmaCore {
 		float TargetAlpha;
 		float TargetFadeTime;
 		bool IgnoreTimeScale;
+		static CFader _instance;
 		
 		#endregion <<---------- Properties ---------->>
 
@@ -22,6 +23,11 @@ namespace EnigmaCore {
 		#region <<---------- MonoBehaviour ---------->>
 
 		void Awake() {
+			if (_instance != null)
+			{
+				_instance.gameObject.CDestroy();
+			}
+			_instance = this;
 			gameObject.layer = 5; // UI
 			gameObject.CDontDestroyOnLoad();
 
