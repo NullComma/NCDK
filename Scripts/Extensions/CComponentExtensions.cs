@@ -50,12 +50,12 @@ namespace EnigmaCore {
             return (comp != null ? comp : value.gameObject.AddComponent<T>());
         }
         
-        public static T CAssertIfNull<T>(this T c, string message = null, Object source = null) where T : Component {
+        public static bool CAssertIfNull<T>(this T c, string message = null, Object source = null) where T : Component {
             bool isNull = (c == null);
             if (isNull) {
                 Debug.LogError($"<b>Assert</b>: Component is null ({message})", source);
             }
-            return c;
+            return isNull;
         }
 
         public static void CDestroyGameObject<T>(this T value, bool shouldLog = false, float time = 0f) where T : Component {
