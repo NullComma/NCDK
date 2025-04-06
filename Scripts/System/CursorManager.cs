@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
+
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+#endif
 
 namespace EnigmaCore {
 	public class CursorManager
@@ -36,7 +39,9 @@ namespace EnigmaCore {
 		}
 
         public void ShowMouseIfNeeded() {
+#if ENABLE_INPUT_SYSTEM
             if (Gamepad.current != null && Gamepad.current.enabled) return;
+#endif
             SetCursorState(true);
         }
 
