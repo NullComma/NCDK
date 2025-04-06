@@ -20,9 +20,7 @@ Check more information about my other projects on [my website](https://chrisjogo
 
 ### How do I get set up? ###
 
-* [Recommended] Install from UPM using the git URL ``https://github.com/EnigmaticComma/EnigmaCore.git``
-
-* Import this as a submodule inside ``Assets/EnigmaCore/`` folder OR download [this](https://github.com/EnigmaticComma/EnigmaCore/archive/master.zip) and put inside ``Assets/EnigmaCore/`` folder.
+* Install from UPM using the git URL ``https://github.com/EnigmaticComma/EnigmaCore.git``
 
 ### Dependencies
 
@@ -33,6 +31,29 @@ Check more information about my other projects on [my website](https://chrisjogo
 ### Contribution guidelines ###
 
 * Fell free to open a pull request for fixes or new versions.
+
+#### 🤝 Contributors
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/chrisdbhr" title="Chris">
+        <img src="https://avatars.githubusercontent.com/u/19819051?v=4" width="100px;" alt="Foto de Chris no GitHub"/><br>
+        <sub>
+          <b>Christopher Ravailhe</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/joojano" title="Joojano">
+        <img src="https://avatars.githubusercontent.com/u/44454114?v=4" width="100px;" alt="Foto do Joojano no GitHub"/><br>
+        <sub>
+          <b>Juliano Rodrigo</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ### Who do I talk to? ###
 
