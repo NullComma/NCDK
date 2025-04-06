@@ -54,3 +54,13 @@ Check more information about my other projects on [my website](https://chrisjogo
 ### Special thanks to ###
 
 * [Jetbrains](https://www.jetbrains.com/?from=ChrisDevelopmentKit) who powered the development until 2024.
+
+
+<details>
+
+<summary>🛣 Roadmap</summary>
+
+* Compatibility with Unity Headless Server Mode
+* Improved compatilibity with [Photon](https://www.photonengine.com/)
+
+</details>
