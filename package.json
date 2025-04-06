@@ -10,8 +10,7 @@
     "url": "https://github.com/EnigmaticComma"
   },
   "dependencies": {
-    "com.unity.nuget.newtonsoft-json": "3.2.1",
-    "jillejr.newtonsoft.json-for-unity.converters": "1.6.3"
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
   },
   "keywords": [
     "devkit",
