@@ -4,8 +4,7 @@ using UnityEngine.Events;
 namespace EnigmaCore {
     public class CDestroyTrigger : MonoBehaviour {
 
-        [SerializeField] UnityEvent DestroyEvent;
-        
+        public UnityEvent DestroyEvent;
         
         public void DestroyGameObject(GameObject go) {
             go.CDestroy();
