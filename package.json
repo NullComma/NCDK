@@ -1,7 +1,7 @@
 {
   "name": "com.enigmaticcomma.core",
   "displayName": "Enigma Core",
-  "version": "5.1.5",
+  "version": "5.1.7",
   "unity": "2022.3",
   "description": "Enigma Core for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.",
   "licensesUrl": "https://github.com/EnigmaticComma/EnigmaCore/blob/master/.github/LICENSE",
