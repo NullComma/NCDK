@@ -21,6 +21,8 @@ Check more information about my other projects on [my website](https://chrisjogo
 ### How do I get set up? ###
 
 * Install from UPM using the git URL ``https://github.com/EnigmaticComma/EnigmaCore.git``
+* Or add manually this line on **Packages/manifest.json**:
+>    "com.enigmaticcomma.core": "https://github.com/EnigmaticComma/EnigmaCore.git",
 
 ### Dependencies
 
