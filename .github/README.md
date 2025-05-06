@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://chrisdbhr.github.io/images/thumbs/EnigmaCore.png" />
+  <img src="https://chrisdbhr.github.io/assets/images/thumbs/enigmacore.webp" />
 </p>
 
 <p align="center">
