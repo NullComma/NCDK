@@ -8,7 +8,9 @@
         "FMODUnity",
         "Unity.Timeline",
         "Unity.Timeline.Editor",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Unity.Addressables",
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

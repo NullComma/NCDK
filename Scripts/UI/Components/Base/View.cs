@@ -156,9 +156,7 @@ namespace EnigmaCore.UI {
 			}
 			_blockingEventsManager?.MenuRetainable.Release(this);
 			#if UNITY_ADDRESSABLES_EXIST
-			if (!CAssets.UnloadAsset(this.gameObject)) {
-				Debug.LogError($"Error releasing instance of object '{this.gameObject.name}'", this);
-			}
+			CAssets.UnloadAsset(this.gameObject);
 			#else
 			gameObject.CDestroy();
 			#endif
