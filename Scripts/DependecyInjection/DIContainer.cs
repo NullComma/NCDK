@@ -79,6 +79,11 @@ namespace EnigmaCore.DependecyInjection
             InjectAttributes(target);
         }
         static void InjectAttributes(object target) {
+            if (!Application.isPlaying)
+            {
+                Debug.LogError("Tried to inject a dependency on Editor, this is not supported. Did you called Inject() inside an OnValidate method?");
+                return;
+            }
             var type = target.GetType();
             while (type != null) {
                 var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
