@@ -5,23 +5,24 @@ using UnityEngine;
 namespace EnigmaCore {
     [Obsolete("Use PlayableHelper instead")]
 	public class CPlayingCutsceneSetter : MonoBehaviour {
-
+		[NonSerialized,Inject] CBlockingEventsManager _blockingEventsManager;
 		[SerializeField] bool _setOnEnableDisable = true;
 
+		void Awake() => this.Inject();
 
 		void OnEnable() {
 			if (!_setOnEnableDisable) return;
-            DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Retain(this);
+			_blockingEventsManager.PlayingCutsceneRetainable.Retain(this);
 		}
 
 		void OnDisable() {
 			if (!_setOnEnableDisable) return;
-			DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Release(this);
+			_blockingEventsManager.PlayingCutsceneRetainable.Release(this);
 		}
 
 		public void SetPlayingState(bool isPlaying) {
-			if(isPlaying) DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Retain(this);
-            else DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Release(this);
+			if(isPlaying) _blockingEventsManager.PlayingCutsceneRetainable.Retain(this);
+            else _blockingEventsManager.PlayingCutsceneRetainable.Release(this);
 		}
 	}
 }

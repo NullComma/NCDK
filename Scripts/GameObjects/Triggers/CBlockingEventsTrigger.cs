@@ -8,8 +8,10 @@ using Sirenix.OdinInspector;
 #endif
 
 namespace EnigmaCore {
-    public class CBlockingEventsTrigger : MonoBehaviour {
-
+    public class CBlockingEventsTrigger : MonoBehaviour
+    {
+        [NonSerialized,Inject] CBlockingEventsManager _blockingEventsManager;
+        
         #if ODIN_INSPECTOR
         [FoldoutGroup("Default")]
         #else
@@ -48,22 +50,23 @@ namespace EnigmaCore {
         [FormerlySerializedAs("NotOnMenuOrNotPlayingCutsceneEvent")] [SerializeField] CUnityEventBool NotOnMenuAndNotPlayingCutsceneEvent;
 
         void Awake() {
-            BlockingEvent(DIContainer.Resolve<CBlockingEventsManager>().InMenuOrPlayingCutscene);
+            this.Inject();
+            BlockingEvent(_blockingEventsManager.InMenuOrPlayingCutscene);
         }
 
         void OnEnable()
         {
-            DIContainer.Resolve<CBlockingEventsManager>().InMenuOrPlayingCutsceneEvent += BlockingEvent;
+            _blockingEventsManager.InMenuOrPlayingCutsceneEvent += BlockingEvent;
         }
 
         void OnDisable()
         {
-            DIContainer.Resolve<CBlockingEventsManager>().InMenuOrPlayingCutsceneEvent -= BlockingEvent;
+            _blockingEventsManager.InMenuOrPlayingCutsceneEvent -= BlockingEvent;
         }
 
         void BlockingEvent(bool inMenuOrPlayingCutscene) {
-            var isInMenu = DIContainer.Resolve<CBlockingEventsManager>().IsInMenu;
-            var isPlayingCutscene = DIContainer.Resolve<CBlockingEventsManager>().IsPlayingCutscene;
+            var isInMenu = _blockingEventsManager.IsInMenu;
+            var isPlayingCutscene = _blockingEventsManager.IsPlayingCutscene;
 
             AnyBlockingEvent.Invoke(inMenuOrPlayingCutscene);
             OnMenuOrPlayingCutsceneEvent.Invoke(isInMenu || isPlayingCutscene);

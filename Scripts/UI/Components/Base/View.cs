@@ -129,7 +129,7 @@ namespace EnigmaCore.UI {
 			_previousButton = originButton;
             _canCloseByReturnButton = canCloseByReturnButton;
             ETime.TimeScale = ShouldPauseTheGame ? 0f : 1f;
-            DIContainer.Resolve<CBlockingEventsManager>().MenuRetainable.Retain(this);
+            _blockingEventsManager.MenuRetainable.Retain(this);
 			OpenEvent?.Invoke(this);
             gameObject.SetActive(true);
 		}

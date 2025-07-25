@@ -1,3 +1,4 @@
+using System;
 using EnigmaCore.DependecyInjection;
 using EnigmaCore.UI;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace EnigmaCore.Interaction {
 
 		#region <<---------- Properties and Fields ---------->>
 		
+		[NonSerialized,Inject] CBlockingEventsManager _blockingEventsManager;
         [SerializeField] protected bool _debug;
 		[SerializeField] bool onlyWorkOneTimePerSceneLoad;
         [SerializeField] Transform _interactionPromptPoint;
@@ -18,8 +20,11 @@ namespace EnigmaCore.Interaction {
 		
 		
 		#region <<---------- MonoBehaviour ---------->>
-		
-		protected virtual void Awake() { }
+
+		protected virtual void Awake()
+		{
+			this.Inject();
+		}
 
 		protected virtual void OnEnable() {
 			// show enable checkbox
@@ -40,7 +45,7 @@ namespace EnigmaCore.Interaction {
         /// Returns TRUE if interacted sucesfull.
         /// </summary>
 		public virtual bool OnInteract(Transform interactingTransform) {
-			if (!enabled || gameObject == null || !gameObject.activeInHierarchy || DIContainer.Resolve<CBlockingEventsManager>().InMenuOrPlayingCutscene) return false;
+			if (!enabled || gameObject == null || !gameObject.activeInHierarchy || _blockingEventsManager.InMenuOrPlayingCutscene) return false;
 			InteractEvent?.Invoke(interactingTransform);
 			if (onlyWorkOneTimePerSceneLoad) {
 				Destroy(this);

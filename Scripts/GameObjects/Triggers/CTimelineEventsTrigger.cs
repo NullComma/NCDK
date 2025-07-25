@@ -24,6 +24,7 @@ namespace EnigmaCore {
                 }
             }
         }
+		[NonSerialized,Inject] CBlockingEventsManager _blockingEventsManager;
         [SerializeField] bool _isPlayingCutscene;
 		[SerializeField] protected PlayableDirector _playableDirector;
 		[SerializeField] [Obsolete("Not working as expected.")] protected bool _autoSetIsPlayingCutsceneOnBlockingEventsManager = true;
@@ -39,6 +40,7 @@ namespace EnigmaCore {
 		#region <<---------- MonoBehaviour ---------->>
 
 		protected virtual void Awake() {
+			this.Inject();
             if (_playableDirector.extrapolationMode != DirectorWrapMode.None) {
                 Debug.LogError($"PlayableDirector {_playableDirector.name} extrapolationMode must be set to None.");
             }
@@ -73,7 +75,7 @@ namespace EnigmaCore {
 		
         protected virtual void OnCutscenePlayed() {
             if (_autoSetIsPlayingCutsceneOnBlockingEventsManager) {
-	            DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Retain(this);
+	            _blockingEventsManager.PlayingCutsceneRetainable.Retain(this);
             }
             _cutscenePlayed?.Invoke();
             _cutscenePlayingStateChanged?.Invoke(true);
@@ -83,7 +85,7 @@ namespace EnigmaCore {
 
         protected virtual void OnCutsceneStopped(PlayableDirector playableDirector) {
             if (_autoSetIsPlayingCutsceneOnBlockingEventsManager) {
-	            DIContainer.Resolve<CBlockingEventsManager>().PlayingCutsceneRetainable.Release(this);
+	            _blockingEventsManager.PlayingCutsceneRetainable.Release(this);
             }
             _cutsceneStopped?.Invoke();
             _cutscenePlayingStateChanged?.Invoke(false);

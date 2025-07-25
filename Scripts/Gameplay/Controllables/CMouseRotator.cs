@@ -7,6 +7,7 @@ namespace EnigmaCore {
 		
 		#region <<---------- Properties and Fields ---------->>
 		
+		[NonSerialized,Inject] CBlockingEventsManager _blockingEventsManager;
 		[SerializeField] Vector2 _rotationSpeed = Vector2.one * 0.2f;
 		[SerializeField] Vector2 _rotationYRange = new Vector2(60f, 60f);
 		[SerializeField] Vector2 _rotationXRange = new Vector2(60f, 30f);
@@ -19,12 +20,13 @@ namespace EnigmaCore {
 
 		#region <<---------- MonoBehaviour ---------->>
 		protected void Awake() {
+			this.Inject();
 			_transform = transform;
 			_initialRotation = _transform.rotation;
 		}
 
 		void Update() {
-			if (DIContainer.Resolve<CBlockingEventsManager>().InMenuOrPlayingCutscene) return;
+			if (_blockingEventsManager.InMenuOrPlayingCutscene) return;
 			
 			_inputLook = new Vector2(Input.GetAxisRaw(CInputKeys.LOOK_X), Input.GetAxisRaw(CInputKeys.LOOK_Y));
 
