@@ -53,7 +53,9 @@ namespace EnigmaCore {
 		private void Awake() {
             this._pauseUnloadOnEditor = false;
 			this._triggerObjectsInside.Clear();
-			this.EnsureColliderIsTrigger();
+			if (TryGetComponent(out Collider c)) {
+				this.EnsureColliderIsTrigger(c);
+			}
 			#if UNITY_EDITOR
 			if (!Application.isPlaying && this._scene != null && this._scene.sceneAsset != null) {
 				EditorSceneManager.OpenScene(AssetDatabase.GetAssetOrScenePath(this._scene.sceneAsset), OpenSceneMode.AdditiveWithoutLoading);
@@ -62,6 +64,10 @@ namespace EnigmaCore {
 		}
 
 		private void OnEnable() {
+			if (Application.isPlaying && !TryGetComponent<Collider>(out _))
+			{
+				LoadScene();
+			}
 			#if UNITY_EDITOR
 			EditorApplication.playModeStateChanged += EditorApplicationOnPlayModeStateChanged;
 			#endif
@@ -81,6 +87,11 @@ namespace EnigmaCore {
 		#endif
 
 		private void OnDisable() {
+			// If it's a "global" loader, unload the scene when the object is disabled.
+			if (Application.isPlaying && !TryGetComponent<Collider>(out _))
+			{
+				UnloadScene();
+			}
 			#if UNITY_EDITOR
 			EditorApplication.playModeStateChanged -= EditorApplicationOnPlayModeStateChanged;
 			#endif
@@ -97,11 +108,11 @@ namespace EnigmaCore {
 		}
 
 		void Reset() {
-			this.EnsureColliderIsTrigger();
+			if(TryGetComponent(out Collider c)) this.EnsureColliderIsTrigger(c);
 		}
 
 		private void OnValidate() {
-			this.EnsureColliderIsTrigger();
+			if(TryGetComponent(out Collider c)) this.EnsureColliderIsTrigger(c);
 		}
 
 		#endif
@@ -127,8 +138,7 @@ namespace EnigmaCore {
 		}
 		#endif
 		
-		void EnsureColliderIsTrigger() {
-			if (!TryGetComponent<Collider>(out var c)) return;
+		void EnsureColliderIsTrigger(Collider c) {
 			if (c.isTrigger) return;
 			c.isTrigger = true;
 			#if UNITY_EDITOR
