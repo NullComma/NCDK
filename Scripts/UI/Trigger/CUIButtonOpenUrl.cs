@@ -27,7 +27,7 @@ namespace EnigmaCore.UI {
                 Debug.LogError($"Error getting Button component on '{name}'");
             }
             button.onClick.AddListener(() => {
-                CApplication.OpenURL(urlToOpen);
+                EApplication.OpenURL(urlToOpen);
             });
         }
 

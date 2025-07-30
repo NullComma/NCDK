@@ -21,12 +21,12 @@ namespace EnigmaCore {
                 ShowMouseIfNeeded();
             };
 
-            CApplication.QuittingEvent += OnAppQuitting;
+            EApplication.QuittingEvent += OnAppQuitting;
         }
 		
 		void OnAppQuitting()
 		{
-			CApplication.QuittingEvent -= OnAppQuitting;
+			EApplication.QuittingEvent -= OnAppQuitting;
 			#if UNITY_EDITOR
 			SetCursorState(true);
 			#endif

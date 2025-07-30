@@ -21,7 +21,7 @@ using FMODUnity;
 
 namespace EnigmaCore {
     [DefaultExecutionOrder(int.MinValue)]
-    public static class CApplication {
+    public static class EApplication {
 
         #region <<---------- Initialization ---------->>
 
@@ -173,7 +173,7 @@ namespace EnigmaCore {
         }
 
         static void OnApplicationIsQuitting() {
-            Debug.Log("<color=red><b>CApplication is quitting...</b></color>");
+            Debug.Log("<b>Application is quitting...</b>");
             IsQuitting = true;
             QuittingCancellationTokenSource?.Cancel();
             Cursor.lockState = CursorLockMode.None;

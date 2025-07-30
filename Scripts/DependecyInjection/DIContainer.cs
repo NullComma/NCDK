@@ -12,7 +12,7 @@ namespace EnigmaCore.DependecyInjection
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init() {
-            CApplication.QuittingEvent += Dispose;
+            EApplication.QuittingEvent += Dispose;
         }
 
         static void Dispose()
@@ -25,7 +25,7 @@ namespace EnigmaCore.DependecyInjection
                 }
             }
             _instances.Clear();
-            CApplication.QuittingEvent -= Dispose;
+            EApplication.QuittingEvent -= Dispose;
         }
 
         public static void Register<T>(T instance) {
@@ -53,7 +53,7 @@ namespace EnigmaCore.DependecyInjection
         }
 
         public static T Resolve<T>() {
-            if (CApplication.IsQuitting)
+            if (EApplication.IsQuitting)
             {
                 Debug.LogError($"Tried to Resolve a '{typeof(T).Name}' dependency while quitting application! Will not be resolved.");
                 return default;

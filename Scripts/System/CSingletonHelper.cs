@@ -11,7 +11,7 @@ namespace EnigmaCore {
         }
         
         public static bool CannotCreateAnyInstance() {
-            return CApplication.IsQuitting || !Application.isPlaying;
+            return EApplication.IsQuitting || !Application.isPlaying;
         }
 
     }

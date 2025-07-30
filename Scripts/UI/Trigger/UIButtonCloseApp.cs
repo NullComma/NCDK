@@ -16,7 +16,7 @@ namespace EnigmaCore.UI
 
         void OnClickEvent()
         {
-            CApplication.Quit();
+            EApplication.Quit();
         }
     }
 }

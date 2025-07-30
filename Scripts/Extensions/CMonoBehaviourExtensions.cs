@@ -6,7 +6,7 @@ namespace EnigmaCore {
 	public static class MonoBehaviourExtensions {
 		
 		public static Coroutine CStartCoroutine(this MonoBehaviour monoBehaviour, IEnumerator coroutine) {
-			if(CApplication.IsQuitting) {
+			if(EApplication.IsQuitting) {
 				Debug.LogError("Tried to start a coroutine while application is quitting. Coroutine will not be started.", monoBehaviour);
 				return null;
 			}
