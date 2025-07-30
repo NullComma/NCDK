@@ -51,6 +51,14 @@ namespace EnigmaCore {
 			imgComp.color = Color.black;
 			imgComp.maskable = false;
 			imgComp.raycastTarget = false;
+			
+			CApplication.QuittingEvent += ApplicationOnQuittingEvent;
+		}
+		void ApplicationOnQuittingEvent()
+		{
+			CApplication.QuittingEvent -= ApplicationOnQuittingEvent;
+			if (this == null) return;
+			gameObject.CDestroy();
 		}
 
 		void Update() => UpdateOpacity();
