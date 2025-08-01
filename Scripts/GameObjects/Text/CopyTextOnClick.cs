@@ -20,6 +20,7 @@ namespace EnigmaCore.Text
         {
             if (data.context is not TextMeshProUGUI comp) return;
             Undo.AddComponent<CopyTextOnClick>(comp.gameObject);
+            comp.raycastTarget = true;
         }
         #endif
         
