@@ -17,7 +17,7 @@ namespace EnigmaCore.UI {
 			_buttonConfirm.Button.interactable = true;
 			_buttonConfirm.ClickEvent += () => {
 				Debug.Log($"SUBMIT: Confirm Popup '{gameObject.name}'",this);
-				this.CloseView();
+				this.Close();
 				onConfirm?.Invoke(this,EventArgs.Empty);
 			};
 					

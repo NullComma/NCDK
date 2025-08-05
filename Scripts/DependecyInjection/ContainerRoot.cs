@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using EnigmaCore.UI;
 using UnityEngine;
 
 namespace EnigmaCore.DependecyInjection
@@ -13,6 +14,7 @@ namespace EnigmaCore.DependecyInjection
             DIContainer.Register(typeof(CursorManager));
             DIContainer.Register(GetUISoundsBankSO());
             DIContainer.Register(GameObjectCreate.WithComponent<CFader>("Fader"));
+            DIContainer.Register(typeof(ViewManager));
         }
 
         static UISoundsBankSO GetUISoundsBankSO()

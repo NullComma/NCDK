@@ -11,7 +11,7 @@ namespace EnigmaCore {
         
         public override bool OnInteract(Transform interactingTransform) {
             if (!base.OnInteract(interactingTransform)) return false;
-            View.InstantiateAndOpen(_viewToOpen, null, null);
+            Instantiate(_viewToOpen).gameObject.SetActive(true);
             return true;
         }
         

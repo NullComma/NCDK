@@ -21,7 +21,7 @@ namespace EnigmaCore.UI {
 
         void OnOnClick()
         {
-            View.InstantiateAndOpen(_menuToOpen, GetComponentInParent<View>(), this);
+            Instantiate(_menuToOpen).gameObject.SetActive(true);
         }
     }
 }

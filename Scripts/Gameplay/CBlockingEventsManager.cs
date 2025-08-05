@@ -8,15 +8,19 @@ namespace EnigmaCore {
 		public bool InMenuOrPlayingCutscene => IsInMenu || IsPlayingCutscene;
 
         public bool IsPlayingCutscene => PlayingCutsceneRetainable.IsRetained;
-        public readonly CRetainable PlayingCutsceneRetainable = new ();
+        public readonly CRetainable PlayingCutsceneRetainable;
 
         public bool IsInMenu => MenuRetainable.IsRetained;
-        public readonly CRetainable MenuRetainable = new ();
+        public readonly CRetainable MenuRetainable;
 
         public event Action<bool> InMenuOrPlayingCutsceneEvent = delegate { };
 
 
-        public CBlockingEventsManager() {
+        public CBlockingEventsManager()
+        {
+	        MenuRetainable = new ();
+	        PlayingCutsceneRetainable = new ();
+	        
 	        // on menu
 	        MenuRetainable.StateEvent += onMenu => {
 		        Debug.Log($"<color=#4fafb6>{nameof(onMenu)}: <b>{onMenu}</b></color>");

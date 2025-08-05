@@ -23,7 +23,7 @@ namespace EnigmaCore.UI {
 		#if FMOD
 		EventInstance _soundEventInstance;
 		#endif
-
+		
         [SerializeField] UnityEvent _interactEvent;
 
         #endregion <<---------- Properties and Fields ---------->>
@@ -42,11 +42,7 @@ namespace EnigmaCore.UI {
 
         protected void TryEndNavigation()
         {
-	        if(transform.root == null || !transform.root.TryGetComponent(out View view)) {
-		        Debug.LogError("Could not get View from root to end navigation", this);
-		        return;
-	        }
-	        view.RecursiveCloseAllViews();
+	       DIContainer.Resolve<ViewManager>().CloseAllViews();
         }
 
 		#if FMOD
@@ -114,7 +110,7 @@ namespace EnigmaCore.UI {
 			if (!IsThisAValidInteractionTarget(eventData)) return;
 			var rootT = transform.root;
             if (rootT != null && rootT.TryGetComponent(out View view)) {
-	            view.CloseView();
+	            view.Close();
                 Canceled();
             }
         }

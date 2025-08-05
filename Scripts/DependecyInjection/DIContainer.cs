@@ -84,6 +84,16 @@ namespace EnigmaCore.DependecyInjection
                 Debug.LogError("Tried to inject a dependency on Editor, this is not supported. Did you called Inject() inside an OnValidate method?");
                 return;
             }
+            if (EApplication.IsQuitting)
+            {
+                Debug.LogError($"Tried to inject dependencies on a target while quitting application! Will not be injected.");
+                return;
+            }
+            if (target == null)
+            {
+                Debug.LogError("Tried to inject dependencies on a null target!");
+                return;
+            }
             var type = target.GetType();
             while (type != null) {
                 var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);

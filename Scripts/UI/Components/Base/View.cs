@@ -1,202 +1,117 @@
 using System;
-using System.Linq;
 using EnigmaCore.DependecyInjection;
-using EnigmaCore.EnigmaCore.Scripts.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Object = UnityEngine.Object;
+using UnityEngine.InputSystem;
 
-namespace EnigmaCore.UI {
-	public abstract class View : MonoBehaviour {
-
-		#region <<---------- Properties and Fields ---------->>
-
-		public static View LastOpenedView { get; private set; }
-
-		public GameObject FirstSelectedObject => _eventSystem.firstSelectedGameObject;
-
-		[Header("Setup")]
-		[SerializeField] protected EventSystem _eventSystem;
-        [Space]
-        [SerializeField] CUIButton _buttonReturn;
-        protected CUIButton ButtonReturn => _buttonReturn;
-
+namespace EnigmaCore.UI
+{
+    public abstract class View : MonoBehaviour
+    {
+        [Header("Setup")]
+        [SerializeField] protected EventSystem _eventSystem;
+        [SerializeField] protected CUIButton _buttonReturn;
+        
+        [Header("Behavior")]
         public bool ShouldPauseTheGame = true;
+        public bool CanCloseWithCancel = true;
 
-		[Obsolete("Trigger audio using OnOpen/OnClose unity events")]
-		[NonSerialized] protected bool _shouldPlayOpenAndCloseMenuSound;
+        [Inject] [NonSerialized] ViewManager _viewManager;
+        [Inject] [NonSerialized] CBlockingEventsManager _blockingEventsManager;
+        
+        GameObject _lastSelectedObject;
 
-		public bool CanCloseByReturnButton => _canCloseByReturnButton;
-		[NonSerialized] protected bool _canCloseByReturnButton = true;
-
-		[NonSerialized] View _previous;
-		[NonSerialized] CUIInteractable _previousButton;
-
-		public event Action<View> OpenEvent;
-		public event Action<View> CloseEvent;
-
-		[NonSerialized,Inject] CBlockingEventsManager _blockingEventsManager;
-
-		#endregion <<---------- Properties and Fields ---------->>
-
-
-
-
-		#region <<---------- MonoBehaviour ---------->>
-
-		protected virtual void Awake()
-		{
-			this.Inject();
-			_eventSystem = GetComponentInChildren<EventSystem>();
-		}
-	
-		protected virtual void OnEnable() {
-			UpdateEventSystemAndCheckForObjectSelection(_eventSystem.firstSelectedGameObject);
-            if(_buttonReturn) _buttonReturn.ClickEvent += CloseView;
-            _blockingEventsManager.MenuRetainable.Retain(this);
-            LastOpenedView = this;
-            _eventSystem.CGetOrAddComponent<EventSystemHandlers>().CancelEvent += OnCancelEvent;
-		}
-
-		void LateUpdate()
-		{
-			if (_eventSystem == null || (_eventSystem.currentSelectedGameObject != null && _eventSystem.currentSelectedGameObject.GetComponent<CUIInteractable>() != null)) return;
-			var childrens = GetComponentsInChildren<CUIInteractable>(true);
-			if (childrens.Length <= 0) {
-				Debug.LogError($"Could not find object to select with a '{nameof(CUIInteractable)}' in '{name}', this will lead to non functional UI in Controllers.", this);
-				return;
-			}
-			var toSelect = childrens.FirstOrDefault(i => i.isActiveAndEnabled);
-			if (toSelect == null)
-			{
-				toSelect = childrens[0]; // select first that is disabled anyway
-				Debug.LogWarning($"Could not find any active object to select with a '{nameof(CUIInteractable)}' in '{name}', selecting first one that is disabled.", this);
-			}
-			Debug.Log($"Auto selecting item '{toSelect.name}' on menu '{name}'", toSelect);
-			_eventSystem.SetSelectedGameObject(toSelect.gameObject);
-		}
-
-		protected virtual void OnDisable() {
-			_blockingEventsManager?.MenuRetainable.Release(this);
-            if(_buttonReturn) _buttonReturn.ClickEvent -= CloseView;
-            _eventSystem.GetComponent<EventSystemHandlers>().CancelEvent -= OnCancelEvent;
-		}
-
-        protected virtual void OnDestroy() { }
-
-        void OnValidate()
+        protected virtual void Awake()
         {
-	        if (_eventSystem == null) {
-		        _eventSystem = GetComponentInChildren<EventSystem>();
-		        #if UNITY_EDITOR
-		        if(_eventSystem == null) {
-			        Debug.LogError($"No EventSystem found in children of '{name}', please add one.", this);
-		        }
-		        else
-		        {
-			        UnityEditor.EditorUtility.SetDirty(this);
-		        }
-		        #endif
-	        }
+            this.Inject();
+            if (_eventSystem == null) _eventSystem = GetComponentInChildren<EventSystem>(true);
         }
 
-        void Reset()
+        protected virtual void OnEnable()
         {
-	        OnValidate();
-        }
-
-        #endregion <<---------- MonoBehaviour ---------->>
-
-
-
-
-		#region <<---------- Open / Close ---------->>
-
-		public static View InstantiateAndOpen(View prefab, View previous = null, CUIInteractable originButton = null, bool canCloseByReturnButton = true)
-		{
-			var view = Object.Instantiate(prefab);
-			view.Open(previous, originButton, canCloseByReturnButton);
-			return view;
-		}
-
-		void Open(View previous, CUIInteractable originButton, bool canCloseByReturnButton = true) {
-			Debug.Log($"Opening UI {gameObject.name}");
-			_previous = previous;
-			if(_previous != null) {
-				GetComponentInChildren<Canvas>(true).sortingOrder = 1 + _previous.GetComponentInChildren<Canvas>(true).sortingOrder;
-				_previous.gameObject.SetActive(false);
-			}
-			_previousButton = originButton;
-            _canCloseByReturnButton = canCloseByReturnButton;
-            ETime.TimeScale = ShouldPauseTheGame ? 0f : 1f;
+            // Store which object was selected right before this view opened.
+            if (EventSystem.current != null)
+                _lastSelectedObject = EventSystem.current.currentSelectedGameObject;
+            
+            // --- The Core of the New System ---
+            // Notify the manager that this view is now the active one.
+            _viewManager?.NotifyViewOpened(this);
+            
             _blockingEventsManager.MenuRetainable.Retain(this);
-			OpenEvent?.Invoke(this);
-            gameObject.SetActive(true);
-		}
+            if (_eventSystem != null && _eventSystem.TryGetComponent(out EventSystemHandlers handlers))
+                handlers.CancelEvent += OnCancelEvent;
 
-		public void CloseView()
-		{
-			CloseInternal(false);
-		}
-
-		public void RecursiveCloseAllViews()
-		{
-			CloseInternal(true);
-		}
-
-        void CloseInternal(bool closeAll = false) {
-			Debug.Log($"Closing UI {gameObject.name}", this);
-			CloseEvent?.Invoke(this);
-			if(_previous != null) {
-				if(closeAll) _previous.RecursiveCloseAllViews();
-				else _previous.ShowIfHidden(_previousButton);
-			}
-			else {
-				ETime.TimeScale = 1f;
-			}
-			_blockingEventsManager?.MenuRetainable.Release(this);
-			#if UNITY_ADDRESSABLES_EXIST
-			CAssets.UnloadAsset(this.gameObject);
-			#else
-			gameObject.CDestroy();
-			#endif
+            if(_buttonReturn) _buttonReturn.ClickEvent += Close;
         }
 
-		#endregion <<---------- Open / Close ---------->>
-
-
-
-
-		#region <<---------- Visibility ---------->>
-
-		void OnCancelEvent(BaseEventData obj)
-		{
-			if(CanCloseByReturnButton) CloseView();
-		}
-		
-		void UpdateEventSystemAndCheckForObjectSelection(GameObject gameObjectToSelect) {
-            if (gameObjectToSelect == null) return;
-			UpdateEventSystemAndCheckForObjectSelection(gameObjectToSelect.GetComponent<CUIInteractable>());
-        }
-
-		void UpdateEventSystemAndCheckForObjectSelection(CUIInteractable interactableToSelect) {
-            if (interactableToSelect == null) {
-                Debug.LogError("Requested to select a null interactable! No object will be selected.");
+        void LateUpdate()
+        {
+            // This logic should only run for the view that is currently on top.
+            if (_viewManager == null || _viewManager.CurrentTopView != this)
+            {
                 return;
             }
 
-            EventSystem.current = _eventSystem;
+            // This is the failsafe for gamepad navigation.
+            // If nothing is selected and a gamepad is connected, it means a mouse user
+            // might have deselected everything, breaking controller navigation.
+            if (_eventSystem.currentSelectedGameObject == null && Gamepad.current != null)
+            {
+                // Find the first available selectable object and select it to restore navigation.
+                var objectToSelect = FirstSelectedObject();
+                if (objectToSelect != null)
+                {
+                    _eventSystem.SetSelectedGameObject(objectToSelect);
+                }
+            }
+        }
+        
+        protected virtual void OnDisable()
+        {
+            // --- The Core of the New System ---
+            // Notify the manager that this view has been closed.
+            _viewManager?.NotifyViewClosed(this);
+            
+            _blockingEventsManager?.MenuRetainable.Release(this);
+            if (_eventSystem != null && _eventSystem.TryGetComponent(out EventSystemHandlers handlers))
+                handlers.CancelEvent -= OnCancelEvent;
+            
+            if(_buttonReturn) _buttonReturn.ClickEvent -= Close;
+        }
 
-            _eventSystem.SetSelectedGameObject(interactableToSelect.gameObject);
-		}
+        /// <summary>
+        /// Called by the ViewManager when a view on top is closed, revealing this one.
+        /// </summary>
+        public virtual void Show()
+        {
+            gameObject.SetActive(true);
+            
+            // Attempt to re-select the object that was selected before the next view was opened.
+            var objectToSelect = _lastSelectedObject != null ? _lastSelectedObject : FirstSelectedObject();
+            if (objectToSelect != null)
+            {
+                _eventSystem.SetSelectedGameObject(objectToSelect);
+            }
+        }
+        
+        /// <summary>
+        /// The standard way to close a view is to just deactivate its GameObject.
+        /// </summary>
+        public void Close()
+        {
+            gameObject.SetActive(false);
+        }
 
-		public void ShowIfHidden(CUIInteractable buttonToSelect) {
-			gameObject.SetActive(true);
-			if(buttonToSelect) UpdateEventSystemAndCheckForObjectSelection(buttonToSelect);
-			ETime.TimeScale = ShouldPauseTheGame ? 0f : 1f;
-		}
-
-		#endregion <<---------- Visibility ---------->>
-
-	}
+        private void OnCancelEvent(BaseEventData obj)
+        {
+            if (CanCloseWithCancel) Close();
+        }
+        
+        private GameObject FirstSelectedObject()
+        {
+            if (_eventSystem.firstSelectedGameObject != null) return _eventSystem.firstSelectedGameObject;
+            var firstInteractable = GetComponentInChildren<CUIInteractable>();
+            return firstInteractable != null ? firstInteractable.gameObject : null;
+        }
+    }
 }
