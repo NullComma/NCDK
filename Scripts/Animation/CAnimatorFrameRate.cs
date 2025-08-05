@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -21,8 +22,14 @@ namespace EnigmaCore {
 
         #region <<---------- Mono Behaviour ---------->>
 
-        private void Awake() {
-            _animator = GetComponent<Animator>();
+        void Awake()
+        {
+            TryGetComponent(out _animator);
+        }
+
+        IEnumerator Start()
+        {
+            yield return new WaitWhile(() => !_animator.playableGraph.IsValid());
             _animator.playableGraph.SetTimeUpdateMode(DirectorUpdateMode.Manual);
         }
 
@@ -30,7 +37,7 @@ namespace EnigmaCore {
             _animator.Update(0);
             if (Time.frameCount % ((int)_delayFrames) != 0) return;
             _animator.Update(Time.realtimeSinceStartup - _lastUpdateTime);
-            //this._animator.playableGraph.Evaluate(Time.realtimeSinceStartup - _lastUpdateTime);
+            if(_animator.playableGraph.IsValid()) _animator.playableGraph.Evaluate(Time.realtimeSinceStartup - _lastUpdateTime);
             _lastUpdateTime = Time.realtimeSinceStartup;
         }
 
