@@ -11,6 +11,7 @@ namespace EnigmaCore {
         public int callbackOrder => 1;
 
         public void OnPostprocessBuild(BuildReport report) {
+            Debug.Log("Running OnPostprocessBuild() for shorcut creation");
             if (report.summary.result != BuildResult.Succeeded && report.summary.result != BuildResult.Unknown) return;
 
             string buildPath = report.summary.outputPath;
@@ -24,14 +25,13 @@ namespace EnigmaCore {
             }
             #elif UNITY_EDITOR_WIN
             var outputPath = buildPath.Replace($"/{Application.productName}.exe", string.Empty);
-            // Create Shortcut to application Logs Directory on Windows
-            CreateShortcut(outputPath);
+            CreateShortcutToApplicationLogsDirectoryOnWindows(outputPath);
             #endif
 
             CEditorPlayerSettings.RaiseBuildVersion();
         }
 
-        static void CreateShortcut(string outputPath)
+        static void CreateShortcutToApplicationLogsDirectoryOnWindows(string outputPath)
         {
             string targetPath = Path.Combine("%USERPROFILE%\\AppData\\LocalLow", Application.companyName, Application.productName);
             string shortcutPath = Path.Combine(outputPath, "Logs and Save Directory.lnk");
