@@ -123,6 +123,10 @@ namespace EnigmaCore
                 image.gameObject.SetActive(true);
                 yield return Fade(1f, fadeInDuration);
                 yield return new WaitForSeconds(holdDuration);
+                if (image.gameObject.TryGetComponent(out ESplashScreenExtraTime extraTime))
+                {
+                    yield return new WaitForSeconds(extraTime.ExtraTime);
+                }
                 yield return Fade(0f, fadeOutDuration);
                 image.gameObject.SetActive(false);
             }
