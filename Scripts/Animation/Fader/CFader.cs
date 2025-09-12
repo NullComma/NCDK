@@ -23,13 +23,11 @@ namespace EnigmaCore {
 		#region <<---------- MonoBehaviour ---------->>
 
 		void Awake() {
-			if (_instance != null)
-			{
-				_instance.gameObject.CDestroy();
-			}
+			if (_instance != null) _instance.gameObject.CDestroy();
 			_instance = this;
 			gameObject.layer = 5; // UI
 			gameObject.CDontDestroyOnLoad();
+            gameObject.hideFlags = HideFlags.DontSaveInEditor;
 
 			// canvas
 			var goCanvas = gameObject.AddComponent<Canvas>();
