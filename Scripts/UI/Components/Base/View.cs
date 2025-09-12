@@ -16,8 +16,8 @@ namespace EnigmaCore.UI
         public bool ShouldPauseTheGame = true;
         public bool CanCloseWithCancel = true;
 
-        [Inject] [NonSerialized] ViewManager _viewManager;
-        [Inject] [NonSerialized] CBlockingEventsManager _blockingEventsManager;
+        [Inject] [NonSerialized] protected ViewManager _viewManager;
+        [Inject] [NonSerialized] protected CBlockingEventsManager _blockingEventsManager;
         
         GameObject _lastSelectedObject;
 
