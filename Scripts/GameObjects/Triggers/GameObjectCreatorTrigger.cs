@@ -8,7 +8,7 @@ namespace EnigmaCore
 {
     public class GameObjectCreatorTrigger : CAutoTriggerCompBase
     {
-        [SerializeField] private GameObject objToCreate;
+        [SerializeField] GameObject objToCreate;
 
 
         protected override void TriggerEvent() {
@@ -20,7 +20,7 @@ namespace EnigmaCore
         }
 
 #if UNITY_EDITOR
-        private void OnDrawGizmos()
+        void OnDrawGizmos()
         {
             var editorCam = Camera.current;
             if (editorCam == null) return;
@@ -45,9 +45,9 @@ namespace EnigmaCore
             Gizmos.color = Color.white;
         }
 #endif
-        
 
-        private void CreateObjs() {
+
+        void CreateObjs() {
             Instantiate(this.objToCreate, this.transform.position, this.transform.rotation);
         }
     }
