@@ -17,31 +17,30 @@ namespace EnigmaCore.UI
         public bool CanCloseWithCancel = true;
 
         [Inject] [NonSerialized] protected ViewManager _viewManager;
-        [Inject] [NonSerialized] protected CBlockingEventsManager _blockingEventsManager;
-        
+
         GameObject _lastSelectedObject;
 
         protected virtual void Awake()
         {
             this.Inject();
             if (_eventSystem == null) _eventSystem = GetComponentInChildren<EventSystem>(true);
+            _viewManager.NotifyViewOpened(this);
         }
 
-        protected virtual void OnEnable()
+		protected virtual void OnEnable()
         {
             // Store which object was selected right before this view opened.
             if (EventSystem.current != null)
                 _lastSelectedObject = EventSystem.current.currentSelectedGameObject;
-            
+
             // --- The Core of the New System ---
             // Notify the manager that this view is now the active one.
-            _viewManager?.NotifyViewOpened(this);
-            
-            _blockingEventsManager.MenuRetainable.Retain(this);
+            _viewManager.NotifyViewShown(this);
+
             if (_eventSystem != null && _eventSystem.TryGetComponent(out EventSystemHandlers handlers))
                 handlers.CancelEvent += OnCancelEvent;
 
-            if(_buttonReturn) _buttonReturn.ClickEvent += Close;
+            if (_buttonReturn) _buttonReturn.ClickEvent += Close;
         }
 
         void LateUpdate()
@@ -70,22 +69,23 @@ namespace EnigmaCore.UI
         {
             // --- The Core of the New System ---
             // Notify the manager that this view has been closed.
-            _viewManager?.NotifyViewClosed(this);
             
-            _blockingEventsManager?.MenuRetainable.Release(this);
             if (_eventSystem != null && _eventSystem.TryGetComponent(out EventSystemHandlers handlers))
                 handlers.CancelEvent -= OnCancelEvent;
             
             if(_buttonReturn) _buttonReturn.ClickEvent -= Close;
+            _viewManager.NotifyViewHidden(this);
         }
 
-        /// <summary>
-        /// Called by the ViewManager when a view on top is closed, revealing this one.
-        /// </summary>
-        public virtual void Show()
+		void OnDestroy()
+		{
+            if(_viewManager != null) _viewManager.NotifyViewClosed(this);
+		}
+
+		public virtual void Show()
         {
             gameObject.SetActive(true);
-            
+
             // Attempt to re-select the object that was selected before the next view was opened.
             var objectToSelect = _lastSelectedObject != null ? _lastSelectedObject : FirstSelectedObject();
             if (objectToSelect != null)
@@ -93,13 +93,15 @@ namespace EnigmaCore.UI
                 _eventSystem.SetSelectedGameObject(objectToSelect);
             }
         }
-        
-        /// <summary>
-        /// The standard way to close a view is to just deactivate its GameObject.
-        /// </summary>
-        public void Close()
+
+        public void Hide()
         {
             gameObject.SetActive(false);
+        }
+
+        public void Close()
+        {
+            gameObject.CDestroy();
         }
 
         private void OnCancelEvent(BaseEventData obj)

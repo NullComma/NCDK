@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using EnigmaCore.DependecyInjection;
+
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace EnigmaCore.UI
@@ -11,55 +14,57 @@ namespace EnigmaCore.UI
         /// </summary>
         public View CurrentTopView => _viewStack.TryPeek(out var view) ? view : null;
 
-        Stack<View> _viewStack = new();
-        int _pauseRequestCount = 0;
+        [Inject] [NonSerialized] protected PauseManager _pauseManager;
+        [Inject] [NonSerialized] protected CBlockingEventsManager _blockingEventsManager;
+        [NonSerialized] Stack<View> _viewStack = new();
 
-        /// <summary>
-        /// Called by a View from its OnEnable method.
-        /// </summary>
         public void NotifyViewOpened(View openedView)
         {
             // If there's already a view on top, hide it.
-            if (_viewStack.TryPeek(out View currentTopView))
+            var currentTopView = CurrentTopView;
+            if (currentTopView != openedView)
             {
-                if (currentTopView != openedView) // Avoid hiding itself
+                if (currentTopView != null)
                 {
-                    currentTopView.gameObject.SetActive(false);
+                    currentTopView.Hide();
                 }
             }
-            
-            // If the view is already in the stack, remove it before pushing to the top.
-            // This handles re-opening an existing view.
-            var list = new List<View>(_viewStack);
-            list.Remove(openedView);
-            list.Reverse();
-            _viewStack = new Stack<View>(list);
-            
             _viewStack.Push(openedView);
             
+            _blockingEventsManager.MenuRetainable.Retain(openedView);
+
             // Handle game pausing
             if (openedView.ShouldPauseTheGame)
             {
-                _pauseRequestCount++;
-                if (_pauseRequestCount == 1) ETime.TimeScale = 0f;
+                _pauseManager.Retain(openedView);
             }
+            Debug.Log($"View opened: {openedView.CGetNameSafe()}");
+        }
+        
+        public void NotifyViewShown(View shownView)
+        {
+          
+            Debug.Log($"View shown: {shownView.CGetNameSafe()}");
         }
 
-        /// <summary>
-        /// Called by a View from its OnDisable method.
-        /// </summary>
+        public void NotifyViewHidden(View hiddenView)
+        {
+            Debug.Log($"View Hidden: {hiddenView.CGetNameSafe()}");
+
+        }
+
         public void NotifyViewClosed(View closedView)
         {
             // Only proceed if the view being closed is the one on top of the stack.
-            if (_viewStack.Count == 0 || _viewStack.Peek() != closedView) return;
+            if (_viewStack.Peek() != closedView) return;
 
             _viewStack.Pop();
+            _blockingEventsManager?.MenuRetainable.Release(closedView);
 
             // Handle game unpausing
             if (closedView.ShouldPauseTheGame)
             {
-                _pauseRequestCount--;
-                if (_pauseRequestCount == 0) ETime.TimeScale = 1f;
+                _pauseManager.Release(closedView);
             }
 
             // Show the next view in the stack, if one exists.
@@ -67,12 +72,9 @@ namespace EnigmaCore.UI
             {
                 previousView.Show();
             }
+            Debug.Log($"View closed: {closedView.CGetNameSafe()}");
         }
-        
-        /// <summary>
-        /// Closes all currently open views in the stack until none are left.
-        /// This will automatically handle unpausing the game.
-        /// </summary>
+
         public void CloseAllViews()
         {
             // Keep closing the top-most view until the stack is empty.
