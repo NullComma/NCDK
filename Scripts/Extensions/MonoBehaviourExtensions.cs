@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -51,6 +52,29 @@ namespace EnigmaCore {
             EditorUtility.SetDirty(m);
             #endif
         }
+
+		public static void CheckForDuplicatedIds(this ISerializedObject m)
+		{
+			var others = Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+				.OfType<ISerializedObject>()
+				.ToList();
+			others.Remove(m);
+			if (others.Count <= 0) return;
+			foreach (var other in others)
+			{
+				if (other.ID == m.ID)
+				{
+					Debug.LogError($"Found duplicated ID {m.ID} in object '{other}' and '{m}'. Resetting ID of '{m}'.", (MonoBehaviour)m);
+					#if UNITY_EDITOR
+					//overwrite by reflection 'm.ID = SerializableGuid.NewGuid();':
+					var field = m.GetType().GetField("id", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+					if (field != null) field.SetValue(m, SerializableGuid.NewGuid());
+					Selection.activeObject = (MonoBehaviour)m;
+					#endif
+					break;
+				}
+			}
+		}
 
     }
 }
