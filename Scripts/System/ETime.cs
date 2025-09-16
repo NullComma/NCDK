@@ -27,7 +27,11 @@ namespace EnigmaCore {
 			}
 		}
 
-        public static bool IsPaused => Time.timeScale.CImprecise() == 0f;
+        public static bool IsPaused
+		{
+			get => Mathf.Approximately(Time.timeScale, 0f);
+			set => TimeScale = value ? 1f : 0f;
+		}
 
 		/// <summary>
 		/// Notify time scaled changed (oldTimeScale, newTimeScale)
