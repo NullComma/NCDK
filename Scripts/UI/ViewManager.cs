@@ -38,20 +38,11 @@ namespace EnigmaCore.UI
             {
                 _pauseManager.Retain(openedView);
             }
-            Debug.Log($"View opened: {openedView.CGetNameSafe()}");
         }
         
-        public void NotifyViewShown(View shownView)
-        {
-          
-            Debug.Log($"View shown: {shownView.CGetNameSafe()}");
-        }
+        public void NotifyViewShown(View shownView) { }
 
-        public void NotifyViewHidden(View hiddenView)
-        {
-            Debug.Log($"View Hidden: {hiddenView.CGetNameSafe()}");
-
-        }
+        public void NotifyViewHidden(View hiddenView) { }
 
         public void NotifyViewClosed(View closedView)
         {
@@ -72,7 +63,6 @@ namespace EnigmaCore.UI
             {
                 previousView.Show();
             }
-            Debug.Log($"View closed: {closedView.CGetNameSafe()}");
         }
 
         public void CloseAllViews()
