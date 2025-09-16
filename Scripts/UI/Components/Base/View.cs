@@ -20,6 +20,8 @@ namespace EnigmaCore.UI
 
         GameObject _lastSelectedObject;
 
+        public event Action CloseEvent = delegate { };
+
         protected virtual void Awake()
         {
             this.Inject();
@@ -102,6 +104,7 @@ namespace EnigmaCore.UI
         public void Close()
         {
             gameObject.CDestroy();
+            CloseEvent.Invoke();
         }
 
         private void OnCancelEvent(BaseEventData obj)
