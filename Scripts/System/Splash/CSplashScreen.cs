@@ -9,6 +9,11 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 #endif
 
+#if UNITY_LOCALIZATION
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
+#endif
+
 namespace EnigmaCore
 {
     [RequireComponent(typeof(CanvasGroup))]
@@ -29,13 +34,16 @@ namespace EnigmaCore
         [Header("Object References")]
         [SerializeField, Tooltip("The parent GameObject containing the splash Image objects as children.")]
         Transform splashImagesHolder;
-        
+
         // Non-Serialized Fields
         [NonSerialized] CanvasGroup canvasGroup;
         [NonSerialized] List<Image> splashImages = new();
         [NonSerialized] bool allowSkip;
         [NonSerialized] Coroutine splashCoroutine;
         [NonSerialized] AsyncOperation sceneLoadOperation;
+#if UNITY_LOCALIZATION
+            
+#endif
 
         void Awake()
         {
@@ -58,15 +66,21 @@ namespace EnigmaCore
 
         IEnumerator Start()
         {
-            yield return null; // Wait one frame for all systems to initialize.
-
+#if UNITY_LOCALIZATION
+            var localizationInitializationOperation = LocalizationSettings.InitializationOperation;
+#endif
             sceneLoadOperation = SceneManager.LoadSceneAsync(sceneToLoadIndex);
-            
             // Prevent the scene from activating as soon as it's finished loading.
             sceneLoadOperation.allowSceneActivation = false;
 
             // Start the visual splash screen sequence.
             splashCoroutine = StartCoroutine(SplashScreenSequence());
+            
+#if UNITY_LOCALIZATION
+            yield return localizationInitializationOperation;
+#endif
+            
+            allowSkip = true;
         }
 
         void Update()
@@ -116,7 +130,6 @@ namespace EnigmaCore
         IEnumerator SplashScreenSequence()
         {
             canvasGroup.alpha = 0f;
-            allowSkip = true;
 
             foreach (var image in splashImages)
             {
@@ -132,6 +145,9 @@ namespace EnigmaCore
             }
 
             allowSkip = false;
+            
+            Debug.Log("Waiting for system initialization.");
+
             
             Debug.Log("Splash sequence finished. Activating next scene.");
             if (sceneLoadOperation != null)
