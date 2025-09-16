@@ -10,7 +10,8 @@
         "Unity.Timeline.Editor",
         "Unity.InputSystem",
         "Unity.Addressables",
-        "Unity.ResourceManager"
+        "Unity.ResourceManager",
+        "Unity.Localization"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -41,10 +42,16 @@
             "define": "CINEMACHINE"
         },
         {
-            "name": "com.annulusgames.lit-motion",
-            "expression": "0.0.0",
-            "define": "LITMOTION"
+          "name": "com.annulusgames.lit-motion",
+          "expression": "0.0.0",
+          "define": "LITMOTION"
+        },
+        {
+          "name": "com.unity.localization",
+          "expression": "0.0.0",
+          "define": "UNITY_LOCALIZATION"
         }
+
     ],
     "noEngineReferences": false
 }
