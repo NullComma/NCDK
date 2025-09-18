@@ -21,12 +21,12 @@ namespace EnigmaCore {
                 ShowMouseIfNeeded();
             };
 
-            EApplication.QuittingEvent += OnAppQuitting;
+			Application.quitting += OnAppQuitting;
         }
 		
 		void OnAppQuitting()
 		{
-			EApplication.QuittingEvent -= OnAppQuitting;
+			Application.quitting -= OnAppQuitting;
 			#if UNITY_EDITOR
 			SetCursorState(true);
 			#endif
@@ -40,7 +40,11 @@ namespace EnigmaCore {
 
         public void ShowMouseIfNeeded() {
 #if ENABLE_INPUT_SYSTEM
-            if (Gamepad.current != null && Gamepad.current.enabled) return;
+			if(Gamepad.current != null && Gamepad.current.enabled)
+			{
+				Debug.Log("Gamepad connected, not showing cursor");
+				return;
+			}
 #endif
             SetCursorState(true);
         }

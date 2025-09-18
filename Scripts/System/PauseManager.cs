@@ -22,7 +22,7 @@ namespace EnigmaCore
             pauseRetainable.StateEvent -= PauseStateChanged;
         }
 
-        private void PauseStateChanged(bool isPaused)
+        void PauseStateChanged(bool isPaused)
         {
             ETime.IsPaused = isPaused;
         }

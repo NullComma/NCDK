@@ -82,6 +82,7 @@ namespace EnigmaCore.UI
 		void OnDestroy()
 		{
             if(_viewManager != null) _viewManager.NotifyViewClosed(this);
+            CloseEvent.Invoke();
 		}
 
 		public virtual void Show()
@@ -104,7 +105,6 @@ namespace EnigmaCore.UI
         public void Close()
         {
             gameObject.CDestroy();
-            CloseEvent.Invoke();
         }
 
         private void OnCancelEvent(BaseEventData obj)

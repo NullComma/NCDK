@@ -51,7 +51,6 @@
           "expression": "0.0.0",
           "define": "UNITY_LOCALIZATION"
         }
-
     ],
     "noEngineReferences": false
 }

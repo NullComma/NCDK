@@ -30,7 +30,7 @@ namespace EnigmaCore {
         public static bool IsPaused
 		{
 			get => Mathf.Approximately(Time.timeScale, 0f);
-			set => TimeScale = value ? 1f : 0f;
+			set => TimeScale = value ? 0f : 1f;
 		}
 
 		/// <summary>

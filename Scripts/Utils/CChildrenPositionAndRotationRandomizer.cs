@@ -116,7 +116,7 @@ namespace EnigmaCore {
 			}
 
             var tChildCol = t.GetComponentsInChildren<Collider>();
-            var allOtherColliders = FindObjectsOfType<Collider>(false).Where(c => !tChildCol.Contains(c) && this._checkLayers.CContains(c.gameObject.layer)).ToArray();
+            var allOtherColliders = FindObjectsByType<Collider>(FindObjectsInactive.Exclude,FindObjectsSortMode.None).Where(c => !tChildCol.Contains(c) && this._checkLayers.CContains(c.gameObject.layer)).ToArray();
             
 			bool needToRecalculate = false;
             MeshCollider startedNonConvexMesh = null;

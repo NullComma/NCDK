@@ -21,11 +21,12 @@ namespace EnigmaCore.DependecyInjection
         static UISoundsBankSO GetUISoundsBankSO()
         {
             var all = Resources.LoadAll<UISoundsBankSO>("");
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             if(!all.CIsNullOrEmpty()) return all.First();
             return CScriptableObjectExtensions.EditorCreateInResourcesFolder<UISoundsBankSO>();
-            #endif
+#else
             return all.First();
+#endif
         }
     }
 }

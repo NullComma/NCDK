@@ -50,11 +50,11 @@ namespace EnigmaCore {
 			imgComp.maskable = false;
 			imgComp.raycastTarget = false;
 			
-			EApplication.QuittingEvent += ApplicationOnQuittingEvent;
+			Application.quitting += ApplicationOnQuittingEvent;
 		}
 		void ApplicationOnQuittingEvent()
 		{
-			EApplication.QuittingEvent -= ApplicationOnQuittingEvent;
+			Application.quitting -= ApplicationOnQuittingEvent;
 			if (this == null) return;
 			gameObject.CDestroy();
 		}

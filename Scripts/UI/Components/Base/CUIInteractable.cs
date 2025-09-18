@@ -24,7 +24,7 @@ namespace EnigmaCore.UI {
 		EventInstance _soundEventInstance;
 		#endif
 		
-        [SerializeField] UnityEvent _interactEvent;
+        [SerializeField] protected UnityEvent _interactEvent;
 
         #endregion <<---------- Properties and Fields ---------->>
 

@@ -40,8 +40,6 @@ namespace EnigmaCore {
 
             // app quit
             IsQuitting = false;
-            Application.quitting -= QuittingEvent;
-            Application.quitting += QuittingEvent;
             Application.quitting -= OnApplicationIsQuitting;
             Application.quitting += OnApplicationIsQuitting;
             #if UNITY_EDITOR
@@ -106,8 +104,7 @@ namespace EnigmaCore {
 
         #region <<---------- Properties and Fields ---------->>
 
-        public static event Action QuittingEvent;
-        public static event Action ApplicationInitialized;
+        public static event Action ApplicationInitialized = delegate { };
 
         public static bool IsQuitting { get; private set; }
         public static CancellationTokenSource QuittingCancellationTokenSource;

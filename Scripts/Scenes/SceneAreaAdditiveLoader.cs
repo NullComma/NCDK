@@ -57,8 +57,8 @@ namespace EnigmaCore {
 				this.EnsureColliderIsTrigger(c);
 			}
 			#if UNITY_EDITOR
-			if (!Application.isPlaying && this._scene != null && this._scene.sceneAsset != null) {
-				EditorSceneManager.OpenScene(AssetDatabase.GetAssetOrScenePath(this._scene.sceneAsset), OpenSceneMode.AdditiveWithoutLoading);
+			if (!Application.isPlaying && this._scene != null) {
+				EditorSceneManager.OpenScene(_scene, OpenSceneMode.AdditiveWithoutLoading);
 			}
 			#endif
 		}
@@ -162,11 +162,11 @@ namespace EnigmaCore {
 			if (this._scene == null) return;
 			#if UNITY_EDITOR
 			if (!Application.isPlaying) {
-				var scenePath = AssetDatabase.GetAssetOrScenePath(this._scene.sceneAsset);
-				if (PrefabStageUtility.GetCurrentPrefabStage() != null || EditorSceneManager.GetSceneByPath(scenePath).isLoaded) return;
-				var scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Additive);
+				var editorScene = EditorSceneManager.GetSceneByPath(_scene);
+				if (PrefabStageUtility.GetCurrentPrefabStage() != null || editorScene.isLoaded) return;
+				var scene = EditorSceneManager.OpenScene(_scene, OpenSceneMode.Additive);
 				if (scene.isLoaded) {
-					Debug.Log($"Scene loaded: {scenePath}");
+					Debug.Log($"Scene loaded: {_scene}");
 					scene.EditorSetSceneExpanded(false);
 				}
 				return;
@@ -190,7 +190,7 @@ namespace EnigmaCore {
 			#if UNITY_EDITOR
 			if (!Application.isPlaying && !PrefabStageUtility.GetCurrentPrefabStage()) {
 				if (this._pauseUnloadOnEditor) return;
-				var loadedScene = EditorSceneManager.GetSceneByName(this._scene);
+				var loadedScene = EditorSceneManager.GetSceneByPath(_scene);
 				if (!loadedScene.isLoaded) return;
 				if (loadedScene.isDirty) {
 					Debug.LogWarning($"Will not unload on editor scene '{loadedScene.name}' because it isDirty.", this);
@@ -198,7 +198,7 @@ namespace EnigmaCore {
 				}
 
 				if (EditorSceneManager.CloseScene(loadedScene, false)) {
-					Debug.Log($"Scene closed: {this._scene.sceneAsset}");
+					Debug.Log($"Scene closed: {this._scene}");
 				}
 				return;
 			}
@@ -230,9 +230,9 @@ namespace EnigmaCore {
                 var scenePath = this.gameObject.scene.path.Replace(this.gameObject.scene.name + ".unity", "");
                 var scenePathAndName = scenePath + scene.name + ".unity";
                 if (!EditorSceneManager.SaveScene(scene, scenePathAndName)) return;
-                this._scene.sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePathAndName);
-                if (this._scene.sceneAsset == null) return;
-                Selection.activeObject = this._scene.sceneAsset;
+                var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePathAndName);
+                if (sceneAsset == null) return;
+                Selection.activeObject = sceneAsset;
                 var list = EditorBuildSettings.scenes.ToList();
                 list.Add(new EditorBuildSettingsScene {
                     path = scenePathAndName.Replace(".unity", ""), enabled = true, guid = AssetDatabase.GUIDFromAssetPath(scenePathAndName)

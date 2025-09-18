@@ -11,9 +11,7 @@ namespace EnigmaCore {
 		#region <<---------- Properties and Fields ---------->>
         
 		[SerializeField] MonoBehaviourExecutionLoop executionLoop = MonoBehaviourExecutionLoop.LateUpdate;
-		[Obsolete("OBSOLETE, use public property instead.")]
-		[SerializeField]
-		Transform _transformToFollow;
+		[SerializeField] Transform _transformToFollow;
         public Transform TransformToFollow => _transformToFollow;
 		[Header("Position")]
 		[SerializeField] Vector3 _followOffset = Vector3.zero;

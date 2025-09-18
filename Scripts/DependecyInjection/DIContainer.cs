@@ -1,22 +1,26 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace EnigmaCore.DependecyInjection
 {
     public static class DIContainer {
-        static Dictionary<Type, object> _instances = new ();
+        static readonly ConcurrentDictionary<Type, object> _instances = new ();
+        /// Cache for reflection results. Maps a Type to a list of its injectable fields.
+        static readonly Dictionary<Type, List<FieldInfo>> _injectionCache = new();
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void Init() {
-            EApplication.QuittingEvent += Dispose;
+        static void Init()
+        {
+            Application.quitting += Dispose;
         }
 
         static void Dispose()
         {
+            Application.quitting -= Dispose;
             foreach (var instance in _instances.Values)
             {
                 if (instance is IDisposable disposable)
@@ -25,20 +29,30 @@ namespace EnigmaCore.DependecyInjection
                 }
             }
             _instances.Clear();
-            EApplication.QuittingEvent -= Dispose;
         }
 
-        public static void Register<T>(T instance) {
-            _instances[instance.GetType()] = instance;
+        public static void Register<T>(T instance)
+        {
+            var typeOf = typeof(T);
+            if(typeOf == typeof(UnityEngine.Object) || typeOf == typeof(System.Object) || typeOf == typeof(object))
+            {
+                typeOf = instance.GetType();
+                if(typeOf == typeof(UnityEngine.Object) || typeOf == typeof(System.Object) || typeOf == typeof(object))
+                {
+                    throw new Exception("Cannot register instance of type Object or object. Use a more specific type.");
+                }
+            }
+            _instances[typeOf] = instance;
             InjectAttributes(instance);
         }
 
         public static void Register(Type serviceType)
         {
-            var constructor = serviceType.GetConstructors().FirstOrDefault();
-            if (constructor == null)
-                throw new Exception($"No constructor found for {serviceType}");
+            var constructors = serviceType.GetConstructors();
+            if (constructors.Length != 1)
+                throw new Exception($"Type {serviceType} must have exactly one public constructor to be registered by type.");
 
+            var constructor = constructors[0];
             var parameters = constructor.GetParameters();
             var parametersInstances = parameters.Select(param =>
             {
@@ -78,6 +92,7 @@ namespace EnigmaCore.DependecyInjection
         public static void InjectDependencies(object target) {
             InjectAttributes(target);
         }
+        
         static void InjectAttributes(object target) {
             if (!Application.isPlaying)
             {
@@ -94,20 +109,43 @@ namespace EnigmaCore.DependecyInjection
                 Debug.LogError("Tried to inject dependencies on a null target!");
                 return;
             }
+            
             var type = target.GetType();
-            while (type != null) {
-                var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-                foreach (var field in fields) {
-                    if (!Attribute.IsDefined(field, typeof(InjectAttribute))) continue;
-                    try {
-                        var dependency = Resolve(field.FieldType);
-                        field.SetValue(target, dependency);
+            
+            // 1. Check if the type is already in our cache
+            if (!_injectionCache.TryGetValue(type, out var injectableFields))
+            {
+                // 2. If not, perform reflection once and build the list of fields
+                injectableFields = new List<FieldInfo>();
+                var currentType = type;
+                while (currentType != null)
+                {
+                    var fields = currentType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                    foreach (var field in fields)
+                    {
+                        if (Attribute.IsDefined(field, typeof(InjectAttribute)))
+                        {
+                            injectableFields.Add(field);
+                        }
                     }
-                    catch (Exception ex) {
-                        Debug.LogError($"Error injecting dependency for {field.FieldType} in {target.GetType()}: {ex.Message}");
-                    }
+                    currentType = currentType.BaseType;
                 }
-                type = type.BaseType;
+                // 3. Add the results to the cache for future use
+                _injectionCache[type] = injectableFields;
+            }
+
+            // 4. Inject dependencies using the cached field info
+            foreach (var field in injectableFields)
+            {
+                try
+                {
+                    var dependency = Resolve(field.FieldType);
+                    field.SetValue(target, dependency);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"Error injecting dependency for {field.FieldType} in {target.GetType()}: {ex.Message}");
+                }
             }
         }
 
