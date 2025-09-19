@@ -1,4 +1,4 @@
-using EnigmaCore;
+using System;
 using UnityEngine;
 
 namespace EnigmaCore {
@@ -7,18 +7,20 @@ namespace EnigmaCore {
     /// Based on https://github.com/JimmyCushnie/JimmysUnityUtilities
     /// </summary>
     [RequireComponent(typeof(Terrain))]
-    public class CTerrainTextureDetector : MonoBehaviour {
-        Terrain ThisTerrain;
+    public class TerrainTextureDetector : MonoBehaviour {
+        [SerializeField] Terrain ThisTerrain;
         TerrainData ThisTerrainData => ThisTerrain.terrainData;
 
-        float[,,] CachedTerrainAlphamapData;
+        [NonSerialized] float[,,] CachedTerrainAlphamapData;
 
-        
-        void Start() {
-            ThisTerrain = GetComponent<Terrain>();
-            CachedTerrainAlphamapData = ThisTerrainData.GetAlphamaps(0, 0, ThisTerrainData.alphamapWidth, ThisTerrainData.alphamapHeight);
+        void OnValidate()
+        {
+            TryGetComponent(out ThisTerrain);
         }
 
+        void Start() {
+            CachedTerrainAlphamapData = ThisTerrainData.GetAlphamaps(0, 0, ThisTerrainData.alphamapWidth, ThisTerrainData.alphamapHeight);
+        }
         
         public TerrainLayer GetTerrainLayerAtPosition(Vector3 worldPosition) {
             int index = this.GetDominantTextureIndexAt(worldPosition);

@@ -1,21 +1,12 @@
 using UnityEngine;
 
 namespace EnigmaCore { 
-    public class InstantiateTrigger : MonoBehaviour
+    public class InstantiateTrigger : CAutoTriggerCompBase
     {
         [SerializeField] GameObject _prefabToInstantiate;
         [SerializeField] Transform _parentTransform;
-        [SerializeField] bool _triggerOnAwake;
 
-        void Awake()
-        {
-            if (_triggerOnAwake)
-            {
-                Trigger();
-            }
-        }
-
-        public void Trigger()
+        protected override void TriggerEvent()
         {
             if (_prefabToInstantiate == null)
             {
@@ -24,5 +15,6 @@ namespace EnigmaCore {
             }
             Instantiate(_prefabToInstantiate, _parentTransform);
         }
+
     }
 }

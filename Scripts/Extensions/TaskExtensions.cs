@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 namespace EnigmaCore {
-	public static class CTaskExtensions {
+	public static class TaskExtensions {
 
-		public static async void CAwait(this Task task, bool continueOnCapturedContext = true)
+		public static async void Await(this Task task, bool continueOnCapturedContext = true)
 		{
 			try {
 				await task.ConfigureAwait(continueOnCapturedContext);
@@ -15,7 +15,7 @@ namespace EnigmaCore {
 			}
 		}
 
-		public static bool CIsRunning(this Task task) {
+		public static bool IsRunning(this Task task) {
 			return task != null && !task.IsCompleted;
 		}
 	}

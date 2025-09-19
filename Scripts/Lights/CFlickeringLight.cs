@@ -78,17 +78,17 @@ namespace EnigmaCore.Scripts.Lights {
         void Flick() {
             this._light.intensity = this._initialIntensity * Random.Range(this._intensityMultiplierRange.x, this._intensityMultiplierRange.y);
             _onLightFlick?.Invoke();
-            #if FMOD
-            this._soundOnFlick.CDoIfNotNull(e=>RuntimeManager.PlayOneShotAttached(e, this.gameObject));
-            #endif
+#if FMOD
+            if(!_soundOnFlick.IsNull) RuntimeManager.PlayOneShotAttached(_soundOnFlick, this.gameObject);
+#endif
         }
 
         void ReturnToNormal() {
             this._light.intensity = _initialIntensity;
             _onLightReturnToNormal?.Invoke();
-            #if FMOD
-            this._soundOnReturnToNormal.CDoIfNotNull(e=>RuntimeManager.PlayOneShotAttached(e, this.gameObject));
-            #endif
+#if FMOD
+            if(!_soundOnReturnToNormal.IsNull) RuntimeManager.PlayOneShotAttached(_soundOnReturnToNormal, this.gameObject);
+#endif
         }
     }
 }

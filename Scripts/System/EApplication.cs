@@ -30,7 +30,7 @@ namespace EnigmaCore {
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             CreatePersistentDataPath();
             AppQuitEvents();
-            InitializeApplicationAsync().CAwait();
+            InitializeApplicationAsync().Await();
         }
 
         static void AppQuitEvents()
@@ -73,9 +73,7 @@ namespace EnigmaCore {
                 Debug.LogException(e);
             }
             #endif
-
-            ApplicationInitialized?.Invoke();
-
+            
             var isMobile = CPlayerPlatformTrigger.IsMobilePlatform();
             if (isMobile) {
                 ScalableBufferManager.ResizeBuffers(0.7f, 0.7f);
@@ -86,6 +84,8 @@ namespace EnigmaCore {
 
             Application.focusChanged -= ApplicationOnfocusChanged;
             Application.focusChanged += ApplicationOnfocusChanged;
+
+            ApplicationInitialized.Invoke();
         }
 
         static void ApplicationOnfocusChanged(bool focused) {
