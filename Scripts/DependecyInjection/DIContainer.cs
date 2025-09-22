@@ -34,12 +34,12 @@ namespace EnigmaCore.DependecyInjection
         public static void Register<T>(T instance)
         {
             var typeOf = typeof(T);
-            if(typeOf == typeof(UnityEngine.Object) || typeOf == typeof(System.Object) || typeOf == typeof(object))
+            if(typeOf == typeof(UnityEngine.Object) || typeOf == typeof(MonoBehaviour) || typeOf == typeof(System.Object) || typeOf == typeof(object))
             {
                 typeOf = instance.GetType();
-                if(typeOf == typeof(UnityEngine.Object) || typeOf == typeof(System.Object) || typeOf == typeof(object))
+                if(typeOf == typeof(UnityEngine.Object) || typeOf == typeof(MonoBehaviour) || typeOf == typeof(System.Object) || typeOf == typeof(object))
                 {
-                    throw new Exception("Cannot register instance of type Object or object. Use a more specific type.");
+                    throw new Exception("Cannot register instance of type Object, MonoBehaviour or object. Use a more specific type.");
                 }
             }
             _instances[typeOf] = instance;
