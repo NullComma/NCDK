@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace EnigmaCore {
-	public static class CVector2Extensions {
+	public static class Vector2Extensions {
 		public static float GetAbsBiggerValue(this Vector2 vec) {
 			float biggerValue = Mathf.Abs(vec.x);
 			float valueToCompare = Mathf.Abs(vec.y);
@@ -36,6 +36,11 @@ namespace EnigmaCore {
             v.y = Mathf.Lerp(v.y, other.y, t);
             return v;
         }
+
+		public static float GetRandomValueInsideRange(this Vector2 v)
+		{
+			return Random.Range(v.x, v.y);
+		}
 
 	}
 }
