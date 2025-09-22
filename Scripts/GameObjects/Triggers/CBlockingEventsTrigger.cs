@@ -7,49 +7,71 @@ using UnityEngine.Serialization;
 using Sirenix.OdinInspector;
 #endif
 
-namespace EnigmaCore {
+namespace EnigmaCore
+{
     public class CBlockingEventsTrigger : MonoBehaviour
     {
-        [NonSerialized,Inject] CBlockingEventsManager _blockingEventsManager;
-        
-        #if ODIN_INSPECTOR
+        [NonSerialized, Inject] CBlockingEventsManager _blockingEventsManager;
+
+        // --- Combined 
+#if ODIN_INSPECTOR
         [FoldoutGroup("Default")]
-        #else
+#else
         [Header("Default")]
-        #endif
-        [SerializeField] CUnityEventBool AnyBlockingEvent;
-        #if ODIN_INSPECTOR
+#endif
+        [SerializeField]
+        CUnityEventBool AnyBlockingEvent;
+
+#if ODIN_INSPECTOR
         [FoldoutGroup("Default")]
-        #endif
-        [SerializeField] CUnityEventBool OnMenuOrPlayingCutsceneEvent;
+#endif
+        [SerializeField]
+        CUnityEventBool OnMenuOrPlayingCutsceneEvent;
 
-        #if ODIN_INSPECTOR
+        // --- Individual 
+#if ODIN_INSPECTOR
         [FoldoutGroup("Individual")]
-        #else
+#else
         [Header("Individual")]
-        #endif
-        [SerializeField] CUnityEventBool OnMenuEvent;
-        #if ODIN_INSPECTOR
+#endif
+        [SerializeField]
+        CUnityEventBool OnMenuEvent;
+
+#if ODIN_INSPECTOR
         [FoldoutGroup("Individual")]
-        #endif
-        [SerializeField] CUnityEventBool PlayingCutsceneEvent;
+#endif
+        [SerializeField]
+        CUnityEventBool PlayingCutsceneEvent;
 
-        #if ODIN_INSPECTOR
+#if ODIN_INSPECTOR
+        [FoldoutGroup("Individual")]
+#endif
+        [SerializeField]
+        CUnityEventBool PlayingCutsceneInvertedEvent;
+
+        // --- Inverted 
+#if ODIN_INSPECTOR
         [FoldoutGroup("Inverted")]
-        #else
+#else
         [Header("Inverted")]
-        #endif
-        [SerializeField] CUnityEventBool NotOnMenuEvent;
-        #if ODIN_INSPECTOR
-        [FoldoutGroup("Inverted")]
-        #endif
-        [SerializeField] CUnityEventBool NotPlayingCutsceneEvent;
-        #if ODIN_INSPECTOR
-        [FoldoutGroup("Inverted")]
-        #endif
-        [FormerlySerializedAs("NotOnMenuOrNotPlayingCutsceneEvent")] [SerializeField] CUnityEventBool NotOnMenuAndNotPlayingCutsceneEvent;
+#endif
+        [SerializeField]
+        CUnityEventBool NotOnMenuEvent;
 
-        void Awake() {
+#if ODIN_INSPECTOR
+        [FoldoutGroup("Inverted")]
+#endif
+        [SerializeField]
+        CUnityEventBool NotPlayingCutsceneEvent;
+
+#if ODIN_INSPECTOR
+        [FoldoutGroup("Inverted")]
+#endif
+        [SerializeField]
+        CUnityEventBool NotOnMenuAndNotPlayingCutsceneEvent;
+
+        void Awake()
+        {
             this.Inject();
             BlockingEvent(_blockingEventsManager.InMenuOrPlayingCutscene);
         }
@@ -64,20 +86,21 @@ namespace EnigmaCore {
             _blockingEventsManager.InMenuOrPlayingCutsceneEvent -= BlockingEvent;
         }
 
-        void BlockingEvent(bool inMenuOrPlayingCutscene) {
+        void BlockingEvent(bool inMenuOrPlayingCutscene)
+        {
             var isInMenu = _blockingEventsManager.IsInMenu;
             var isPlayingCutscene = _blockingEventsManager.IsPlayingCutscene;
-
-            AnyBlockingEvent.Invoke(inMenuOrPlayingCutscene);
-            OnMenuOrPlayingCutsceneEvent.Invoke(isInMenu || isPlayingCutscene);
-            OnMenuEvent.Invoke(isInMenu);
-            PlayingCutsceneEvent.Invoke(isPlayingCutscene);
 
             // inverted
             NotOnMenuEvent.Invoke(!isInMenu);
             NotPlayingCutsceneEvent.Invoke(!isPlayingCutscene);
             NotOnMenuAndNotPlayingCutsceneEvent.Invoke(!isInMenu && !isPlayingCutscene);
+            
+            AnyBlockingEvent.Invoke(inMenuOrPlayingCutscene);
+            OnMenuOrPlayingCutsceneEvent.Invoke(isInMenu || isPlayingCutscene);
+            OnMenuEvent.Invoke(isInMenu);
+            PlayingCutsceneEvent.Invoke(isPlayingCutscene);
+            PlayingCutsceneInvertedEvent.Invoke(!isPlayingCutscene);
         }
-
     }
 }
