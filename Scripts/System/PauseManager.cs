@@ -8,11 +8,6 @@ namespace EnigmaCore
 
         public PauseManager()
         {
-            if (pauseRetainable != null)
-            {
-                pauseRetainable = null;
-                GC.Collect();
-            }
             pauseRetainable = new();
             pauseRetainable.StateEvent += PauseStateChanged;
         }
