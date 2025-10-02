@@ -4,7 +4,7 @@ using System.Linq;
 using Object = UnityEngine.Object;
 
 namespace EnigmaCore {
-	public static class CIEnumerableExtensions {
+	public static class IEnumerableExtensions {
 		public static T CRandomElement<T>(this IEnumerable<T> enumerable) {
 			var array = enumerable as T[] ?? enumerable.ToArray();
 			if (array.Length <= 0) return default;

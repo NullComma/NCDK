@@ -20,13 +20,13 @@ namespace EnigmaCore
         [Header("Default")]
 #endif
         [SerializeField]
-        CUnityEventBool AnyBlockingEvent;
+        CUnityEventBool AnyBlockingEvent = new();
 
 #if ODIN_INSPECTOR
         [FoldoutGroup("Default")]
 #endif
         [SerializeField]
-        CUnityEventBool OnMenuOrPlayingCutsceneEvent;
+        CUnityEventBool OnMenuOrPlayingCutsceneEvent = new();
 
         // --- Individual 
 #if ODIN_INSPECTOR
@@ -35,19 +35,19 @@ namespace EnigmaCore
         [Header("Individual")]
 #endif
         [SerializeField]
-        CUnityEventBool OnMenuEvent;
+        CUnityEventBool OnMenuEvent = new();
 
 #if ODIN_INSPECTOR
         [FoldoutGroup("Individual")]
 #endif
         [SerializeField]
-        CUnityEventBool PlayingCutsceneEvent;
+        CUnityEventBool PlayingCutsceneEvent = new();
 
 #if ODIN_INSPECTOR
         [FoldoutGroup("Individual")]
 #endif
         [SerializeField]
-        CUnityEventBool PlayingCutsceneInvertedEvent;
+        CUnityEventBool PlayingCutsceneInvertedEvent = new();
 
         // --- Inverted 
 #if ODIN_INSPECTOR
@@ -56,19 +56,19 @@ namespace EnigmaCore
         [Header("Inverted")]
 #endif
         [SerializeField]
-        CUnityEventBool NotOnMenuEvent;
+        CUnityEventBool NotOnMenuEvent = new();
 
 #if ODIN_INSPECTOR
         [FoldoutGroup("Inverted")]
 #endif
         [SerializeField]
-        CUnityEventBool NotPlayingCutsceneEvent;
+        CUnityEventBool NotPlayingCutsceneEvent = new();
 
 #if ODIN_INSPECTOR
         [FoldoutGroup("Inverted")]
 #endif
         [SerializeField]
-        CUnityEventBool NotOnMenuAndNotPlayingCutsceneEvent;
+        CUnityEventBool NotOnMenuAndNotPlayingCutsceneEvent = new();
 
         void Awake()
         {

@@ -28,7 +28,7 @@ namespace EnigmaCore {
 		void Update() {
 			if (_blockingEventsManager.InMenuOrPlayingCutscene) return;
 			
-			_inputLook = new Vector2(Input.GetAxisRaw(CInputKeys.LOOK_X), Input.GetAxisRaw(CInputKeys.LOOK_Y));
+			_inputLook = new Vector2(Input.GetAxisRaw("Look X"), Input.GetAxisRaw("Look Y"));
 
 			// rotate camera
 			_transform.Rotate(Vector3.up,
