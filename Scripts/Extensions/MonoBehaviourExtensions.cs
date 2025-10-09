@@ -75,6 +75,12 @@ namespace EnigmaCore {
 				}
 			}
 		}
+		
+		public static MonoBehaviour DontDestroyOnLoad(this MonoBehaviour mb) {
+			Debug.Log($"Setting '{mb.name}' to DontDestroyOnLoad");
+			Object.DontDestroyOnLoad(mb);
+			return mb;
+		}
 
     }
 }

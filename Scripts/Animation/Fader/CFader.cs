@@ -26,8 +26,7 @@ namespace EnigmaCore {
 			if (_instance != null) _instance.gameObject.CDestroy();
 			_instance = this;
 			gameObject.layer = 5; // UI
-			gameObject.CDontDestroyOnLoad();
-            gameObject.hideFlags = HideFlags.DontSaveInEditor;
+			this.DontDestroyOnLoad();
 
 			// canvas
 			var goCanvas = gameObject.AddComponent<Canvas>();
