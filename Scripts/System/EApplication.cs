@@ -60,8 +60,7 @@ namespace EnigmaCore {
             SetSlowFramerate();
 
             #if UNITY_ADDRESSABLES_EXIST
-            ResourceLocator = await AddressablesInitializeAsync();
-            Debug.Log($"Resource Locator Id: '{(ResourceLocator != null ? ResourceLocator.LocatorId : "null")}'");
+            await Addressables.InitializeAsync(true).Task;
 			#endif
             
             #if FMOD
@@ -127,23 +126,6 @@ namespace EnigmaCore {
         #endregion <<---------- Properties and Fields ---------->>
 
 
-
-
-        #region <<---------- Addressables ---------->>
-
-		#if UNITY_ADDRESSABLES_EXIST
-
-        private static async Task<IResourceLocator> AddressablesInitializeAsync() {
-            var op = Addressables.InitializeAsync();
-            var resourceLocator = await op.Task;
-            return resourceLocator;
-        }
-
-		#endif
-
-        #endregion <<---------- Addressables ---------->>
-
-        
         
         
         #region <<---------- Paths ---------->>

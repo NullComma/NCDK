@@ -53,10 +53,10 @@ namespace EnigmaCore {
             #endif
         }
 
-		public static void CheckForDuplicatedIds(this ISerializedObject m)
+		public static void CheckForDuplicatedIds(this IIdentifiableObject m)
 		{
 			var others = Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None)
-				.OfType<ISerializedObject>()
+				.OfType<IIdentifiableObject>()
 				.ToList();
 			others.Remove(m);
 			if (others.Count <= 0) return;
@@ -64,7 +64,7 @@ namespace EnigmaCore {
 			{
 				if (other.ID == m.ID)
 				{
-					Debug.LogError($"Found duplicated ID {m.ID} in object '{other}' and '{m}'. Resetting ID of '{m}'.", (MonoBehaviour)m);
+					Debug.LogError($"Found duplicated ID {m.ID} in object '{other}' and '{m}'. \nResetting ID of '{m}'.", (MonoBehaviour)m);
 					#if UNITY_EDITOR
 					//overwrite by reflection 'm.ID = SerializableGuid.NewGuid();':
 					var field = m.GetType().GetField("id", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);

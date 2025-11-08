@@ -34,7 +34,7 @@ namespace EnigmaCore {
 
 			this.asyncOp.allowSceneActivation = this.enableSceneOnLoad;
 			this.asyncOp.completed += operation => {
-				if (this.setAsActive && this.enableSceneOnLoad) {
+				if (this.setAsActive && this.enableSceneOnLoad && loadSceneMode == LoadSceneMode.Additive) {
 					SceneManager.SetActiveScene(SceneManager.GetSceneByName(this.sceneToLoad));
 				}
 				this.SceneLoadedEvent?.Invoke();

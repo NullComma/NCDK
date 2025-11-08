@@ -1,4 +1,5 @@
 ﻿using System;
+using EnigmaCore;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Animations;
@@ -13,7 +14,10 @@ namespace Game
     public class CodeAnimationController : MonoBehaviour
     {
         [Header("Configuration")]
-        [SerializeField, Required, Tooltip("The Animator component that the graph will drive.")]
+        [SerializeField, Tooltip("The Animator component that the graph will drive.")]
+        #if ODIN_INSPECTOR
+        [Required]
+        #endif
         Animator animator;
 
         [Tooltip("Controls how the animation graph's time is updated.")]
@@ -40,7 +44,7 @@ namespace Game
 
         void Awake()
         {
-            if (animator == null) animator = GetComponent<Animator>();
+            if(animator == null) TryGetComponent(out animator).ThrowIfFalse();
             
             playableGraph = PlayableGraph.Create(gameObject.name + " AnimationGraph");
             

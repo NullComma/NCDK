@@ -6,7 +6,9 @@ namespace CDK {
     public static class CAddressablesExtensions {
 
         public static void ClearAddressables() {
+#if !UNITY_WEBGL
             Caching.ClearCache();
+#endif
             Addressables.UpdateCatalogs();
             Addressables.CleanBundleCache();
         }

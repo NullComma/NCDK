@@ -9,6 +9,7 @@ namespace EnigmaCore.UI
         [SerializeField] SetLanguageOption _languageOptionPrefab;
         [SerializeField] Transform _languageOptionsContainer;
 
+#if UNITY_LOCALIZATION
         protected override void Awake()
         {
             base.Awake();
@@ -20,6 +21,6 @@ namespace EnigmaCore.UI
                 option.Init(locale);
             }
         }
-
+#endif
     }
 }

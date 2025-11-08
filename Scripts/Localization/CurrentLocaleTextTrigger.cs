@@ -4,9 +4,10 @@ using System.Collections;
 using TMPro;
 
 using UnityEngine;
+#if UNITY_LOCALIZATION
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-
+#endif
 namespace EnigmaCore.UI
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
@@ -14,7 +15,7 @@ namespace EnigmaCore.UI
     {
 
         [NonSerialized] TextMeshProUGUI _textToSet;
-
+#if UNITY_LOCALIZATION
         void Awake()
         {
             TryGetComponent(out _textToSet);
@@ -36,5 +37,6 @@ namespace EnigmaCore.UI
         {
             _textToSet.text = locale.LocaleName;
         }
+#endif
     }
 }

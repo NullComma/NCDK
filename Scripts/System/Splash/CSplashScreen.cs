@@ -10,7 +10,6 @@ using UnityEngine.InputSystem;
 #endif
 
 #if UNITY_LOCALIZATION
-using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
 #endif
 
@@ -41,9 +40,6 @@ namespace EnigmaCore
         [NonSerialized] bool allowSkip;
         [NonSerialized] Coroutine splashCoroutine;
         [NonSerialized] AsyncOperation sceneLoadOperation;
-#if UNITY_LOCALIZATION
-            
-#endif
 
         void Awake()
         {
@@ -66,6 +62,7 @@ namespace EnigmaCore
 
         IEnumerator Start()
         {
+            
 #if UNITY_LOCALIZATION
             var localizationInitializationOperation = LocalizationSettings.InitializationOperation;
 #endif
@@ -81,6 +78,7 @@ namespace EnigmaCore
 #endif
             
             allowSkip = true;
+            yield return null;
         }
 
         void Update()
