@@ -1,6 +1,6 @@
 ﻿namespace EnigmaCore
 {
-    public interface ISerializedObject
+    public interface IIdentifiableObject
     {
         public SerializableGuid ID { get; }
     }
