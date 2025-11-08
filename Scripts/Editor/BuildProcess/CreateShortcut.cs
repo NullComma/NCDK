@@ -6,14 +6,13 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace EnigmaCore {
-    public class CBuildProcessMethods : IPostprocessBuildWithReport {
+    public class CreateShortcut : IPostprocessBuildWithReport {
 
         public int callbackOrder => 1;
 
         public void OnPostprocessBuild(BuildReport report) {
-            Debug.Log("Running OnPostprocessBuild() for shorcut creation");
             if (report.summary.result != BuildResult.Succeeded && report.summary.result != BuildResult.Unknown) return;
-
+            Debug.Log("Running OnPostprocessBuild() for shortcut creation");
             string buildPath = report.summary.outputPath;
 
             #if UNITY_WEBGL
@@ -21,14 +20,12 @@ namespace EnigmaCore {
             if (Directory.Exists(netlifyFolder))
             {
                 Debug.Log($".netlify folder found in: {netlifyFolder}. Executing cmd 'netlify build --prod'...");
-                RunCmd(netlifyFolder, "netlify build --prod", true);
+                NetlifyBuildProd(netlifyFolder, "netlify build --prod", true);
             }
             #elif UNITY_EDITOR_WIN
             var outputPath = buildPath.Replace($"/{Application.productName}.exe", string.Empty);
             CreateShortcutToApplicationLogsDirectoryOnWindows(outputPath);
             #endif
-
-            CEditorPlayerSettings.RaiseBuildVersion();
         }
 
         static void CreateShortcutToApplicationLogsDirectoryOnWindows(string outputPath)
@@ -38,10 +35,25 @@ namespace EnigmaCore {
 
             string cmd = $"/c powershell -Command \"$WshShell = New-Object -ComObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('{shortcutPath}'); $Shortcut.TargetPath = '{targetPath}'; $Shortcut.Save()\"";
 
-            RunCmd("", cmd);
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = "cmd.exe",
+                Arguments = cmd,
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            using var process = new Process();
+            process.StartInfo = startInfo;
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
+            UnityEngine.Debug.Log($"Shortcut creation output: {output}");
         }
 
-        static void RunCmd(string cdToPath, string cmd, bool createWindow = false)
+#if UNITY_WEBGL
+        static void NetlifyBuildProd(string cdToPath, string cmd, bool createWindow = false)
         {
             try
             {
@@ -66,6 +78,7 @@ namespace EnigmaCore {
                 Debug.LogError($"Error executing '{cmd}': {ex.Message}");
             }
         }
+#endif
 
     }
 }
