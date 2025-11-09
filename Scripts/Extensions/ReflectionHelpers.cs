@@ -39,7 +39,7 @@ namespace EnigmaCore
 
         public static void SetPrivateField<T>(this object obj, string fieldName, T value)
         {
-            var fieldInfo = obj.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+            var fieldInfo = obj.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if(fieldInfo == null)
             {
                 throw new ArgumentException($"Field {fieldName} not found in type {obj.GetType().FullName}");
@@ -50,7 +50,7 @@ namespace EnigmaCore
 
         public static T GetPrivateProperty<T>(this object obj, string propertyName)
         {
-            var propertyInfo = obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
+            var propertyInfo = obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if(propertyInfo == null)
             {
                 throw new ArgumentException($"Property {propertyName} not found in type {obj.GetType().FullName}");
@@ -61,7 +61,7 @@ namespace EnigmaCore
 
         public static void SetPrivateProperty<T>(this object obj, string propertyName, T value)
         {
-            var propertyInfo = obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
+            var propertyInfo = obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if(propertyInfo == null)
             {
                 throw new ArgumentException($"Property {propertyName} not found in type {obj.GetType().FullName}");
