@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using EnigmaCore.DependecyInjection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -40,9 +41,11 @@ namespace EnigmaCore
         [NonSerialized] bool allowSkip;
         [NonSerialized] Coroutine splashCoroutine;
         [NonSerialized] AsyncOperation sceneLoadOperation;
+        [Inject] CBlockingEventsManager blockingEventsManager;
 
         void Awake()
         {
+            this.Inject();
             if (!TryGetComponent(out canvasGroup))
             {
                 Debug.LogError($"{nameof(CSplashScreen)} requires a CanvasGroup component.");
@@ -58,6 +61,16 @@ namespace EnigmaCore
                 splashImages.Add(image);
                 image.gameObject.SetActive(false);
             }
+        }
+
+        void OnEnable()
+        {
+            blockingEventsManager.MenuRetainable.Retain(this);
+        }
+
+        void OnDisable()
+        {
+            blockingEventsManager.MenuRetainable.Release(this);
         }
 
         IEnumerator Start()
