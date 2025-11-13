@@ -25,8 +25,11 @@ namespace EnigmaCore.Timeline {
                 var data = ((ScriptPlayable<FadeDataPlayable>) input).GetBehaviour();
                 if (data == null) continue;
 
-                targetAlpha = Mathf.Max(targetAlpha, (data.MaxAlpha * weight));
-                targetColor = targetColor == Color.clear ? data.Color : Color.Lerp(targetColor, data.Color, weight);
+                targetAlpha += data.MaxAlpha * weight;
+                
+                if (weight > 0.001f) { 
+                    targetColor = targetColor == Color.clear ? data.Color : Color.Lerp(targetColor, data.Color, weight);
+                }
             }
 
             _fadeController.SetColor(targetColor == Color.clear ? Color.black : targetColor, targetAlpha);
