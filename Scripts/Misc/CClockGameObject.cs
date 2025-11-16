@@ -2,6 +2,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+#if FMOD
+using FMODUnity;
+#endif
+
 namespace EnigmaCore {
 	public class CClockGameObject : MonoBehaviour {
 	
@@ -16,6 +20,10 @@ namespace EnigmaCore {
 
 		public float clockSpeed = 1.0f; // 1.0f = realtime, < 1.0f = slower, > 1.0f = faster
 
+		#if FMOD
+		[SerializeField] EventReference _clockTickSound;
+		#endif
+		
 		[NonSerialized] float msecs = 0;
 
 		
@@ -31,7 +39,16 @@ namespace EnigmaCore {
 			while (enabled) {
 				yield return wait;
 				UpdateTime();
+				PlayClockTickSound();
 			}
+		}
+
+		void PlayClockTickSound()
+		{
+			#if FMOD
+			if(_clockTickSound.IsNull) return;
+			RuntimeManager.PlayOneShotAttached(_clockTickSound, gameObject);
+			#endif
 		}
 
 		void UpdateTime() {
