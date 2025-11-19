@@ -40,7 +40,10 @@ namespace EnigmaCore {
 	        TryGetComponent(out _collider);
         }
 
-        protected virtual void Reset() { }
+		protected virtual void Reset()
+		{
+			this.gameObject.layer = 2; // Ignore Raycast
+		}
 
         protected virtual bool WillIgnoreTrigger(Component col) {
 			return !this._tag.CIsNullOrEmpty() && !col.CompareTag(this._tag);
