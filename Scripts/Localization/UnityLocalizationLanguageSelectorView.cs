@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace EnigmaCore.UI
 {
-    public class LanguageSelectorView : View
+    public class UnityLocalizationLanguageSelectorView : View
     {
 
         [SerializeField] SetLanguageOption _languageOptionPrefab;
