@@ -22,6 +22,20 @@ namespace EnigmaCore.UI
 
         public event Action CloseEvent = delegate { };
 
+        protected virtual void OnValidate()
+        {
+            if(_eventSystem == null)
+            {
+                _eventSystem = GetComponentInChildren<EventSystem>();
+                if(_eventSystem != null)
+                {
+#if UNITY_EDITOR
+                    UnityEditor.EditorUtility.SetDirty(this);
+#endif
+                }
+            }
+        }
+
         protected virtual void Awake()
         {
             this.Inject();
@@ -87,6 +101,7 @@ namespace EnigmaCore.UI
 
 		public virtual void Show()
         {
+            if(EApplication.IsQuitting) return;
             gameObject.SetActive(true);
 
             // Attempt to re-select the object that was selected before the next view was opened.

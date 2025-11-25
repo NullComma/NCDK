@@ -25,6 +25,8 @@ namespace EnigmaCore.UI {
 		#endif
 		
         [SerializeField] protected UnityEvent _interactEvent;
+		[Inject, NonSerialized] UISoundsBankSO _uiSoundsBankSo;
+		[Inject, NonSerialized] ViewManager _viewManager;
 
         #endregion <<---------- Properties and Fields ---------->>
 
@@ -33,7 +35,11 @@ namespace EnigmaCore.UI {
         
         #region <<---------- Mono Behaviour ---------->>
 
-        protected virtual void Awake() { }
+		protected virtual void Awake()
+		{
+			this.Inject();
+			if(_uiSoundsBankSo == null) _uiSoundsBankSo = ScriptableObject.CreateInstance<UISoundsBankSO>();
+		}
 
         protected virtual void OnEnable() { }
 
@@ -41,9 +47,9 @@ namespace EnigmaCore.UI {
 
 
         protected void TryEndNavigation()
-        {
-	       DIContainer.Resolve<ViewManager>().CloseAllViews();
-        }
+		{
+			_viewManager?.CloseAllViews();
+		}
 
 		#if FMOD
 		void PlaySound(EventReference sound) {
@@ -72,7 +78,7 @@ namespace EnigmaCore.UI {
 		public virtual void Selected(bool playSound = true) {
 			if(_debug) Debug.Log($"Selected: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
-			if(playSound) PlaySound(DIContainer.Resolve<UISoundsBankSO>().SoundSelect);
+			if(playSound) PlaySound(_uiSoundsBankSo.SoundSelect);
 			#endif
 		}
 
@@ -81,7 +87,7 @@ namespace EnigmaCore.UI {
 			if(_debug) Debug.Log($"SUBMIT: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
             if (!(this is CUIButton b && !b.Button.interactable)) {
-                PlaySound(DIContainer.Resolve<UISoundsBankSO>().SoundSubmit);
+                PlaySound(_uiSoundsBankSo.SoundSubmit);
             }
 			#endif
 		}
@@ -89,7 +95,7 @@ namespace EnigmaCore.UI {
 		public virtual void Canceled() {
 			if(_debug) Debug.Log($"CANCEL: CUIInteractable '{gameObject.name}'", this);
 			#if FMOD
-			PlaySound(DIContainer.Resolve<UISoundsBankSO>().SoundCancel);
+			PlaySound(_uiSoundsBankSo.SoundCancel);
 			#endif
 		}
 		
