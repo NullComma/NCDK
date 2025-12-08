@@ -13,8 +13,8 @@ namespace EnigmaCore.Interaction {
 		[SerializeField] bool onlyWorkOneTimePerSceneLoad;
         [SerializeField] Transform _interactionPromptPoint;
 		[SerializeField] GameObject[] _setActiveStateOnBecameInteractionTarget;
-		[SerializeField] CUnityEventTransform InteractEvent;
-
+		[SerializeField] CUnityEventTransform InteractEvent = new();
+		[SerializeField] StateUnityEvents BecameTargetEvent = new();
 		#endregion <<---------- Properties and Fields ---------->>
 
 
@@ -57,11 +57,13 @@ namespace EnigmaCore.Interaction {
 		public virtual void OnBecameInteractionTarget(Transform lookingTransform)
 		{
 			_setActiveStateOnBecameInteractionTarget.CDoForEachNotNull(g=>g.SetActive(true));
+			BecameTargetEvent.Trigger(true);
 		}
 
 		public virtual void OnStoppedBeingInteractionTarget(Transform lookingTransform)
 		{
 			_setActiveStateOnBecameInteractionTarget.CDoForEachNotNull(g=>g.SetActive(false));
+			BecameTargetEvent.Trigger(false);
 		}
 
         public Vector3 GetInteractionPromptPoint() {
