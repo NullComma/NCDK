@@ -22,10 +22,11 @@ namespace EnigmaCore {
         
         protected static bool SaveJsonTextToFile(string json, string filePath) {
 			try {
-                using (var streamWriter = File.CreateText(filePath)) {
-                    streamWriter.Write(json);
-                }
-                return true;
+				string contentToWrite = EncryptionUtils.Encrypt(json);
+				if (string.IsNullOrEmpty(contentToWrite)) return false;
+				using var streamWriter = File.CreateText(filePath);
+				streamWriter.Write(contentToWrite);
+				return true;
             }
 			catch (Exception e) {
 				Debug.LogError(e);

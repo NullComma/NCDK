@@ -29,6 +29,7 @@ namespace EnigmaCore.DependecyInjection
                 }
             }
             _instances.Clear();
+            _injectionCache.Clear();
         }
 
         public static void Register<T>(T instance)

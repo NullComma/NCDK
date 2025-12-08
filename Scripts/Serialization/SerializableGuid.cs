@@ -6,6 +6,7 @@ namespace EnigmaCore
     /// <summary>
     /// Represents a globally unique identifier (GUID) that is serializable with Unity and usable in game scripts.
     /// From: https://github.com/adammyhre/Unity-Inventory-System/tree/master/Assets/_Project/Scripts/Inventory/Helpers/SerializableGuid.cs
+    /// Modified by Christopher Ravailhe.
     /// </summary>
     [Serializable]
     public struct SerializableGuid : IEquatable<SerializableGuid>
@@ -65,6 +66,36 @@ namespace EnigmaCore
             BitConverter.GetBytes(Part3).CopyTo(bytes, 8);
             BitConverter.GetBytes(Part4).CopyTo(bytes, 12);
             return new Guid(bytes);
+        }
+        
+        public string ToShortString()
+        {
+            var bytes = new byte[16];
+            BitConverter.GetBytes(Part1).CopyTo(bytes, 0);
+            BitConverter.GetBytes(Part2).CopyTo(bytes, 4);
+            BitConverter.GetBytes(Part3).CopyTo(bytes, 8);
+            BitConverter.GetBytes(Part4).CopyTo(bytes, 12);
+
+            string base64 = Convert.ToBase64String(bytes);
+
+            return base64.Replace('+', '-').Replace('/', '_').TrimEnd('=');
+        }
+
+        public static SerializableGuid FromShortString(string shortString)
+        {
+            string base64 = shortString.Replace('-', '+').Replace('_', '/');
+            switch (base64.Length % 4)
+            {
+                case 2: base64 += "=="; break;
+                case 3: base64 += "="; break;
+            }
+    
+            try {
+                byte[] bytes = Convert.FromBase64String(base64);
+                return new SerializableGuid(new Guid(bytes));
+            } catch {
+                return Empty;
+            }
         }
 
         public static implicit operator Guid(SerializableGuid serializableGuid) => serializableGuid.ToGuid();

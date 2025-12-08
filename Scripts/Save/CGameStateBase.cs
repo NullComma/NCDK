@@ -19,7 +19,7 @@ namespace EnigmaCore {
 
         protected CGameStateBase(string name = null, bool isAutoInitialized = false) {
             this.WasLoadedAutomatically = isAutoInitialized;
-            this.SaveIdentifier = Guid.NewGuid().ToString();
+            this.SaveIdentifier = SerializableGuid.NewGuid();
             if (!name.CIsNullOrEmpty()) this.SaveDescriptiveName = name;
             this.SaveDate = DateTime.UtcNow;
             AppVersionWhenCreated = new Version(Application.version);
@@ -60,7 +60,7 @@ namespace EnigmaCore {
         public const string SavesDirectoryName = "SavesDir";
 
         [JsonProperty("_saveIdentifier")]
-        public string SaveIdentifier;
+        public SerializableGuid SaveIdentifier;
 
         [JsonProperty("_saveDescriptiveName")]
         public string SaveDescriptiveName = "Save";
@@ -90,8 +90,8 @@ namespace EnigmaCore {
             }
             // serialized json without hash
             this.SaveHash = Animator.StringToHash(this.GetSerializedJson()).ToString();
-            // then serialize again and save with hash
-            return SaveJsonTextToFile(this.GetSerializedJson(), GetGameStateFilePath(this.SaveIdentifier));
+            // then serialize again and save with hash and a short name
+            return SaveJsonTextToFile(this.GetSerializedJson(), GetGameStateFilePath(this.SaveIdentifier.ToShortString()));
         }
 
         string GetSerializedJson() {
@@ -109,9 +109,9 @@ namespace EnigmaCore {
 
         #region <<---------- Loading ---------->>
 
-        public static T LoadFromId<T>(string saveId) where T : CPersistentData {
+        public static T LoadFromId<T>(string saveFileNameWithoutExtension) where T : CPersistentData {
             try {
-                var filePath = GetGameStateFilePath(saveId);
+                var filePath = GetGameStateFilePath(saveFileNameWithoutExtension);
 				
                 Debug.Log($"Trying to LoadGameProgress with file '{filePath}'");
 
@@ -133,7 +133,13 @@ namespace EnigmaCore {
             try {
                 var fileContent = File.ReadAllText(filePath);
 				
-				var save = DeserializeFile<T>(fileContent);
+                var jsonContent = EncryptionUtils.Decrypt(fileContent);
+                if (string.IsNullOrEmpty(jsonContent)) {
+                    Debug.LogError($"Save file at '{filePath}' is corrupted or could not be decrypted.");
+                    return null;
+                }
+                
+                var save = DeserializeFile<T>(jsonContent);
                 if (save == null) {
                     Debug.LogError($"Could not deserialize Save at path '{filePath}'!");
                     return null;
@@ -163,9 +169,9 @@ namespace EnigmaCore {
         /// Never returns a null list.
         /// </summary>
         public static List<T> GetAllSaveFiles<T>() where T : CGameStateBase {
-            List<T> saves = new List<T>();
+            List<T> saves = new ();
             try {
-                var filesPaths = Directory.GetFiles(GetGameStateFolder(), "*.json");
+                var filesPaths = Directory.GetFiles(GetGameStateFolder(), $"*{EnigmaPaths.SaveExtension}");
                 foreach (var filePath in filesPaths) {
                     try {
                         var save = LoadFromPath<T>(filePath);
@@ -192,7 +198,7 @@ namespace EnigmaCore {
 
         public bool DeleteSave() {
             try {
-                var filePath = GetGameStateFilePath(this.SaveIdentifier);
+                var filePath = GetGameStateFilePath(this.SaveIdentifier.ToShortString());
                 if (!File.Exists(filePath)) return false;
                 File.Delete(filePath);
                 return true;
@@ -219,7 +225,7 @@ namespace EnigmaCore {
             return folderPath;
         }
         public static string GetGameStateFilePath(string fileName) {
-            return Path.Combine(GetGameStateFolder(), $"{fileName}.json");
+            return Path.Combine(GetGameStateFolder(), $"{fileName}{EnigmaPaths.SaveExtension}");
         }
 
         #endregion <<---------- Paths ---------->>
