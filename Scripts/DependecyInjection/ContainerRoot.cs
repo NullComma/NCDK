@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using EnigmaCore.UI;
+using Game;
 using UnityEngine;
 
 namespace EnigmaCore.DependecyInjection
@@ -16,6 +17,7 @@ namespace EnigmaCore.DependecyInjection
             DIContainer.Register(GetUISoundsBankSO());
             DIContainer.Register(GameObjectCreate.WithComponent<CFader>("Fader"));
             DIContainer.Register(typeof(ViewManager));
+            DIContainer.Register(GameObjectCreate.WithComponent<TruePlaytimeCounter>("System_PlaytimeCounter"));
         }
 
         static UISoundsBankSO GetUISoundsBankSO()
