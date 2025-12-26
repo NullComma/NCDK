@@ -1,3 +1,8 @@
+using System;
 using UnityEngine;
 
-public class ReadOnlyAttribute : PropertyAttribute { }
+namespace EnigmaCore
+{
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
+    public class ReadOnlyAttribute : PropertyAttribute { }
+}

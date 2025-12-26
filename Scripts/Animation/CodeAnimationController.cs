@@ -1,23 +1,14 @@
 ﻿using System;
-using EnigmaCore;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Animations;
 
-#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
-
-namespace Game
+namespace EnigmaCore
 {
-    [RequireComponent(typeof(Animator))]
     public class CodeAnimationController : MonoBehaviour
     {
         [Header("Configuration")]
         [SerializeField, Tooltip("The Animator component that the graph will drive.")]
-        #if ODIN_INSPECTOR
-        [Required]
-        #endif
         Animator animator;
 
         [Tooltip("Controls how the animation graph's time is updated.")]
@@ -109,6 +100,23 @@ namespace Game
             
             // Connect our new clip to the graph's output, making it play.
             playableOutput.SetSourcePlayable(currentClipPlayable);
+        }
+        
+        public void RebindAnimator(Animator newAnimator)
+        {
+            if (newAnimator == null) return;
+
+            if (playableGraph.IsValid())
+            {
+                playableGraph.Destroy();
+            }
+
+            animator = newAnimator;
+
+            playableGraph = PlayableGraph.Create(gameObject.name + "_AnimationGraph_" + Guid.NewGuid());
+            playableOutput = AnimationPlayableOutput.Create(playableGraph, "AnimationOutput", animator);
+    
+            playableGraph.Play();
         }
     }
 }

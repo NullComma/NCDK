@@ -4,10 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
-
 namespace EnigmaCore
 {
     public class ETimedLoopStateTrigger : MonoBehaviour

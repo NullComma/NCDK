@@ -1,18 +1,21 @@
 using UnityEngine;
 using UnityEditor;
 
-/// <summary>
-/// Custom drawer for the ReadOnly attribute
-/// </summary>
-[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-public class ReadOnlyDrawer : PropertyDrawer
+namespace EnigmaCore
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    /// <summary>
+    /// Custom drawer for the ReadOnly attribute
+    /// </summary>
+    [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+    public class ReadOnlyDrawer : PropertyDrawer
     {
-        bool previousGUIState = GUI.enabled;
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            bool previousGUIState = GUI.enabled;
 
-        GUI.enabled = false;
-        EditorGUI.PropertyField(position, property, label);
-        GUI.enabled = previousGUIState;
+            GUI.enabled = false;
+            EditorGUI.PropertyField(position, property, label);
+            GUI.enabled = previousGUIState;
+        }
     }
 }

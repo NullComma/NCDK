@@ -1,10 +1,6 @@
 using System;
 using UnityEngine;
 
-#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
-
 namespace EnigmaCore {
 	public abstract class CBasePhysicsTriggers : MonoBehaviour {
 	

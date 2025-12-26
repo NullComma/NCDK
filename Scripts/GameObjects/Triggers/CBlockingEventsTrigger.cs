@@ -3,10 +3,6 @@ using EnigmaCore.DependecyInjection;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
-
 namespace EnigmaCore
 {
     public class CBlockingEventsTrigger : MonoBehaviour

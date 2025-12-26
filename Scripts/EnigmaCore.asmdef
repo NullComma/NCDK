@@ -11,14 +11,14 @@
         "Unity.InputSystem",
         "Unity.Addressables",
         "Unity.ResourceManager",
-        "Unity.Localization"
+        "Unity.Localization",
+        "UnityEngine.CoreModule"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [
         {

@@ -5,10 +5,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using AsyncOperation = UnityEngine.AsyncOperation;
-
-#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
 	
 #if UNITY_EDITOR
 using UnityEditor;
@@ -155,9 +151,7 @@ namespace EnigmaCore {
 			}
 		}
 
-		#if ODIN_INSPECTOR
 		[Button]
-		#endif
 		void LoadScene() {
 			if (this._scene == null) return;
 			#if UNITY_EDITOR
