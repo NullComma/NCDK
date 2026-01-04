@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using EnigmaCore.DependecyInjection;
+using EnigmaCore.DependencyInjection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

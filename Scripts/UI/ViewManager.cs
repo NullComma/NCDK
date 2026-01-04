@@ -1,4 +1,4 @@
-﻿using EnigmaCore.DependecyInjection;
+﻿using EnigmaCore.DependencyInjection;
 
 using System;
 using System.Collections.Generic;

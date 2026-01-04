@@ -1,5 +1,5 @@
 using System;
-using EnigmaCore.DependecyInjection;
+using EnigmaCore.DependencyInjection;
 using EnigmaCore.UI;
 using UnityEngine;
 

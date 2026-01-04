@@ -1,15 +1,17 @@
 ﻿using System.Linq;
 using EnigmaCore.UI;
-using Game;
 using UnityEngine;
+using UnityEngine.Scripting;
 
-namespace EnigmaCore.DependecyInjection
+namespace EnigmaCore.DependencyInjection
 {
+    [Preserve]
     [DefaultExecutionOrder(int.MinValue)]
-    static class CompositionRoot
+    internal class CoreInstaller : IInstaller
     {
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void InitializeSubsystemRegistration()
+        public int Priority => int.MinValue;
+        
+        public void Install()
         {
             DIContainer.Register(typeof(CBlockingEventsManager));
             DIContainer.Register(typeof(PauseManager));
@@ -17,7 +19,6 @@ namespace EnigmaCore.DependecyInjection
             DIContainer.Register(GetUISoundsBankSO());
             DIContainer.Register(GameObjectCreate.WithComponent<CFader>("Fader"));
             DIContainer.Register(typeof(ViewManager));
-            DIContainer.Register(GameObjectCreate.WithComponent<TruePlaytimeCounter>("System_PlaytimeCounter"));
         }
 
         static UISoundsBankSO GetUISoundsBankSO()

@@ -1,4 +1,4 @@
-﻿using EnigmaCore.DependecyInjection;
+﻿using EnigmaCore.DependencyInjection;
 using Unity.Linq;
 using UnityEngine;
 
