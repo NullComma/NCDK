@@ -21,7 +21,7 @@ namespace EnigmaCore.Editor {
         }
 
         static void HierarchyWindowItemOnGUI (int instanceID, Rect selectionRect) {
-            if(!(EditorUtility.InstanceIDToObject(instanceID) is GameObject obj))return;
+            if(!(EditorUtility.EntityIdToObject(instanceID) is GameObject obj))return;
 
             if (Event.current.type != EventType.Repaint) {
                 applicationNameShown = false;
