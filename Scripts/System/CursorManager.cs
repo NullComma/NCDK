@@ -33,6 +33,7 @@ namespace EnigmaCore
             RefreshCursorState();
         }
 
+#if ENABLE_INPUT_SYSTEM
         void OnInputReceived(InputEventPtr eventPtr, InputDevice device)
         {
             if (!eventPtr.IsA<StateEvent>() && !eventPtr.IsA<DeltaStateEvent>()) return;
@@ -59,6 +60,7 @@ namespace EnigmaCore
                 RefreshCursorState();
             }
         }
+#endif
 
         void OnMenuStateChanged(bool onMenu)
         {
