@@ -28,7 +28,7 @@ namespace EnigmaCore
             return keyboardHeld || gamepadHeld || mouseHeld;
 #else
             // Fallback for old Input Manager
-            return Input.anyKey;
+            return UnityEngine.Input.anyKey;
 #endif
         }
         
