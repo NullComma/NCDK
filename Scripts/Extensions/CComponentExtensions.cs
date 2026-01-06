@@ -1,6 +1,8 @@
-﻿using EnigmaCore.DependencyInjection;
+﻿using System;
+using EnigmaCore.DependencyInjection;
 using Unity.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace EnigmaCore {
     public static class CComponentExtensions {
@@ -54,6 +56,17 @@ namespace EnigmaCore {
             bool isNull = (c == null);
             if (isNull) {
                 Debug.LogError($"<b>Assert</b>: Component is null ({message})", source);
+            }
+            return isNull;
+        }
+        
+        public static bool ThrowIfNull<T>(this T c, string message = null, Object source = null) where T : Component {
+            bool isNull = (c == null);
+            if (isNull)
+            {
+                var exception = new NullReferenceException($"Component is null ({message})");
+                Debug.LogException(exception, source);
+                throw exception;
             }
             return isNull;
         }
