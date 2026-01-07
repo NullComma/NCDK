@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://chrisdbhr.github.io/assets/images/thumbs/enigmacore.webp" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=256&color=gradient&text=Enigma%20Core&textBg=false" />
 </p>
 
 <p align="center">
