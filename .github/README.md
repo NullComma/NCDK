@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=256&color=gradient&text=Enigma%20Core&textBg=false" />
+  <img src="https://cms.chrisjogos.com/assets/63298647-e4b4-4da5-90df-6512b3fdd208?format=webp" />
 </p>
 
 <p align="center">
