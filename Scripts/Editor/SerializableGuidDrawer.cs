@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,99 +7,110 @@ namespace EnigmaCore.Editor
     [CustomPropertyDrawer(typeof(SerializableGuid))]
     public class SerializableGuidDrawer : PropertyDrawer
     {
-        static readonly string[] GuidParts = { "Part1", "Part2", "Part3", "Part4" };
-
-        static SerializedProperty[] GetGuidParts(SerializedProperty property)
-        {
-            var values = new SerializedProperty[GuidParts.Length];
-            for (int i = 0; i < GuidParts.Length; i++)
-            {
-                values[i] = property.FindPropertyRelative(GuidParts[i]);
-            }
-
-            return values;
-        }
+        private const float ButtonWidth = 25f; 
+        private const float Spacing = 2f;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
 
-            if (GetGuidParts(property).All(x => x != null))
+            // 1. Draw the Label
+            Rect labelRect = position;
+            labelRect.width = EditorGUIUtility.labelWidth;
+            EditorGUI.LabelField(labelRect, label);
+
+            // 2. Calculate Rects
+            Rect contentRect = position;
+            contentRect.x += labelRect.width;
+            contentRect.width -= labelRect.width;
+
+            // Define area for the Text and the Button
+            Rect textFieldRect = new Rect(contentRect.x, contentRect.y, contentRect.width - ButtonWidth - Spacing, contentRect.height);
+            Rect buttonRect = new Rect(contentRect.x + contentRect.width - ButtonWidth, contentRect.y, ButtonWidth, contentRect.height);
+
+            // 3. Get Properties
+            SerializedProperty p1 = property.FindPropertyRelative("Part1");
+            SerializedProperty p2 = property.FindPropertyRelative("Part2");
+            SerializedProperty p3 = property.FindPropertyRelative("Part3");
+            SerializedProperty p4 = property.FindPropertyRelative("Part4");
+
+            // 4. Construct GUID String
+            var tempGuid = new SerializableGuid(
+                (uint)p1.longValue, 
+                (uint)p2.longValue,
+                (uint)p3.longValue,
+                (uint)p4.longValue
+            );
+            string guidString = tempGuid.ToGuid().ToString();
+
+            // 5. Draw the GUID as a Selectable Label with TextField styling
+            // This allows selecting/copying text but prevents editing, fixing the previous issue.
+            EditorGUI.SelectableLabel(textFieldRect, guidString, EditorStyles.textField);
+
+            // 6. Regenerate Button
+            var icon = EditorGUIUtility.IconContent("d_Refresh");
+            var buttonContent = icon.image ? icon : new GUIContent("R", "Regenerate GUID");
+            if (GUI.Button(buttonRect, buttonContent))
             {
-                EditorGUI.LabelField(position, BuildGuidString(GetGuidParts(property)));
-            }
-            else
-            {
-                EditorGUI.SelectableLabel(position, "GUID Not Initialized");
+                RegenerateGuid(property, p1, p2, p3, p4);
             }
 
-            bool hasClicked = Event.current.type == EventType.MouseUp && Event.current.button == 1;
-            if (hasClicked && position.Contains(Event.current.mousePosition))
+            // 7. Context Menu (Right Click)
+            // Still useful if the user wants to regenerate via right-click or copy without selecting
+            Event e = Event.current;
+            if (e.type == EventType.MouseDown && e.button == 1 && textFieldRect.Contains(e.mousePosition))
             {
-                ShowContextMenu(property);
-                Event.current.Use();
+                ShowContextMenu(property, p1, p2, p3, p4, guidString);
+                e.Use();
             }
 
             EditorGUI.EndProperty();
         }
 
-        void ShowContextMenu(SerializedProperty property)
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            // Ensure standard height to avoid layout glitches with SelectableLabel
+            return EditorGUIUtility.singleLineHeight;
+        }
+
+        private void ShowContextMenu(SerializedProperty rootProperty, SerializedProperty p1, SerializedProperty p2, SerializedProperty p3, SerializedProperty p4, string currentString)
         {
             GenericMenu menu = new GenericMenu();
-            menu.AddItem(new GUIContent("Copy GUID"), false, () => CopyGuid(property));
-            menu.AddItem(new GUIContent("Reset GUID"), false, () => ResetGuid(property));
-            menu.AddItem(new GUIContent("Regenerate GUID"), false, () => RegenerateGuid(property));
+            menu.AddItem(new GUIContent("Copy GUID"), false, () => 
+            {
+                EditorGUIUtility.systemCopyBuffer = currentString;
+            });
+            
+            menu.AddItem(new GUIContent("Regenerate GUID"), false, () => RegenerateGuid(rootProperty, p1, p2, p3, p4));
+            
+            menu.AddItem(new GUIContent("Reset to Empty"), false, () => 
+            {
+                p1.longValue = 0;
+                p2.longValue = 0;
+                p3.longValue = 0;
+                p4.longValue = 0;
+                rootProperty.serializedObject.ApplyModifiedProperties();
+            });
+            
             menu.ShowAsContext();
         }
 
-        void CopyGuid(SerializedProperty property)
+        private void RegenerateGuid(SerializedProperty rootProperty, SerializedProperty p1, SerializedProperty p2, SerializedProperty p3, SerializedProperty p4)
         {
-            if (GetGuidParts(property).Any(x => x == null)) return;
-
-            string guid = BuildGuidString(GetGuidParts(property));
-            EditorGUIUtility.systemCopyBuffer = guid;
-            Debug.Log($"GUID copied to clipboard: {guid}");
-        }
-
-        void ResetGuid(SerializedProperty property)
-        {
-            const string warning = "Are you sure you want to reset the GUID?";
-            if (!EditorUtility.DisplayDialog("Reset GUID", warning, "Yes", "No")) return;
-
-            foreach (var part in GetGuidParts(property))
+            if (!EditorUtility.DisplayDialog("Regenerate GUID", 
+                "Are you sure you want to regenerate this ID? This may break existing references.", "Regenerate", "Cancel")) 
             {
-                part.uintValue = 0;
+                return;
             }
-
-            property.serializedObject.ApplyModifiedProperties();
-            Debug.Log("GUID has been reset.");
-        }
-
-        void RegenerateGuid(SerializedProperty property)
-        {
-            const string warning = "Are you sure you want to regenerate the GUID?";
-            if (!EditorUtility.DisplayDialog("Reset GUID", warning, "Yes", "No")) return;
 
             byte[] bytes = Guid.NewGuid().ToByteArray();
-            SerializedProperty[] guidParts = GetGuidParts(property);
 
-            for (int i = 0; i < GuidParts.Length; i++)
-            {
-                guidParts[i].uintValue = BitConverter.ToUInt32(bytes, i * 4);
-            }
+            p1.longValue = BitConverter.ToUInt32(bytes, 0);
+            p2.longValue = BitConverter.ToUInt32(bytes, 4);
+            p3.longValue = BitConverter.ToUInt32(bytes, 8);
+            p4.longValue = BitConverter.ToUInt32(bytes, 12);
 
-            property.serializedObject.ApplyModifiedProperties();
-            Debug.Log("GUID has been regenerated.");
-        }
-
-        static string BuildGuidString(SerializedProperty[] guidParts)
-        {
-            return new StringBuilder()
-                .AppendFormat("{0:X8}", guidParts[0].uintValue)
-                .AppendFormat("{0:X8}", guidParts[1].uintValue)
-                .AppendFormat("{0:X8}", guidParts[2].uintValue)
-                .AppendFormat("{0:X8}", guidParts[3].uintValue)
-                .ToString();
+            rootProperty.serializedObject.ApplyModifiedProperties();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 namespace EnigmaCore
@@ -9,6 +10,7 @@ namespace EnigmaCore
     /// Modified by Christopher Ravailhe.
     /// </summary>
     [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
     public struct SerializableGuid : IEquatable<SerializableGuid>
     {
         [SerializeField, HideInInspector] public uint Part1;
@@ -16,7 +18,8 @@ namespace EnigmaCore
         [SerializeField, HideInInspector] public uint Part3;
         [SerializeField, HideInInspector] public uint Part4;
 
-        public static SerializableGuid Empty => new(0, 0, 0, 0);
+        public static SerializableGuid NewGuid() => new SerializableGuid(Guid.NewGuid());
+        public static readonly SerializableGuid Empty = new(0, 0, 0, 0);
 
         public SerializableGuid(uint val1, uint val2, uint val3, uint val4)
         {
@@ -28,72 +31,96 @@ namespace EnigmaCore
 
         public SerializableGuid(Guid guid)
         {
+#if UNITY_2021_2_OR_NEWER
+            // Optimized "Safe" approach using Span on the Stack (Zero Allocation).
+            Span<byte> guidBytes = stackalloc byte[16];
+            guid.TryWriteBytes(guidBytes);
+
+            Span<uint> uints = MemoryMarshal.Cast<byte, uint>(guidBytes);
+            Part1 = uints[0];
+            Part2 = uints[1];
+            Part3 = uints[2];
+            Part4 = uints[3];
+#else
+            // Legacy fallback (Allocates byte array)
             byte[] bytes = guid.ToByteArray();
             Part1 = BitConverter.ToUInt32(bytes, 0);
             Part2 = BitConverter.ToUInt32(bytes, 4);
             Part3 = BitConverter.ToUInt32(bytes, 8);
             Part4 = BitConverter.ToUInt32(bytes, 12);
-        }
-
-        public static SerializableGuid NewGuid() => Guid.NewGuid().ToSerializableGuid();
-
-        public static SerializableGuid FromHexString(string hexString)
-        {
-            if (hexString.Length != 32)
-            {
-                return Empty;
-            }
-
-            return new SerializableGuid
-            (
-                Convert.ToUInt32(hexString.Substring(0, 8), 16),
-                Convert.ToUInt32(hexString.Substring(8, 8), 16),
-                Convert.ToUInt32(hexString.Substring(16, 8), 16),
-                Convert.ToUInt32(hexString.Substring(24, 8), 16)
-            );
-        }
-
-        public string ToHexString()
-        {
-            return $"{Part1:X8}{Part2:X8}{Part3:X8}{Part4:X8}";
+#endif
         }
 
         public Guid ToGuid()
         {
+#if UNITY_2021_2_OR_NEWER
+            Span<uint> uints = stackalloc uint[4];
+            uints[0] = Part1;
+            uints[1] = Part2;
+            uints[2] = Part3;
+            uints[3] = Part4;
+
+            // Guid constructor accepting ReadOnlySpan<byte> (Zero Alloc)
+            return new Guid(MemoryMarshal.Cast<uint, byte>(uints));
+#else
+            // Legacy fallback
             var bytes = new byte[16];
             BitConverter.GetBytes(Part1).CopyTo(bytes, 0);
             BitConverter.GetBytes(Part2).CopyTo(bytes, 4);
             BitConverter.GetBytes(Part3).CopyTo(bytes, 8);
             BitConverter.GetBytes(Part4).CopyTo(bytes, 12);
             return new Guid(bytes);
+#endif
         }
-        
+
+        /// <summary>
+        /// Returns a URL-safe Base64 string representation of the GUID.
+        /// Useful for compact serialization (e.g., JSON or file names).
+        /// </summary>
         public string ToShortString()
         {
-            var bytes = new byte[16];
-            BitConverter.GetBytes(Part1).CopyTo(bytes, 0);
-            BitConverter.GetBytes(Part2).CopyTo(bytes, 4);
-            BitConverter.GetBytes(Part3).CopyTo(bytes, 8);
-            BitConverter.GetBytes(Part4).CopyTo(bytes, 12);
+#if UNITY_2021_2_OR_NEWER
+            Span<uint> uints = stackalloc uint[4];
+            uints[0] = Part1;
+            uints[1] = Part2;
+            uints[2] = Part3;
+            uints[3] = Part4;
 
+            ReadOnlySpan<byte> bytes = MemoryMarshal.Cast<uint, byte>(uints);
+            
+            // Convert.ToBase64String accepting Span was added in .NET Standard 2.1
             string base64 = Convert.ToBase64String(bytes);
-
+#else
+            var bytesArray = new byte[16];
+            BitConverter.GetBytes(Part1).CopyTo(bytesArray, 0);
+            BitConverter.GetBytes(Part2).CopyTo(bytesArray, 4);
+            BitConverter.GetBytes(Part3).CopyTo(bytesArray, 8);
+            BitConverter.GetBytes(Part4).CopyTo(bytesArray, 12);
+            
+            string base64 = Convert.ToBase64String(bytesArray);
+#endif
             return base64.Replace('+', '-').Replace('/', '_').TrimEnd('=');
         }
 
         public static SerializableGuid FromShortString(string shortString)
         {
+            if (string.IsNullOrEmpty(shortString)) return Empty;
+
             string base64 = shortString.Replace('-', '+').Replace('_', '/');
+            
             switch (base64.Length % 4)
             {
                 case 2: base64 += "=="; break;
                 case 3: base64 += "="; break;
             }
     
-            try {
+            try 
+            {
                 byte[] bytes = Convert.FromBase64String(base64);
                 return new SerializableGuid(new Guid(bytes));
-            } catch {
+            } 
+            catch 
+            {
                 return Empty;
             }
         }
@@ -101,27 +128,11 @@ namespace EnigmaCore
         public static implicit operator Guid(SerializableGuid serializableGuid) => serializableGuid.ToGuid();
         public static implicit operator SerializableGuid(Guid guid) => new SerializableGuid(guid);
 
-        public override bool Equals(object obj)
-        {
-            return obj is SerializableGuid guid && this.Equals(guid);
-        }
-
-        public bool Equals(SerializableGuid other)
-        {
-            return Part1 == other.Part1 && Part2 == other.Part2 && Part3 == other.Part3 && Part4 == other.Part4;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Part1, Part2, Part3, Part4);
-        }
-
+        public override bool Equals(object obj) => obj is SerializableGuid other && Equals(other);
+        public bool Equals(SerializableGuid other) => Part1 == other.Part1 && Part2 == other.Part2 && Part3 == other.Part3 && Part4 == other.Part4;
+        public override int GetHashCode() => HashCode.Combine(Part1, Part2, Part3, Part4);
         public static bool operator ==(SerializableGuid left, SerializableGuid right) => left.Equals(right);
-        public static bool operator !=(SerializableGuid left, SerializableGuid right) => !(left == right);
-
-        public override string ToString()
-        {
-            return ToHexString();
-        }
+        public static bool operator !=(SerializableGuid left, SerializableGuid right) => !left.Equals(right);
+        public override string ToString() => ToGuid().ToString();
     }
 }
