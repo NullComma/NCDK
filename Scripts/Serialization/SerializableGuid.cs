@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
+#if UNITY_NETCODE
+using Unity.Netcode;
+#endif
 
 namespace EnigmaCore
 {
@@ -12,6 +15,9 @@ namespace EnigmaCore
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
     public struct SerializableGuid : IEquatable<SerializableGuid>
+#if UNITY_NETCODE
+        , INetworkSerializable
+#endif
     {
         [SerializeField, HideInInspector] public uint Part1;
         [SerializeField, HideInInspector] public uint Part2;
@@ -124,6 +130,16 @@ namespace EnigmaCore
                 return Empty;
             }
         }
+
+#if UNITY_NETCODE
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            serializer.SerializeValue(ref Part1);
+            serializer.SerializeValue(ref Part2);
+            serializer.SerializeValue(ref Part3);
+            serializer.SerializeValue(ref Part4);
+        }
+#endif
 
         public static implicit operator Guid(SerializableGuid serializableGuid) => serializableGuid.ToGuid();
         public static implicit operator SerializableGuid(Guid guid) => new SerializableGuid(guid);
