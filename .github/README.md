@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://chrisdbhr.github.io/assets/images/thumbs/enigmacore.webp" />
+  <img src="https://cms.chrisjogos.com/assets/63298647-e4b4-4da5-90df-6512b3fdd208?format=webp" />
 </p>
 
 <p align="center">
