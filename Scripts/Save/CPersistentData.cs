@@ -75,7 +75,7 @@ namespace EnigmaCore {
 	
 		#if UNITY_EDITOR
 
-		[MenuItem("Tools/Open root save folder")]
+		[MenuItem(StaticStrings.PrefixTools + "Open root save folder")]
 		public static void OpenSaveFolder() {
 			EditorUtility.RevealInFinder(GetApplicationPersistentDataFolder());
 		}

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EnigmaCore.Editor {
     public class AvatarMaker {
-        [MenuItem("Tools/Avatar Mask/Make Avatar Mask")]
+        [MenuItem(StaticStrings.PrefixTools + "Avatar Mask/Make Avatar Mask")]
         private static void MakeAvatarMask() {
             GameObject activeGameObject = Selection.activeGameObject;
             if (activeGameObject == null) return;
@@ -15,7 +15,7 @@ namespace EnigmaCore.Editor {
             AssetDatabase.CreateAsset(avatarMask, path);
         }
 
-        [MenuItem("Tools/Avatar Mask/Make Generic Avatar")]
+        [MenuItem(StaticStrings.PrefixTools + "Avatar Mask/Make Generic Avatar")]
         private static void MakeAvatar() {
             GameObject activeGameObject = Selection.activeGameObject;
             if (activeGameObject == null) return;
