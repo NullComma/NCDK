@@ -168,8 +168,6 @@ namespace EnigmaCore
             Debug.Log("<b>Application is quitting...</b>");
             IsQuitting = true;
             QuittingCancellationTokenSource?.Cancel();
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
             Application.focusChanged -= ApplicationOnfocusChanged;
         }
 

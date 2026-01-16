@@ -2,17 +2,20 @@
 
 namespace EnigmaCore
 {
-    public class PauseManager
+    /// <summary>
+    /// Manages the game's pause state using a retain/release system to set the TimeScale.
+    /// </summary>
+    public class TimePauseManager
     {
         static CRetainable pauseRetainable;
 
-        public PauseManager()
+        public TimePauseManager()
         {
             pauseRetainable = new();
             pauseRetainable.StateEvent += PauseStateChanged;
         }
 
-        ~PauseManager()
+        ~TimePauseManager()
         {
             pauseRetainable.StateEvent -= PauseStateChanged;
         }

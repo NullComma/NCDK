@@ -38,7 +38,14 @@ namespace EnigmaCore
         {
             if (!eventPtr.IsA<StateEvent>() && !eventPtr.IsA<DeltaStateEvent>()) return;
 
-            bool currentIsMouseAndKeyboard = device is Mouse || device is Keyboard;
+            bool isMouseOrKeyboard = device is Mouse || device is Keyboard;
+            bool isGamepad = device is Gamepad;
+
+            // Filter out events from relevant devices only. 
+            // If it's not a mouse/keyboard AND not a gamepad (e.g. some generic HID), we ignore it to avoid flipping state erroneously.
+            if (!isMouseOrKeyboard && !isGamepad) return;
+
+            bool currentIsMouseAndKeyboard = isMouseOrKeyboard;
 
             // 1. Check for device change (Gamepad <-> Mouse)
             bool deviceChanged = currentIsMouseAndKeyboard != _lastInputIsMouseAndKeyboard;
@@ -86,21 +93,9 @@ namespace EnigmaCore
 
         static void SetCursorState(bool visible)
         {
-            // Only apply if the state is different to avoid unnecessary Unity API calls
-            if (Cursor.visible != visible)
-            {
-                Cursor.visible = visible;
-                Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
-            }
-            // Force correct lockstate even if visible is already ok (Unity sometimes loses lockstate on Alt-Tab)
-            else if (visible && Cursor.lockState != CursorLockMode.None)
-            {
-                Cursor.lockState = CursorLockMode.None;
-            }
-            else if (!visible && Cursor.lockState != CursorLockMode.Locked)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+            Debug.Log($"[CursorManager] SetCursorState: {visible} | Frame: {Time.frameCount} | Cursor.visible was: {Cursor.visible}");
+            Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = visible;
         }
         
         public void Dispose()
