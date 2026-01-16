@@ -26,7 +26,6 @@ namespace EnigmaCore.UI {
 		
         [SerializeField] protected UnityEvent _interactEvent;
 		[Inject, NonSerialized] UISoundsBankSO _uiSoundsBankSo;
-		[Inject, NonSerialized] ViewManager _viewManager;
 
         #endregion <<---------- Properties and Fields ---------->>
 
@@ -44,12 +43,6 @@ namespace EnigmaCore.UI {
         protected virtual void OnEnable() { }
 
         #endregion <<---------- Mono Behaviour ---------->>
-
-
-        protected void TryEndNavigation()
-		{
-			_viewManager?.CloseAllViews();
-		}
 
 		#if FMOD
 		void PlaySound(EventReference sound) {
@@ -116,7 +109,7 @@ namespace EnigmaCore.UI {
 			if (!IsThisAValidInteractionTarget(eventData)) return;
 			var rootT = transform.root;
             if (rootT != null && rootT.TryGetComponent(out View view)) {
-	            view.Close();
+	            view.CloseByCancelled();
                 Canceled();
             }
         }
