@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 using Newtonsoft.Json;
@@ -132,7 +133,7 @@ namespace EnigmaCore {
         public static T LoadFromPath<T>(string filePath) where T : CPersistentData {
             try {
                 var fileContent = File.ReadAllText(filePath);
-				
+				Debug.Log($"Read {fileContent.Length} characters from save file at '{filePath}'.");
                 var jsonContent = EncryptionUtils.Decrypt(fileContent);
                 if (string.IsNullOrEmpty(jsonContent)) {
                     Debug.LogError($"Save file at '{filePath}' is corrupted or could not be decrypted.");
@@ -147,7 +148,7 @@ namespace EnigmaCore {
 
                 CheckForModifiedFile(save);
 
-                Debug.Log($"GameProgress Loaded.");
+                Debug.Log($"Successfully loaded save file '{Path.GetFileName(filePath)}' from path '{filePath}'.");
                 return save;
             }
             catch (Exception e) {
@@ -165,30 +166,55 @@ namespace EnigmaCore {
             #endif
         }
 
-        /// <summary>
-        /// Never returns a null list.
-        /// </summary>
-        public static List<T> GetAllSaveFiles<T>() where T : CGameStateBase {
-            List<T> saves = new ();
+        private static IEnumerable<T> EnumerateSaveFiles<T>() where T : CGameStateBase {
+            string[] filesPaths;
             try {
-                var filesPaths = Directory.GetFiles(GetGameStateFolder(), $"*{EnigmaPaths.SaveExtension}");
-                foreach (var filePath in filesPaths) {
-                    try {
-                        var save = LoadFromPath<T>(filePath);
-                        if (save == null) continue;
-                        saves.Add(save);
-                    }
-                    catch (Exception e) {
-                        Debug.LogError($"Error reading file from path '{filePath}'" + e);
-                    }
-                }
+                var directory = new DirectoryInfo(GetGameStateFolder());
+                if (!directory.Exists) yield break;
+
+                // Sort by LastWriteTime descending to get newest first
+                filesPaths = directory.GetFiles($"*{EnigmaPaths.SaveExtension}")
+                    .OrderByDescending(f => f.LastWriteTime)
+                    .Select(f => f.FullName)
+                    .ToArray();
+
+                Debug.Log($"Found {filesPaths.Length} save files.");
             }
             catch (Exception e) {
-                Debug.LogError("Could not load all save files: " + e);
+                Debug.LogError("Could not access save folder: " + e);
+                yield break;
             }
-            return saves;
+
+            foreach (var filePath in filesPaths) {
+                T save = null;
+                try {
+                    save = LoadFromPath<T>(filePath);
+                }
+                catch (Exception e) {
+                    Debug.LogError($"Error reading file from path '{filePath}': " + e);
+                }
+
+                if (save != null) {
+                    yield return save;
+                }
+            }
         }
 
+        /// <summary>
+        /// Returns all saves ordered by most recent. Never returns a null list.
+        /// </summary>
+        public static List<T> GetAllSaveFiles<T>() where T : CGameStateBase {
+            return new List<T>(EnumerateSaveFiles<T>());
+        }
+
+        /// <summary>
+        /// Returns the most recent save file or null if none found.
+        /// </summary>
+        public static T GetMostRecentSaveFile<T>() where T : CGameStateBase {
+            using var enumerator = EnumerateSaveFiles<T>().GetEnumerator();
+            return enumerator.MoveNext() ? enumerator.Current : null;
+        }
+        
         #endregion <<---------- Loading ---------->>
 
 
