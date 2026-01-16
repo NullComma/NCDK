@@ -141,6 +141,9 @@ namespace EnigmaCore
 
         #region <<---------- Paths ---------->>
         
+        /// <summary>
+        /// This is required because in some situations Unity does not instantly create persistent data path right at the start of the application.
+        /// </summary>
         static void CreatePersistentDataPath() 
         {
             try 

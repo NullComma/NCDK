@@ -25,7 +25,7 @@ namespace EnigmaCore
                 if (!string.IsNullOrEmpty(_cachedExtension)) return _cachedExtension;
 
                 // 1. Create a unique signature string
-                var signature = $"{Application.companyName}.{Application.productName}";
+                var signature = $"{Application.companyName}.{Application.productName}".ToLowerInvariant();
 
                 // 2. Hash it to get a consistent, unique code regardless of length
                 using (var algo = SHA256.Create())

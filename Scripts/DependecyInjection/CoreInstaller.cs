@@ -14,11 +14,10 @@ namespace EnigmaCore.DependencyInjection
         public void Install()
         {
             DIContainer.Register(typeof(CBlockingEventsManager));
-            DIContainer.Register(typeof(PauseManager));
+            DIContainer.Register(typeof(TimePauseManager));
             DIContainer.Register(typeof(CursorManager));
             DIContainer.Register(GetUISoundsBankSO());
             DIContainer.Register(GameObjectCreate.WithComponent<CFader>("Fader"));
-            DIContainer.Register(typeof(ViewManager));
         }
 
         static UISoundsBankSO GetUISoundsBankSO()

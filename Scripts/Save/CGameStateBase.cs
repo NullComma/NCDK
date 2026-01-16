@@ -58,7 +58,7 @@ namespace EnigmaCore {
 
         public bool WasLoadedAutomatically { get; }
 
-        public const string SavesDirectoryName = "SavesDir";
+        public const string SavesDirectoryName = "save";
 
         [JsonProperty("_saveIdentifier")]
         public SerializableGuid SaveIdentifier;
@@ -242,14 +242,94 @@ namespace EnigmaCore {
 
         #region <<---------- Paths ---------->>
 
+        private static string _cachedGameStateFolder;
+
         public static string GetGameStateFolder() {
-            var folderPath = Path.Combine(GetApplicationPersistentDataFolder(), SavesDirectoryName).Replace('\\', '/');
+            if (!string.IsNullOrEmpty(_cachedGameStateFolder)) return _cachedGameStateFolder;
+
+            var persistentDataPath = GetApplicationPersistentDataFolder();
+            
+            // Default path: .../EnigmaticComma/ApplicationName/save
+            var folderPath = Path.Combine(persistentDataPath, SavesDirectoryName);
+
+            // Steamworks support: .../EnigmaticComma/ApplicationName/SteamID/save
+            ulong? steamId = GetSteamID();
+            if (steamId.HasValue) {
+                folderPath = Path.Combine(persistentDataPath, steamId.Value.ToString(), SavesDirectoryName);
+            }
+
+            folderPath = folderPath.Replace('\\', '/');
             if (!Directory.Exists(folderPath)) {
                 Directory.CreateDirectory(folderPath);
             }
+            
+            CopyOldSaveFiles(folderPath);
+
+            _cachedGameStateFolder = folderPath;
             Debug.Log($"{nameof(GetGameStateFolder)} returned: '{folderPath}'");
             return folderPath;
         }
+
+        private static void CopyOldSaveFiles(string newSavePath)
+        {
+            try {
+                var persistentPath = GetApplicationPersistentDataFolder();
+                // persistentPath is .../AppData/LocalLow/EnigmaticComma/ProductName
+                
+                var productDir = new DirectoryInfo(persistentPath);
+                var companyDir = productDir.Parent; // EnigmaticComma
+                var localLowDir = companyDir.Parent; // LocalLow
+
+                var oldCompanyNames = new string[] { "ChrisDBHR", "Enigmatic Comma", companyDir.Name };
+                // logic: check old names + "SavesDir"
+                
+                foreach (var oldComp in oldCompanyNames) {
+                    var oldPath = Path.Combine(localLowDir.FullName, oldComp, productDir.Name, "SavesDir");
+                    
+                    if (Directory.Exists(oldPath)) {
+                        bool copiedAny = false;
+                        foreach (var file in Directory.GetFiles(oldPath)) {
+                            var fileName = Path.GetFileName(file);
+                            var destPath = Path.Combine(newSavePath, fileName);
+                            
+                            if (!File.Exists(destPath)) {
+                                File.Copy(file, destPath);
+                                copiedAny = true;
+                            }
+                        }
+                        if (copiedAny) Debug.Log($"[Migration] Copied saves from '{oldPath}' to '{newSavePath}'");
+                    }
+                }
+            } catch (Exception e) {
+                Debug.LogError($"[Migration] Failed to copy old save files: {e.Message}");
+            }
+        }
+
+        private static ulong? GetSteamID() {
+            try {
+                // Use Reflection to avoid hard dependency on Facepunch.Steamworks
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                var steamAssembly = assemblies.FirstOrDefault(a => a.GetName().Name.StartsWith("Facepunch.Steamworks"));
+                
+                if (steamAssembly != null) {
+                    var clientType = steamAssembly.GetType("Steamworks.SteamClient");
+                    if (clientType != null) {
+                        var isValidProp = clientType.GetProperty("IsValid", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                        if (isValidProp != null && (bool)isValidProp.GetValue(null)) {
+                            var steamIdProp = clientType.GetProperty("SteamId", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                            var steamIdObj = steamIdProp.GetValue(null);
+                            // SteamId is a struct with a 'Value' ulong property
+                            var valueProp = steamIdObj.GetType().GetProperty("Value", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                            if (valueProp != null) {
+                                return (ulong)valueProp.GetValue(steamIdObj);
+                            }
+                        }
+                    }
+                }
+            } catch { }
+            return null;
+        }
+        
         public static string GetGameStateFilePath(string fileName) {
             return Path.Combine(GetGameStateFolder(), $"{fileName}{EnigmaPaths.SaveExtension}");
         }
