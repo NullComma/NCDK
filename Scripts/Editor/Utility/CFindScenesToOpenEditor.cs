@@ -138,7 +138,7 @@ namespace EnigmaCore.Editor {
                 // filter scenes to show
                 for (int i = 0; i < assetsScenesPaths.Length; i++) {
                     var sceneName = TrimScenePath(assetsScenesPaths[i]);
-                    if (sceneName.StartsWith(ADDITIVE_SCENE_PREFIX) || !IsEquivalentStrings(sceneName, searchFilter)) continue;
+                    if (sceneName.StartsWith(ADDITIVE_SCENE_PREFIX) || sceneName.StartsWith("_") || !IsEquivalentStrings(sceneName, searchFilter)) continue;
                     this._filteredScenes.Add(assetsScenesPaths[i]);
                 }
 
@@ -163,6 +163,7 @@ namespace EnigmaCore.Editor {
 
                         if (GUILayout.Button((isSelected ? ("> " + buttonLabel + " <") : buttonLabel), EditorStyles.miniButton)) {
                             EditorSceneManager.OpenScene(this._filteredScenes[i], OpenSceneMode.Single);
+                            this.Close();
                         }
 
                         EditorGUILayout.EndHorizontal();

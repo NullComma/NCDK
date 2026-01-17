@@ -20,7 +20,7 @@ namespace EnigmaCore
             // Logic for Editor Play Mode only
             if (Application.isEditor)
             {
-                Debug.Log($"[EnigmaCore] Disabling '{name}' because we are in Editor Play Mode.", this);
+                Debug.Log($"[EnigmaCore] Disabling game object '{name}' because we are in Editor Play Mode.", this);
                 this.gameObject.SetActive(false);
             }
         }

@@ -28,10 +28,18 @@ namespace EnigmaCore
 
         public static T GetPrivateField<T>(this object obj, string fieldName)
         {
-            var fieldInfo = obj.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic);
+            var type = obj.GetType();
+            FieldInfo fieldInfo = null;
+            while (type != null)
+            {
+                fieldInfo = type.GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (fieldInfo != null) break;
+                type = type.BaseType;
+            }
+
             if(fieldInfo == null)
             {
-                throw new ArgumentException($"Field {fieldName} not found in type {obj.GetType().FullName}");
+                throw new ArgumentException($"Field {fieldName} not found in type {obj.GetType().FullName} or its base types.");
             }
 
             return (T)fieldInfo.GetValue(obj);
@@ -39,10 +47,18 @@ namespace EnigmaCore
 
         public static void SetPrivateField<T>(this object obj, string fieldName, T value)
         {
-            var fieldInfo = obj.GetType().GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            var type = obj.GetType();
+            FieldInfo fieldInfo = null;
+            while (type != null)
+            {
+                fieldInfo = type.GetField(fieldName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (fieldInfo != null) break;
+                type = type.BaseType;
+            }
+
             if(fieldInfo == null)
             {
-                throw new ArgumentException($"Field {fieldName} not found in type {obj.GetType().FullName}");
+                throw new ArgumentException($"Field {fieldName} not found in type {obj.GetType().FullName} or its base types.");
             }
 
             fieldInfo.SetValue(obj, value);
@@ -50,10 +66,18 @@ namespace EnigmaCore
 
         public static T GetPrivateProperty<T>(this object obj, string propertyName)
         {
-            var propertyInfo = obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            var type = obj.GetType();
+            PropertyInfo propertyInfo = null;
+            while (type != null)
+            {
+                propertyInfo = type.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (propertyInfo != null) break;
+                type = type.BaseType;
+            }
+
             if(propertyInfo == null)
             {
-                throw new ArgumentException($"Property {propertyName} not found in type {obj.GetType().FullName}");
+                throw new ArgumentException($"Property {propertyName} not found in type {obj.GetType().FullName} or its base types.");
             }
 
             return (T)propertyInfo.GetValue(obj);
@@ -61,10 +85,18 @@ namespace EnigmaCore
 
         public static void SetPrivateProperty<T>(this object obj, string propertyName, T value)
         {
-            var propertyInfo = obj.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            var type = obj.GetType();
+            PropertyInfo propertyInfo = null;
+            while (type != null)
+            {
+                propertyInfo = type.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                if (propertyInfo != null) break;
+                type = type.BaseType;
+            }
+
             if(propertyInfo == null)
             {
-                throw new ArgumentException($"Property {propertyName} not found in type {obj.GetType().FullName}");
+                throw new ArgumentException($"Property {propertyName} not found in type {obj.GetType().FullName} or its base types.");
             }
 
             propertyInfo.SetValue(obj, value);
