@@ -71,7 +71,6 @@ namespace EnigmaCore
 
         void OnMenuStateChanged(bool onMenu)
         {
-            Debug.Log($"[CursorManager] Menu State Changed: {onMenu}");
             RefreshCursorState();
         }
 
@@ -93,7 +92,6 @@ namespace EnigmaCore
 
         static void SetCursorState(bool visible)
         {
-            Debug.Log($"[CursorManager] SetCursorState: {visible} | Frame: {Time.frameCount} | Cursor.visible was: {Cursor.visible}");
             Cursor.lockState = visible ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = visible;
         }

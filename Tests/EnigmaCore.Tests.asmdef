@@ -1,0 +1,28 @@
+{
+    "name": "EnigmaCore.Tests",
+    "rootNamespace": "EnigmaCore.Tests",
+    "references": [
+        "EnigmaCore",
+        "EnigmaCore.Editor",
+        "GUID:8a4049b5-4880-4c77-a31d-37e636681342",
+        "GUID:4f8b0e4e-1234-5678-90ab-cdef12345678"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false,
+    "testableReferences": [
+        "EnigmaCore"
+    ]
+}
