@@ -24,13 +24,6 @@ namespace EnigmaCore
 #endif
             Application.quitting += OnAppQuitting;
             Application.focusChanged += OnApplicationFocusChanged;
-            
-            // Debug to check initial state.
-            // If this is False, it means the Manager was initialized BEFORE the Menu View called Retain.
-            bool initialState = _blockingEventsManager.MenuRetainable.IsRetained;
-            Debug.Log($"[CursorManager] Initialized. Menu Open? {initialState}. Applying initial state...");
-            
-            RefreshCursorState();
         }
 
 #if ENABLE_INPUT_SYSTEM
@@ -81,7 +74,6 @@ namespace EnigmaCore
 
         void RefreshCursorState()
         {
-            // The rule: Show if (Menu Retained) AND (Using Mouse)
             bool menuOpen = _blockingEventsManager.MenuRetainable.IsRetained;
             bool isMouse = _lastInputIsMouseAndKeyboard;
             

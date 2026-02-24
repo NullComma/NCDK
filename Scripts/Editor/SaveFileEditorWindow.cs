@@ -184,8 +184,9 @@ namespace EnigmaCore.Editor
             }
         }
 
-        private void SaveChanges()
+        public override void SaveChanges()
         {
+            base.SaveChanges();
             if (_currentJson == null || string.IsNullOrEmpty(_selectedFilePath)) return;
 
             try

@@ -63,7 +63,7 @@ namespace EnigmaCore {
 				return true;
 			}
 			float currentFill = this._imageDelayedHealth.fillAmount;
-			float step = ETime.DeltaTimeScaled / time;
+			float step = Time.deltaTime / time;
 			float nextValue = currentFill - step;
 			if (nextValue <= targetValue) {
 				this._imageDelayedHealth.fillAmount = targetValue;

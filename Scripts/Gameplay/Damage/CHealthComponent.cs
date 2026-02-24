@@ -159,7 +159,7 @@ namespace EnigmaCore {
 
 		protected virtual void Update() {
 			if (_immuneTimer > 0f) {
-				_immuneTimer -= ETime.DeltaTimeScaled;
+				_immuneTimer -= Time.deltaTime;
 			}
 		}
 

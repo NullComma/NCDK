@@ -17,7 +17,7 @@ namespace EnigmaCore {
 
         void Update() {
             previousPosition = transform.position;
-            transform.position += transform.forward * (moveSpeed * ETime.DeltaTimeScaled);
+            transform.position += transform.forward * (moveSpeed * Time.deltaTime);
         }
 
         void LateUpdate() {

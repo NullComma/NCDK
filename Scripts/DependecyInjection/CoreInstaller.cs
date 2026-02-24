@@ -15,7 +15,7 @@ namespace EnigmaCore.DependencyInjection
         {
             DIContainer.RegisterLazy(typeof(CBlockingEventsManager));
             DIContainer.RegisterLazy(typeof(TimePauseManager));
-            DIContainer.RegisterLazy(typeof(CursorManager));
+            DIContainer.Register(typeof(CursorManager));
             DIContainer.RegisterLazy(() => GetUISoundsBankSO());
             DIContainer.RegisterLazy(() => GameObjectCreate.WithComponent<CFader>("Fader"));
         }

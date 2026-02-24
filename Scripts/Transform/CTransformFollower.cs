@@ -59,17 +59,17 @@ namespace EnigmaCore {
 
         protected virtual void Update() {
 			if (executionLoop != MonoBehaviourExecutionLoop.Update) return;
-            Execute(_ignoreTimeScale ? Time.unscaledDeltaTime : ETime.DeltaTimeScaled);
+            Execute(_ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime);
         }
 
 		protected virtual void FixedUpdate() {
 			if (executionLoop != MonoBehaviourExecutionLoop.FixedUpdate) return;
-            Execute(_ignoreTimeScale ? Time.fixedUnscaledDeltaTime : ETime.DeltaTimeScaled);
+            Execute(_ignoreTimeScale ? Time.fixedUnscaledDeltaTime : Time.deltaTime);
 		}
 
         protected virtual void LateUpdate() {
 			if (executionLoop != MonoBehaviourExecutionLoop.LateUpdate) return;
-            Execute(_ignoreTimeScale ? Time.unscaledDeltaTime : ETime.DeltaTimeScaled);
+            Execute(_ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime);
 		}
 
 		#if UNITY_EDITOR

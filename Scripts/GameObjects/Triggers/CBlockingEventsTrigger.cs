@@ -133,7 +133,9 @@ namespace EnigmaCore
 
         private void MigrateComponent()
         {
-            CBlockingEventsTrigger oldComp = (CBlockingEventsTrigger)target;
+#pragma warning disable CS0618 // Type or member is obsolete
+            var oldComp = (CBlockingEventsTrigger)target;
+#pragma warning restore CS0618 // Type or member is obsolete
             GameObject go = oldComp.gameObject;
 
             Undo.RegisterCompleteObjectUndo(go, "Migrate Blocking Events");

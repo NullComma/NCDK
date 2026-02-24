@@ -32,10 +32,10 @@ namespace EnigmaCore {
 
 			// rotate camera
 			_transform.Rotate(Vector3.up,
-				_inputLook.x * _rotationSpeed.x * ETime.DeltaTimeScaled,
+				_inputLook.x * _rotationSpeed.x * Time.deltaTime,
 				Space.World);
 			_transform.Rotate(_transform.right,
-				_inputLook.y * -1 * _rotationSpeed.y * ETime.DeltaTimeScaled,
+				_inputLook.y * -1 * _rotationSpeed.y * Time.deltaTime,
 				Space.World);
 
 			// clamp rotation
