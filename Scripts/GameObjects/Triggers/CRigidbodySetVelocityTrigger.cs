@@ -16,7 +16,12 @@ namespace EnigmaCore {
 		}
 
 		protected override void TriggerEvent() {
+			// Unity 6+ uses linearVelocity, older versions use velocity
+			#if UNITY_6000_0_OR_NEWER
 			_rb.linearVelocity = transform.TransformDirection(_setVelocityAmount);
+			#else
+			_rb.velocity = transform.TransformDirection(_setVelocityAmount);
+			#endif
 		}
 		
 	}
