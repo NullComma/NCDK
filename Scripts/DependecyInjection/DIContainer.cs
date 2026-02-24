@@ -13,6 +13,7 @@ namespace EnigmaCore.DependencyInjection
     public static class DIContainer 
     {
         static readonly ConcurrentDictionary<Type, object> _instances = new ();
+        static readonly ConcurrentDictionary<Type, Func<object>> _lazyFactories = new();
         static readonly Dictionary<Type, List<FieldInfo>> _injectionCache = new();
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -32,6 +33,7 @@ namespace EnigmaCore.DependencyInjection
                 }
             }
             _instances.Clear();
+            _lazyFactories.Clear();
             _injectionCache.Clear();
         }
 
@@ -80,6 +82,49 @@ namespace EnigmaCore.DependencyInjection
         }
 
         /// <summary>
+        /// Registers a factory delegate to create the instance only when first invoked.
+        /// </summary>
+        public static void RegisterLazy<T>(Func<T> factory)
+        {
+            var typeOf = typeof(T);
+            
+            if(IsGenericObjectType(typeOf))
+            {
+                throw new Exception("Cannot register instance of type Object, MonoBehaviour or object. Use a more specific type.");
+            }
+            
+            _lazyFactories[typeOf] = () => factory();
+        }
+
+        /// <summary>
+        /// Registers a type to be instantiated lazily upon first resolution.
+        /// </summary>
+        public static void RegisterLazy(Type serviceType)
+        {
+            if(IsGenericObjectType(serviceType))
+                throw new Exception("Cannot register instance of type Object, MonoBehaviour or object. Use a more specific type.");
+
+            _lazyFactories[serviceType] = () => 
+            {
+                var constructors = serviceType.GetConstructors();
+                if (constructors.Length != 1)
+                    throw new Exception($"Type {serviceType} must have exactly one public constructor to be registered by type.");
+
+                var constructor = constructors[0];
+                var parameters = constructor.GetParameters();
+                var parametersInstances = parameters.Select(param =>
+                {
+                    var resolved = Resolve(param.ParameterType);
+                    if (resolved == null)
+                        throw new Exception($"Dependency {param.ParameterType} not registered for {serviceType}");
+                    return resolved;
+                }).ToArray();
+
+                return constructor.Invoke(parametersInstances);
+            };
+        }
+
+        /// <summary>
         /// Resolves and returns the registered instance of type T.
         /// </summary>
         public static T Resolve<T>() 
@@ -91,6 +136,16 @@ namespace EnigmaCore.DependencyInjection
             }
             if (_instances.TryGetValue(typeof(T), out var instance))
                 return (T)instance;
+            
+            if (_lazyFactories.TryGetValue(typeof(T), out var factory))
+            {
+                var newInstance = (T)factory();
+                // We add it to instances first to handle potential circular dependencies during injection
+                _instances[typeof(T)] = newInstance; 
+                _lazyFactories.TryRemove(typeof(T), out _);
+                InjectAttributes(newInstance);
+                return newInstance;
+            }
             
             throw new Exception($"Instance of type {typeof(T)} not registered.");
         }
@@ -111,6 +166,15 @@ namespace EnigmaCore.DependencyInjection
             if (_instances.TryGetValue(serviceType, out var instance))
                 return instance;
             
+            if (_lazyFactories.TryGetValue(serviceType, out var factory))
+            {
+                var newInstance = factory();
+                _instances[serviceType] = newInstance;
+                _lazyFactories.TryRemove(serviceType, out _);
+                InjectAttributes(newInstance);
+                return newInstance;
+            }
+            
             throw new Exception($"Instance of type {serviceType} not registered.");
         }
 
@@ -124,11 +188,6 @@ namespace EnigmaCore.DependencyInjection
         
         static void InjectAttributes(object target) 
         {
-            if (!Application.isPlaying)
-            {
-                Debug.LogError("Tried to inject a dependency on Editor, this is not supported. Did you called Inject() inside an OnValidate method?");
-                return;
-            }
             if (EApplication.IsQuitting)
             {
                 Debug.LogError($"Tried to inject dependencies on a target while quitting application! Will not be injected.");
