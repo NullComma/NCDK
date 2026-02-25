@@ -1,72 +1,85 @@
-Shader "EnigmaCore/2D/SingleSidedGrayscale"
+Shader "EnigmaCore/2D/SingleSidedSpriteURP"
 {
     Properties
     {
-        [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-        _Color ("Tint", Color) = (1,1,1,1)
+        _MainTex ("Sprite Texture", 2D) = "white" {}
+        [MaterialToggle] _ZWrite("ZWrite", Float) = 0
+
+        // Legacy properties for fallback and SpriteRenderer compatibility
+        [HideInInspector] _Color ("Tint", Color) = (1,1,1,1)
+        [HideInInspector] PixelSnap ("Pixel snap", Float) = 0
+        [HideInInspector] _RendererColor ("RendererColor", Color) = (1,1,1,1)
+        [HideInInspector] _AlphaTex ("External Alpha", 2D) = "white" {}
+        [HideInInspector] _EnableExternalAlpha ("Enable External Alpha", Float) = 0
     }
 
     SubShader
     {
-        Tags
+        Tags 
         { 
-            "Queue"="Transparent" 
-            "IgnoreProjector"="True" 
-            "RenderType"="Transparent" 
-            "PreviewType"="Plane"
-            "CanUseSpriteAtlas"="True"
+            "Queue" = "Transparent" 
+            "RenderType" = "Transparent" 
+            "RenderPipeline" = "UniversalPipeline" 
         }
 
-        // Optimization: Discard back-facing polygons
+        Blend SrcAlpha OneMinusSrcAlpha, One OneMinusSrcAlpha
+        
+        // Optimization: Single-sided rendering (discards back faces)
         Cull Back
-        Lighting Off
-        ZWrite Off
-        Blend SrcAlpha OneMinusSrcAlpha
+        ZWrite [_ZWrite]
 
         Pass
         {
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
+            HLSLPROGRAM
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/Core2D.hlsl"
 
-            struct appdata_t
+            #pragma vertex UnlitVertex
+            #pragma fragment UnlitFragment
+
+            struct Attributes
             {
-                float4 vertex   : POSITION;
-                fixed4 color    : COLOR;
-                half2 texcoord  : TEXCOORD0;
+                COMMON_2D_INPUTS
+                half4 color : COLOR;
+                UNITY_SKINNED_VERTEX_INPUTS
             };
 
-            struct v2f
+            struct Varyings
             {
-                float4 vertex   : SV_POSITION;
-                fixed4 color    : COLOR;
-                half2 texcoord  : TEXCOORD0;
+                COMMON_2D_OUTPUTS
+                half4 color : COLOR;
             };
 
-            fixed4 _Color;
-            sampler2D _MainTex;
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/2D/Include/2DCommon.hlsl"
+          
+            // GPU Instancing and 2D Animation support
+            #pragma multi_compile_instancing
+            #pragma multi_compile _ DEBUG_DISPLAY SKINNED_SPRITE
 
-            v2f vert(appdata_t IN)
+            // SRP Batcher compatibility (do not use ifdef here)
+            CBUFFER_START(UnityPerMaterial)
+                half4 _Color;
+            CBUFFER_END
+
+            Varyings UnlitVertex(Attributes input)
             {
-                v2f OUT;
-                OUT.vertex = UnityObjectToClipPos(IN.vertex);
-                OUT.texcoord = IN.texcoord;
-                // Calculate tint in vertex shader to save fragment operations
-                OUT.color = IN.color * _Color;
-                return OUT;
+                UNITY_SKINNED_VERTEX_COMPUTE(input);
+                SetUpSpriteInstanceProperties();
+                
+                // Handles SpriteRenderer FlipX/FlipY automatically
+                input.positionOS = UnityFlipSprite(input.positionOS, unity_SpriteProps.xy);
+
+                Varyings o = CommonUnlitVertex(input);
+                
+                // Pre-multiply color in vertex for performance
+                o.color = input.color * _Color * unity_SpriteColor;
+                return o;
             }
 
-            fixed4 frag(v2f IN) : SV_Target
+            half4 UnlitFragment(Varyings input) : SV_Target
             {
-                fixed4 c = tex2D(_MainTex, IN.texcoord) * IN.color;
-                
-                // Grayscale conversion using standard luminance weights
-                fixed gray = dot(c.rgb, fixed3(0.299, 0.587, 0.114));
-                
-                return fixed4(gray.xxx, c.a);
+                return CommonUnlitFragment(input, input.color);
             }
-            ENDCG
+            ENDHLSL
         }
     }
 }
