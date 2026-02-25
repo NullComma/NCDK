@@ -1,6 +1,6 @@
 namespace EnigmaCore.UI
 {
-    public class UIButtonCloseApp : CUIButton
+    public class UIButtonCloseApp : UIButton
     {
         protected override void OnEnable()
         {

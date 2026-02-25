@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace EnigmaCore.Damage {
 	public interface ICDamageable {
-		public CHealthComponent Health { get; }
+		public HealthComponent Health { get; }
 		/// <summary>
 		/// Returns the amount of final damage taken.
 		/// </summary>
-		float TakeHit(CHitInfoData attack, Transform attackerTransform, float damageMultiplier = 1f);
+		float TakeHit(HitInfoData attack, Transform attackerTransform, float damageMultiplier = 1f);
 	}
 }

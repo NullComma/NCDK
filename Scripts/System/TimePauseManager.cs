@@ -7,7 +7,7 @@ namespace EnigmaCore
     /// </summary>
     public class TimePauseManager
     {
-        static CRetainable pauseRetainable;
+        static Retainable pauseRetainable;
 
         public TimePauseManager()
         {

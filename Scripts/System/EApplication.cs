@@ -110,7 +110,7 @@ namespace EnigmaCore
             }
             #endif
             
-            var isMobile = CPlayerPlatformTrigger.IsMobilePlatform();
+            var isMobile = PlayerPlatformTrigger.IsMobilePlatform();
             if (isMobile) 
             {
                 ScalableBufferManager.ResizeBuffers(0.7f, 0.7f);
@@ -194,7 +194,7 @@ namespace EnigmaCore
 
         static void SetDefaultFramerate() 
         {
-            var isMobile = CPlayerPlatformTrigger.IsMobilePlatform();
+            var isMobile = PlayerPlatformTrigger.IsMobilePlatform();
             Application.targetFrameRate = isMobile ? 30 : -1;
         }
 

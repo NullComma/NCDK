@@ -38,7 +38,7 @@ namespace EnigmaCore.Editor
 
             try
             {
-                // We rely on CPersistentData to tell us the folder, 
+                // We rely on PersistentData to tell us the folder, 
                 // but we need to verify if the method is accessible or we just reconstruct the path.
                 // Looking at the provided context, GetGameStateFolder is public static.
                 string folderPath = GetGameStateFolderPath();
@@ -55,14 +55,14 @@ namespace EnigmaCore.Editor
             }
         }
 
-        // Helper to get folder path, replicating CPersistentData logic if needed, 
+        // Helper to get folder path, replicating PersistentData logic if needed, 
         // but since we are in the same assembly assembly definition (usually) or Editor folder, 
-        // we can try to access it. CPersistentData is in EnigmaCore namespace.
-        // If CPersistentData is not accessible due to asmdef, we might need a fallback.
+        // we can try to access it. PersistentData is in EnigmaCore namespace.
+        // If PersistentData is not accessible due to asmdef, we might need a fallback.
         // Assuming Editor folder is in an assembly that references the runtime assembly.
         private string GetGameStateFolderPath()
         {
-            return CGameStateBase.GetGameStateFolder();
+            return GameStateBase.GetGameStateFolder();
         }
 
         private void OnGUI()
@@ -198,7 +198,7 @@ namespace EnigmaCore.Editor
                 }
 
                 // 2. Serialize to get content for hashing
-                // CJsonExtensions.DefaultSettings uses Formatting.Indented
+                // JsonExtensions.DefaultSettings uses Formatting.Indented
                 string jsonForHash = _currentJson.ToString(Formatting.Indented);
 
                 // 3. Calculate Hash

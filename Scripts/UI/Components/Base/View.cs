@@ -12,13 +12,13 @@ namespace EnigmaCore.UI
         
         [Header("Setup")]
         [SerializeField] protected EventSystem _eventSystem;
-        [SerializeField] protected CUIButton _buttonReturn;
+        [SerializeField] protected UIButton _buttonReturn;
         
         [Header("Behavior")]
         public bool ShouldPauseTheGame = true;
         public bool CanCloseWithCancel = true;
 
-        [Inject] [NonSerialized] protected CBlockingEventsManager _blockingEventsManager;
+        [Inject] [NonSerialized] protected BlockingEventsManager _blockingEventsManager;
         [Inject] [NonSerialized] protected TimePauseManager timePauseManager;
         
         public static View ActiveView { get; private set; }
@@ -168,7 +168,7 @@ namespace EnigmaCore.UI
         private GameObject FirstSelectedObject()
         {
             if (_eventSystem.firstSelectedGameObject != null) return _eventSystem.firstSelectedGameObject;
-            var firstInteractable = GetComponentInChildren<CUIInteractable>();
+            var firstInteractable = GetComponentInChildren<UIInteractable>();
             return firstInteractable != null ? firstInteractable.gameObject : null;
         }
     }

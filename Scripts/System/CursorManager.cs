@@ -10,10 +10,10 @@ namespace EnigmaCore
 {
     public class CursorManager : IDisposable
     {
-        [NonSerialized] readonly CBlockingEventsManager _blockingEventsManager;
+        [NonSerialized] readonly BlockingEventsManager _blockingEventsManager;
         [NonSerialized] bool _lastInputIsMouseAndKeyboard = true;
 
-        public CursorManager(CBlockingEventsManager blockingEventsManager)
+        public CursorManager(BlockingEventsManager blockingEventsManager)
         {
             _blockingEventsManager = blockingEventsManager;
 

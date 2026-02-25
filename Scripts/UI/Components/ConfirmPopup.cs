@@ -7,7 +7,7 @@ namespace EnigmaCore.UI {
 	public class ConfirmPopup : View {
 		
 		[Header("Confirmation")]
-		[SerializeField] CUIButton _buttonConfirm;
+		[SerializeField] UIButton _buttonConfirm;
         [SerializeField] TextMeshProUGUI _title;
         
 

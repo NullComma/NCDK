@@ -10,7 +10,7 @@ namespace EnigmaCore {
         public void OnPostprocessBuild(BuildReport report) {
             if (report.summary.result != BuildResult.Succeeded && report.summary.result != BuildResult.Unknown) return;
             Debug.Log($"Build version {Application.version} succeeded.");
-            CEditorPlayerSettings.RaiseBuildVersion();
+            EditorPlayerSettings.RaiseBuildVersion();
         }
 
     }
