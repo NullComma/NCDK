@@ -1,4 +1,4 @@
-Shader "Custom/MobileSpriteGrayscale"
+Shader "EnigmaCore/SpriteGrayscale"
 {
     Properties
     {

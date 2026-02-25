@@ -1,4 +1,4 @@
-Shader "Custom/MobileScreenGradientSkyboxURP"
+Shader "EnigmaCore/Skybox/ScreenGradientSkybox"
 {
     Properties
     {

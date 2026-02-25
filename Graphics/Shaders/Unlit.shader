@@ -7,7 +7,7 @@
 
 // Modified by Chrisdbhr to add double sided rendering and color tint
 
-Shader "CDK/C Unlit"
+Shader "EnigmaCore/C Unlit"
 {
     Properties
     {
