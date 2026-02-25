@@ -1,4 +1,4 @@
-Shader "EnigmaCore/SpriteGrayscale"
+Shader "EnigmaCore/2D/Sprite Grayscale"
 {
     Properties
     {

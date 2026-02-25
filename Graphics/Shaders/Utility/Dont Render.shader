@@ -1,4 +1,4 @@
-Shader "CDK/C Dont Render" {
+Shader "EnigmaCore/Utility/Dont Render" {
     SubShader {
     Pass {
       CGPROGRAM
