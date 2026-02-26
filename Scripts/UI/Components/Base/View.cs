@@ -47,7 +47,6 @@ namespace EnigmaCore.UI
         protected virtual void Awake()
         {
             this.Inject();
-            Debug.Log($"[View] Awake: {gameObject.name} | Frame: {Time.frameCount}");
             if (_eventSystem == null) _eventSystem = GetComponentInChildren<EventSystem>(true);
         }
 
@@ -119,8 +118,6 @@ namespace EnigmaCore.UI
 
 		void OnDestroy()
 		{
-            Debug.Log($"[View] OnDestroy: {gameObject.name} | Frame: {Time.frameCount}");
-            
             // Navigation Logic: "Pop" from stack
             if (ActiveView == this)
             {

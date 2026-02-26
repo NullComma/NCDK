@@ -7,5 +7,6 @@ namespace EnigmaCore {
         public const string PrefixTools = "Tools/EnigmaCore/";
         public const string DontDestroyOnLoad = "DontDestroyOnLoad";
         public const string ResourcesPath = "Assets/Resources/";
+        public const string GameBundleVersion = "GameBundleVersion";
     }
 }
