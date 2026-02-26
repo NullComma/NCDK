@@ -3,16 +3,18 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using TMPro;
 
 namespace EnigmaCore {
-    
-    public class VersionNumberGetter : MonoBehaviour {
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class VersionNumberTrigger : MonoBehaviour {
 
-        [SerializeField] private CUnityEventString versionStringEvent;
         [SerializeField] private string prefix = "v";
         [SerializeField] private string suffix = "";
+        [NonSerialized] private TextMeshProUGUI textMeshProUGUI;
         
         private void Awake() {
+            TryGetComponent(out this.textMeshProUGUI);
             this.LoadAndInvokeVersion();
         }
 
@@ -42,13 +44,13 @@ namespace EnigmaCore {
             if (Version.TryParse(rawVersionText, out Version parsedVersion)) {
                 // Apply the extra formatting exclusively for the UI event
                 string finalDisplay = $"{prefix}{parsedVersion.ToString()}{suffix}";
-                this.versionStringEvent?.Invoke(finalDisplay);
+                this.textMeshProUGUI.text = finalDisplay;
             } else {
                 // Fallback in case someone typed "1.0.0a" in PlayerSettings, 
                 // which breaks System.Version strict parsing.
                 Debug.LogWarning($"[VersionNumberGetter] '{rawVersionText}' is not a strict System.Version format. Falling back to raw string.");
                 string finalDisplay = $"{prefix}{rawVersionText}{suffix}";
-                this.versionStringEvent?.Invoke(finalDisplay);
+                this.textMeshProUGUI.text = finalDisplay;
             }
         }
     }
