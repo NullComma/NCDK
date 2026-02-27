@@ -76,6 +76,10 @@ namespace EnigmaCore.Editor
             {
                 SaveChanges();
             }
+            if (GUILayout.Button("Save Unencrypted", EditorStyles.toolbarButton))
+            {
+                SaveUnencryptedChanges();
+            }
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
 
@@ -186,6 +190,16 @@ namespace EnigmaCore.Editor
 
         public override void SaveChanges()
         {
+            SaveData(true);
+        }
+
+        private void SaveUnencryptedChanges()
+        {
+            SaveData(false);
+        }
+
+        private void SaveData(bool encrypt)
+        {
             base.SaveChanges();
             if (_currentJson == null || string.IsNullOrEmpty(_selectedFilePath)) return;
 
@@ -208,13 +222,14 @@ namespace EnigmaCore.Editor
                 // 4. Final Serialize
                 string finalJson = _currentJson.ToString(Formatting.Indented);
 
-                // 5. Encrypt
-                string encrypted = EncryptionUtils.Encrypt(finalJson);
+                // 5. Encrypt (optional)
+                string contentToWrite = encrypt ? EncryptionUtils.Encrypt(finalJson) : finalJson;
 
                 // 6. Write to File
-                File.WriteAllText(_selectedFilePath, encrypted);
+                File.WriteAllText(_selectedFilePath, contentToWrite);
                 
-                _statusMessage = $"File saved successfully at {DateTime.Now.ToShortTimeString()}";
+                string modeStr = encrypt ? "Encrypted" : "Unencrypted";
+                _statusMessage = $"File saved successfully ({modeStr}) at {DateTime.Now.ToShortTimeString()}";
                 ReloadFiles();
             }
             catch (Exception e)

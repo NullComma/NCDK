@@ -22,8 +22,13 @@ namespace EnigmaCore {
         
         protected static bool SaveJsonTextToFile(string json, string filePath) {
 			try {
+#if UNITY_EDITOR
+                // In the Editor (including Play Mode), save plain JSON for easy inspection.
+                string contentToWrite = json;
+#else
 				string contentToWrite = EncryptionUtils.Encrypt(json);
 				if (string.IsNullOrEmpty(contentToWrite)) return false;
+#endif
 				using var streamWriter = File.CreateText(filePath);
 				streamWriter.Write(contentToWrite);
 				return true;
