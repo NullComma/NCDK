@@ -25,23 +25,23 @@ namespace EnigmaCore {
 			return result;
 		}
 
-        public static bool CIsNotNullOrEmpty(this string str) {
-            return !CIsNullOrEmpty(str);
+        public static bool IsNotNullOrEmpty(this string str) {
+            return !IsNullOrEmpty(str);
         }
 
-        public static bool CIsNullOrEmpty(this string str) {
+        public static bool IsNullOrEmpty(this string str) {
 			return string.IsNullOrEmpty(str);
 		}
 		
-        public static bool CIsNotNullOrWhitespace(this string str) {
-            return !CIsNullOrWhitespace(str);
+        public static bool IsNotNullOrWhitespace(this string str) {
+            return !IsNullOrWhitespace(str);
         }
 
-        public static bool CIsNullOrWhitespace(this string str) {
+        public static bool IsNullOrWhitespace(this string str) {
 			return string.IsNullOrWhiteSpace(str);
 		}
 
-		public static string CSubstring(this string input, int startIndex, int length) {
+		public static string Substring(this string input, int startIndex, int length) {
 			if (string.IsNullOrEmpty(input)) return null;
 			if (length >= input.Length) {
 				return input;
@@ -52,7 +52,7 @@ namespace EnigmaCore {
 		/// <summary>
 		/// Returns the input string with the first character converted to uppercase, or mutates any nulls passed into string.Empty
 		/// </summary>
-		public static string CFirstLetterToUpperCase(this string s) {
+		public static string FirstLetterToUpperCase(this string s) {
 			// from https://stackoverflow.com/questions/4135317/make-first-letter-of-a-string-upper-case-with-maximum-performance/27073919#27073919
 			if (string.IsNullOrEmpty(s)) return string.Empty;
 
@@ -66,7 +66,7 @@ namespace EnigmaCore {
 		/// </summary>
 		/// <param name="text"></param>
 		/// <returns>Return normalized string.</returns>
-		public static string CRemoveDiacritics(this string s) {
+		public static string RemoveDiacritics(this string s) {
 			var normalizedString = s.Normalize(NormalizationForm.FormD);
 			sb.Clear();
 
