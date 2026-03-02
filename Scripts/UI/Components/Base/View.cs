@@ -149,6 +149,18 @@ namespace EnigmaCore.UI
         public void Close() => gameObject.CDestroy();
 
         /// <summary>
+        /// Closes all open views in the scene.
+        /// </summary>
+        public static void CloseAllViews()
+        {
+            var views = UnityEngine.Object.FindObjectsByType<View>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var view in views)
+            {
+                view.Close();
+            }
+        }
+
+        /// <summary>
         /// Closes the view if CanCloseWithCancel is true.
         /// </summary>
         public void CloseByCancelled()
