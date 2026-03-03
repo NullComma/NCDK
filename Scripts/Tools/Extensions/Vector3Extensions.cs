@@ -31,13 +31,13 @@ namespace EnigmaCore {
 			return closerPos;
 		}
 
-        public static bool CImpreciseEqualCompare(this Vector3 a, Vector3 b) {
-            return a.x.CImprecise() == b.x.CImprecise()
-            && a.y.CImprecise() == b.y.CImprecise()
-            && a.z.CImprecise() == b.z.CImprecise();
+        public static bool ImpreciseEqualCompare(this Vector3 a, Vector3 b) {
+            return a.x.Imprecise() == b.x.Imprecise()
+            && a.y.Imprecise() == b.y.Imprecise()
+            && a.z.Imprecise() == b.z.Imprecise();
         }
 
-        public static Vector3 CCastValuesToInt(this Vector3 v) {
+        public static Vector3 CastValuesToInt(this Vector3 v) {
             v.x = (int)v.x;
             v.y = (int)v.y;
             v.z = (int)v.z;

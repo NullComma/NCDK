@@ -37,15 +37,15 @@ namespace EnigmaCore {
 
 				switch (_stunStatus) {
 					case StunStatus.lightStun: {
-						_animator.CSetTriggerSafe(ANIM_LIGHTSTUN);
+						_animator.SetTriggerSafe(ANIM_LIGHTSTUN);
 						break;
 					}
 					case StunStatus.mediumStun: {
-						_animator.CSetTriggerSafe(ANIM_MEDIUMSTUN);
+						_animator.SetTriggerSafe(ANIM_MEDIUMSTUN);
 						break;
 					}
 					case StunStatus.heavyStun: {
-						_animator.CSetTriggerSafe(ANIM_HEAVYSTUN);
+						_animator.SetTriggerSafe(ANIM_HEAVYSTUN);
 						break;
 					}
 				}

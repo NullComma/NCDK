@@ -7,18 +7,18 @@ namespace EnigmaCore {
         /// <summary>
         /// Check if self is null and if was the parameter.
         /// </summary>
-		public static void CSetFloatWithLerp(this Animator self, int id, float target, float time) {
+		public static void SetFloatWithLerp(this Animator self, int id, float target, float time) {
 			if (!CheckIfIsAvailable(self)) return;
             if (self.parameters.All(p => p.nameHash != id)) return;
-			target = target.CImprecise();
+			target = target.Imprecise();
 			var currentFloat = self.GetFloat(id);
-			self.SetFloat(id, currentFloat.CLerp(target, time).CImprecise());
+			self.SetFloat(id, currentFloat.Lerp(target, time).Imprecise());
 		}
 
         /// <summary>
         /// Check if self is null and if was the parameter.
         /// </summary>
-		public static void CSetBoolSafe(this Animator self, int id, bool value) {
+		public static void SetBoolSafe(this Animator self, int id, bool value) {
 			if (!CheckIfIsAvailable(self)) return;
             if (self.parameters.All(p => p.nameHash != id)) return;
 			self.SetBool(id, value);
@@ -27,16 +27,16 @@ namespace EnigmaCore {
 		/// <summary>
 		/// Check if self is null and if was the parameter.
 		/// </summary>
-		public static void CSetFloatSafe(this Animator self, int id, float value) {
+		public static void SetFloatSafe(this Animator self, int id, float value) {
 			if (!CheckIfIsAvailable(self)) return;
             if (self.parameters.All(p => p.nameHash != id)) return;
-			self.SetFloat(id, value.CImprecise());
+			self.SetFloat(id, value.Imprecise());
 		}
         
         /// <summary>
         /// Check if self is null and if was the parameter.
         /// </summary>
-        public static void CSetIntegerSafe(this Animator self, int id, int value) {
+        public static void SetIntegerSafe(this Animator self, int id, int value) {
             if (!CheckIfIsAvailable(self)) return;
             if (self.parameters.All(p => p.nameHash != id)) return;
             self.SetInteger(id, value);
@@ -46,7 +46,7 @@ namespace EnigmaCore {
         /// <summary>
         /// Check if self is null and if was the parameter.
         /// </summary>
-        public static void CSetTriggerSafe(this Animator self, int id) {
+        public static void SetTriggerSafe(this Animator self, int id) {
             if (!CheckIfIsAvailable(self)) return;
 			if (self.parameters.All(p => p.nameHash != id)) return;
             self.SetTrigger(id);
@@ -56,5 +56,5 @@ namespace EnigmaCore {
 			return self != null && self.isActiveAndEnabled;
 		}
 
-}
+    }
 }

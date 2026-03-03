@@ -42,7 +42,7 @@ namespace EnigmaCore {
 
 
 		public void SetValueNormalized(float newValue) {
-			this.CurrentValue = newValue.CClamp01();
+			this.CurrentValue = newValue.Clamp01();
 		}
 
 		private IEnumerator UpdateDelayedBar(float initialValue, float targetValue) {

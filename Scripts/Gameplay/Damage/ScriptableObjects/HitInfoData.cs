@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace EnigmaCore {
-	[CreateAssetMenu(fileName = "Hit info", menuName = EnigmaConstants.EDITOR_SCRIPTABLEOBJECT_CREATION_PREFIX + "Hit info data", order = 51)]
 	public class HitInfoData : ScriptableObject {
 		
 		public float RawDamage {

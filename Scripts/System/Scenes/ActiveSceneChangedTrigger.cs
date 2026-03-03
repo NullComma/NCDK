@@ -1,7 +1,7 @@
 using UnityEngine.SceneManagement;
 
 namespace EnigmaCore {
-	public class ActiveSceneChangedTrigger : EventTrigger{
+	public class ActiveSceneChangedTrigger : UnityEventTrigger{
 
 		public void OnEnable() {
 			SceneManager.activeSceneChanged += this.ActiveSceneChanged;

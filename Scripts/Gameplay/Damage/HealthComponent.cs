@@ -53,7 +53,7 @@ namespace EnigmaCore {
 		public float CurrentHealth {
 			get { return _currentHealth; }
 			private set {
-				var clampedValue = value.CClamp(0f, MaxHealth);
+				var clampedValue = value.Clamp(0f, MaxHealth);
 				if (clampedValue == _currentHealth || clampedValue == MaxHealth && _currentHealth == MaxHealth) return;
 
 				float oldHealth = _currentHealth;

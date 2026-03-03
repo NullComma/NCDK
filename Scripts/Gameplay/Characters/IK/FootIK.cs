@@ -17,12 +17,12 @@ namespace EnigmaCore {
 
 		private float rightFootIkWeight {
 			get { return _rightFootIkWeight; }
-			set { _rightFootIkWeight = value.CClamp01(); }
+			set { _rightFootIkWeight = value.Clamp01(); }
 		}
 		[SerializeField, Range(0f, 1f)] private float _rightFootIkWeight = 1f;
 		private float leftFootIkWeight {
-			get { return _leftFootIkWeight.CClamp01(); }
-			set { _leftFootIkWeight = value.CClamp01(); }
+			get { return _leftFootIkWeight.Clamp01(); }
+			set { _leftFootIkWeight = value.Clamp01(); }
 		}
 		[SerializeField, Range(0f, 1f)] private float _leftFootIkWeight = 1f;
 

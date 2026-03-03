@@ -19,45 +19,40 @@ namespace EnigmaCore
 
             _blockingEventsManager.MenuRetainable.StateEvent += OnMenuStateChanged;
 
+            _lastInputIsMouseAndKeyboard = EInput.CurrentDevice == InputDeviceType.MouseAndKeyboard;
+            EInput.OnDeviceChanged += OnDeviceChanged;
+
 #if ENABLE_INPUT_SYSTEM
-            InputSystem.onEvent += OnInputReceived;
+            InputSystem.onEvent += FailsafeInputCheck;
 #endif
             Application.quitting += OnAppQuitting;
             Application.focusChanged += OnApplicationFocusChanged;
         }
 
-#if ENABLE_INPUT_SYSTEM
-        void OnInputReceived(InputEventPtr eventPtr, InputDevice device)
+        void OnDeviceChanged(InputDeviceType device)
         {
-            if (!eventPtr.IsA<StateEvent>() && !eventPtr.IsA<DeltaStateEvent>()) return;
-
-            bool isMouseOrKeyboard = device is Mouse || device is Keyboard;
-            bool isGamepad = device is Gamepad;
-
-            // Filter out events from relevant devices only. 
-            // If it's not a mouse/keyboard AND not a gamepad (e.g. some generic HID), we ignore it to avoid flipping state erroneously.
-            if (!isMouseOrKeyboard && !isGamepad) return;
-
-            bool currentIsMouseAndKeyboard = isMouseOrKeyboard;
-
-            // 1. Check for device change (Gamepad <-> Mouse)
-            bool deviceChanged = currentIsMouseAndKeyboard != _lastInputIsMouseAndKeyboard;
-            
-            // 2. CRITICAL FAILSAFE:
-            // If the user is using Mouse, and they should be seeing the cursor (Menu Open),
-            // but the cursor is invisible in the engine, we force a refresh.
-            // This fixes the initialization bug where the cursor starts locked unintentionally.
-            bool cursorStateDesync = currentIsMouseAndKeyboard && 
-                                     _blockingEventsManager.MenuRetainable.IsRetained && 
-                                     Cursor.visible == false;
-
-            if (deviceChanged || cursorStateDesync)
+            bool isMouseAndKeyboard = device == InputDeviceType.MouseAndKeyboard;
+            if (_lastInputIsMouseAndKeyboard != isMouseAndKeyboard)
             {
-                if (deviceChanged) Debug.Log($"[CursorManager] Input device changed: {device.displayName}");
-                if (cursorStateDesync) Debug.Log("[CursorManager] Cursor desync detected (Should be visible). Forcing refresh.");
-
-                _lastInputIsMouseAndKeyboard = currentIsMouseAndKeyboard;
+                _lastInputIsMouseAndKeyboard = isMouseAndKeyboard;
+                Debug.Log($"[CursorManager] Input device changed: {device}");
                 RefreshCursorState();
+            }
+        }
+
+#if ENABLE_INPUT_SYSTEM
+        void FailsafeInputCheck(InputEventPtr eventPtr, InputDevice device)
+        {
+            if (!_lastInputIsMouseAndKeyboard || !_blockingEventsManager.MenuRetainable.IsRetained) return;
+            if (!eventPtr.IsA<StateEvent>() && !eventPtr.IsA<DeltaStateEvent>()) return;
+            
+            if (device is Mouse || device is Keyboard)
+            {
+                if (Cursor.visible == false)
+                {
+                    Debug.Log("[CursorManager] Cursor desync detected (Should be visible). Forcing refresh.");
+                    RefreshCursorState();
+                }
             }
         }
 #endif
@@ -93,8 +88,10 @@ namespace EnigmaCore
             if (_blockingEventsManager != null)
                 _blockingEventsManager.MenuRetainable.StateEvent -= OnMenuStateChanged;
             
+            EInput.OnDeviceChanged -= OnDeviceChanged;
+
 #if ENABLE_INPUT_SYSTEM
-            InputSystem.onEvent -= OnInputReceived;
+            InputSystem.onEvent -= FailsafeInputCheck;
 #endif
             Application.quitting -= OnAppQuitting;
             Application.focusChanged -= OnApplicationFocusChanged;

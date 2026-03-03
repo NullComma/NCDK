@@ -15,9 +15,9 @@ namespace EnigmaCore {
 
         public static Color CLerp(this Color c, Color target, float time) {
             return new Color(
-                c.r.CLerp(target.r, time),
-                c.g.CLerp(target.g, time),
-                c.b.CLerp(target.b, time)
+                c.r.Lerp(target.r, time),
+                c.g.Lerp(target.g, time),
+                c.b.Lerp(target.b, time)
             );
         }
 

@@ -3,12 +3,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-#if ODIN_INSPECTOR
-
-#endif
-
 namespace EnigmaCore {
-	public class EventTrigger : MonoBehaviour {
+	public class UnityEventTrigger : MonoBehaviour {
 
 		[SerializeField] float delayToTriggerEvent;
 		[SerializeField] bool _triggerOnlyOneTime;
@@ -17,9 +13,7 @@ namespace EnigmaCore {
 
 		void OnEnable() { } // exposing to allow enable/disable component.
 
-		#if ODIN_INSPECTOR
 		[Button]
-		#endif
 		public virtual void TriggerEvent() {
 			if (!enabled || _triggered) return;
 

@@ -23,13 +23,11 @@ namespace EnigmaCore {
 	        
 	        // on menu
 	        MenuRetainable.StateEvent += onMenu => {
-		        Debug.Log($"<color=#4fafb6>{nameof(onMenu)}: <b>{onMenu}</b></color>");
 		        InMenuOrPlayingCutsceneEvent.Invoke(InMenuOrPlayingCutscene);
 	        };
 
 	        // playing cutscene
 	        PlayingCutsceneRetainable.StateEvent += isPlayingCutscene => {
-		        Debug.Log($"<color=#cc5636>{nameof(isPlayingCutscene)}: <b>{isPlayingCutscene}</b></color>");
 		        InMenuOrPlayingCutsceneEvent.Invoke(InMenuOrPlayingCutscene);
 	        };
         }

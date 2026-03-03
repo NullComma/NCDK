@@ -10,7 +10,8 @@
         "Unity.Timeline.Editor",
         "UnityEditor.PackageManager",
         "EnigmaCore",
-        "LINQtoGameObject"
+        "LINQtoGameObject",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [
         "Editor"
