@@ -140,6 +140,32 @@ namespace EnigmaCore
             return UnityEngine.Input.anyKey;
 #endif
         }
+
+        public static bool IsAnyButtonPressed()
+        {
+#if ENABLE_INPUT_SYSTEM
+            bool keyboardPressed = Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame;
+            
+            bool gamepadPressed = false;
+            if (Gamepad.current != null)
+            {
+                gamepadPressed = Gamepad.current.buttonSouth.wasPressedThisFrame || 
+                                 Gamepad.current.buttonEast.wasPressedThisFrame || 
+                                 Gamepad.current.buttonWest.wasPressedThisFrame || 
+                                 Gamepad.current.buttonNorth.wasPressedThisFrame || 
+                                 Gamepad.current.rightShoulder.wasPressedThisFrame || 
+                                 Gamepad.current.leftShoulder.wasPressedThisFrame ||
+                                 Gamepad.current.rightTrigger.wasPressedThisFrame ||
+                                 Gamepad.current.leftTrigger.wasPressedThisFrame;
+            }
+
+            bool mousePressed = Mouse.current != null && (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.rightButton.wasPressedThisFrame);
+            
+            return keyboardPressed || gamepadPressed || mousePressed;
+#else
+            return UnityEngine.Input.anyKeyDown;
+#endif
+        }
         
     }
 }
