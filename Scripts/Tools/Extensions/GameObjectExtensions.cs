@@ -55,7 +55,7 @@ namespace EnigmaCore {
             return target;
         }
 
-        public static GameObject CDontDestroyOnLoad(this GameObject go) {
+        public static GameObject DontDestroyOnLoad(this GameObject go) {
             Debug.Log($"Setting '{go.name}' to DontDestroyOnLoad");
             Object.DontDestroyOnLoad(go);
             return go;

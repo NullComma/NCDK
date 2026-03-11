@@ -7,7 +7,7 @@ namespace EnigmaCore {
             if (CannotCreateAnyInstance()) {
                 return null;
             }
-            return new GameObject(gameObjectName).CDontDestroyOnLoad().AddComponent<T>();
+            return new GameObject(gameObjectName).DontDestroyOnLoad().AddComponent<T>();
         }
         
         public static bool CannotCreateAnyInstance() {

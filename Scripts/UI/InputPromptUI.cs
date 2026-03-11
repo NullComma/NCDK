@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 namespace EnigmaCore.UI
 {
-    public class InputPromptUI : MonoBehaviour
+    public class InputPromptUI : MonoBehaviour, IPointerClickHandler
     {
         [Header("References")]
         [SerializeField] private InputActionReference _actionReference;
@@ -13,17 +14,13 @@ namespace EnigmaCore.UI
 
         [Header("Events")]
         [SerializeField] private CUnityEventString _onUpdateLabel;
+        [SerializeField] private bool _clickToTrigger = false;
 
         private EnigmaCore.Input.InputIconBinding _currentBinding;
         private Sprite[] _currentIcons;
         private bool _hasSetup;
         private float _animationTimer;
         private int _currentFrame;
-        
-        void Awake()
-        {
-            _promptImage.enabled = false;
-        }
 
         private void OnEnable()
         {
@@ -187,6 +184,25 @@ namespace EnigmaCore.UI
         public void SetLabelText(string newText)
         {
             _onUpdateLabel?.Invoke(newText);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (!_clickToTrigger || eventData.button != PointerEventData.InputButton.Left) return;
+            if (EInput.CurrentDevice != InputDeviceType.MouseAndKeyboard) return;
+            if (_actionReference == null || _actionReference.action == null) return;
+
+            var action = _actionReference.action;
+            foreach (var control in action.controls)
+            {
+                if (control.device is Keyboard || control.device is Mouse)
+                {
+                    // Simulate a press and release
+                    InputSystem.QueueDeltaStateEvent(control, 1f);
+                    InputSystem.QueueDeltaStateEvent(control, 0f);
+                    break;
+                }
+            }
         }
     }
 }
