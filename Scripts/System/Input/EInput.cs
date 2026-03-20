@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.DualShock;
 using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.InputSystem.Switch;
 #endif
 
 namespace EnigmaCore
@@ -107,8 +106,8 @@ namespace EnigmaCore
                 {
                     return GamepadLayoutType.PlayStation;
                 }
-                
-                if (pad is SwitchProControllerHID || pad.name.Contains("Switch", StringComparison.OrdinalIgnoreCase) || pad.name.Contains("ProController", StringComparison.OrdinalIgnoreCase))
+
+                if (pad.name.Contains("Switch", StringComparison.OrdinalIgnoreCase) || pad.name.Contains("ProController", StringComparison.OrdinalIgnoreCase))
                 {
                     return GamepadLayoutType.Nintendo;
                 }

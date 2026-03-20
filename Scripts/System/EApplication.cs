@@ -115,9 +115,10 @@ namespace EnigmaCore
             {
                 ScalableBufferManager.ResizeBuffers(0.7f, 0.7f);
             }
-            
-            QualitySettings.vSyncCount = 1;
+
             Application.backgroundLoadingPriority = ThreadPriority.Low;
+            QualitySettings.vSyncCount = 1;
+            SetDefaultFramerate();
 
             Application.focusChanged -= ApplicationOnfocusChanged;
             Application.focusChanged += ApplicationOnfocusChanged;
@@ -194,8 +195,7 @@ namespace EnigmaCore
 
         static void SetDefaultFramerate() 
         {
-            var isMobile = PlayerPlatformTrigger.IsMobilePlatform();
-            Application.targetFrameRate = isMobile ? 30 : -1;
+            Application.targetFrameRate = -1;
         }
 
         static void SetSlowFramerate() 
