@@ -1,7 +1,8 @@
-﻿using System.Linq;
+using System.Linq;
 using EnigmaCore.UI;
 using UnityEngine;
 using UnityEngine.Scripting;
+using UnityEngine.AddressableAssets;
 
 namespace EnigmaCore.DependencyInjection
 {
@@ -22,13 +23,19 @@ namespace EnigmaCore.DependencyInjection
 
         static UISoundsBankSO GetUISoundsBankSO()
         {
-            var all = Resources.LoadAll<UISoundsBankSO>("");
-#if UNITY_EDITOR
-            if(!all.CIsNullOrEmpty()) return all.First();
-            return ScriptableObjectExtensions.EditorCreateInResourcesFolder<UISoundsBankSO>();
-#else
-            return all.First();
-#endif
+            var handle = Addressables.LoadResourceLocationsAsync("UISoundsBankSO");
+            var locations = handle.WaitForCompletion();
+            
+            if (locations != null && locations.Count > 0)
+            {
+                var assetHandle = Addressables.LoadAssetAsync<UISoundsBankSO>(locations[0]);
+                var asset = assetHandle.WaitForCompletion();
+                if (asset != null) return asset;
+            }
+            
+            var fallback = ScriptableObject.CreateInstance<UISoundsBankSO>();
+            fallback.name = "UISoundsBankSO_Fallback";
+            return fallback;
         }
     }
 }
