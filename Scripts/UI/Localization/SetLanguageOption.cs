@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 using TMPro;
 
@@ -16,10 +16,33 @@ namespace EnigmaCore.UI
 #if UNITY_LOCALIZATION
         [NonSerialized] Locale _localeToSet;
 
-        public void Init(Locale locale)
+        public void Init(Locale locale, LocalizedString languageTitleString = null)
         {
             _localeToSet = locale;
-            _localeName.text = locale.LocaleName;
+            
+            if (languageTitleString != null && !languageTitleString.IsEmpty)
+            {
+                var op = LocalizationSettings.StringDatabase.GetLocalizedStringAsync(languageTitleString.TableReference, languageTitleString.TableEntryReference, locale);
+                if (op.IsDone)
+                {
+                    _localeName.text = op.Result;
+                }
+                else
+                {
+                    op.Completed += operation => 
+                    {
+                        if (this != null && gameObject != null)
+                        {
+                            _localeName.text = operation.Result;
+                        }
+                    };
+                }
+            }
+            else
+            {
+                _localeName.text = locale.LocaleName;
+            }
+            
             gameObject.SetActive(true);
         }
 
