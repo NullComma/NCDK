@@ -69,12 +69,12 @@ namespace EnigmaCore {
 			#endif
 		}
 
+		#if UNITY_EDITOR
 		private void Update() {
-			#if UNITY_EDITOR
 			if (Time.frameCount % this._editorUpdateFrameSkips != 0) return;
 			this.EditorCheckForObject();
-			#endif
 		}
+		#endif
 
 		#if UNITY_EDITOR
 		private void EditorApplicationOnPlayModeStateChanged(PlayModeStateChange newState) {
