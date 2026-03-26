@@ -1,5 +1,8 @@
-﻿
+
 using UnityEngine;
+#if UNITY_LOCALIZATION
+using UnityEngine.Localization;
+#endif
 
 namespace EnigmaCore.UI
 {
@@ -10,6 +13,8 @@ namespace EnigmaCore.UI
         [SerializeField] Transform _languageOptionsContainer;
 
 #if UNITY_LOCALIZATION
+        [SerializeField] LocalizedString _languageTitleString;
+
         protected override void Awake()
         {
             base.Awake();
@@ -18,7 +23,7 @@ namespace EnigmaCore.UI
             foreach (var locale in locales)
             {
                 var option = Instantiate(_languageOptionPrefab, _languageOptionsContainer);
-                option.Init(locale);
+                option.Init(locale, _languageTitleString);
             }
         }
 #endif

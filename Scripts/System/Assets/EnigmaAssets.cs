@@ -7,6 +7,7 @@ using UnityEditor;
 #endif
 
 namespace EnigmaCore {
+    [System.Obsolete("Use Unity Addressables instead of Resources.")]
     public static class EnigmaAssets {
 
         #region <<---------- Load From Resources ---------->>
