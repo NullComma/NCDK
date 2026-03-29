@@ -17,7 +17,7 @@ namespace EnigmaCore.UI {
         }
         #endif
 
-        [SerializeField] string urlToOpen = "https://chrisjogos.com";
+        [SerializeField] string urlToOpen = "https://nullcomma.com";
         Button button;
 
 

@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://cms.chrisjogos.com/assets/63298647-e4b4-4da5-90df-6512b3fdd208?format=webp" />
+  <img src="https://cms.nullcomma.com/assets/63298647-e4b4-4da5-90df-6512b3fdd208?format=webp" />
 </p>
 
 <p align="center">
@@ -10,8 +10,8 @@
 
 Enigma Core for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.
 
-It's being used in my main current game project "[Resultarias](https://chrisjogos.com/resultarias)", a surrealist game about dream exploration.
-Check more information about my other projects on [my website](https://chrisjogos.com)!
+It's being used in my main current game project "[Resultarias](https://nullcomma.com/resultarias)", a surrealist game about dream exploration.
+Check more information about my other projects on [my website](https://nullcomma.com)!
 
 ### What is this repository for? ###
 
@@ -56,7 +56,7 @@ https://github.com/EnigmaticComma/EnigmaCore.git
 
 ### Who do I talk to? ###
 
-* I'm an Unity games and application developer. You can find more info about me and my projects [here](https://chrisjogos.com).
+* I'm an Unity games and application developer. You can find more info about me and my projects [here](https://nullcomma.com).
 
 ### Special thanks to ###
 
