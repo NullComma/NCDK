@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class UnparentChildrenOnAwake : MonoBehaviour {
         protected virtual void Awake() {
             Unparent();

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class Texture2DExtensions {
 
 		private static int _windowSize;

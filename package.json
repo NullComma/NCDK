@@ -1,13 +1,13 @@
 {
-  "name": "com.enigmaticcomma.core",
-  "displayName": "Enigma Core",
-  "version": "6.0.7",
+  "name": "com.nullcomma.core",
+  "displayName": "NullCore",
+  "version": "7.0.0",
   "unity": "2022.3",
-  "description": "Enigma Core for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.",
-  "licensesUrl": "https://github.com/EnigmaticComma/EnigmaCore/blob/master/.github/LICENSE",
+  "description": "NullCore for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.",
+  "licensesUrl": "https://github.com/nullcomma/nullcore/blob/master/.github/LICENSE",
   "author": {
-    "name": "Christopher Ravailhe - Enigmatic Comma",
-    "url": "https://github.com/EnigmaticComma"
+    "name": "Christopher Ravailhe - NullComma",
+    "url": "https://github.com/nullcomma"
   },
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.1"

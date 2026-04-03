@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
     [ExecuteInEditMode]
     public class BakeSceneOnOpenEditor : MonoBehaviour {
         private void Awake() {

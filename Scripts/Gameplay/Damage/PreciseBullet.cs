@@ -1,8 +1,8 @@
 ﻿using System;
-using EnigmaCore.Damage;
+using NullCore.Damage;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class PreciseBullet : DamageDealerTrigger {
 
         [Range(1, 20), SerializeField] float autoDestroyAfter = 3f;

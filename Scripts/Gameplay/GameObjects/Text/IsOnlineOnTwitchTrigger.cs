@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace EnigmaCore.Text {
+namespace NullCore.Text {
 	/// <summary>
 	/// Dunno if this works in another languages like Japanese.
 	/// </summary>

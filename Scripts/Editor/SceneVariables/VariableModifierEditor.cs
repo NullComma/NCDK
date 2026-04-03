@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
-using EnigmaCore.SceneVariables;
+using NullCore.SceneVariables;
 
-namespace EnigmaCore.Editor.SceneVariables
+namespace NullCore.Editor.SceneVariables
 {
     [CustomEditor(typeof(VariableModifier))]
 

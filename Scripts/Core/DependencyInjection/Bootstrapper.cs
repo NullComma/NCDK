@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace EnigmaCore.DependencyInjection
+namespace NullCore.DependencyInjection
 {
     /// <summary>
     /// Handles both Global DI Installation and Per-Scene PreLoad logic.

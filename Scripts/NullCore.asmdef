@@ -1,6 +1,6 @@
 {
-    "name": "EnigmaCore",
-    "rootNamespace": "EnigmaCore",
+    "name": "NullCore",
+    "rootNamespace": "NullCore",
     "references": [
         "Unity.TextMeshPro",
         "LINQtoGameObject",
@@ -43,19 +43,19 @@
             "define": "CINEMACHINE"
         },
         {
-          "name": "com.annulusgames.lit-motion",
-          "expression": "0.0.0",
-          "define": "LITMOTION"
-        },
-        {
-          "name": "com.unity.localization",
-          "expression": "0.0.0",
-          "define": "UNITY_LOCALIZATION"
-        },
-        {
-            "name" :"com.unity.netcode.gameobjects",
+            "name": "com.annulusgames.lit-motion",
             "expression": "0.0.0",
-            "define" :"UNITY_NETCODE"
+            "define": "LITMOTION"
+        },
+        {
+            "name": "com.unity.localization",
+            "expression": "0.0.0",
+            "define": "UNITY_LOCALIZATION"
+        },
+        {
+            "name": "com.unity.netcode.gameobjects",
+            "expression": "0.0.0",
+            "define": "UNITY_NETCODE"
         }
     ],
     "noEngineReferences": false

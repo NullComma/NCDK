@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace EnigmaCore.Editor {
+namespace NullCore.Editor {
     public static class SkinnedMeshToMesh {
         [MenuItem("CONTEXT/SkinnedMeshRenderer/Convert to Static Mesh Renderer")]
         private static void ConvertToStaticMeshRenderer(MenuCommand data) {

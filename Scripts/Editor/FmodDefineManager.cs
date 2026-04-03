@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Build;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Automatically adds or removes the "FMOD" scripting define symbol

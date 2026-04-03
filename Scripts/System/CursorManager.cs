@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     public class CursorManager : IDisposable
     {

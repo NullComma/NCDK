@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore.Lights {
+namespace NullCore.Lights {
 	[RequireComponent(typeof(Collider))]
 	public class LightTriggerReceiver : MonoBehaviour {
 		

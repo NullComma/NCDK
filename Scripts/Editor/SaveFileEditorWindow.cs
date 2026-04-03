@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace EnigmaCore.Editor
+namespace NullCore.Editor
 {
     public class SaveFileEditorWindow : EditorWindow
     {

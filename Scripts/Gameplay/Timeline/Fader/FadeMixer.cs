@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
 
-namespace EnigmaCore.Timeline {
+namespace NullCore.Timeline {
     public class FadeMixer : PlayableBehaviour {
 
         FadeController _fadeController;

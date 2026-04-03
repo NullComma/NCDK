@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     /// <summary>
     /// Makes an object be a selection base.
     /// </summary>

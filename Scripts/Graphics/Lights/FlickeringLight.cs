@@ -12,7 +12,7 @@ using FMODUnity;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore.Scripts.Lights {
+namespace NullCore.Scripts.Lights {
     [RequireComponent(typeof(Light))]
     public class FlickeringLight : MonoBehaviour {
         

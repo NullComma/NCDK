@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class QuaternionExtensions {
 
         public static Quaternion CLerp(this Quaternion a, Quaternion b, float t) {

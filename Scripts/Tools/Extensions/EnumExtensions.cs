@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class EnumExtensions {
 
 		public static IEnumerable<T> CGetValues<T>() {

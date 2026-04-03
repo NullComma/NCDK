@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class HandIk : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

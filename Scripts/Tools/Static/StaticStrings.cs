@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class StaticStrings {
         public static readonly StringBuilder Builder = new StringBuilder();
         public const string PrefixScripts = "EnigmaCore/";

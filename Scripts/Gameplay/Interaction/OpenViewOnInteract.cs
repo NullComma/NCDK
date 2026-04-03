@@ -1,8 +1,8 @@
-﻿using EnigmaCore.Interaction;
-using EnigmaCore.UI;
+﻿using NullCore.Interaction;
+using NullCore.UI;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class OpenViewOnInteract : Interactable {
 
         [SerializeField] View _viewToOpen;

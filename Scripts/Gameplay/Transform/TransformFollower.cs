@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
     [ExecuteAlways]
     [DefaultExecutionOrder(350)]
 	public class TransformFollower : MonoBehaviour {

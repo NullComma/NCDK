@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Object = UnityEngine.Object;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class IEnumerableExtensions {
 		public static T CRandomElement<T>(this IEnumerable<T> enumerable) {
 			var array = enumerable as T[] ?? enumerable.ToArray();

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class GuidExtensions
     {

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     /// <summary>
     /// Utility for getting the dominant texture from a splat blend at a given point on a terrain.
     /// Based on https://github.com/JimmyCushnie/JimmysUnityUtilities

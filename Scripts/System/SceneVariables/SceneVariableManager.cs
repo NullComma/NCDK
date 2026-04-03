@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace EnigmaCore.SceneVariables
+namespace NullCore.SceneVariables
 {
     public class SceneVariableManager : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Text.RegularExpressions;
 using System.Linq;
 
-namespace EnigmaCore.Editor 
+namespace NullCore.Editor 
 {
     internal static class RenameSelectedComponent 
     {

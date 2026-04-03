@@ -1,7 +1,7 @@
-using EnigmaCore;
+using NullCore;
 using UnityEngine;
 
-namespace EnigmaCore.Lights {
+namespace NullCore.Lights {
 	[RequireComponent(typeof(Collider))]
 	public class LightTriggerSensor : MonoBehaviour {
 		private void OnTriggerEnter(Collider other) {

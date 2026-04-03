@@ -3,7 +3,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-namespace EnigmaCore.Editor {
+namespace NullCore.Editor {
     
     [InitializeOnLoad]
     public class ImprovedHierarchyView  {

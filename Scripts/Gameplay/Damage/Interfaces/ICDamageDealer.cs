@@ -1,6 +1,6 @@
-using EnigmaCore.Data;
+using NullCore.Data;
 
-namespace EnigmaCore.Damage {
+namespace NullCore.Damage {
 	public interface ICDamageDealer {
 		AttackData AttackData { get; } 
 	}

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class SceneUnloader : MonoBehaviour {
 
 		[SerializeField] private bool unloadThisObjectSceneToo;

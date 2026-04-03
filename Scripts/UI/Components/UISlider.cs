@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace EnigmaCore.UI {
+namespace NullCore.UI {
 	[RequireComponent(typeof(Slider))]
 	public class UISlider : UIInteractable, IMoveHandler {
 

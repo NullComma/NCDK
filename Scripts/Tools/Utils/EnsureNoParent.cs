@@ -4,7 +4,7 @@
 using UnityEditor;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
     [ExecuteInEditMode, DisallowMultipleComponent]
     public class EnsureNoParent : MonoBehaviour {
         void OnValidate() {

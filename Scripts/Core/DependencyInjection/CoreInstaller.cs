@@ -1,10 +1,10 @@
 using System.Linq;
-using EnigmaCore.UI;
+using NullCore.UI;
 using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.AddressableAssets;
 
-namespace EnigmaCore.DependencyInjection
+namespace NullCore.DependencyInjection
 {
     [Preserve]
     [DefaultExecutionOrder(int.MinValue)]

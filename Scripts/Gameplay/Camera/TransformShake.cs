@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class TransformShake : MonoBehaviour {
 
 		private Coroutine _shakeRoutine;

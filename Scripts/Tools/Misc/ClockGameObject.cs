@@ -6,7 +6,7 @@ using UnityEngine;
 using FMODUnity;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class ClockGameObject : MonoBehaviour {
 	
 		public int seconds = 0;

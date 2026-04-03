@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class RawImageExtensions {
         
        

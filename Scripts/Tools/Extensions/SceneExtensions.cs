@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class SceneExtensions
     {

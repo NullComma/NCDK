@@ -10,7 +10,7 @@ using UnityEngine.InputSystem.UI;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     
     /// <summary>

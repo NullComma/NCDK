@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
     [JsonObject(MemberSerialization.OptIn)]
     [Serializable]
     public abstract class GameStateBase : PersistentData {

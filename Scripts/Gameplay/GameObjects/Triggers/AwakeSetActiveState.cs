@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class AwakeSetActiveState : MonoBehaviour {
 
 		[SerializeField] bool _activeStateOnAwake;

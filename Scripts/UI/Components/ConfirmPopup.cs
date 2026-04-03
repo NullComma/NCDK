@@ -3,7 +3,7 @@ using TMPro;
 
 using UnityEngine;
 
-namespace EnigmaCore.UI {
+namespace NullCore.UI {
 	public class ConfirmPopup : View {
 		
 		[Header("Confirmation")]

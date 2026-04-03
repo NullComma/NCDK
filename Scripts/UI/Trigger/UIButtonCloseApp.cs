@@ -1,4 +1,4 @@
-namespace EnigmaCore.UI
+namespace NullCore.UI
 {
     public class UIButtonCloseApp : UIButton
     {

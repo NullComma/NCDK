@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class DisableOnEditor : MonoBehaviour {
         #if UNITY_EDITOR
         void Awake() {

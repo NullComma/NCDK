@@ -1,5 +1,5 @@
 using System;
-using EnigmaCore.UI;
+using NullCore.UI;
 using UnityEngine;
 
 #if FMOD
@@ -7,7 +7,7 @@ using FMODUnity;
 #endif
 
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class UISoundsBankSO : ScriptableObject
 	{
 		#if FMOD

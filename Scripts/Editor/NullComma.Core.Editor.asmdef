@@ -1,6 +1,6 @@
 {
-    "name": "EnigmaCore.Editor",
-    "rootNamespace": "",
+    "name": "NullCore.Editor",
+    "rootNamespace": "NullCore.Editor",
     "references": [
         "Unity.TextMeshPro",
         "FMODUnity",
@@ -9,7 +9,7 @@
         "Unity.Timeline",
         "Unity.Timeline.Editor",
         "UnityEditor.PackageManager",
-        "EnigmaCore",
+        "NullCore",
         "LINQtoGameObject",
         "Unity.InputSystem"
     ],

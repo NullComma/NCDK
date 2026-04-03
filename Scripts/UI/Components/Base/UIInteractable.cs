@@ -1,5 +1,5 @@
 using System;
-using EnigmaCore.DependencyInjection;
+using NullCore.DependencyInjection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -11,7 +11,7 @@ using FMOD.Studio;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 #endif
 
-namespace EnigmaCore.UI {
+namespace NullCore.UI {
 	public class UIInteractable : MonoBehaviour, ISelectHandler, ISubmitHandler, ICancelHandler,
 	                               IPointerEnterHandler, IPointerClickHandler, IDeselectHandler {
        

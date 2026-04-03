@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using EnigmaCore.DependencyInjection;
+using NullCore.DependencyInjection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,7 +14,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Localization.Settings;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class SplashScreen : MonoBehaviour

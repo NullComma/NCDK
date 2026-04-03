@@ -1,4 +1,4 @@
-﻿namespace EnigmaCore
+﻿namespace NullCore
 {
     public interface IIdentifiableObject
     {

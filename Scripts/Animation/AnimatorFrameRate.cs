@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace EnigmaCore {
+namespace NullCore {
     [RequireComponent(typeof(Animator))]
     public class AnimatorFrameRate : MonoBehaviour {
 

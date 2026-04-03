@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     [Serializable]
     public class ReactiveProperty<T>

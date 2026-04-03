@@ -5,7 +5,7 @@ using UnityEngine;
 using Unity.Netcode;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Represents a globally unique identifier (GUID) that is serializable with Unity and usable in game scripts.

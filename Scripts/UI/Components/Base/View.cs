@@ -1,10 +1,10 @@
 using System;
-using EnigmaCore.DependencyInjection;
+using NullCore.DependencyInjection;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-namespace EnigmaCore.UI
+namespace NullCore.UI
 {
     public abstract class View : MonoBehaviour
     {

@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class ChildrenPositionAndRotationRandomizer : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

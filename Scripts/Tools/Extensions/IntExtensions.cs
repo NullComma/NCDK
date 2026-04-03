@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class IntExtensions {
         
         public static int CAbs(this int value) {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore.SceneVariables
+namespace NullCore.SceneVariables
 {
     public class VariableModifier : BaseVariable
     {

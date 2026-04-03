@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore {
+namespace NullCore {
     
     [Serializable]
     public class CUnityEvent : UnityEvent {}

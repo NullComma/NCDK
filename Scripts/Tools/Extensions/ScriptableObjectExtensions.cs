@@ -4,7 +4,7 @@
 using UnityEditor;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class ScriptableObjectExtensions
     {

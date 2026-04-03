@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
 	[JsonObject(MemberSerialization.OptIn)]
 	public abstract class PersistentData {
 

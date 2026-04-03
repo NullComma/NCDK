@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public class TimedAutoTriggerRepeating : AutoTriggerCompBase
     {

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore.Interaction {
+namespace NullCore.Interaction {
     [Obsolete("This script needs revision")]
 	public class InteractableIo : Interactable {
 

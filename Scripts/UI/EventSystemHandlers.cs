@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace EnigmaCore.UI
+namespace NullCore.UI
 {
     public class EventSystemHandlers : MonoBehaviour, ICancelHandler
     {

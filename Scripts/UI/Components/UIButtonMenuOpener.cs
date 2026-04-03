@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace EnigmaCore.UI {
+namespace NullCore.UI {
     public class UIButtonMenuOpener : UIButton {
 
         [SerializeField] View _menuToOpen;

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class GameObjectSineLocalMovement : MonoBehaviourUpdateExecutionLoopTime {
 		
 		[SerializeField] private Vector3 _sineDirectionAndMagnitude = Vector3.up * 0.5f;

@@ -1,7 +1,7 @@
-using EnigmaCore.Data;
+using NullCore.Data;
 using UnityEngine;
 
-namespace EnigmaCore.Damage {
+namespace NullCore.Damage {
 	public interface ICDamageable {
 		public HealthComponent Health { get; }
 		/// <summary>

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace EnigmaCore {
+namespace NullCore {
 	
 	/// <summary>
 	/// All values are normalized.

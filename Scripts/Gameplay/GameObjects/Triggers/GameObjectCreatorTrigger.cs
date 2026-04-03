@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     public class GameObjectCreatorTrigger : AutoTriggerCompBase
     {

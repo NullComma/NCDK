@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class RandomRotation : AutoTriggerCompBase {
 
         [SerializeField] private Vector3 _rotationMin;

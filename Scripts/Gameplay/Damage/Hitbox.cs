@@ -1,10 +1,10 @@
 ﻿using System;
-using EnigmaCore.Data;
-using EnigmaCore.Damage;
+using NullCore.Data;
+using NullCore.Damage;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class Hitbox : MonoBehaviour, ICDamageable {
 
 		public const float CriticalMultiplier = 1.5f;

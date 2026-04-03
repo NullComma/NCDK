@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Manages the game's pause state using a retain/release system to set the TimeScale.

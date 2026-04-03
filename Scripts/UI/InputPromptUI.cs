@@ -3,20 +3,20 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
-namespace EnigmaCore.UI
+namespace NullCore.UI
 {
     public class InputPromptUI : MonoBehaviour, IPointerClickHandler
     {
         [Header("References")]
         [SerializeField] private InputActionReference _actionReference;
-        [SerializeField] private EnigmaCore.Input.InputIconMap _iconMap;
+        [SerializeField] private NullCore.Input.InputIconMap _iconMap;
         [SerializeField] private Image _promptImage;
 
         [Header("Events")]
         [SerializeField] private CUnityEventString _onUpdateLabel;
         [SerializeField] private bool _clickToTrigger = false;
 
-        private EnigmaCore.Input.InputIconBinding _currentBinding;
+        private NullCore.Input.InputIconBinding _currentBinding;
         private Sprite[] _currentIcons;
         private bool _hasSetup;
         private float _animationTimer;
@@ -151,7 +151,7 @@ namespace EnigmaCore.UI
             }
         }
 
-        private Sprite[] ResolveIconsArray(InputDeviceType deviceType, EnigmaCore.Input.InputIconBinding binding)
+        private Sprite[] ResolveIconsArray(InputDeviceType deviceType, NullCore.Input.InputIconBinding binding)
         {
             if (deviceType == InputDeviceType.MouseAndKeyboard)
                 return binding.keyboardMouseIcons;

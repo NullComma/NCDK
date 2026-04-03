@@ -1,9 +1,9 @@
 using System;
-using EnigmaCore.DependencyInjection;
-using EnigmaCore.UI;
+using NullCore.DependencyInjection;
+using NullCore.UI;
 using UnityEngine;
 
-namespace EnigmaCore.Interaction {
+namespace NullCore.Interaction {
 	public class Interactable : MonoBehaviour, IInteractable {
 
 		#region <<---------- Properties and Fields ---------->>

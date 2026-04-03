@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class RootMotionUntilEnd : StateMachineBehaviour
 	{
 		// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

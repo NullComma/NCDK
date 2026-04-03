@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
     [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
     public sealed class MinMaxSlider : PropertyAttribute {
         internal Vector2 m_MinmaxLimit;

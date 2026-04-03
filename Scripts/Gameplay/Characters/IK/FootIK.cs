@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	[Obsolete]
 	public class FootIK : MonoBehaviour {
 		

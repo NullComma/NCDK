@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace EnigmaCore {
+namespace NullCore {
 	[Obsolete("Use Fader on timeline instead")]
 	public class Fader : MonoBehaviour {
 

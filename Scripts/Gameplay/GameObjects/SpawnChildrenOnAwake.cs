@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class SpawnChildrenOnAwake : MonoBehaviour {
         
         [SerializeField] private int _amount = 10;

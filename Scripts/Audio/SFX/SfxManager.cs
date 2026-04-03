@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnigmaCore.SFX {
+namespace NullCore.SFX {
     public class SfxManager : MonoBehaviour {
         
         #region <<---------- Monobehaviour Singleton ---------->>

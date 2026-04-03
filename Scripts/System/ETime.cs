@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class ETime {
 		
 		[Obsolete("This was implemented as a workaround to some Unity bug in some old version. Use Time.deltaTime directly.", false)]
