@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Forces a list of specific components to be enabled when saving or entering play mode.

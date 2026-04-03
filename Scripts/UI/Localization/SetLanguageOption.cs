@@ -8,7 +8,7 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 #endif
 
-namespace EnigmaCore.UI
+namespace NullCore.UI
 {
     public class SetLanguageOption : MonoBehaviour
     {

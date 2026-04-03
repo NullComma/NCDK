@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EnigmaCore.Editor
+namespace NullCore.Editor
 {
     [CustomPropertyDrawer(typeof(RequiredListLengthAttribute))]
     public class RequiredListLengthAttributeDrawer : PropertyDrawer

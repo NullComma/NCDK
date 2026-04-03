@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class DisableTrigger : MonoBehaviour {
 		[SerializeField] UnityEvent TriggerEvent;
 

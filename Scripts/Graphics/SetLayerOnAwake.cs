@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class SetLayerOnAwake : MonoBehaviour {
 
         [SerializeField] private LayerMask _layer = -1;

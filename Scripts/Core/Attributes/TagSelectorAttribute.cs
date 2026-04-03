@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class TagSelectorAttribute : PropertyAttribute {
 		public bool UseDefaultTagFieldDrawer = false;
 	}

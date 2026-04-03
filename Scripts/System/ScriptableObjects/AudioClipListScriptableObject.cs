@@ -5,7 +5,7 @@ using UnityEngine;
 using FMODUnity;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
 	[CreateAssetMenu(fileName = "AudioClipArray", menuName = EnigmaConstants.EDITOR_SCRIPTABLEOBJECT_CREATION_PREFIX + "AudioClipArray", order = 201)]
 	public class AudioClipListScriptableObject : ScriptableObject {
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using EnigmaCore.DependencyInjection;
+using NullCore.DependencyInjection;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -9,7 +9,7 @@ using UnityEditor;
 #endif
 
 
-namespace EnigmaCore {
+namespace NullCore {
     [Obsolete("Callbacks not working as expected.")]
 	public class ETimelineEventsTrigger : MonoBehaviour {
 

@@ -4,7 +4,7 @@
 using UnityEditor;
 #endif
 
-namespace EnigmaCore.SceneVariables
+namespace NullCore.SceneVariables
 {
     public class BaseVariable : MonoBehaviour
     {

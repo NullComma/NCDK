@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     [RequireComponent(typeof(Rigidbody))]
     public class RigidbodyMassBasedOnScale : MonoBehaviour {
 

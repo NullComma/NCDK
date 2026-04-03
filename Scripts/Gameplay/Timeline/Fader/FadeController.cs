@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace EnigmaCore.Timeline {
+namespace NullCore.Timeline {
     [RequireComponent(typeof(Image), typeof(Canvas))]
     public class FadeController : MonoBehaviour {
 

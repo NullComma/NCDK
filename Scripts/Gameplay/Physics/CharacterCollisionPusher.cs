@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
     [AddComponentMenu(StaticStrings.PrefixScripts + "Physics/CCharacterCollisionPusher")]
     [RequireComponent(typeof(CharacterController))]
 	[DisallowMultipleComponent]

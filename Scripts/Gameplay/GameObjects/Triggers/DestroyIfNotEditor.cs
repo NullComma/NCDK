@@ -7,7 +7,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine.SceneManagement;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Handles an object that should be disabled during Editor Play Mode 

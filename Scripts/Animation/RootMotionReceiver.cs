@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     [RequireComponent(typeof(Animator))]
     public class RootMotionReceiver : MonoBehaviour

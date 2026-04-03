@@ -1,10 +1,10 @@
 ﻿using System;
-using EnigmaCore.DependencyInjection;
+using NullCore.DependencyInjection;
 using Unity.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class ComponentExtensions {
 
         public static void Inject(this Component c) {

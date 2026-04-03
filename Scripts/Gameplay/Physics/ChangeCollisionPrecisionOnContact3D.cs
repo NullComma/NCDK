@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     [RequireComponent(typeof(Rigidbody), typeof(Collider))]
     public class ChangeCollisionPrecisionOnContact3D : PhysicsTrigger {
 

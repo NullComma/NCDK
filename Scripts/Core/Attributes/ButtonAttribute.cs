@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Adds a button to the Inspector that executes the decorated method.

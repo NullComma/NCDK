@@ -1,7 +1,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class StringExtensions {
 
 		private static StringBuilder sb = new StringBuilder();

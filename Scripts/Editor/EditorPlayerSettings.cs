@@ -1,7 +1,7 @@
 using System;
 using UnityEditor;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class EditorPlayerSettings {
 
         public static void RaiseBuildVersion() {

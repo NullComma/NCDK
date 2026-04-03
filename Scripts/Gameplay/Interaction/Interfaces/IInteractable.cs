@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore.Interaction {
+namespace NullCore.Interaction {
     public interface IInteractable {
         bool CanBeInteractedWith();
         void OnBecameInteractionTarget(Transform lookingTransform);

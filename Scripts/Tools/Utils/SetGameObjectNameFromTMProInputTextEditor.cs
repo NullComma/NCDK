@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	[RequireComponent(typeof(TextMeshProUGUI))]
 	public class SetGameObjectNameFromTMProInputTextEditor : MonoBehaviour {
 

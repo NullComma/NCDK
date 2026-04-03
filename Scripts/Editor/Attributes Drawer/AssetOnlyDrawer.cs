@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.IO;
 
-namespace EnigmaCore.Editor
+namespace NullCore.Editor
 {
     [CustomPropertyDrawer(typeof(AssetOnlyAttribute))]
     public class AssetOnlyDrawer : PropertyDrawer

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public class ETimedLoopStateTrigger : MonoBehaviour
     {

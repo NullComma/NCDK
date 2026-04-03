@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class ETimeTriggers : MonoBehaviour {
 
 		[Header("Booleans")]

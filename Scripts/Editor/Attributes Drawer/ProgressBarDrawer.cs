@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Reflection;
 
-namespace EnigmaCore
+namespace NullCore
 {
     [CustomPropertyDrawer(typeof(ProgressBarAttribute))]
     public class ProgressBarDrawer : PropertyDrawer

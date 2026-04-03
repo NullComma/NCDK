@@ -5,7 +5,7 @@ using UnityEngine;
 using FMODUnity;
 #endif
 
-namespace EnigmaCore.Audio {
+namespace NullCore.Audio {
 	public class SoundAreaGlobalParamTrigger : MonoBehaviour {
 
 		#if FMOD

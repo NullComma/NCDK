@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class ETimedAutoTrigger : AutoTriggerCompBase {
 
         [SerializeField, Min(0f)] float _secondsToTrigger = 5f;

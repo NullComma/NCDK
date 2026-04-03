@@ -1,8 +1,8 @@
 using System;
-using EnigmaCore.DependencyInjection;
+using NullCore.DependencyInjection;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Listens to blocking state changes from <see cref="BlockingEventsManager"/> 

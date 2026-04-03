@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace EnigmaCore.DependencyInjection
+namespace NullCore.DependencyInjection
 {
     /// <summary>
     /// A static Dependency Injection container for registering and resolving services.

@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class EnigmaEditorUtils
     {

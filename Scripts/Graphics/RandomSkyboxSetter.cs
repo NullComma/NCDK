@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore.Graphics {
+namespace NullCore.Graphics {
     public class RandomSkyboxSetter : MonoBehaviour {
 
         [SerializeField] private bool _updateGiToo = true;

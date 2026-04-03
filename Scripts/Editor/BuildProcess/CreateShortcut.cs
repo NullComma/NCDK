@@ -5,7 +5,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class CreateShortcut : IPostprocessBuildWithReport {
 
         public int callbackOrder => 1;

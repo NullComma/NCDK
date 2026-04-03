@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace EnigmaCore.GameObjects {
+namespace NullCore.GameObjects {
     public class SetScaleTrigger : MonoBehaviour {
 
         [SerializeField, ReadOnly] Vector3 initialScale;

@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using EnigmaCore.Enums;
+using NullCore.Enums;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	/// <summary>
 	/// Game object with this component can be stunned.
 	/// </summary>

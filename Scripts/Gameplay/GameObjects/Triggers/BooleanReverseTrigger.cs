@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class BooleanReverseTrigger : MonoBehaviour {
 
 		[SerializeField] CUnityEventBool _reversedBoolEvent;

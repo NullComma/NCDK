@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     [RequireComponent(typeof(Animator))]
     public class RootMotionToRigidbody : MonoBehaviour {
         

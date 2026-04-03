@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class Vector2Extensions {
 		public static float GetAbsBiggerValue(this Vector2 vec) {
 			float biggerValue = Mathf.Abs(vec.x);

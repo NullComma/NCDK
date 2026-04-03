@@ -1,6 +1,6 @@
 using UnityEngine.Scripting;
 
-namespace EnigmaCore.DependencyInjection
+namespace NullCore.DependencyInjection
 {
     /// <summary>
     /// Interface for modules that register dependencies into the static DIContainer.

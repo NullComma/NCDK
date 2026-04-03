@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class SceneLoader : MonoBehaviour {
 		
 		public SceneField sceneToLoad;

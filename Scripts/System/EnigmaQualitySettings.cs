@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Screen = UnityEngine.Device.Screen;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class EnigmaQualitySettings {
 
         public static bool GetVsync() {

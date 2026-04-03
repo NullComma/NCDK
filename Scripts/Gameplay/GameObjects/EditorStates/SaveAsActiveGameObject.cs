@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Forces the GameObject to be active when saving or entering play mode.

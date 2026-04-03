@@ -4,7 +4,7 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace EnigmaCore.Editor {
+namespace NullCore.Editor {
     
     public class BuildVersionProcessor : IPreprocessBuildWithReport {
         

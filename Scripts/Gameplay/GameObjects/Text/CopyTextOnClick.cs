@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore.Text
+namespace NullCore.Text
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class CopyTextOnClick : MonoBehaviour, IPointerClickHandler

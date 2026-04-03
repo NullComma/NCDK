@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     [Serializable]
     public class SceneField : ISerializationCallbackReceiver

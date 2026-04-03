@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class Vector3Extensions {
 
 		public static float GetAbsBiggerValue(this Vector3 vec) {

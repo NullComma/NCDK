@@ -14,7 +14,7 @@ using UnityEditor.Experimental.SceneManagement;
 #endif
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
 	[ExecuteInEditMode]
 	public class SceneAreaAdditiveLoader : MonoBehaviour {
 

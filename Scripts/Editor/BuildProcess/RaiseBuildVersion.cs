@@ -2,7 +2,7 @@
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class RaiseBuildVersion : IPostprocessBuildWithReport {
 
         public int callbackOrder => 9999;

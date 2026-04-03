@@ -18,7 +18,7 @@ using UnityEditor;
 using FMODUnity;
 #endif
 
-namespace EnigmaCore 
+namespace NullCore 
 {
     /// <summary>
     /// Handles low-level application configuration, lifecycle events, and environment setup.

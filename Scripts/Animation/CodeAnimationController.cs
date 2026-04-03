@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Animations;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public class CodeAnimationController : MonoBehaviour
     {

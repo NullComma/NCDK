@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(MonoBehaviour), true)]

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace EnigmaCore.Data {
+namespace NullCore.Data {
 	[System.Serializable]
 	public class AttackData {
 

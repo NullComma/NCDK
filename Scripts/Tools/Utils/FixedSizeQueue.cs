@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace EnigmaCore {
+namespace NullCore {
     // From https://stackoverflow.com/a/53954045/7485017
     [Serializable]
     [DebuggerDisplay("Count = {" + nameof(Count) + "}, Limit = {" + nameof(Limit) + "}")]

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace EnigmaCore.Input
+namespace NullCore.Input
 {
     [Serializable]
     public struct InputIconBinding

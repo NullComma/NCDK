@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using EnigmaCore.Damage;
-using EnigmaCore.Data;
+using NullCore.Damage;
+using NullCore.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class DamageDealerTrigger : MonoBehaviour, ICDamageDealer {
 
 		#region <<---------- Initializers ---------->>

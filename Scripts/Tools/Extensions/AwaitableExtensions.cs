@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class AwaitableExtensions
     {

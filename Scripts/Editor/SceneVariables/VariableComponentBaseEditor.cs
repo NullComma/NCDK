@@ -1,9 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using EnigmaCore.SceneVariables;
+using NullCore.SceneVariables;
 
-namespace EnigmaCore.Editor.SceneVariables
+namespace NullCore.Editor.SceneVariables
 {
     
     public class VariableComponentBaseEditor : UnityEditor.Editor

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// A collection of UnityEvents for handling state changes.

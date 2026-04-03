@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Custom drawer for the ReadOnly attribute

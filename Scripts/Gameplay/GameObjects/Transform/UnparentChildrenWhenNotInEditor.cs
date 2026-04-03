@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public class UnparentChildrenWhenNotInEditor : UnparentChildrenOnAwake {
         protected override void Awake() {
             if (Application.isEditor) return;

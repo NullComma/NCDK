@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class Disposables {
         public static IDisposable Empty { get; } = new EmptyDisposable();

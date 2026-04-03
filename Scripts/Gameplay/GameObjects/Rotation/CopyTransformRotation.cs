@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     [DefaultExecutionOrder(351)]
     public class CopyTransformRotation : MonoBehaviourUpdateExecutionLoopTime {
 

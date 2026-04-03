@@ -4,7 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     /// <summary>
     /// Handles dynamic file extension generation based on project metadata.

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public abstract class MonoBehaviourUpdateExecutionLoopTime : MonoBehaviour {
 
 		

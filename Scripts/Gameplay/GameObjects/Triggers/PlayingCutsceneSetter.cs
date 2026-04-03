@@ -1,8 +1,8 @@
 ﻿using System;
-using EnigmaCore.DependencyInjection;
+using NullCore.DependencyInjection;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     [Obsolete("Use PlayableHelper instead")]
 	public class PlayingCutsceneSetter : MonoBehaviour {
 		[NonSerialized,Inject] BlockingEventsManager _blockingEventsManager;

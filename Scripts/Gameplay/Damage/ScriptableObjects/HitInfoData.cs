@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class HitInfoData : ScriptableObject {
 		
 		public float RawDamage {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class OnEditorTrigger : AutoTriggerCompBase {
 
 		[SerializeField] CUnityEventBool _isOnEditorEvent;

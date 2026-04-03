@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EnigmaCore.DependencyInjection
+namespace NullCore.DependencyInjection
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class InjectAttribute : Attribute { }

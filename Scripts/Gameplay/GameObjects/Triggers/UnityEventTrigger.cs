@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class UnityEventTrigger : MonoBehaviour {
 
 		[SerializeField] float delayToTriggerEvent;

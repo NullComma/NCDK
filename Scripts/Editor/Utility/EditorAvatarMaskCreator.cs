@@ -3,7 +3,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EnigmaCore.Editor {
+namespace NullCore.Editor {
     public class AvatarMaker {
         [MenuItem(StaticStrings.PrefixTools + "Avatar Mask/Make Avatar Mask")]
         private static void MakeAvatarMask() {

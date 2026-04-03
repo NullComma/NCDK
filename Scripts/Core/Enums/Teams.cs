@@ -1,6 +1,6 @@
 using System;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public enum Teams {
 		NEUTRAL_GAYA = 0,
 		PLAYER = 1,

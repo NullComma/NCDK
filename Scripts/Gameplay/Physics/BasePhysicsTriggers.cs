@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public abstract class BasePhysicsTriggers : MonoBehaviour {
 	
 		[SerializeField] [TagSelector] protected string _tag = "Player";

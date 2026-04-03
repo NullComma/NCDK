@@ -1,11 +1,11 @@
 ﻿using System;
-using EnigmaCore.DependencyInjection;
+using NullCore.DependencyInjection;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class MouseRotator : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

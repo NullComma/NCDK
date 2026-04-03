@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 using TMPro;
 
-namespace EnigmaCore {
+namespace NullCore {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class VersionNumberTrigger : MonoBehaviour {
 

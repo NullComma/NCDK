@@ -1,4 +1,4 @@
-namespace EnigmaCore {
+namespace NullCore {
 	public enum Priority {
 		/// <summary>
 		///   <para>Lowest priority.</para>

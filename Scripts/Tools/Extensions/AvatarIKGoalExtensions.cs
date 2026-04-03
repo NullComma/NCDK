@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class AvatarIKGoalExtensions {
 		public static bool IsFoot(this AvatarIKGoal value) {
 			return value == AvatarIKGoal.LeftFoot || value == AvatarIKGoal.RightFoot;

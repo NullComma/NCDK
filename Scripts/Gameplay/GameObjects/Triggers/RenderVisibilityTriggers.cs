@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class RenderVisibilityTriggers : MonoBehaviour
 	{
 		[SerializeField] bool _debug;

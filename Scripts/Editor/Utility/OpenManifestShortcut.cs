@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace EnigmaCore.Editor {
+namespace NullCore.Editor {
     /// <summary>
     /// Adds a menu item that opens the Package Manifest json, bellow the Package Manager button.
     /// </summary>

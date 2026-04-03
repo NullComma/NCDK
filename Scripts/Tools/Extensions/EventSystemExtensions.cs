@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class EventSystemExtensions {
 		
 		public static EventSystem GetFirstActiveEventSystem()

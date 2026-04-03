@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class ReflectionHelpers
     {

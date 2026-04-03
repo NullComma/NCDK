@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.DualShock;
 using UnityEngine.InputSystem.LowLevel;
 #endif
 
-namespace EnigmaCore
+namespace NullCore
 {
     public enum InputDeviceType { MouseAndKeyboard, Gamepad }
     

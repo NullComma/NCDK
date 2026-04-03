@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class BootLoader
     {

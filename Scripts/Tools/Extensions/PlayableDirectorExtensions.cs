@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Playables;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class PlayableDirectorExtensions {
 
 		public static PlayableDirector SetAsActiveAndPlay(this PlayableDirector p) {

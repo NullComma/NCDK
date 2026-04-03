@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class ObjectExtensions {
 
         public static string CGetNameSafe(this Object o, string fallback = "null") {

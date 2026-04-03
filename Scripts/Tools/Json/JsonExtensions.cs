@@ -8,7 +8,7 @@ using Newtonsoft.Json.UnityConverters.Math;
 using UnityEngine;
 using UnityEngine.Scripting;
 
-namespace EnigmaCore {
+namespace NullCore {
     [Preserve]
 	public static class JsonExtensions {
 	

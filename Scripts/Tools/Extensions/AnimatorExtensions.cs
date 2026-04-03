@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public static class AnimatorExtensions {
 
         /// <summary>
