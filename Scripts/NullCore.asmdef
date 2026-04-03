@@ -1,0 +1,62 @@
+{
+    "name": "NullCore",
+    "rootNamespace": "NullCore",
+    "references": [
+        "Unity.TextMeshPro",
+        "LINQtoGameObject",
+        "Newtonsoft.Json.UnityConverters",
+        "FMODUnity",
+        "Unity.Timeline",
+        "Unity.Timeline.Editor",
+        "Unity.InputSystem",
+        "Unity.Addressables",
+        "Unity.ResourceManager",
+        "Unity.Localization",
+        "UnityEngine.CoreModule",
+        "Unity.Netcode.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.nuget.newtonsoft-json",
+            "expression": "0.0.0",
+            "define": "NEWTONSOFT_JSON"
+        },
+        {
+            "name": "jillejr.newtonsoft.json-for-unity.converters",
+            "expression": "0.0.0",
+            "define": "JSON_FOR_UNITY_CONVERTERS"
+        },
+        {
+            "name": "com.unity.addressables",
+            "expression": "0.0.0",
+            "define": "UNITY_ADDRESSABLES_EXIST"
+        },
+        {
+            "name": "com.unity.cinemachine",
+            "expression": "0.0.0",
+            "define": "CINEMACHINE"
+        },
+        {
+            "name": "com.annulusgames.lit-motion",
+            "expression": "0.0.0",
+            "define": "LITMOTION"
+        },
+        {
+            "name": "com.unity.localization",
+            "expression": "0.0.0",
+            "define": "UNITY_LOCALIZATION"
+        },
+        {
+            "name": "com.unity.netcode.gameobjects",
+            "expression": "0.0.0",
+            "define": "UNITY_NETCODE"
+        }
+    ],
+    "noEngineReferences": false
+}

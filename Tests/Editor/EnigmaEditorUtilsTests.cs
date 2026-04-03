@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
-namespace EnigmaCore.Tests.Editor
+namespace NullCore.Tests.Editor
 {
     [TestFixture]
     public class EnigmaEditorUtilsTests

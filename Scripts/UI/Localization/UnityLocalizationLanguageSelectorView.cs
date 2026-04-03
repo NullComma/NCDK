@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 #endif
 
-namespace EnigmaCore.UI
+namespace NullCore.UI
 {
     public class UnityLocalizationLanguageSelectorView : View
     {

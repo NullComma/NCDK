@@ -1,0 +1,29 @@
+{
+    "name": "NullCore.Editor",
+    "rootNamespace": "NullCore.Editor",
+    "references": [
+        "Unity.TextMeshPro",
+        "FMODUnity",
+        "Unity.Localization",
+        "Unity.Localization.Editor",
+        "Unity.Timeline",
+        "Unity.Timeline.Editor",
+        "UnityEditor.PackageManager",
+        "NullCore",
+        "LINQtoGameObject",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [
+        ""
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
