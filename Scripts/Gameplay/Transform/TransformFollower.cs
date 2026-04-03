@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 namespace EnigmaCore {
+    [ExecuteAlways]
     [DefaultExecutionOrder(350)]
 	public class TransformFollower : MonoBehaviour {
 
@@ -55,20 +56,32 @@ namespace EnigmaCore {
 
         protected virtual void OnEnable() {
 			CheckIfWillMove();
+			#if UNITY_EDITOR
+			if (_myTransform == null) _myTransform = transform;
+			#endif
 		}
 
         protected virtual void Update() {
-			if (executionLoop != MonoBehaviourExecutionLoop.Update) return;
+			#if UNITY_EDITOR
+			if (!Application.isPlaying && UnityEditor.Selection.activeGameObject != gameObject) return;
+			#endif
+			if (executionLoop != MonoBehaviourExecutionLoop.Update && Application.isPlaying) return;
             Execute(_ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime);
         }
 
 		protected virtual void FixedUpdate() {
-			if (executionLoop != MonoBehaviourExecutionLoop.FixedUpdate) return;
+			#if UNITY_EDITOR
+			if (!Application.isPlaying && UnityEditor.Selection.activeGameObject != gameObject) return;
+			#endif
+			if (executionLoop != MonoBehaviourExecutionLoop.FixedUpdate && Application.isPlaying) return;
             Execute(_ignoreTimeScale ? Time.fixedUnscaledDeltaTime : Time.deltaTime);
 		}
 
         protected virtual void LateUpdate() {
-			if (executionLoop != MonoBehaviourExecutionLoop.LateUpdate) return;
+			#if UNITY_EDITOR
+			if (!Application.isPlaying && UnityEditor.Selection.activeGameObject != gameObject) return;
+			#endif
+			if (executionLoop != MonoBehaviourExecutionLoop.LateUpdate && Application.isPlaying) return;
             Execute(_ignoreTimeScale ? Time.unscaledDeltaTime : Time.deltaTime);
 		}
 
@@ -79,7 +92,10 @@ namespace EnigmaCore {
 				return;
 			}
 			Handles.color = Gizmos.color = Color.cyan;
-			var targetPos = _transformToFollow.position + _followOffset;
+			var targetPos = Vector3.Scale(_transformToFollow.position, _positionMultiplier);
+			if (!_followOffset.CIsZero()) {
+				targetPos += _transformToFollow.TransformVector(_followOffset);
+			}
 			Handles.Label(targetPos, $"Follow Target: {_transformToFollow.name}");
 			Gizmos.DrawLine(transform.position, targetPos);
 		}
@@ -136,6 +152,37 @@ namespace EnigmaCore {
             TransformToFollowChanged?.Invoke(t);
             CheckIfWillMove();
         }
+
+		[Button("Set Current Position as Follow Offset")]
+		public void SetCurrentPositionAsFollowOffset() {
+			if (_transformToFollow == null) return;
+			_followOffset = _transformToFollow.InverseTransformVector(transform.position - Vector3.Scale(_transformToFollow.position, _positionMultiplier));
+			#if UNITY_EDITOR
+			EditorUtility.SetDirty(this);
+			#endif
+		}
+
+		[Button("Snap to Target")]
+		public void SnapToTarget() {
+			if (_transformToFollow == null) return;
+
+			if (_followRotation) {
+				transform.rotation = _transformToFollow.rotation;
+			}
+
+			var targetPos = Vector3.Scale(_transformToFollow.position, _positionMultiplier);
+			if (!_followOffset.CIsZero()) {
+				targetPos += _transformToFollow.TransformVector(_followOffset);
+			}
+			if (_ignoreXAxis) targetPos.x = transform.position.x;
+			if (_ignoreYAxis) targetPos.y = transform.position.y;
+			if (_ignoreZAxis) targetPos.z = transform.position.z;
+
+			transform.position = targetPos;
+			#if UNITY_EDITOR
+			EditorUtility.SetDirty(this);
+			#endif
+		}
 		
 		#endregion <<---------- General ---------->>
 		
