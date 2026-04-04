@@ -4,7 +4,7 @@ using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class FmodLoadedBankTrigger : StudioBankLoader {
         
         [SerializeField] GameObject[] SetActiveOnBankLoaded;
@@ -13,10 +13,10 @@ namespace EnigmaCore {
 
         void Update() {
             if (_banksLoaded) return;
-            if (Banks.Count <= 0 || !RuntimeManager.HaveMasterBanksLoaded || !Banks.Where(b => !b.CIsNullOrEmpty()).Any(RuntimeManager.HasBankLoaded)) return;
+            if (Banks.Count <= 0 || !RuntimeManager.HaveMasterBanksLoaded || !Banks.Where(b => !b.IsNullOrEmpty()).Any(RuntimeManager.HasBankLoaded)) return;
             _banksLoaded = true;
             OnBanksLoaded?.Invoke();
-            if (!SetActiveOnBankLoaded.CIsNullOrEmpty()) {
+            if (!SetActiveOnBankLoaded.IsNullOrEmpty()) {
                 foreach (var go in SetActiveOnBankLoaded) {
                     if(go == null) continue;
                     go.SetActive(true);

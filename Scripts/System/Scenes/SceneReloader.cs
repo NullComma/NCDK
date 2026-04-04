@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace EnigmaCore {
+namespace NullCore {
 	public class SceneReloader : MonoBehaviour {
 		
 		public void ReloadCurrentScene() {

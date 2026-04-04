@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NullCore.Interaction {
+namespace NullCore {
     public interface IInteractable {
         bool CanBeInteractedWith();
         void OnBecameInteractionTarget(Transform lookingTransform);

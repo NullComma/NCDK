@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace EnigmaCore
+namespace NullCore
 {
     public static class WindowsFileAssociation
     {

@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using NullCore.Damage;
-using NullCore.Data;
 using UnityEngine;
 
 namespace NullCore {

@@ -21,7 +21,7 @@ namespace NullCore {
         protected GameStateBase(string name = null, bool isAutoInitialized = false) {
             this.WasLoadedAutomatically = isAutoInitialized;
             this.SaveIdentifier = SerializableGuid.NewGuid();
-            if (!name.CIsNullOrEmpty()) this.SaveDescriptiveName = name;
+            if (!name.IsNullOrEmpty()) this.SaveDescriptiveName = name;
             this.SaveDate = DateTime.UtcNow;
             AppVersionWhenCreated = new Version(Application.version);
         }

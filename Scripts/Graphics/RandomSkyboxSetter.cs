@@ -17,7 +17,7 @@ namespace NullCore.Graphics {
         [Button]
         #endif
         public void ChooseSkybox() {
-            RenderSettings.skybox = this._skyboxes.CRandomElement();
+            RenderSettings.skybox = this._skyboxes.RandomElement();
             if(_updateGiToo) DynamicGI.UpdateEnvironment();
         }
     }

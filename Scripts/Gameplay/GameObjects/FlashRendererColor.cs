@@ -49,7 +49,7 @@ namespace NullCore {
 
 
         int GetValidShaderKeyword(string initialKeyword) {
-            if (initialKeyword.CIsNullOrEmpty()) {
+            if (initialKeyword.IsNullOrEmpty()) {
                 Debug.LogError("Shader keyword cannot be null or empty!");
                 return -1;
             }

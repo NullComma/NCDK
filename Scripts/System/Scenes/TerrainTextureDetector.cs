@@ -25,7 +25,7 @@ namespace NullCore {
         public TerrainLayer GetTerrainLayerAtPosition(Vector3 worldPosition) {
             int index = this.GetDominantTextureIndexAt(worldPosition);
             if (index < 0) return null;
-            return this.ThisTerrainData.terrainLayers.CGetAtIndexSafe(index);
+            return this.ThisTerrainData.terrainLayers.GetAtIndexSafe(index);
         }
 
         /// <summary>

@@ -42,7 +42,7 @@ namespace NullCore {
 		}
 
         protected virtual bool WillIgnoreTrigger(Component col) {
-			return !this._tag.CIsNullOrEmpty() && !col.CompareTag(this._tag);
+			return !this._tag.IsNullOrEmpty() && !col.CompareTag(this._tag);
 		}
         
     }

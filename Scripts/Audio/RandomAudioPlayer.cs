@@ -34,7 +34,7 @@ namespace NullCore.Audio {
 			if (_lastPlayedAudios.Count >= count * 0.5f) {
 				_lastPlayedAudios.Dequeue();
 			}
-			return _audios.Except(_lastPlayedAudios).CRandomElement();
+			return _audios.Except(_lastPlayedAudios).RandomElement();
 		}
 	}
 }

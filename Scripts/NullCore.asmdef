@@ -13,7 +13,8 @@
         "Unity.ResourceManager",
         "Unity.Localization",
         "UnityEngine.CoreModule",
-        "Unity.Netcode.Runtime"
+        "Unity.Netcode.Runtime",
+        "NullCore.Refs"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,4 +1,5 @@
 using UnityEngine;
+using NullCore.Refs;
 
 namespace NullCore
 {
@@ -10,7 +11,7 @@ namespace NullCore
 	[RequireComponent(typeof(Renderer))]
 	public class QuadShadowFollower : ValidatedMonoBehaviour
 	{
-		[SerializeField, AutoRef(RefLocation.Self)] Renderer cachedRenderer;
+		[SerializeField, Scene] Renderer cachedRenderer;
 		public Renderer coinRenderer;
 		public LayerMask groundMask = 1;
 		public float raycastDistance = 10f;

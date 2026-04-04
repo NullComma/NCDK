@@ -1,7 +1,7 @@
 ﻿#if FMOD
 using FMODUnity;
 
-namespace EnigmaCore {
+namespace NullCore {
     public static class EventEmitterExtensions {
         
         /// <summary>

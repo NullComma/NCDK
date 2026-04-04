@@ -1,9 +1,8 @@
 using System;
 using NullCore.DependencyInjection;
-using NullCore.UI;
 using UnityEngine;
 
-namespace NullCore.Interaction {
+namespace NullCore {
 	public class Interactable : MonoBehaviour, IInteractable {
 
 		#region <<---------- Properties and Fields ---------->>
@@ -56,13 +55,13 @@ namespace NullCore.Interaction {
 
 		public virtual void OnBecameInteractionTarget(Transform lookingTransform)
 		{
-			_setActiveStateOnBecameInteractionTarget.CDoForEachNotNull(g=>g.SetActive(true));
+			_setActiveStateOnBecameInteractionTarget.DoForEachNotNull(g=>g.SetActive(true));
 			BecameTargetEvent.Trigger(true);
 		}
 
 		public virtual void OnStoppedBeingInteractionTarget(Transform lookingTransform)
 		{
-			_setActiveStateOnBecameInteractionTarget.CDoForEachNotNull(g=>g.SetActive(false));
+			_setActiveStateOnBecameInteractionTarget.DoForEachNotNull(g=>g.SetActive(false));
 			BecameTargetEvent.Trigger(false);
 		}
 
