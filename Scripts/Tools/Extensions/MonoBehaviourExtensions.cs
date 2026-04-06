@@ -39,7 +39,7 @@ namespace NullCore {
         
         public static void CResolveComponentFromChildrenOrParentIfNull<T>(this MonoBehaviour m, ref T c) where T : Component {
             if (c != null) return;
-            c = m.CGetComponentInChildrenOrInParent<T>();
+            c = m.GetComponentInChildrenOrInParent<T>();
         }
 
         public static void CSetNameIfOnlyComponent(this MonoBehaviour m, string name) {

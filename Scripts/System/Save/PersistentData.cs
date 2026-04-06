@@ -14,14 +14,19 @@ using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 #endif
 
-namespace NullCore {
-	[JsonObject(MemberSerialization.OptIn)]
-	public abstract class PersistentData {
+namespace NullCore
+{
+    [JsonObject(MemberSerialization.OptIn)]
+    public abstract class PersistentData
+    {
+        private static bool _loggedPersistentDataPath;
 
-		#region <<---------- Saving ---------->>
-        
-        protected static bool SaveJsonTextToFile(string json, string filePath) {
-			try {
+        #region <<---------- Saving ---------->>
+
+        protected static bool SaveJsonTextToFile(string json, string filePath)
+        {
+            try
+            {
 #if UNITY_EDITOR
                 // In the Editor (including Play Mode), save plain JSON for easy inspection.
                 string contentToWrite = json;
@@ -29,33 +34,37 @@ namespace NullCore {
 				string contentToWrite = EncryptionUtils.Encrypt(json);
 				if (string.IsNullOrEmpty(contentToWrite)) return false;
 #endif
-				using var streamWriter = File.CreateText(filePath);
-				streamWriter.Write(contentToWrite);
-				return true;
+                using var streamWriter = File.CreateText(filePath);
+                streamWriter.Write(contentToWrite);
+                return true;
             }
-			catch (Exception e) {
-				Debug.LogError(e);
+            catch (Exception e)
+            {
+                Debug.LogError(e);
                 return false;
             }
-		}
-		
-		#endregion <<---------- Saving ---------->>
+        }
+
+        #endregion <<---------- Saving ---------->>
 
 
 
 
-		#region <<---------- Path ---------->>
+        #region <<---------- Path ---------->>
 
-        public static string GetApplicationPersistentDataFolder() {
+        public static string GetApplicationPersistentDataFolder()
+        {
             string path = null;
-            
-            #if UNITY_WEBGL
-            path = Path.Combine(Application.persistentDataPath, "idbfs");
-            #else
-            path = Application.persistentDataPath;
-            #endif
 
-            if (Debug.isDebugBuild) {
+#if UNITY_WEBGL
+            path = Path.Combine(Application.persistentDataPath, "idbfs");
+#else
+            path = Application.persistentDataPath;
+#endif
+
+            if (Debug.isDebugBuild && !_loggedPersistentDataPath)
+            {
+                _loggedPersistentDataPath = true;
                 Debug.Log($"Application.{nameof(Application.persistentDataPath)}: '{Application.persistentDataPath}'");
             }
             return path;
@@ -64,8 +73,8 @@ namespace NullCore {
         #endregion <<---------- Path ---------->>
 
 
-        
-        
+
+
         #region <<---------- JS External Invocation ---------->>
 #if UNITY_WEBGL
         [DllImport("__Internal")]
@@ -74,20 +83,21 @@ namespace NullCore {
         #endregion <<---------- JS External Invocation ---------->>
 
 
-        
-        
-		#region <<---------- Editor ---------->>
-	
-		#if UNITY_EDITOR
 
-		[MenuItem(StaticStrings.PrefixTools + "Open root save folder")]
-		public static void OpenSaveFolder() {
-			EditorUtility.RevealInFinder(GetApplicationPersistentDataFolder());
-		}
-		
-		#endif
-		
-		#endregion <<---------- Editor ---------->>
-		
-	}
+
+        #region <<---------- Editor ---------->>
+
+#if UNITY_EDITOR
+
+        [MenuItem(StaticStrings.PrefixTools + "Open root save folder")]
+        public static void OpenSaveFolder()
+        {
+            EditorUtility.RevealInFinder(GetApplicationPersistentDataFolder());
+        }
+
+#endif
+
+        #endregion <<---------- Editor ---------->>
+
+    }
 }

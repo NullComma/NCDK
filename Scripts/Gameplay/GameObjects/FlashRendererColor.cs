@@ -22,7 +22,7 @@ namespace NullCore {
 
         private void Awake() {
             try {
-                this._targetRenderer.CAssertIfNull("Target renderer cannot be null!", this);
+                this._targetRenderer.AssertIfNull("Target renderer cannot be null!", this);
                 this._targetMaterial = this._targetRenderer.material;
                 this._shaderKeywordId = GetValidShaderKeyword(_shaderKeyword);
                 this._initialColor = this._targetMaterial.GetColor(this._shaderKeywordId);

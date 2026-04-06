@@ -11,14 +11,17 @@ using Newtonsoft.Json;
 using UnityEditor;
 #endif
 
-namespace NullCore {
+namespace NullCore
+{
     [JsonObject(MemberSerialization.OptIn)]
     [Serializable]
-    public abstract class GameStateBase : PersistentData {
+    public abstract class GameStateBase : PersistentData
+    {
 
         #region <<---------- Initializers ---------->>
 
-        protected GameStateBase(string name = null, bool isAutoInitialized = false) {
+        protected GameStateBase(string name = null, bool isAutoInitialized = false)
+        {
             this.WasLoadedAutomatically = isAutoInitialized;
             this.SaveIdentifier = SerializableGuid.NewGuid();
             if (!name.IsNullOrEmpty()) this.SaveDescriptiveName = name;
@@ -33,8 +36,10 @@ namespace NullCore {
 
         #region <<---------- Properties and Fields ---------->>
 
-        public static event Action OnNotifyForExternalModifiedSaveFile {
-            add {
+        public static event Action OnNotifyForExternalModifiedSaveFile
+        {
+            add
+            {
                 _onNotifyForExternalModifiedSaveFile -= value;
                 _onNotifyForExternalModifiedSaveFile += value;
             }
@@ -44,14 +49,16 @@ namespace NullCore {
 
         [JsonProperty("_appVersionWhenCreated"), SerializeField]
         string _appVersionWhenCreated;
-        public Version AppVersionWhenCreated {
+        public Version AppVersionWhenCreated
+        {
             get => Version.TryParse(_appVersionWhenCreated, out var version) ? version : default;
             set => _appVersionWhenCreated = value.ToString();
         }
 
         [JsonProperty("_appVersionOnLastSave"), SerializeField]
         string _appVersionOnLastSave;
-        public Version AppVersionOnLastSave {
+        public Version AppVersionOnLastSave
+        {
             get => Version.TryParse(_appVersionOnLastSave, out var version) ? version : default;
             set => _appVersionOnLastSave = value.ToString();
         }
@@ -79,14 +86,17 @@ namespace NullCore {
 
         #region <<---------- Save ---------->>
 
-        public virtual bool Save() {
+        public virtual bool Save()
+        {
             return this.SaveJson();
         }
 
-        bool SaveJson() {
+        bool SaveJson()
+        {
             this.SaveDate = DateTime.UtcNow;
             this.SaveHash = String.Empty;
-            if (Version.TryParse(Application.version, out var version)) {
+            if (Version.TryParse(Application.version, out var version))
+            {
                 this.AppVersionOnLastSave = version;
             }
             // serialized json without hash
@@ -95,53 +105,62 @@ namespace NullCore {
             return SaveJsonTextToFile(this.GetSerializedJson(), GetGameStateFilePath(this.SaveIdentifier.ToShortString()));
         }
 
-        string GetSerializedJson() {
-            #if NEWTONSOFT_JSON
+        string GetSerializedJson()
+        {
+#if NEWTONSOFT_JSON
             return JsonConvert.SerializeObject(this, JsonExtensions.DefaultSettings);
-            #else
+#else
             return JsonUtility.ToJson(this);
-            #endif
+#endif
         }
 
         #endregion <<---------- Save ---------->>
 
-        
-        
+
+
 
         #region <<---------- Loading ---------->>
 
-        public static T LoadFromId<T>(string saveFileNameWithoutExtension) where T : PersistentData {
-            try {
+        public static T LoadFromId<T>(string saveFileNameWithoutExtension) where T : PersistentData
+        {
+            try
+            {
                 var filePath = GetGameStateFilePath(saveFileNameWithoutExtension);
-				
+
                 Debug.Log($"Trying to LoadGameProgress with file '{filePath}'");
 
-                if (!File.Exists(filePath)) {
+                if (!File.Exists(filePath))
+                {
                     Debug.LogWarning($"SaveGameProgress file at path '{filePath}' doesn't exist!");
                     return null;
                 }
-				
+
                 return LoadFromPath<T>(filePath);
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.LogError(e);
             }
-			
+
             return null;
         }
-        
-        public static T LoadFromPath<T>(string filePath) where T : PersistentData {
-            try {
+
+        public static T LoadFromPath<T>(string filePath) where T : PersistentData
+        {
+            try
+            {
                 var fileContent = File.ReadAllText(filePath);
-				Debug.Log($"Read {fileContent.Length} characters from save file at '{filePath}'.");
+                Debug.Log($"Read {fileContent.Length} characters from save file at '{filePath}'.");
                 var jsonContent = EncryptionUtils.Decrypt(fileContent);
-                if (string.IsNullOrEmpty(jsonContent)) {
+                if (string.IsNullOrEmpty(jsonContent))
+                {
                     Debug.LogError($"Save file at '{filePath}' is corrupted or could not be decrypted.");
                     return null;
                 }
-                
+
                 var save = DeserializeFile<T>(jsonContent);
-                if (save == null) {
+                if (save == null)
+                {
                     Debug.LogError($"Could not deserialize Save at path '{filePath}'!");
                     return null;
                 }
@@ -151,24 +170,28 @@ namespace NullCore {
                 Debug.Log($"Successfully loaded save file '{Path.GetFileName(filePath)}' from path '{filePath}'.");
                 return save;
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.LogError(e);
             }
 
             return null;
         }
 
-        static T DeserializeFile<T>(string fileContent) where T : PersistentData {
-            #if NEWTONSOFT_JSON
+        static T DeserializeFile<T>(string fileContent) where T : PersistentData
+        {
+#if NEWTONSOFT_JSON
             return JsonConvert.DeserializeObject<T>(fileContent, JsonExtensions.DefaultSettings);
-            #else
+#else
 			return JsonUtility.FromJson<T>(fileContent);
-            #endif
+#endif
         }
 
-        private static IEnumerable<T> EnumerateSaveFiles<T>() where T : GameStateBase {
+        private static IEnumerable<T> EnumerateSaveFiles<T>() where T : GameStateBase
+        {
             string[] filesPaths;
-            try {
+            try
+            {
                 var directory = new DirectoryInfo(GetGameStateFolder());
                 if (!directory.Exists) yield break;
 
@@ -180,21 +203,26 @@ namespace NullCore {
 
                 Debug.Log($"Found {filesPaths.Length} save files.");
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.LogError("Could not access save folder: " + e);
                 yield break;
             }
 
-            foreach (var filePath in filesPaths) {
+            foreach (var filePath in filesPaths)
+            {
                 T save = null;
-                try {
+                try
+                {
                     save = LoadFromPath<T>(filePath);
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Debug.LogError($"Error reading file from path '{filePath}': " + e);
                 }
 
-                if (save != null) {
+                if (save != null)
+                {
                     yield return save;
                 }
             }
@@ -203,18 +231,20 @@ namespace NullCore {
         /// <summary>
         /// Returns all saves ordered by most recent. Never returns a null list.
         /// </summary>
-        public static List<T> GetAllSaveFiles<T>() where T : GameStateBase {
+        public static List<T> GetAllSaveFiles<T>() where T : GameStateBase
+        {
             return new List<T>(EnumerateSaveFiles<T>());
         }
 
         /// <summary>
         /// Returns the most recent save file or null if none found.
         /// </summary>
-        public static T GetMostRecentSaveFile<T>() where T : GameStateBase {
+        public static T GetMostRecentSaveFile<T>() where T : GameStateBase
+        {
             using var enumerator = EnumerateSaveFiles<T>().GetEnumerator();
             return enumerator.MoveNext() ? enumerator.Current : null;
         }
-        
+
         #endregion <<---------- Loading ---------->>
 
 
@@ -222,14 +252,17 @@ namespace NullCore {
 
         #region Deleting
 
-        public bool DeleteSave() {
-            try {
+        public bool DeleteSave()
+        {
+            try
+            {
                 var filePath = GetGameStateFilePath(this.SaveIdentifier.ToShortString());
                 if (!File.Exists(filePath)) return false;
                 File.Delete(filePath);
                 return true;
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.LogException(e);
             }
             return false;
@@ -237,62 +270,69 @@ namespace NullCore {
 
         #endregion Deleting
 
-        
+
 
 
         #region <<---------- Paths ---------->>
 
         private static string _cachedGameStateFolder;
 
-        public static string GetGameStateFolder() {
+        public static string GetGameStateFolder()
+        {
             if (!string.IsNullOrEmpty(_cachedGameStateFolder)) return _cachedGameStateFolder;
 
             var persistentDataPath = GetApplicationPersistentDataFolder();
-            
+
             // Default path: .../EnigmaticComma/ApplicationName/save
             var folderPath = Path.Combine(persistentDataPath, SavesDirectoryName);
 
             // Steamworks support: .../EnigmaticComma/ApplicationName/SteamID/save
             ulong? steamId = GetSteamID();
-            if (steamId.HasValue) {
+            if (steamId.HasValue)
+            {
                 folderPath = Path.Combine(persistentDataPath, steamId.Value.ToString(), SavesDirectoryName);
             }
 
             folderPath = folderPath.Replace('\\', '/');
-            if (!Directory.Exists(folderPath)) {
+            if (!Directory.Exists(folderPath))
+            {
                 Directory.CreateDirectory(folderPath);
             }
-            
+
             CopyOldSaveFiles(folderPath);
 
             _cachedGameStateFolder = folderPath;
-            Debug.Log($"{nameof(GetGameStateFolder)} returned: '{folderPath}'");
             return folderPath;
         }
 
         private static void CopyOldSaveFiles(string newSavePath)
         {
-            try {
+            try
+            {
                 var persistentPath = GetApplicationPersistentDataFolder();
                 // persistentPath is .../AppData/LocalLow/EnigmaticComma/ProductName
-                
+
                 var productDir = new DirectoryInfo(persistentPath);
                 var companyDir = productDir.Parent; // EnigmaticComma
                 var localLowDir = companyDir.Parent; // LocalLow
 
                 var oldCompanyNames = new string[] { "ChrisDBHR", "Enigmatic Comma", companyDir.Name };
                 // logic: check old names + "SavesDir"
-                
-                foreach (var oldComp in oldCompanyNames) {
+
+                foreach (var oldComp in oldCompanyNames)
+                {
                     var oldPath = Path.Combine(localLowDir.FullName, oldComp, productDir.Name, "SavesDir");
-                    
-                    if (Directory.Exists(oldPath)) {
+
+                    if (Directory.Exists(oldPath))
+                    {
                         bool copiedAny = false;
-                        foreach (var file in Directory.GetFiles(oldPath)) {
+                        foreach (var file in Directory.GetFiles(oldPath))
+                        {
                             var fileName = Path.GetFileName(file);
                             var destPath = Path.Combine(newSavePath, fileName);
-                            
-                            if (!File.Exists(destPath)) {
+
+                            if (!File.Exists(destPath))
+                            {
                                 File.Copy(file, destPath);
                                 copiedAny = true;
                             }
@@ -300,37 +340,47 @@ namespace NullCore {
                         if (copiedAny) Debug.Log($"[Migration] Copied saves from '{oldPath}' to '{newSavePath}'");
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Debug.LogError($"[Migration] Failed to copy old save files: {e.Message}");
             }
         }
 
-        private static ulong? GetSteamID() {
-            try {
+        private static ulong? GetSteamID()
+        {
+            try
+            {
                 // Use Reflection to avoid hard dependency on Facepunch.Steamworks
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 var steamAssembly = assemblies.FirstOrDefault(a => a.GetName().Name.StartsWith("Facepunch.Steamworks"));
-                
-                if (steamAssembly != null) {
+
+                if (steamAssembly != null)
+                {
                     var clientType = steamAssembly.GetType("Steamworks.SteamClient");
-                    if (clientType != null) {
+                    if (clientType != null)
+                    {
                         var isValidProp = clientType.GetProperty("IsValid", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
-                        if (isValidProp != null && (bool)isValidProp.GetValue(null)) {
+                        if (isValidProp != null && (bool)isValidProp.GetValue(null))
+                        {
                             var steamIdProp = clientType.GetProperty("SteamId", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
                             var steamIdObj = steamIdProp.GetValue(null);
                             // SteamId is a struct with a 'Value' ulong property
                             var valueProp = steamIdObj.GetType().GetProperty("Value", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
-                            if (valueProp != null) {
+                            if (valueProp != null)
+                            {
                                 return (ulong)valueProp.GetValue(steamIdObj);
                             }
                         }
                     }
                 }
-            } catch { }
+            }
+            catch { }
             return null;
         }
-        
-        public static string GetGameStateFilePath(string fileName) {
+
+        public static string GetGameStateFilePath(string fileName)
+        {
             return Path.Combine(GetGameStateFolder(), $"{fileName}{EnigmaPaths.SaveExtension}");
         }
 
@@ -341,12 +391,14 @@ namespace NullCore {
 
         #region <<---------- General ---------->>
 
-        public static bool CheckForModifiedFile<T>(T dataT) {
+        public static bool CheckForModifiedFile<T>(T dataT)
+        {
             if (!(dataT is GameStateBase data)) return true;
             var originalHash = data.SaveHash;
             data.SaveHash = string.Empty;
             var newHash = Animator.StringToHash(data.GetSerializedJson()).ToString();
-            if (originalHash != newHash) {
+            if (originalHash != newHash)
+            {
                 Debug.Log($"Save file '{data.SaveIdentifier}' was modified externally!");
                 _onNotifyForExternalModifiedSaveFile?.Invoke();
                 return true;
