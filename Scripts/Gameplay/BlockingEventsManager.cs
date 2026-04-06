@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 namespace NullCore {
 	public class BlockingEventsManager {
                 
-		public bool InMenuOrPlayingCutscene => IsInMenu || IsPlayingCutscene || IsPlayingInteractiveSubtitle;
+		public bool InMenuOrPlayingCutscene => IsInMenu || IsPlayingCutscene;
 
         public bool IsPlayingCutscene => PlayingCutsceneRetainable.IsRetained;
         public readonly Retainable PlayingCutsceneRetainable;
@@ -13,16 +13,12 @@ namespace NullCore {
         public bool IsInMenu => MenuRetainable.IsRetained;
         public readonly Retainable MenuRetainable;
 
-        public bool IsPlayingInteractiveSubtitle => InteractiveSubtitleRetainable.IsRetained;
-        public readonly Retainable InteractiveSubtitleRetainable;
-
         public event Action<bool> InMenuOrPlayingCutsceneEvent = delegate { };
 
         public BlockingEventsManager()
         {
 	        MenuRetainable = new ();
 	        PlayingCutsceneRetainable = new ();
-            InteractiveSubtitleRetainable = new ();
 	        
 	        // on menu
 	        MenuRetainable.StateEvent += state => {
@@ -33,11 +29,6 @@ namespace NullCore {
 	        PlayingCutsceneRetainable.StateEvent += state => {
 		        InMenuOrPlayingCutsceneEvent.Invoke(InMenuOrPlayingCutscene);
 	        };
-
-            // playing interactive subtitle
-            InteractiveSubtitleRetainable.StateEvent += state => {
-                InMenuOrPlayingCutsceneEvent.Invoke(InMenuOrPlayingCutscene);
-            };
         }
 	}
 }

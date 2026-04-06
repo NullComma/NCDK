@@ -1,9 +1,9 @@
 using UnityEngine.Scripting;
 
-namespace NullCore.DependencyInjection
+namespace NullCore
 {
     /// <summary>
-    /// Interface for modules that register dependencies into the static DIContainer.
+    /// Interface for modules that register dependencies into the static NullCore.ServiceLocator.
     /// </summary>
     public interface IInstaller
     {
@@ -13,7 +13,7 @@ namespace NullCore.DependencyInjection
         int Priority { get; }
 
         /// <summary>
-        /// Performs the registration of services using DIContainer.
+        /// Performs the registration of services using NullCore.ServiceLocator.
         /// </summary>
         void Install();
     }

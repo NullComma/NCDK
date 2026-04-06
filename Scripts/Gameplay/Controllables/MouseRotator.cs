@@ -1,5 +1,5 @@
 ﻿using System;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -10,7 +10,7 @@ namespace NullCore {
 		
 		#region <<---------- Properties and Fields ---------->>
 		
-		[NonSerialized,Inject] BlockingEventsManager _blockingEventsManager;
+		[NonSerialized] BlockingEventsManager _blockingEventsManager;
 		[SerializeField] Vector2 _rotationSpeed = Vector2.one * 0.2f;
 		[SerializeField] Vector2 _rotationYRange = new Vector2(60f, 60f);
 		[SerializeField] Vector2 _rotationXRange = new Vector2(60f, 30f);
@@ -28,7 +28,8 @@ namespace NullCore {
 
 		#region <<---------- MonoBehaviour ---------->>
 		protected void Awake() {
-			this.Inject();
+			_blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
+			
 			_transform = transform;
 			_initialRotation = _transform.rotation;
 		}

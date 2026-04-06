@@ -12,7 +12,7 @@ namespace NullCore {
         Vector3 previousPosition;
 
         void Start() {
-            this.CDestroyGameObject(autoDestroyAfter);
+            this.DestroyGameObject(autoDestroyAfter);
         }
 
         void Update() {
@@ -35,7 +35,7 @@ namespace NullCore {
         }
 
         void DestroyBullet(Vector3 hitPoint) {
-            this.CDestroyGameObject();
+            this.DestroyGameObject();
         }
 
         #if UNITY_EDITOR
