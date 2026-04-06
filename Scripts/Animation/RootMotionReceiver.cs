@@ -13,7 +13,7 @@ namespace NullCore
 
         void Awake()
         {
-            _animator = this.CGetComponentInChildrenOrInParent<Animator>();
+            _animator = this.GetComponentInChildrenOrInParent<Animator>();
         }
 
         void OnAnimatorMove()

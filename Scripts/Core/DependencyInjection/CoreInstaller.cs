@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Scripting;
 using UnityEngine.AddressableAssets;
 
-namespace NullCore.DependencyInjection
+namespace NullCore
 {
     [Preserve]
     [DefaultExecutionOrder(int.MinValue)]
@@ -14,11 +14,12 @@ namespace NullCore.DependencyInjection
         
         public void Install()
         {
-            DIContainer.RegisterLazy(typeof(BlockingEventsManager));
-            DIContainer.RegisterLazy(typeof(TimePauseManager));
-            DIContainer.Register(typeof(CursorManager));
-            DIContainer.RegisterLazy(() => GetUISoundsBankSO());
-            DIContainer.RegisterLazy(() => GameObjectCreate.WithComponent<Fader>("Fader"));
+            var blockingEventsManager = new BlockingEventsManager();
+            ServiceLocator.Register(blockingEventsManager);
+            ServiceLocator.Register(new CursorManager(blockingEventsManager));
+            ServiceLocator.RegisterLazy<TimePauseManager>();
+            ServiceLocator.RegisterLazy(() => GetUISoundsBankSO());
+            ServiceLocator.RegisterLazy(() => GameObjectCreate.WithComponent<Fader>("Fader"));
         }
 
         static UISoundsBankSO GetUISoundsBankSO()
