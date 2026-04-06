@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,20 +32,19 @@ namespace NullCore
         int sceneToLoadIndex = 1;
 
         [Header("Object References")]
-        [SerializeField, Tooltip("The parent GameObject containing the splash Image objects as children.")]
-        Transform splashImagesHolder;
+        [SerializeField, Tooltip("The splash screen objects to display sequentially.")]
+        List<GameObject> splashObjects = new();
 
         // Non-Serialized Fields
         [NonSerialized] CanvasGroup canvasGroup;
-        [NonSerialized] List<Image> splashImages = new();
         [NonSerialized] bool allowSkip;
         [NonSerialized] Coroutine splashCoroutine;
         [NonSerialized] AsyncOperation sceneLoadOperation;
-        [Inject] BlockingEventsManager blockingEventsManager;
+        BlockingEventsManager blockingEventsManager;
 
         void Awake()
         {
-            this.Inject();
+            blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
             if (!TryGetComponent(out canvasGroup))
             {
                 Debug.LogError($"{nameof(SplashScreen)} requires a CanvasGroup component.");
@@ -53,13 +52,12 @@ namespace NullCore
                 return;
             }
 
-            if (splashImagesHolder == null) splashImagesHolder = this.transform;
-
-            var childTransforms = splashImagesHolder.GetComponentsInChildren<Image>(true);
-            foreach (var image in childTransforms)
+            foreach (var splashObj in splashObjects)
             {
-                splashImages.Add(image);
-                image.gameObject.SetActive(false);
+                if (splashObj != null)
+                {
+                    splashObj.SetActive(false);
+                }
             }
         }
 
@@ -75,7 +73,7 @@ namespace NullCore
 
         IEnumerator Start()
         {
-            
+
 #if UNITY_LOCALIZATION
             var localizationInitializationOperation = LocalizationSettings.InitializationOperation;
 #endif
@@ -85,11 +83,11 @@ namespace NullCore
 
             // Start the visual splash screen sequence.
             splashCoroutine = StartCoroutine(SplashScreenSequence());
-            
+
 #if UNITY_LOCALIZATION
             yield return localizationInitializationOperation;
 #endif
-            
+
             allowSkip = true;
             yield return null;
         }
@@ -104,7 +102,7 @@ namespace NullCore
             if (Gamepad.current != null)
             {
                 gamepadSkip = Gamepad.current.buttonSouth.wasPressedThisFrame ||
-                              Gamepad.current.buttonEast.wasPressedThisFrame  ||
+                              Gamepad.current.buttonEast.wasPressedThisFrame ||
                               Gamepad.current.startButton.wasPressedThisFrame;
             }
             bool mouseSkip = false;
@@ -130,7 +128,7 @@ namespace NullCore
         {
             Debug.Log("Splash screen skipped by user.");
             allowSkip = false;
-            
+
             if (splashCoroutine != null)
             {
                 StopCoroutine(splashCoroutine);
@@ -142,24 +140,24 @@ namespace NullCore
         {
             canvasGroup.alpha = 0f;
 
-            foreach (var image in splashImages)
+            foreach (var splashObj in splashObjects)
             {
-                image.gameObject.SetActive(true);
+                splashObj.SetActive(true);
                 yield return Fade(1f, fadeInDuration);
                 yield return new WaitForSeconds(holdDuration);
-                if (image.gameObject.TryGetComponent(out ESplashScreenExtraTime extraTime))
+                if (splashObj.TryGetComponent(out ESplashScreenExtraTime extraTime))
                 {
                     yield return new WaitForSeconds(extraTime.ExtraTime);
                 }
                 yield return Fade(0f, fadeOutDuration);
-                image.gameObject.SetActive(false);
+                splashObj.SetActive(false);
             }
 
             allowSkip = false;
-            
+
             Debug.Log("Waiting for system initialization.");
 
-            
+
             Debug.Log("Splash sequence finished. Activating next scene.");
             if (sceneLoadOperation != null)
             {

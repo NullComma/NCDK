@@ -1,5 +1,5 @@
 using System;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 
 namespace NullCore
@@ -10,7 +10,7 @@ namespace NullCore
     /// </summary>
     public class BlockingEventsTrigger : MonoBehaviour
     {
-        [NonSerialized, Inject] BlockingEventsManager _blockingEventsManager;
+        [NonSerialized,] BlockingEventsManager _blockingEventsManager;
 
         [Header("Combined (Menu OR Cutscene)")]
         [Tooltip("Triggered when the game is paused OR in a cutscene.")]
@@ -28,7 +28,8 @@ namespace NullCore
 
         void Awake()
         {
-            this.Inject();
+			_blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
+            
             
             UpdateStates(_blockingEventsManager.InMenuOrPlayingCutscene);
         }

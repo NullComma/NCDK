@@ -1,16 +1,15 @@
 ﻿using System;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 
 namespace NullCore {
     [Obsolete("Use PlayableHelper instead")]
 	public class PlayingCutsceneSetter : MonoBehaviour {
-		[NonSerialized,Inject] BlockingEventsManager _blockingEventsManager;
+		[NonSerialized] BlockingEventsManager _blockingEventsManager;
 		[SerializeField] bool _setOnEnableDisable = true;
 
-		void Awake() => this.Inject();
-
 		void OnEnable() {
+			_blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
 			if (!_setOnEnableDisable) return;
 			_blockingEventsManager.PlayingCutsceneRetainable.Retain(this);
 		}

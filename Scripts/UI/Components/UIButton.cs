@@ -21,7 +21,7 @@ namespace NullCore.UI {
 		protected override void Awake()
 		{
 			base.Awake();
-			Button.CAssertIfNull("Button in a UIButton is null!");
+			Button.AssertIfNull("Button in a UIButton is null!");
 		}
 
 		protected override void OnEnable()

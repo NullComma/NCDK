@@ -1,5 +1,5 @@
 using System;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 
 namespace NullCore {
@@ -7,7 +7,7 @@ namespace NullCore {
 
 		#region <<---------- Properties and Fields ---------->>
 		
-		[NonSerialized,Inject] BlockingEventsManager _blockingEventsManager;
+		[NonSerialized] BlockingEventsManager _blockingEventsManager;
         [SerializeField] protected bool _debug;
 		[SerializeField] bool onlyWorkOneTimePerSceneLoad;
         [SerializeField] Transform _interactionPromptPoint;
@@ -23,7 +23,8 @@ namespace NullCore {
 
 		protected virtual void Awake()
 		{
-			this.Inject();
+			_blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
+			
 		}
 
 		protected virtual void OnEnable() {

@@ -1,5 +1,5 @@
 using System;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -25,7 +25,7 @@ namespace NullCore.UI {
 		#endif
 		
         [SerializeField] protected UnityEvent _interactEvent;
-		[Inject, NonSerialized] UISoundsBankSO _uiSoundsBankSo;
+		[NonSerialized] UISoundsBankSO _uiSoundsBankSo;
 
         #endregion <<---------- Properties and Fields ---------->>
 
@@ -36,7 +36,8 @@ namespace NullCore.UI {
 
 		protected virtual void Awake()
 		{
-			this.Inject();
+			_uiSoundsBankSo = ServiceLocator.Resolve<UISoundsBankSO>();
+			
 			if(_uiSoundsBankSo == null) _uiSoundsBankSo = ScriptableObject.CreateInstance<UISoundsBankSO>();
 		}
 

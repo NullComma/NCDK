@@ -1,5 +1,5 @@
 ﻿using System;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -24,7 +24,7 @@ namespace NullCore {
                 }
             }
         }
-		[NonSerialized,Inject] BlockingEventsManager _blockingEventsManager;
+		[NonSerialized] BlockingEventsManager _blockingEventsManager;
         [SerializeField] bool _isPlayingCutscene;
 		[SerializeField] protected PlayableDirector _playableDirector;
 		[SerializeField] [Obsolete("Not working as expected.")] protected bool _autoSetIsPlayingCutsceneOnBlockingEventsManager = true;
@@ -40,7 +40,8 @@ namespace NullCore {
 		#region <<---------- MonoBehaviour ---------->>
 
 		protected virtual void Awake() {
-			this.Inject();
+			_blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
+			
             if (_playableDirector.extrapolationMode != DirectorWrapMode.None) {
                 Debug.LogError($"PlayableDirector {_playableDirector.name} extrapolationMode must be set to None.");
             }

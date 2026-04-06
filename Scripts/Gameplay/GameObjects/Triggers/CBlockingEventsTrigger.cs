@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,7 +14,7 @@ namespace NullCore
     [Obsolete("Use BlockingEventsTrigger instead. Please use the 'MIGRATE' button in Inspector.", false)]
     public class CBlockingEventsTrigger : MonoBehaviour
     {
-        [NonSerialized, Inject] BlockingEventsManager _blockingEventsManager;
+        [NonSerialized,] BlockingEventsManager _blockingEventsManager;
 
         // --- Combined 
 #if ODIN_INSPECTOR
@@ -75,7 +75,8 @@ namespace NullCore
 
         void Awake()
         {
-            this.Inject();
+			_blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
+            
             if (_blockingEventsManager != null)
                 BlockingEvent(_blockingEventsManager.InMenuOrPlayingCutscene);
         }

@@ -1,5 +1,5 @@
 using System;
-using NullCore.DependencyInjection;
+using NullCore;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -9,34 +9,34 @@ namespace NullCore.UI
     public abstract class View : MonoBehaviour
     {
         #region Properties
-        
+
         [Header("Setup")]
         [SerializeField] protected EventSystem _eventSystem;
         [SerializeField] protected UIButton _buttonReturn;
-        
+
         [Header("Behavior")]
         public bool ShouldPauseTheGame = true;
         public bool CanCloseWithCancel = true;
 
-        [Inject] [NonSerialized] protected BlockingEventsManager _blockingEventsManager;
-        [Inject] [NonSerialized] protected TimePauseManager timePauseManager;
-        
+        [NonSerialized] protected BlockingEventsManager _blockingEventsManager;
+        [NonSerialized] protected TimePauseManager timePauseManager;
+
         public static View ActiveView { get; private set; }
         protected View _returnToView;
 
         GameObject _lastSelectedObject;
 
         public event Action CloseEvent = delegate { };
-        
+
         #endregion
 
         protected virtual void OnValidate()
         {
 #if UNITY_EDITOR
-            if(_eventSystem == null)
+            if (_eventSystem == null)
             {
                 _eventSystem = GetComponentInChildren<EventSystem>();
-                if(_eventSystem != null)
+                if (_eventSystem != null)
                 {
                     UnityEditor.EditorUtility.SetDirty(this);
                 }
@@ -46,18 +46,19 @@ namespace NullCore.UI
 
         protected virtual void Awake()
         {
-            this.Inject();
+            _blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
+            timePauseManager = ServiceLocator.Resolve<TimePauseManager>();
             if (_eventSystem == null) _eventSystem = GetComponentInChildren<EventSystem>(true);
         }
 
-		protected virtual void OnEnable()
+        protected virtual void OnEnable()
         {
             // Store which object was selected right before this view opened.
             if (EventSystem.current != null)
                 _lastSelectedObject = EventSystem.current.currentSelectedGameObject;
 
             _blockingEventsManager.MenuRetainable.Retain(this);
-            
+
             if (ShouldPauseTheGame)
                 timePauseManager.Retain(this);
 
@@ -65,7 +66,7 @@ namespace NullCore.UI
                 handlers.CancelEvent += OnCancelEvent;
 
             if (_buttonReturn) _buttonReturn.ClickEvent += CloseByCancelled;
-            
+
             // Navigation Logic: "Push" to stack
             // Hide previous view (Release functionality)
             if (ActiveView != this)
@@ -77,14 +78,14 @@ namespace NullCore.UI
                 }
                 ActiveView = this;
             }
-            
+
             // Attempt to re-select the object that was selected before the next view was opened.
             var objectToSelect = _lastSelectedObject != null ? _lastSelectedObject : FirstSelectedObject();
             if (objectToSelect != null)
             {
                 _eventSystem.SetSelectedGameObject(objectToSelect);
             }
-            
+
         }
 
         void LateUpdate()
@@ -102,13 +103,13 @@ namespace NullCore.UI
                 }
             }
         }
-        
+
         protected virtual void OnDisable()
         {
             if (_eventSystem != null && _eventSystem.TryGetComponent(out EventSystemHandlers handlers))
                 handlers.CancelEvent -= OnCancelEvent;
-            
-            if(_buttonReturn) _buttonReturn.ClickEvent -= CloseByCancelled;
+
+            if (_buttonReturn) _buttonReturn.ClickEvent -= CloseByCancelled;
 
             _blockingEventsManager.MenuRetainable.Release(this);
 
@@ -116,21 +117,21 @@ namespace NullCore.UI
                 timePauseManager.Release(this);
         }
 
-		void OnDestroy()
-		{
+        void OnDestroy()
+        {
             // Navigation Logic: "Pop" from stack
             if (ActiveView == this)
             {
                 // We are the active view and we are dying. Pass control back.
                 ActiveView = null; // Clear first so Show() doesn't capture us as parent
-                if(_returnToView) _returnToView.gameObject.SetActive(true);
+                if (_returnToView) _returnToView.gameObject.SetActive(true);
             }
             CloseEvent.Invoke();
-		}
+        }
 
         public virtual void Show()
         {
-            if(EApplication.IsQuitting)
+            if (EApplication.IsQuitting)
             {
                 Debug.Log($"[View] Show() called on '{gameObject.name}' during application quitting. Ignoring.");
                 return;
@@ -153,7 +154,7 @@ namespace NullCore.UI
         /// </summary>
         public static void CloseAllViews()
         {
-            var views = UnityEngine.Object.FindObjectsByType<View>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var views = UnityEngine.Object.FindObjectsByType<View>(FindObjectsInactive.Include);
             foreach (var view in views)
             {
                 view.Close();
@@ -165,7 +166,7 @@ namespace NullCore.UI
         /// </summary>
         public void CloseByCancelled()
         {
-            if(!CanCloseWithCancel) return;
+            if (!CanCloseWithCancel) return;
             Close();
         }
 
@@ -173,7 +174,7 @@ namespace NullCore.UI
         {
             CloseByCancelled();
         }
-        
+
         private GameObject FirstSelectedObject()
         {
             if (_eventSystem.firstSelectedGameObject != null) return _eventSystem.firstSelectedGameObject;

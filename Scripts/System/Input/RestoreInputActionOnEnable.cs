@@ -32,7 +32,7 @@ namespace NullCore
         [MenuItem("CONTEXT/RestoreInputActionOnEnable/Add RestoreInputActionOnEnable")]
         static void AddRestoreInputActionOnEnable(MenuCommand data) {
             if (data?.context is not RestoreInputActionOnEnable comp) return;
-            comp.CGetOrAddComponent<RestoreInputActionOnEnable>();
+            comp.GetOrAddComponent<RestoreInputActionOnEnable>();
             Debug.Log("Added RestoreInputActionOnEnable");
             EditorUtility.SetDirty(comp);
         }
