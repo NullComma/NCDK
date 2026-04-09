@@ -38,9 +38,7 @@ namespace NullCore.Editor
 
             _nameCache = new Dictionary<SerializableGuid, string>();
             _gameObjectCache = new Dictionary<SerializableGuid, GameObject>();
-
-            IdentifiableMonoBehaviour[] allIdentifiables = Object.FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include);
-
+            var allIdentifiables = Object.FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (IdentifiableMonoBehaviour idObj in allIdentifiables)
             {
                 if (idObj != null && idObj.ID != SerializableGuid.Empty)

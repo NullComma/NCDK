@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -84,7 +84,7 @@ namespace NullCore
 
             // 2. Check for duplicates in Scene
             // finding all objects is heavy, but OnValidate in Editor is acceptable for this safety.
-            var allIdentifiables = FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include);
+            var allIdentifiables = FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (var other in allIdentifiables)
             {
                 if (other == this) continue;

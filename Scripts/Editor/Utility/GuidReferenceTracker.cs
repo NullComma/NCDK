@@ -32,9 +32,7 @@ namespace NullCore.Editor
         public static void ForceRebuild()
         {
             _referencersCache = new Dictionary<SerializableGuid, List<Object>>();
-
-            MonoBehaviour[] allBehaviours = Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include);
-
+            var allBehaviours = Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (MonoBehaviour mb in allBehaviours)
             {
                 if (mb == null) continue;

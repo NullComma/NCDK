@@ -154,7 +154,7 @@ namespace NullCore.UI
         /// </summary>
         public static void CloseAllViews()
         {
-            var views = UnityEngine.Object.FindObjectsByType<View>(FindObjectsInactive.Include);
+            var views = UnityEngine.Object.FindObjectsByType<View>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (var view in views)
             {
                 view.Close();

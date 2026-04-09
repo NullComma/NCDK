@@ -49,16 +49,7 @@ namespace NullCore.Refs
                     {
                         continue;
                     }
-#if UNITY_6000_4_OR_NEWER
-                    Object[] objects = Object.FindObjectsByType(scriptType, FindObjectsInactive.Include);
-#elif UNITY_2021_3_18_OR_NEWER
-                    Object[] objects = Object.FindObjectsByType(scriptType, FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
-#elif UNITY_2020_1_OR_NEWER
-                    Object[] objects = Object.FindObjectsOfType(scriptType, true);
-#else
-                    Object[] objects = Object.FindObjectsOfType(scriptType);
-#endif
-
+                    var objects = Object.FindObjectsOfType(scriptType);
                     if (objects.Length == 0)
                     {
                         continue;
