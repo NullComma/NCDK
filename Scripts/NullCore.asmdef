@@ -11,16 +11,18 @@
         "Unity.InputSystem",
         "Unity.Addressables",
         "Unity.ResourceManager",
-        "Unity.Localization",
         "UnityEngine.CoreModule",
         "Unity.Netcode.Runtime",
-        "NullCore.Refs"
+        "NullCore.Refs",
+        "I2Localization",
+        "Unity.Localization"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [
         {

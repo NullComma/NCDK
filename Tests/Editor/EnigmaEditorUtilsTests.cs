@@ -32,7 +32,7 @@ namespace NullCore.Tests.Editor
         {
             var obj = new TestObjectWithField { boolField = true };
             Assert.IsTrue(EnigmaEditorUtils.EvaluateCondition(obj, "boolField"));
-            
+
             obj.boolField = false;
             Assert.IsFalse(EnigmaEditorUtils.EvaluateCondition(obj, "boolField"));
         }
@@ -42,7 +42,7 @@ namespace NullCore.Tests.Editor
         {
             var obj = new TestObjectWithProperty { BoolProperty = true };
             Assert.IsTrue(EnigmaEditorUtils.EvaluateCondition(obj, "BoolProperty"));
-            
+
             obj.BoolProperty = false;
             Assert.IsFalse(EnigmaEditorUtils.EvaluateCondition(obj, "BoolProperty"));
         }

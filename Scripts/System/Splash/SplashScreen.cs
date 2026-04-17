@@ -8,16 +8,14 @@ using UnityEngine.UI;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using NullCore.Refs;
+
 #endif
 
-#if UNITY_LOCALIZATION
-using UnityEngine.Localization.Settings;
-#endif
 
 namespace NullCore
 {
-    [RequireComponent(typeof(CanvasGroup))]
-    public class SplashScreen : MonoBehaviour
+    public class SplashScreen : ValidatedMonoBehaviour
     {
         [Header("Timing Settings")]
         [SerializeField, Tooltip("Duration in seconds for each image to fade in.")]
@@ -35,23 +33,20 @@ namespace NullCore
         [SerializeField, Tooltip("The splash screen objects to display sequentially.")]
         List<GameObject> splashObjects = new();
 
+        [Tooltip("The pre-splash loading indicator to display before start showing logos.")]
+        [SerializeField] GameObject preSplashIndicator;
+
+        [SerializeField, Scene(Flag.Editable)] CanvasGroup canvasGroup;
+
         // Non-Serialized Fields
-        [NonSerialized] CanvasGroup canvasGroup;
         [NonSerialized] bool allowSkip;
         [NonSerialized] Coroutine splashCoroutine;
         [NonSerialized] AsyncOperation sceneLoadOperation;
-        BlockingEventsManager blockingEventsManager;
+        [NonSerialized] BlockingEventsManager blockingEventsManager;
 
         void Awake()
         {
             blockingEventsManager = ServiceLocator.Resolve<BlockingEventsManager>();
-            if (!TryGetComponent(out canvasGroup))
-            {
-                Debug.LogError($"{nameof(SplashScreen)} requires a CanvasGroup component.");
-                enabled = false;
-                return;
-            }
-
             foreach (var splashObj in splashObjects)
             {
                 if (splashObj != null)
@@ -73,20 +68,25 @@ namespace NullCore
 
         IEnumerator Start()
         {
+            float startTime = Time.realtimeSinceStartup;
+            Debug.Log($"[SplashScreen] Start sequence @ {startTime:F2}s");
 
-#if UNITY_LOCALIZATION
-            var localizationInitializationOperation = LocalizationSettings.InitializationOperation;
-#endif
+            // 1. Wait for the engine core to be ready (EApplication initialization)
+            yield return new WaitUntil(() => EApplication.IsInitialized);
+
+            if (preSplashIndicator != null) preSplashIndicator.SetActive(false);
+            canvasGroup.gameObject.SetActive(true);
+
+
+            // 3. Start loading the next scene ONLY after initialization is complete
             sceneLoadOperation = SceneManager.LoadSceneAsync(sceneToLoadIndex);
+
             // Prevent the scene from activating as soon as it's finished loading.
             sceneLoadOperation.allowSceneActivation = false;
 
-            // Start the visual splash screen sequence.
+            // 4. Start the visual splash screen sequence.
+            // This is safe now because all LocalizedString components on splash objects will find the system ready.
             splashCoroutine = StartCoroutine(SplashScreenSequence());
-
-#if UNITY_LOCALIZATION
-            yield return localizationInitializationOperation;
-#endif
 
             allowSkip = true;
             yield return null;
@@ -155,13 +155,18 @@ namespace NullCore
 
             allowSkip = false;
 
-            Debug.Log("Waiting for system initialization.");
-
-
-            Debug.Log("Splash sequence finished. Activating next scene.");
+            Debug.Log($"Splash sequence finished. Activating next scene. (Scene load status: {sceneLoadOperation?.progress * 100:F0}%)");
             if (sceneLoadOperation != null)
             {
+                var sceneActivationStart = Time.realtimeSinceStartup;
                 sceneLoadOperation.allowSceneActivation = true;
+
+                // Track how long it takes for the scene to actually become active
+                while (!sceneLoadOperation.isDone)
+                {
+                    yield return null;
+                }
+                Debug.Log($"[SplashScreen] Scene activation completed in {Time.realtimeSinceStartup - sceneActivationStart:F2}s");
             }
         }
 

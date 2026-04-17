@@ -18,32 +18,33 @@ using UnityEditor;
 using FMODUnity;
 #endif
 
-namespace NullCore 
+namespace NullCore
 {
     /// <summary>
     /// Handles low-level application configuration, lifecycle events, and environment setup.
     /// Executed before the splash screen to ensure the engine is ready for gameplay logic.
     /// </summary>
     [DefaultExecutionOrder(int.MinValue)]
-    public static class EApplication 
+    public static class EApplication
     {
         #region <<---------- Properties and Fields ---------->>
 
         public static event Action ApplicationInitialized = delegate { };
+        public static bool IsInitialized { get; private set; }
 
         public static bool IsQuitting { get; private set; }
         public static CancellationTokenSource QuittingCancellationTokenSource;
 
-        #if UNITY_ADDRESSABLES_EXIST
+#if UNITY_ADDRESSABLES_EXIST
         public static IResourceLocator ResourceLocator;
-        #endif
-        
-        public static Version Version 
+#endif
+
+        public static Version Version
         {
-            get 
+            get
             {
                 if (_version != null) return _version;
-                if (Version.TryParse(Application.version, out _version)) 
+                if (Version.TryParse(Application.version, out _version))
                 {
                     return _version;
                 }
@@ -57,7 +58,7 @@ namespace NullCore
         #region <<---------- Initialization ---------->>
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
-        static void InitializeBeforeSceneLoad() 
+        static void InitializeBeforeSceneLoad()
         {
             Screen.sleepTimeout = SleepTimeout.NeverSleep;
             CreatePersistentDataPath();
@@ -67,72 +68,110 @@ namespace NullCore
 
         static void AppQuitEvents()
         {
-            QuittingCancellationTokenSource?.Dispose();
+            try
+            {
+                QuittingCancellationTokenSource?.Cancel();
+                QuittingCancellationTokenSource?.Dispose();
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[EApplication] Error disposing QuittingCancellationTokenSource: {e.Message}");
+            }
             QuittingCancellationTokenSource = new CancellationTokenSource();
 
             IsQuitting = false;
             Application.quitting -= OnApplicationIsQuitting;
             Application.quitting += OnApplicationIsQuitting;
-            
-            #if UNITY_EDITOR
+
+#if UNITY_EDITOR
             EditorApplication.quitting -= OnApplicationIsQuitting;
             EditorApplication.quitting += OnApplicationIsQuitting;
             EditorApplication.playModeStateChanged -= EditorApplicationOnPlayModeStateChanged;
             EditorApplication.playModeStateChanged += EditorApplicationOnPlayModeStateChanged;
-            
+
             static void EditorApplicationOnPlayModeStateChanged(PlayModeStateChange newState)
             {
                 IsQuitting = newState == PlayModeStateChange.ExitingPlayMode;
             }
-            #endif
+#endif
         }
 
-        static async Task InitializeApplicationAsync() 
+        static async Task InitializeApplicationAsync()
         {
+            var startTime = Time.realtimeSinceStartup;
+            Debug.Log($"[EApplication] Starting application initialization at {startTime:F2}s");
+
             // Set high priority to load initial assets quickly
-            Application.backgroundLoadingPriority = ThreadPriority.High; 
+            Application.backgroundLoadingPriority = ThreadPriority.High;
             QualitySettings.vSyncCount = 0;
             SetSlowFramerate();
 
-            #if UNITY_ADDRESSABLES_EXIST
-            await Addressables.InitializeAsync(true).Task;
-            #endif
-            
-            #if FMOD
-            try 
+            // Sequential Initialization
+#if UNITY_ADDRESSABLES_EXIST
+            try
             {
+                var addressablesStartTime = Time.realtimeSinceStartup;
+                await Addressables.InitializeAsync().Task;
+                Debug.Log($"[EApplication] Addressables initialized in {Time.realtimeSinceStartup - addressablesStartTime:F2}s");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[EApplication] Error initializing Addressables: {e.Message}");
+            }
+#endif
+
+#if I2LOC
+            try
+            {
+                var localizationStartTime = Time.realtimeSinceStartup;
+                I2.Loc.LocalizationManager.InitializeIfNeeded();
+                Debug.Log($"[EApplication] I2 Localization initialized in {Time.realtimeSinceStartup - localizationStartTime:F2}s. Language: {I2.Loc.LocalizationManager.CurrentLanguage}");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[EApplication] Error initializing I2 Localization: {e.Message}");
+            }
+#endif
+
+#if FMOD
+            try
+            {
+                var fmodStartTime = Time.realtimeSinceStartup;
                 RuntimeManager.LoadBank("Master");
                 RuntimeManager.LoadBank("Master.strings");
+                Debug.Log($"[EApplication] FMOD Banks loaded in {Time.realtimeSinceStartup - fmodStartTime:F2}s");
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Debug.LogException(e);
             }
-            #endif
-            
+#endif
+
             var isMobile = PlayerPlatformTrigger.IsMobilePlatform();
-            if (isMobile) 
+            if (isMobile)
             {
                 ScalableBufferManager.ResizeBuffers(0.7f, 0.7f);
             }
 
-            Application.backgroundLoadingPriority = ThreadPriority.Low;
+            Application.backgroundLoadingPriority = ThreadPriority.Normal;
             QualitySettings.vSyncCount = 1;
             SetDefaultFramerate();
 
             Application.focusChanged -= ApplicationOnfocusChanged;
             Application.focusChanged += ApplicationOnfocusChanged;
 
+            Debug.Log($"[EApplication] Application initialization finished in {Time.realtimeSinceStartup - startTime:F2}s");
+            IsInitialized = true;
             ApplicationInitialized.Invoke();
         }
 
-        static void ApplicationOnfocusChanged(bool focused) 
+        static void ApplicationOnfocusChanged(bool focused)
         {
-            if (focused) 
+            if (focused)
             {
                 SetDefaultFramerate();
             }
-            else 
+            else
             {
                 SetSlowFramerate();
             }
@@ -141,33 +180,33 @@ namespace NullCore
         #endregion <<---------- Initialization ---------->>
 
         #region <<---------- Paths ---------->>
-        
+
         /// <summary>
         /// This is required because in some situations Unity does not instantly create persistent data path right at the start of the application.
         /// </summary>
-        static void CreatePersistentDataPath() 
+        static void CreatePersistentDataPath()
         {
-            try 
+            try
             {
                 if (Directory.Exists(Application.persistentDataPath)) return;
                 Directory.CreateDirectory(Application.persistentDataPath);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Debug.LogError(e);
             }
         }
-        
+
         #endregion <<---------- Paths ---------->>
 
-       #region <<---------- Application ---------->>
+        #region <<---------- Application ---------->>
 
-        public static bool IsEditorOrDevelopment() 
+        public static bool IsEditorOrDevelopment()
         {
             return Application.isEditor || Debug.isDebugBuild;
         }
 
-        static void OnApplicationIsQuitting() 
+        static void OnApplicationIsQuitting()
         {
             Debug.Log("<b>Application is quitting...</b>");
             IsQuitting = true;
@@ -175,42 +214,42 @@ namespace NullCore
             Application.focusChanged -= ApplicationOnfocusChanged;
         }
 
-       public static void Quit(int exitCode = 0) 
-       {
+        public static void Quit(int exitCode = 0)
+        {
             Debug.Log("Requesting Application.Quit()");
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             Time.timeScale = 1f;
             UnityEditor.EditorApplication.isPlaying = false;
-            #elif UNITY_WEBGL
+#elif UNITY_WEBGL
             Application.OpenURL("https://enigmaticcomma.com");
-            #else
+#else
             Application.Quit(exitCode);
-            #endif
-       }
+#endif
+        }
 
-       #endregion <<---------- Application ---------->>
+        #endregion <<---------- Application ---------->>
 
         #region Framerate
 
-        static void SetDefaultFramerate() 
+        static void SetDefaultFramerate()
         {
             Application.targetFrameRate = -1;
         }
 
-        static void SetSlowFramerate() 
+        static void SetSlowFramerate()
         {
             Application.targetFrameRate = 18;
         }
 
-        public static int GetRefreshRateOrFallback() 
+        public static int GetRefreshRateOrFallback()
         {
             const int fallback = 60;
-            try 
+            try
             {
                 return Mathf.Max(fallback, (int)Screen.currentResolution.refreshRateRatio.value);
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 Debug.LogError(e);
             }
@@ -222,7 +261,7 @@ namespace NullCore
         /// <summary>
         /// Log and try Open URL.
         /// </summary>
-        public static void OpenURL(string urlToOpen) 
+        public static void OpenURL(string urlToOpen)
         {
             Debug.Log($"Requested to open url {urlToOpen}");
             Application.OpenURL(urlToOpen);

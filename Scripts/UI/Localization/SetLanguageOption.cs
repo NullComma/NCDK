@@ -1,60 +1,26 @@
 using System;
-
+using I2.Loc;
+using NullCore.Refs;
 using TMPro;
-
 using UnityEngine;
-#if UNITY_LOCALIZATION
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
-#endif
 
 namespace NullCore.UI
 {
-    public class SetLanguageOption : MonoBehaviour
+    public class SetLanguageOption : ValidatedMonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI _localeName;
-#if UNITY_LOCALIZATION
-        [NonSerialized] Locale _localeToSet;
+        [SerializeField, Child] TextMeshProUGUI _localizable;
+        [NonSerialized] string languageText;
 
-        public void Init(Locale locale, LocalizedString languageTitleString = null)
+        public void Init(string language)
         {
-            _localeToSet = locale;
-            
-            if (languageTitleString != null && !languageTitleString.IsEmpty)
-            {
-                var op = LocalizationSettings.StringDatabase.GetLocalizedStringAsync(languageTitleString.TableReference, languageTitleString.TableEntryReference, locale);
-                if (op.IsDone)
-                {
-                    _localeName.text = op.Result;
-                }
-                else
-                {
-                    op.Completed += operation => 
-                    {
-                        if (this != null && gameObject != null)
-                        {
-                            _localeName.text = operation.Result;
-                        }
-                    };
-                }
-            }
-            else
-            {
-                _localeName.text = locale.LocaleName;
-            }
-            
+            languageText = language;
+            _localizable.text = LocalizationManager.GetTranslation("language title", overrideLanguage: language) ?? language;
             gameObject.SetActive(true);
         }
 
         public void SetLocale()
         {
-            if (_localeToSet == null)
-            {
-                Debug.LogError("Locale to set is null!");
-                return;
-            }
-            LocalizationSettings.SelectedLocale = _localeToSet;
+            LocalizationManager.CurrentLanguage = languageText;
         }
-#endif
     }
 }

@@ -11,7 +11,7 @@ namespace NullCore {
 				await task.ConfigureAwait(continueOnCapturedContext);
 			}
 			catch (Exception e) {
-				Debug.LogException(e);
+				Debug.LogError($"[TaskExtensions] Exception in Await: {e.Message}\n{e.StackTrace}");
 			}
 		}
 

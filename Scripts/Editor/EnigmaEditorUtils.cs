@@ -77,7 +77,6 @@ namespace NullCore
 
         public static void DrawMinMaxSlider(Rect position, SerializedProperty property, MinMaxSliderAttribute attr)
         {
-            // (Mesmo código da resposta anterior...)
              object target = property.serializedObject.targetObject;
             var (minLimit, maxLimit) = GetLimits(target, attr.Min, attr.Max, attr.MinMember, attr.MaxMember);
 

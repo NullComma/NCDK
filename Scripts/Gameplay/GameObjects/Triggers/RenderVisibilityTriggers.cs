@@ -1,70 +1,91 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace NullCore {
-	public class RenderVisibilityTriggers : MonoBehaviour
-	{
-		[SerializeField] bool _debug;
-		[SerializeField] UnityEvent _becameVisibleEvent;
-		[SerializeField] UnityEvent _becameInvisibleEvent;
-		[SerializeField] CUnityEventBool _visibleEvent;
-		[SerializeField] CUnityEventBool _invisibleEvent;
-		[NonSerialized] bool _isVisible;
-		
-		[NonSerialized] public Action BecameVisibleAction;
-		[NonSerialized] public Action BecameInvisibleAction;
-		
-		
-		
-		
-		#region <<---------- MonoBehaviour ---------->>
+namespace NullCore
+{
+    /// <summary>
+    /// Attach to any GameObject that has a Renderer.
+    /// Reports renderer visibility to both code (via <see cref="Action"/> events)
+    /// and the Inspector (via <see cref="StateUnityEvents"/>).
+    ///
+    /// Unity sends <c>OnBecameVisible</c> / <c>OnBecameInvisible</c> to the Renderer's
+    /// own GameObject, so this script must live on that same GameObject.
+    /// </summary>
+    [RequireComponent(typeof(Renderer))]
+    [DisallowMultipleComponent]
+    public class RenderVisibilityTriggers : MonoBehaviour
+    {
+        // ── Inspector ────────────────────────────────────────────────────────────
 
-		void OnEnable() {
-			if (_isVisible) {
-				BecameVisibleInvoke();
-			}
-			else {
-				BecameInvisibleInvoke();
-			}
-		}
+        [SerializeField] bool _debug;
 
-		void OnBecameVisible() {
-			_isVisible = true;
-			if (!enabled) return;
-			BecameVisibleInvoke();
-		}
+        [Tooltip("On  = became visible by at least one camera.\n" +
+                 "Off = became invisible to all cameras.")]
+        [SerializeField] StateUnityEvents _visibilityState = new();
 
-		void OnBecameInvisible() {
-			_isVisible = false;
-			if (!enabled) return;
-			BecameInvisibleInvoke();
-		}
+        // ── Code-facing events ───────────────────────────────────────────────────
 
-		#endregion <<---------- MonoBehaviour ---------->>
-		
-		
-		
-		
-		#region <<---------- Events Invoke ---------->>
+        /// <summary>Raised when the renderer starts being drawn by at least one camera.</summary>
+        public event Action BecameVisibleAction;
 
-		void BecameVisibleInvoke() {
-			_becameVisibleEvent?.Invoke();
-			BecameVisibleAction?.Invoke();
-			_visibleEvent?.Invoke(true);
-			_invisibleEvent?.Invoke(false);
-			if(_debug) Debug.Log($"{this.name} became visible by some camera.",this);
-		}
+        /// <summary>Raised when the renderer is no longer drawn by any camera.</summary>
+        public event Action BecameInvisibleAction;
 
-		void BecameInvisibleInvoke() {
-			_becameInvisibleEvent?.Invoke();
-			BecameInvisibleAction?.Invoke();
-			_visibleEvent?.Invoke(false);
-			_invisibleEvent?.Invoke(true);
-			if(_debug) Debug.Log($"{this.name} became invisible by all cameras.",this);
-		}
-		
-		#endregion <<---------- Events Invoke ---------->>
-		
-	}
+        // ── State ────────────────────────────────────────────────────────────────
+
+        /// <summary>Is this renderer currently being drawn by at least one camera?</summary>
+        public bool IsCurrentlyVisible { get; private set; }
+
+        // ── Unity messages ───────────────────────────────────────────────────────
+
+        void OnEnable()
+        {
+            // Re-broadcast the last known state so listeners initialise correctly.
+            if (IsCurrentlyVisible)
+                BecameVisibleInvoke();
+            else
+                BecameInvisibleInvoke();
+        }
+
+        void OnDisable()
+        {
+            if (IsCurrentlyVisible)
+            {
+                IsCurrentlyVisible = false;
+                BecameInvisibleInvoke();
+            }
+        }
+
+        void OnBecameVisible()
+        {
+            if (IsCurrentlyVisible) return;
+            IsCurrentlyVisible = true;
+            if (!enabled) return;
+            BecameVisibleInvoke();
+        }
+
+        void OnBecameInvisible()
+        {
+            if (!IsCurrentlyVisible) return;
+            IsCurrentlyVisible = false;
+            if (!enabled) return;
+            BecameInvisibleInvoke();
+        }
+
+        // ── Invoke helpers ───────────────────────────────────────────────────────
+
+        void BecameVisibleInvoke()
+        {
+            _visibilityState.Trigger(true);
+            BecameVisibleAction?.Invoke();
+            if (_debug) Debug.Log($"{name} became visible by some camera.", this);
+        }
+
+        void BecameInvisibleInvoke()
+        {
+            _visibilityState.Trigger(false);
+            BecameInvisibleAction?.Invoke();
+            if (_debug) Debug.Log($"{name} became invisible to all cameras.", this);
+        }
+    }
 }

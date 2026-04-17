@@ -1,34 +1,33 @@
 using UnityEngine;
 
-namespace NullCore {
-	public abstract class MonoBehaviourUpdateExecutionLoopTime : MonoBehaviour {
+namespace NullCore
+{
+    /// <summary>
+    /// Base class to execute logic in a specific update loop.
+    /// </summary>
+    public abstract class MonoBehaviourUpdateExecutionLoopTime : MonoBehaviour
+    {
 
-		
-		[SerializeField] private MonoBehaviourExecutionLoop _executionTime;
-		
+        [SerializeField] MonoBehaviourExecutionLoop _executionTime;
 
-		#region <<---------- MonoBehaviour ---------->>
+        void Update()
+        {
+            if (_executionTime == MonoBehaviourExecutionLoop.Update)
+                Execute(Time.deltaTime);
+        }
 
-		private void Update() {
-			if (this._executionTime != MonoBehaviourExecutionLoop.Update) return;
-			this.Execute(Time.deltaTime);
-		}
+        void FixedUpdate()
+        {
+            if (_executionTime == MonoBehaviourExecutionLoop.FixedUpdate)
+                Execute(Time.fixedDeltaTime);
+        }
 
-		private void FixedUpdate() {
-			if (this._executionTime != MonoBehaviourExecutionLoop.FixedUpdate) return;
-			this.Execute(Time.deltaTime);
-		}
+        void LateUpdate()
+        {
+            if (_executionTime == MonoBehaviourExecutionLoop.LateUpdate)
+                Execute(Time.deltaTime);
+        }
 
-		private void LateUpdate() {
-			if (this._executionTime != MonoBehaviourExecutionLoop.LateUpdate) return;
-			this.Execute(Time.deltaTime);
-		}
-
-		#endregion <<---------- MonoBehaviour ---------->>
-
-		
-		protected abstract void Execute(float deltaTime);
-		
-
-	}
+        protected abstract void Execute(float deltaTime);
+    }
 }

@@ -9,6 +9,7 @@ using UnityEditor.SceneManagement;
 namespace NullCore
 {
     [DisallowMultipleComponent]
+    [DefaultExecutionOrder(-100)]
     public class IdentifiableMonoBehaviour : MonoBehaviour, IIdentifiableObject
     {
 
@@ -84,7 +85,11 @@ namespace NullCore
 
             // 2. Check for duplicates in Scene
             // finding all objects is heavy, but OnValidate in Editor is acceptable for this safety.
-            var allIdentifiables = FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+#if UNITY_6000_4_OR_NEWER
+            var allIdentifiables = FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include);
+#else
+            var allIdentifiables = FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
+#endif
             foreach (var other in allIdentifiables)
             {
                 if (other == this) continue;

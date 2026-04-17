@@ -1,8 +1,5 @@
-using System.Linq;
-using NullCore.UI;
 using UnityEngine;
 using UnityEngine.Scripting;
-using UnityEngine.AddressableAssets;
 
 namespace NullCore
 {
@@ -24,16 +21,8 @@ namespace NullCore
 
         static UISoundsBankSO GetUISoundsBankSO()
         {
-            var handle = Addressables.LoadResourceLocationsAsync("UISoundsBankSO");
-            var locations = handle.WaitForCompletion();
-            
-            if (locations != null && locations.Count > 0)
-            {
-                var assetHandle = Addressables.LoadAssetAsync<UISoundsBankSO>(locations[0]);
-                var asset = assetHandle.WaitForCompletion();
-                if (asset != null) return asset;
-            }
-            
+            // We avoid WaitForCompletion to prevent deadlocks on startup.
+            // If the Bank is needed before Addressables are ready, a fallback is returned.
             var fallback = ScriptableObject.CreateInstance<UISoundsBankSO>();
             fallback.name = "UISoundsBankSO_Fallback";
             return fallback;

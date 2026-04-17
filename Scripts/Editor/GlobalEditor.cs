@@ -7,8 +7,14 @@ using UnityEngine;
 
 namespace NullCore
 {
-    [CanEditMultipleObjects]
     [CustomEditor(typeof(MonoBehaviour), true)]
+    [CanEditMultipleObjects]
+    public class MonoBehaviourEditor : GlobalEditor { }
+
+    [CustomEditor(typeof(ScriptableObject), true)]
+    [CanEditMultipleObjects]
+    public class ScriptableObjectEditor : GlobalEditor { }
+
     public class GlobalEditor : UnityEditor.Editor
     {
         private Dictionary<string, object[]> _methodParameters = new Dictionary<string, object[]>();
@@ -52,7 +58,7 @@ namespace NullCore
 
                 // Tenta pegar o FieldInfo para checar atributos
                 FieldInfo fieldInfo = target.GetType().GetField(iterator.name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                
+
                 if (fieldInfo != null)
                 {
                     // Check InfoBox
@@ -100,7 +106,7 @@ namespace NullCore
                 Rect rect = EditorGUILayout.GetControlRect();
 
                 // 3. Check for Special Drawers
-                
+
                 // MinMaxSlider
                 var sliderAttr = (MinMaxSliderAttribute)prop.GetCustomAttribute(typeof(MinMaxSliderAttribute));
                 if (sliderAttr != null)
@@ -119,16 +125,16 @@ namespace NullCore
                     EditorGUI.PrefixLabel(rect, new GUIContent(label));
                     // Ajusta rect para a barra (metade direita) ou desenha full se preferir
                     Rect barRect = new Rect(rect.x + EditorGUIUtility.labelWidth, rect.y, rect.width - EditorGUIUtility.labelWidth, rect.height);
-                    
+
                     float current = Convert.ToSingle(value);
                     float min = progressAttr.Min;
                     // Busca Max dinamicamente se precisar (logica simplificada aqui)
-                    float max = progressAttr.Max; 
-                    if (!string.IsNullOrEmpty(progressAttr.MaxMemberName)) 
+                    float max = progressAttr.Max;
+                    if (!string.IsNullOrEmpty(progressAttr.MaxMemberName))
                         max = EnigmaEditorUtils.GetValueFromMember(target, progressAttr.MaxMemberName, max);
 
                     float newVal = EnigmaEditorUtils.DrawProgressBar(barRect, current, min, max, progressAttr, isReadOnly);
-                    
+
                     if (!isReadOnly && Math.Abs(newVal - current) > 0.001f)
                     {
                         if (prop.PropertyType == typeof(int)) prop.SetValue(target, Mathf.RoundToInt(newVal));
@@ -231,7 +237,7 @@ namespace NullCore
                     }
                     EditorGUILayout.EndVertical();
                 }
-                
+
                 // InfoBox em métodos (sim, é possível)
                 var infoBoxes = method.GetCustomAttributes(typeof(InfoBoxAttribute), true);
                 foreach (InfoBoxAttribute box in infoBoxes)
