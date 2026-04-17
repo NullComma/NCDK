@@ -37,8 +37,6 @@ namespace NullCore.UI {
 		protected virtual void Awake()
 		{
 			_uiSoundsBankSo = ServiceLocator.Resolve<UISoundsBankSO>();
-			
-			if(_uiSoundsBankSo == null) _uiSoundsBankSo = ScriptableObject.CreateInstance<UISoundsBankSO>();
 		}
 
         protected virtual void OnEnable() { }

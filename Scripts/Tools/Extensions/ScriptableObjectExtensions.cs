@@ -11,7 +11,7 @@ namespace NullCore
         #if UNITY_EDITOR
         public static T EditorCreateInResourcesFolder<T>() where T : ScriptableObject
         {
-            var so = ScriptableObject.CreateInstance<UISoundsBankSO>();
+            var so = ScriptableObject.CreateInstance<T>();
             var path = "Assets/Resources";
             
             // Unity 2023.1+ uses AssetPathExists, older versions use IsValidFolder
@@ -21,7 +21,7 @@ namespace NullCore
             if(!AssetDatabase.IsValidFolder(path)) AssetDatabase.CreateFolder("Assets", "Resources");
             #endif
             
-            AssetDatabase.CreateAsset(so, $"{path}/{nameof(UISoundsBankSO)}.asset");
+            AssetDatabase.CreateAsset(so, $"{path}/{nameof(T)}.asset");
 			return so as T;
         }
         #endif

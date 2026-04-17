@@ -21,8 +21,8 @@ namespace NullCore
 
         static UISoundsBankSO GetUISoundsBankSO()
         {
-            // We avoid WaitForCompletion to prevent deadlocks on startup.
-            // If the Bank is needed before Addressables are ready, a fallback is returned.
+            var resource = Resources.Load<UISoundsBankSO>("UISoundsBankSO");
+            if (resource != null) return resource;
             var fallback = ScriptableObject.CreateInstance<UISoundsBankSO>();
             fallback.name = "UISoundsBankSO_Fallback";
             return fallback;
