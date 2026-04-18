@@ -1,93 +1,80 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
-#if FMOD
-using FMODUnity;
-#endif
+using UnityEngine.Events; // Necessário para UnityEvent
 
 namespace NullCore {
-	public class ClockGameObject : MonoBehaviour {
-	
-		public int seconds = 0;
-		public int minutes = 0;
-		public int hour = 0;
-		public bool realTime = true;
+    public class ClockGameObject : MonoBehaviour {
+    
+       public int seconds = 0;
+       public int minutes = 0;
+       public int hour = 0;
+       public bool realTime = true;
 
-		public Transform pointerSeconds;
-		public Transform pointerMinutes;
-		public Transform pointerHours;
+       public Transform pointerSeconds;
+       public Transform pointerMinutes;
+       public Transform pointerHours;
 
-		public float clockSpeed = 1.0f; // 1.0f = realtime, < 1.0f = slower, > 1.0f = faster
+       public float clockSpeed = 1.0f; // 1.0f = realtime, < 1.0f = slower, > 1.0f = faster
 
-		#if FMOD
-		[SerializeField] EventReference _clockTickSound;
-		#endif
-		
-		[NonSerialized] float msecs = 0;
+       [Header("Events")]
+       [SerializeField, Tooltip("Disparado a cada tick (segundo) do relógio.")]
+       UnityEvent _onClockTick = new UnityEvent();
+       
+       [NonSerialized] float msecs = 0;
 
-		
-		
-		
-		void Awake() {
-			UpdateTime();
-			this.CStartCoroutine(ClockTickRoutine());
-		}
+       void Awake() {
+          UpdateTime();
+          this.CStartCoroutine(ClockTickRoutine());
+       }
 
-		IEnumerator ClockTickRoutine() {
-			var wait = new WaitForSeconds(1.0f);
-			while (enabled) {
-				yield return wait;
-				UpdateTime();
-				PlayClockTickSound();
-			}
-		}
+       IEnumerator ClockTickRoutine() {
+          var wait = new WaitForSeconds(1.0f);
+          while (enabled) {
+             yield return wait;
+             UpdateTime();
+             _onClockTick.Invoke(); // Dispara o evento exposto no Inspector
+          }
+       }
 
-		void PlayClockTickSound()
-		{
-			#if FMOD
-			if(_clockTickSound.IsNull) return;
-			RuntimeManager.PlayOneShotAttached(_clockTickSound, gameObject);
-			#endif
-		}
+       /// <summary>
+       /// Updates the internal time representation and rotates the clock pointers accordingly.
+       /// </summary>
+       void UpdateTime() {
+          if (realTime) {
+             //-- set real time
+             var dateNow = DateTime.Now;
+             hour = dateNow.Hour;
+             minutes = dateNow.Minute;
+             seconds = dateNow.Second;
+          }
+          else {
+             //-- calculate time
+             msecs += 1f * clockSpeed;
+             if (msecs >= 1.0f) {
+                msecs -= 1.0f;
+                seconds++;
+                if (seconds >= 60) {
+                   seconds = 0;
+                   minutes++;
+                   if (minutes > 60) {
+                      minutes = 0;
+                      hour++;
+                      if (hour >= 24) hour = 0;
+                   }
+                }
+             }
+          }
 
-		void UpdateTime() {
-			if (realTime) {
-				//-- set real time
-				var dateNow = DateTime.Now;
-				hour = dateNow.Hour;
-				minutes = dateNow.Minute;
-				seconds = dateNow.Second;
-			}
-			else {
-				//-- calculate time
-				msecs += 1f * clockSpeed;
-				if (msecs >= 1.0f) {
-					msecs -= 1.0f;
-					seconds++;
-					if (seconds >= 60) {
-						seconds = 0;
-						minutes++;
-						if (minutes > 60) {
-							minutes = 0;
-							hour++;
-							if (hour >= 24) hour = 0;
-						}
-					}
-				}
-			}
+          //-- calculate pointer angles
+          float rotationSeconds = (360.0f / 60.0f) * seconds;
+          float rotationMinutes = (360.0f / 60.0f) * minutes;
+          float rotationHours = ((360.0f / 12.0f) * hour) + ((360.0f / (60.0f * 12.0f)) * minutes);
 
-			//-- calculate pointer angles
-			float rotationSeconds = (360.0f / 60.0f) * seconds;
-			float rotationMinutes = (360.0f / 60.0f) * minutes;
-			float rotationHours = ((360.0f / 12.0f) * hour) + ((360.0f / (60.0f * 12.0f)) * minutes);
-
-			//-- draw pointers
-			if(pointerSeconds) pointerSeconds.localEulerAngles = new Vector3(0.0f, 0.0f, rotationSeconds);
-			if(pointerMinutes) pointerMinutes.localEulerAngles = new Vector3(0.0f, 0.0f, rotationMinutes);
-			if(pointerHours) pointerHours.localEulerAngles = new Vector3(0.0f, 0.0f, rotationHours);
-		}
-		
-	}
-
+          //-- draw pointers
+          if(pointerSeconds) pointerSeconds.localEulerAngles = new Vector3(0.0f, 0.0f, rotationSeconds);
+          if(pointerMinutes) pointerMinutes.localEulerAngles = new Vector3(0.0f, 0.0f, rotationMinutes);
+          if(pointerHours) pointerHours.localEulerAngles = new Vector3(0.0f, 0.0f, rotationHours);
+       }
+    }
 }
