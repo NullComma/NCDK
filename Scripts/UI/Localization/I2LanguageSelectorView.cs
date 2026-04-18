@@ -17,7 +17,7 @@ namespace NullCore.UI
             base.Awake();
             _languageOptionPrefab.gameObject.SetActive(false);
 
-            var languages = I2.Loc.LocalizationManager.GetAllLanguagesCode();
+            var languages = I2.Loc.LocalizationManager.GetAllLanguages();
             foreach (var language in languages)
             {
                 var option = Instantiate(_languageOptionPrefab, _languageOptionsContainer);
