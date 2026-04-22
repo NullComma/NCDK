@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 namespace NullCore
 {
     [Serializable]
@@ -37,7 +39,9 @@ namespace NullCore
                     Component targetComponent = obj.GetComponent(componentTypeName);
                     if (targetComponent != null)
                     {
-                        System.Reflection.MethodInfo method = targetComponent.GetType().GetMethod(methodName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                        System.Reflection.MethodInfo method = targetComponent.GetType()
+                            .GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+                            .FirstOrDefault(m => m.Name == methodName && m.GetParameters().Length == parameters.Count);
                         if (method != null)
                         {
                             System.Reflection.ParameterInfo[] paramInfos = method.GetParameters();
