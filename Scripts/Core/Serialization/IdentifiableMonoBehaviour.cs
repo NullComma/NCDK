@@ -60,7 +60,16 @@ namespace NullCore
         private void OnValidate()
         {
             if (Application.isPlaying) return;
-            ValidateEditor();
+            
+            // Unsubscribe first to avoid multiple entries
+            EditorApplication.delayCall -= DeferredValidate;
+            EditorApplication.delayCall += DeferredValidate;
+        }
+
+        private void DeferredValidate()
+        {
+            EditorApplication.delayCall -= DeferredValidate;
+            if (this != null) ValidateEditor();
         }
 
         private void ValidateEditor()
@@ -83,22 +92,14 @@ namespace NullCore
                 }
             }
 
-            // 2. Check for duplicates in Scene
-            // finding all objects is heavy, but OnValidate in Editor is acceptable for this safety.
-#if UNITY_6000_4_OR_NEWER
-            var allIdentifiables = FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include);
-#else
-            var allIdentifiables = FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
-#endif
-            foreach (var other in allIdentifiables)
+            // 2. Check for duplicates using the registry
+            if (IdentifiableEditorHooks.GetAllObjects != null)
             {
-                if (other == this) continue;
-                if (other._id == this._id)
+                var allWithSameId = IdentifiableEditorHooks.GetAllObjects(_id);
+                if (allWithSameId.Count > 1)
                 {
                     // Collision detected!
-                    // If we are the one being validated (likely the new one), we change.
                     ResetId();
-                    return;
                 }
             }
         }

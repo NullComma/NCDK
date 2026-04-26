@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
@@ -14,42 +15,6 @@ namespace NullCore.Editor
     [CustomPropertyDrawer(typeof(SerializableGuidReference))]
     public class SerializableGuidReferenceDrawer : PropertyDrawer
     {
-        [System.NonSerialized]
-        static Dictionary<SerializableGuid, string> _nameCache;
-
-        [System.NonSerialized]
-        static Dictionary<SerializableGuid, GameObject> _gameObjectCache;
-
-        [System.NonSerialized]
-        static bool _needsCacheUpdate = true;
-
-        [InitializeOnLoadMethod]
-        static void Init()
-        {
-            EditorApplication.hierarchyChanged += () => _needsCacheUpdate = true;
-        }
-
-        public static void RequestCacheUpdate() => _needsCacheUpdate = true;
-
-        void UpdateCacheIfNeeded()
-        {
-            if (!_needsCacheUpdate && _nameCache != null && _gameObjectCache != null) return;
-
-            _nameCache = new Dictionary<SerializableGuid, string>();
-            _gameObjectCache = new Dictionary<SerializableGuid, GameObject>();
-            var allIdentifiables = Object.FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            foreach (IdentifiableMonoBehaviour idObj in allIdentifiables)
-            {
-                if (idObj != null && idObj.ID != SerializableGuid.Empty)
-                {
-                    _nameCache[idObj.ID] = $"{idObj.gameObject.scene.name}/{idObj.name}";
-                    _gameObjectCache[idObj.ID] = idObj.gameObject;
-                }
-            }
-
-            _needsCacheUpdate = false;
-        }
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
@@ -66,19 +31,17 @@ namespace NullCore.Editor
                 (uint)p3.longValue,
                 (uint)p4.longValue);
 
-            UpdateCacheIfNeeded();
-
             Rect labelRect = new Rect(position.x, position.y, EditorGUIUtility.labelWidth, position.height);
             Event currentEvent = Event.current;
 
             if (currentEvent.type == EventType.MouseDown && currentEvent.button == 0 && labelRect.Contains(currentEvent.mousePosition))
             {
-                if (currentGuid != SerializableGuid.Empty && _gameObjectCache.TryGetValue(currentGuid, out GameObject targetObject))
+                if (currentGuid != SerializableGuid.Empty && IdentifiableRegistry.TryGetObject(currentGuid, out var targetObject))
                 {
                     if (targetObject != null)
                     {
                         EditorGUIUtility.PingObject(targetObject);
-                        Selection.activeGameObject = targetObject;
+                        Selection.activeObject = targetObject;
                         currentEvent.Use();
                     }
                 }
@@ -89,13 +52,13 @@ namespace NullCore.Editor
             string buttonText = "None";
             if (currentGuid != SerializableGuid.Empty)
             {
-                if (_nameCache.TryGetValue(currentGuid, out string cachedName))
+                if (IdentifiableRegistry.TryGetObject(currentGuid, out var obj) && obj != null)
                 {
-                    buttonText = cachedName;
+                    buttonText = IdentifiableRegistry.GetObjectPath(obj);
                 }
                 else
                 {
-                    buttonText = "ID Assigned (Not in Scene)";
+                    buttonText = "ID Assigned (Not Found)";
                 }
             }
 
@@ -131,14 +94,20 @@ namespace NullCore.Editor
             noneItem.id = 0;
             root.AddChild(noneItem);
 
-            IdentifiableMonoBehaviour[] allIdentifiables = Object.FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var allRegistered = IdentifiableRegistry.GetAllRegistered();
 
-            foreach (IdentifiableMonoBehaviour idObj in allIdentifiables)
+            foreach (var kvp in allRegistered)
             {
-                if (idObj == null || idObj.ID == SerializableGuid.Empty) continue;
+                SerializableGuid guid = kvp.Key;
+                UnityEngine.Object obj = kvp.Value.FirstOrDefault();
+                if (obj == null) continue;
 
-                AdvancedDropdownItem sceneGroup = GetOrAddGroup(root, idObj.gameObject.scene.name);
-                IdentifiableDropdownItem item = new IdentifiableDropdownItem(idObj.name, idObj.ID);
+                string groupName = "Assets";
+                if (obj is Component comp && comp.gameObject.scene.IsValid()) groupName = comp.gameObject.scene.name;
+                else if (obj is GameObject go && go.scene.IsValid()) groupName = go.scene.name;
+
+                AdvancedDropdownItem sceneGroup = GetOrAddGroup(root, groupName);
+                IdentifiableDropdownItem item = new IdentifiableDropdownItem(obj.name, guid);
                 sceneGroup.AddChild(item);
             }
 
@@ -186,8 +155,7 @@ namespace NullCore.Editor
             p4.longValue = guid.Part4;
 
             _valueProp.serializedObject.ApplyModifiedProperties();
-            GuidReferenceTracker.MarkDirty();
-            SerializableGuidReferenceDrawer.RequestCacheUpdate();
+            IdentifiableRegistry.MarkDirty();
         }
     }
 

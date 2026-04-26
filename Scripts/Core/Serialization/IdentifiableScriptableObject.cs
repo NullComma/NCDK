@@ -35,6 +35,18 @@ namespace NullCore
             // When an object is duplicated, _id is copied but _lastCheckId resets, forcing a re-validation.
             if (_id == _lastCheckId) return;
 
+            // Defer the heavy check to avoid asset loading during OnValidate
+            EditorApplication.delayCall -= DeferredValidate;
+            EditorApplication.delayCall += DeferredValidate;
+#endif
+        }
+
+#if UNITY_EDITOR
+        private void DeferredValidate()
+        {
+            EditorApplication.delayCall -= DeferredValidate;
+            if (this == null) return;
+
             if (!IsUnique(this, logError: false))
             {
                 Debug.Log($"[IdentifiableScriptableObject] Resetting ID because IsUnique returned false. Object: {name}", this);
@@ -44,8 +56,8 @@ namespace NullCore
             {
                 _lastCheckId = _id;
             }
-#endif
         }
+#endif
 
         public static bool IsUnique(IdentifiableScriptableObject original, bool logError = true)
         {
@@ -56,53 +68,39 @@ namespace NullCore
             }
 
 #if UNITY_EDITOR
-            string originalGuid = null;
-            long originalLocalId = 0;
-            bool originalIsPersistent = EditorUtility.IsPersistent(original);
-            if (originalIsPersistent)
+            if (IdentifiableEditorHooks.GetAllObjects == null) return true;
+
+            var allWithSameId = IdentifiableEditorHooks.GetAllObjects(original.ID);
+            
+            // Filter to check if there's any OTHER object with the same ID
+            bool hasDuplicate = false;
+            foreach (var obj in allWithSameId)
             {
-                if (!AssetDatabase.TryGetGUIDAndLocalFileIdentifier(original, out originalGuid, out originalLocalId))
+                if (obj == original) continue;
+                
+                // If it's a persistent asset, we must check if it's the same asset via AssetDatabase
+                if (UnityEditor.EditorUtility.IsPersistent(original) && UnityEditor.EditorUtility.IsPersistent(obj))
                 {
-                    // If we can't identify the original object (e.g. during rename or fresh import), 
-                    // we assume it is unique to prevent accidental ID resets.
-                    return true;
+                    string originalPath = UnityEditor.AssetDatabase.GetAssetPath(original);
+                    string otherPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
+                    if (originalPath == otherPath) continue;
                 }
+
+                hasDuplicate = true;
+                if (logError)
+                {
+                    string otherPath = IdentifiableEditorHooks.GetObjectPath != null 
+                        ? IdentifiableEditorHooks.GetObjectPath(obj) 
+                        : obj.name;
+                    Debug.LogError($"Duplicate ID {original.ID} detected on {original.name}. Existing: {otherPath}", original);
+                }
+                break;
             }
-#endif
-
-            foreach (var mb in Resources.FindObjectsOfTypeAll<IdentifiableScriptableObject>())
-            {
-                if (mb == original) continue;
-
-#if UNITY_EDITOR
-                // 1. Ghost Check: Persistent vs Non-Persistent
-                // If original is persistent (saved asset), ignore transient in-memory copies or un-persisted ghosts.
-                if (originalIsPersistent && !EditorUtility.IsPersistent(mb)) continue;
-
-                // 2. Identity Check: Same underlying asset?
-                if (originalIsPersistent && EditorUtility.IsPersistent(mb))
-                {
-                    // Check if 'mb' is a stale handle (persistent but no valid GUID)
-                    if (!AssetDatabase.TryGetGUIDAndLocalFileIdentifier(mb, out string mbGuid, out long mbLocalId))
-                    {
-                        continue;
-                    }
-
-                    // Both have valid GUIDs. Are they the same?
-                    if (originalGuid != null && originalGuid == mbGuid && originalLocalId == mbLocalId) continue;
-                }
-#endif
-
-                if (mb.ID == original.ID)
-                {
-                    if (logError)
-                    {
-                        Debug.LogError($"Duplicate ID {original.ID} detected on {original.name}. Existing: {mb.name}", original);
-                    }
-                    return false;
-                }
-            }
+            
+            return !hasDuplicate;
+#else
             return true;
+#endif
         }
 
         void ResetId()

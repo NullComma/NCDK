@@ -30,12 +30,10 @@ namespace NullCore.Editor
         /// </summary>
         public static Func<Guid, UnityEngine.Object> GuidObjectResolver;
         
-        private List<IIdentifiableObject> _allIdentifiablesCache;
-
         private void OnEnable()
         {
             ReloadFiles();
-            UpdateIdentifiablesRegistry();
+            IdentifiableRegistry.MarkDirty();
         }
 
         private void ReloadFiles()
@@ -88,10 +86,6 @@ namespace NullCore.Editor
             if (GUILayout.Button("Save Unencrypted", EditorStyles.toolbarButton))
             {
                 SaveUnencryptedChanges();
-            }
-            if (GUILayout.Button("🔍 Index Identifiables", EditorStyles.toolbarButton))
-            {
-                UpdateIdentifiablesRegistry();
             }
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
@@ -501,76 +495,19 @@ namespace NullCore.Editor
                 return cachedObj;
             }
 
-            // 3. Search in all IIdentifiableObjects (Assets and Scene)
-            // To be efficient, we search on demand but scan everything if forced or not found.
-            if (_allIdentifiablesCache == null || forceSearch)
+            // 3. Search in global registry
+            if (forceSearch)
             {
-                UpdateIdentifiablesRegistry();
+                IdentifiableRegistry.ForceRebuild();
             }
 
-            var found = _allIdentifiablesCache?.FirstOrDefault(x => x.ID.ToGuid() == guid);
-            if (found != null && found is UnityEngine.Object unityObj)
+            if (IdentifiableRegistry.TryGetObject(guid, out var found))
             {
-                _guidObjectCache[guid] = unityObj;
-                return unityObj;
+                _guidObjectCache[guid] = found;
+                return found;
             }
 
             return null;
-        }
-
-        private void UpdateIdentifiablesRegistry()
-        {
-            _allIdentifiablesCache = new List<IIdentifiableObject>();
-            _guidObjectCache.Clear();
-
-            // 1. Find in Scene (including inactive)
-#if UNITY_6000_4_OR_NEWER
-            var sceneObjects = UnityEngine.Object.FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include);
-#else
-            var sceneObjects = UnityEngine.Object.FindObjectsByType<IdentifiableMonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-#endif
-            foreach (var mb in sceneObjects)
-            {
-                _allIdentifiablesCache.Add(mb);
-                _guidObjectCache[mb.ID.ToGuid()] = mb;
-            }
-
-            // 2. Find in Assets (ScriptableObjects)
-            string[] soGuids = AssetDatabase.FindAssets("t:IdentifiableScriptableObject");
-            foreach (string assetGuid in soGuids)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(assetGuid);
-                var asset = AssetDatabase.LoadAssetAtPath<IdentifiableScriptableObject>(path);
-                if (asset != null)
-                {
-                    _allIdentifiablesCache.Add(asset);
-                    _guidObjectCache[asset.ID.ToGuid()] = asset;
-                }
-            }
-            
-            // 3. Find in Assets (Prefabs)
-            string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab");
-            foreach (string prefabGuid in prefabGuids)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(prefabGuid);
-                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                if (prefab != null)
-                {
-                    var components = prefab.GetComponentsInChildren<IdentifiableMonoBehaviour>(true);
-                    foreach (var comp in components)
-                    {
-                        if (comp != null)
-                        {
-                            _allIdentifiablesCache.Add(comp);
-                            _guidObjectCache[comp.ID.ToGuid()] = comp;
-                        }
-                    }
-                }
-            }
-
-            _allIdentifiablesCache = _allIdentifiablesCache.Distinct().ToList();
-            Repaint();
-            Debug.Log($"[SaveFileEditorWindow] Indexed {_allIdentifiablesCache.Count} identifiables.");
         }
     }
 }
