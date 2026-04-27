@@ -9,9 +9,10 @@ using System.Diagnostics.CodeAnalysis;
 
 #if UNITY_EDITOR
 
-using UnityEditor;
-
-#endif
+using System.Text;
+ using UnityEditor;
+ 
+ #endif
 
 namespace NullCore.Refs
 {
@@ -28,12 +29,18 @@ namespace NullCore.Refs
         public static bool ValidateAllRefs()
         {
             var validationSuccess = true;
-            MonoScript[] scripts = MonoImporter.GetAllRuntimeMonoScripts();
-            for (int i = 0; i < scripts.Length; i++)
+            var scripts = MonoImporter.GetAllRuntimeMonoScripts();
+            
+            var summary = new StringBuilder("<b>[NullCore AutoRef Validation]</b>\n");
+            var validatedScriptCount = 0;
+            var validatedObjectCount = 0;
+            var validatedFieldCount = 0;
+            var failedValidationDetails = new StringBuilder();
+
+            foreach (var runtimeMonoScript in scripts)
             {
-                MonoScript runtimeMonoScript = scripts[i];
-                Type scriptType = runtimeMonoScript.GetClass();
-                if (scriptType == null)
+                var scriptType = runtimeMonoScript.GetClass();
+                if (scriptType == null || !typeof(MonoBehaviour).IsAssignableFrom(scriptType))
                 {
                     continue;
                 }
@@ -45,20 +52,33 @@ namespace NullCore.Refs
                         ATTRIBUTED_FIELDS_CACHE,
                         BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
                     );
+                    
                     if (ATTRIBUTED_FIELDS_CACHE.Count == 0)
                     {
                         continue;
                     }
-                    var objects = Object.FindObjectsOfType(scriptType);
+
+                    var objects = Object.FindObjectsByType(scriptType, FindObjectsSortMode.None);
                     if (objects.Length == 0)
                     {
                         continue;
                     }
 
-                    Debug.Log($"Validating {ATTRIBUTED_FIELDS_CACHE.Count} field(s) on {objects.Length} {objects[0].GetType().Name} instance(s)");
+                    validatedScriptCount++;
+                    
                     for (int o = 0; o < objects.Length; o++)
                     {
-                        validationSuccess &= Validate(objects[o] as MonoBehaviour, ATTRIBUTED_FIELDS_CACHE, false);
+                        var obj = objects[o] as MonoBehaviour;
+                        if (obj == null) continue;
+
+                        validatedObjectCount++;
+                        validatedFieldCount += ATTRIBUTED_FIELDS_CACHE.Count;
+
+                        if (!Validate(obj, ATTRIBUTED_FIELDS_CACHE, false))
+                        {
+                            validationSuccess = false;
+                            failedValidationDetails.AppendLine($"- <b>{obj.name}</b> ({scriptType.Name})");
+                        }
                     }
                 }
                 finally
@@ -66,6 +86,21 @@ namespace NullCore.Refs
                     ATTRIBUTED_FIELDS_CACHE.Clear();
                 }
             }
+
+            summary.AppendLine($"Validated {validatedFieldCount} fields across {validatedObjectCount} objects from {validatedScriptCount} script types.");
+
+            if (validationSuccess)
+            {
+                summary.Append("<color=green>All references are valid.</color>");
+            }
+            else
+            {
+                summary.Append($"<color=red><b>Validation Failed!</b></color> {failedValidationDetails.Length} objects have missing references:\n");
+                summary.Append(failedValidationDetails);
+            }
+            
+            Debug.Log(summary.ToString());
+            
             return validationSuccess;
         }
 
@@ -662,10 +697,10 @@ namespace NullCore.Refs
 #elif UNITY_2020_1_OR_NEWER
             if (isUnityType)
                 return isCollection
-                    ? (object)Object.FindObjectsOfType(elementType, includeInactive)
-                    : (object)Object.FindObjectOfType(elementType, includeInactive);
+                    ? (object)Object.FindObjectsByType(elementType, includeInactive ? FindObjectsInactive.Include : FindObjectsInactive.Exclude, FindObjectsSortMode.None)
+                    : (object)Object.FindFirstObjectByType(elementType, includeInactive ? FindObjectsInactive.Include : FindObjectsInactive.Exclude);
 
-            var elements = Object.FindObjectsOfType<MonoBehaviour>(includeInactive);
+            var elements = Object.FindObjectsByType<MonoBehaviour>(includeInactive ? FindObjectsInactive.Include : FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 #else
             if (isUnityType)
                 return isCollection
