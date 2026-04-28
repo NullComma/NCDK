@@ -1,4 +1,4 @@
-Shader "EnigmaCore/2D/SingleSidedSpriteURP"
+Shader "NCDK/2D/SingleSidedSpriteURP"
 {
     Properties
     {

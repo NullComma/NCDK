@@ -1,6 +1,6 @@
 {
-    "name": "NullCore.Editor",
-    "rootNamespace": "NullCore.Editor",
+    "name": "NCDK.Editor",
+    "rootNamespace": "NCDK.Editor",
     "references": [
         "Unity.TextMeshPro",
         "FMODUnity",
@@ -9,7 +9,7 @@
         "Unity.Timeline",
         "Unity.Timeline.Editor",
         "UnityEditor.PackageManager",
-        "NullCore",
+        "NCDK",
         "LINQtoGameObject",
         "Unity.InputSystem"
     ],

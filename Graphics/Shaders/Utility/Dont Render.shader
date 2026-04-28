@@ -1,4 +1,4 @@
-Shader "EnigmaCore/Utility/Dont Render" {
+Shader "NCDK/Utility/Dont Render" {
     SubShader {
     Pass {
       CGPROGRAM

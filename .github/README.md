@@ -3,30 +3,30 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/package-json/v/EnigmaticComma/EnigmaCore" />
-  <img src="https://img.shields.io/github/package-json/unity/EnigmaticComma/EnigmaCore" />
-  <img src="https://img.shields.io/github/languages/code-size/EnigmaticComma/EnigmaCore" />
+  <img src="https://img.shields.io/github/package-json/v/EnigmaticComma/NCDK" />
+  <img src="https://img.shields.io/github/package-json/unity/EnigmaticComma/NCDK" />
+  <img src="https://img.shields.io/github/languages/code-size/EnigmaticComma/NCDK" />
 </p>
 
-Enigma Core for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.
+NCDK for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.
 
 It's being used in my main current game project "[Resultarias](https://nullcomma.com/resultarias)", a surrealist game about dream exploration.
 Check more information about my other projects on [my website](https://nullcomma.com)!
 
 ### What is this repository for? ###
 
-* Host the latest version of the EnigmaCore.
+* Host the latest version of the NCDK.
 * Track issues.
 
 ### How do I get set up? ###
 
 * Install from UPM using the git URL:
 ```
-https://github.com/EnigmaticComma/EnigmaCore.git
+https://github.com/EnigmaticComma/NCDK.git
 ```
 * Or add manually this line on **Packages/manifest.json**:
 ```
-"com.enigmaticcomma.core": "https://github.com/EnigmaticComma/EnigmaCore.git",
+"com.enigmaticcomma.ncdk": "https://github.com/EnigmaticComma/NCDK.git",
 ```
 
 ### Dependencies

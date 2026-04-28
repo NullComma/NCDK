@@ -1,4 +1,4 @@
-Shader "EnigmaCore/Skybox/Gradient Skybox"
+Shader "NCDK/Skybox/Gradient Skybox"
 {
 Properties
 {

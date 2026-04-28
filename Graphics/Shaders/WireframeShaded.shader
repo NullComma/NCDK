@@ -1,4 +1,4 @@
-﻿Shader "EnigmaCore/Wireframe-Shaded-Unlit"
+﻿Shader "NCDK/Wireframe-Shaded-Unlit"
 {
 	Properties
 	{

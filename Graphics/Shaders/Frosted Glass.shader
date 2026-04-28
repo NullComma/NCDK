@@ -1,4 +1,4 @@
-﻿Shader "EnigmaCore/Unlit/FrostedGlass"
+﻿Shader "NCDK/Unlit/FrostedGlass"
 {
     Properties
     {

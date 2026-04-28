@@ -1,6 +1,6 @@
 {
-    "name": "NullCore",
-    "rootNamespace": "NullCore",
+    "name": "NCDK",
+    "rootNamespace": "NCDK",
     "references": [
         "Unity.TextMeshPro",
         "LINQtoGameObject",
@@ -13,7 +13,7 @@
         "Unity.ResourceManager",
         "UnityEngine.CoreModule",
         "Unity.Netcode.Runtime",
-        "NullCore.Refs",
+        "NCDK.Refs",
         "I2Localization",
         "Unity.Localization"
     ],
