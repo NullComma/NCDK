@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/github/package-json/v/EnigmaticComma/NCDK" />
-  <img src="https://img.shields.io/github/package-json/unity/EnigmaticComma/NCDK" />
-  <img src="https://img.shields.io/github/languages/code-size/EnigmaticComma/NCDK" />
+  <img src="https://img.shields.io/github/package-json/v/NullComma/NCDK" />
+  <img src="https://img.shields.io/github/package-json/unity/NullComma/NCDK" />
+  <img src="https://img.shields.io/github/languages/code-size/NullComma/NCDK" />
 </p>
 
 NCDK for Unity - is a useful set of tools and extensions to speedup development of core Unity applications. This code is shared between all my projects and it is in active update and improvement.
@@ -22,11 +22,11 @@ Check more information about my other projects on [my website](https://nullcomma
 
 * Install from UPM using the git URL:
 ```
-https://github.com/EnigmaticComma/NCDK.git
+https://github.com/NullComma/NCDK.git
 ```
 * Or add manually this line on **Packages/manifest.json**:
 ```
-"com.enigmaticcomma.ncdk": "https://github.com/EnigmaticComma/NCDK.git",
+"com.enigmaticcomma.ncdk": "https://github.com/NullComma/NCDK.git",
 ```
 
 ### Dependencies
