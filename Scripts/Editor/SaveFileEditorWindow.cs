@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     public class SaveFileEditorWindow : EditorWindow
     {

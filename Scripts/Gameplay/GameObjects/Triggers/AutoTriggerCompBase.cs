@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public abstract class AutoTriggerCompBase : MonoBehaviour {
 
 		[SerializeField] MonoBehaviourExecutionTime executionTime = MonoBehaviourExecutionTime.Awake;

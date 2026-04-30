@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace NullCore {
+namespace NCDK {
     [ExecuteAlways]
     [DefaultExecutionOrder(350)]
 	public class TransformFollower : MonoBehaviour {

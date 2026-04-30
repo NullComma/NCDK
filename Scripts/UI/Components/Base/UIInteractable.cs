@@ -1,5 +1,5 @@
 using System;
-using NullCore;
+using NCDK;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -11,7 +11,7 @@ using FMOD.Studio;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 #endif
 
-namespace NullCore.UI {
+namespace NCDK.UI {
 	public class UIInteractable : MonoBehaviour, ISelectHandler, ISubmitHandler, ICancelHandler,
 	                               IPointerEnterHandler, IPointerClickHandler, IDeselectHandler {
        

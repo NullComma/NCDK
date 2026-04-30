@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -7,7 +7,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine.SceneManagement;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Handles an object that should be disabled during Editor Play Mode 
@@ -20,7 +20,7 @@ namespace NullCore
             // Logic for Editor Play Mode only
             if (Application.isEditor)
             {
-                Debug.Log($"[EnigmaCore] Disabling game object '{name}' because we are in Editor Play Mode.", this);
+                Debug.Log($"[NCDK] Disabling game object '{name}' because we are in Editor Play Mode.", this);
                 this.gameObject.SetActive(false);
             }
         }
@@ -45,14 +45,14 @@ namespace NullCore
 
             if (objectsToStrip.Length > 0)
             {
-                Debug.Log($"[EnigmaCore Build] Found {objectsToStrip.Length} objects to strip in scene '{scene.name}'.");
+                Debug.Log($"[NCDK Build] Found {objectsToStrip.Length} objects to strip in scene '{scene.name}'.");
 
                 foreach (var component in objectsToStrip)
                 {
                     // Ensure we only destroy objects belonging to the scene currently being processed
                     if (component.gameObject.scene == scene)
                     {
-                        Debug.Log($"[EnigmaCore Build] REMOVING object '{component.name}' from the build.");
+                        Debug.Log($"[NCDK Build] REMOVING object '{component.name}' from the build.");
                         Object.DestroyImmediate(component.gameObject);
                     }
                 }

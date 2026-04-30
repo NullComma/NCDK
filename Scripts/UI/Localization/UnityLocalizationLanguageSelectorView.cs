@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 #endif
 
-namespace NullCore.UI
+namespace NCDK.UI
 {
     public class UnityLocalizationLanguageSelectorView : View
     {

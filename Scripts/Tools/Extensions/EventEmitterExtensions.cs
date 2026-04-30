@@ -1,7 +1,7 @@
-﻿#if FMOD
+#if FMOD
 using FMODUnity;
 
-namespace NullCore {
+namespace NCDK {
     public static class EventEmitterExtensions {
         
         /// <summary>

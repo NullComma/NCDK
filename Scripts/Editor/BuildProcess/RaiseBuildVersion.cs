@@ -1,8 +1,8 @@
-﻿using UnityEditor.Build;
+using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class RaiseBuildVersion : IPostprocessBuildWithReport {
 
         public int callbackOrder => 9999;

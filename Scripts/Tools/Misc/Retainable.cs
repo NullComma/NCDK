@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace NullCore {
+namespace NCDK {
 	public class Retainable {
         class ReleaseHelper : IDisposable {
             readonly Retainable _retainable;

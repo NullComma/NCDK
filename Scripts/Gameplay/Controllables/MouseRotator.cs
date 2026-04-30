@@ -1,11 +1,11 @@
-﻿using System;
-using NullCore;
+using System;
+using NCDK;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
-namespace NullCore {
+namespace NCDK {
 	public class MouseRotator : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class FixedWorldRotation : MonoBehaviourUpdateExecutionLoopTime {
 
         [SerializeField] private Vector3 _axis = new Vector3(90f,0f,0f);

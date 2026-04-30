@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	/// <summary>
 	/// Makes something have health, can be hit and die.
 	/// </summary>

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class ETimeTriggers : MonoBehaviour {
 
 		[Header("Booleans")]

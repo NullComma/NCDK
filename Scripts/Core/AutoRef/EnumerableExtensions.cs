@@ -1,6 +1,6 @@
-﻿using System.Collections;
+using System.Collections;
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     public static class EnumerableExtensions
     {

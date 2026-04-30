@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class DestroyGameObjectTrigger : AutoTriggerCompBase {
 
 		[SerializeField] bool _destroyThis;

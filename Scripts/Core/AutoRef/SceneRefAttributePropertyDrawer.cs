@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 #endif
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     /// <summary>
     /// Custom property drawer for the reference attributes, making them read-only.

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor {
+namespace NCDK.Editor {
     
     [InitializeOnLoad]
     public class ImprovedHierarchyView  {

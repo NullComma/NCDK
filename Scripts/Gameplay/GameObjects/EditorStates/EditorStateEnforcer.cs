@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Base class for components that enforce a specific state (active/inactive) 

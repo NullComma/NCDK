@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace NullCore.Timeline {
+namespace NCDK.Timeline {
 
     [System.Serializable]
     public class FadeDataPlayable : PlayableBehaviour {

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class FlashRendererColor : MonoBehaviour {
 
         #region <<---------- Properties and Fields ---------->>

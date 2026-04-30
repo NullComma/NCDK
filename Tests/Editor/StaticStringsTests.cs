@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
-namespace NullCore.Tests.Editor
+namespace NCDK.Tests.Editor
 {
 	[TestFixture]
 	public class StaticStringsTests
@@ -15,13 +15,13 @@ namespace NullCore.Tests.Editor
 		[Test]
 		public void PrefixScripts_IsCorrect()
 		{
-			Assert.AreEqual("NullCore/", StaticStrings.PrefixScripts);
+			Assert.AreEqual("NCDK/", StaticStrings.PrefixScripts);
 		}
 
 		[Test]
 		public void PrefixTools_IsCorrect()
 		{
-			Assert.AreEqual("Tools/NullCore/", StaticStrings.PrefixTools);
+			Assert.AreEqual("Tools/NCDK/", StaticStrings.PrefixTools);
 		}
 
 		[Test]

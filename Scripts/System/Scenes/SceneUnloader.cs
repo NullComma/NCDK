@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace NullCore {
+namespace NCDK {
 	public class SceneUnloader : MonoBehaviour {
 
 		[SerializeField] private bool unloadThisObjectSceneToo;

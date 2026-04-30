@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     public static class SceneExtensions
     {

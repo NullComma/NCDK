@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Handles dynamic file extension generation based on project metadata.
@@ -37,7 +37,7 @@ namespace NullCore
                     string hexHash = BitConverter.ToString(bytes, 0, 3).Replace("-", "").ToLowerInvariant();
 
                     // 4. Construct the final extension
-                    // "ec" stands for EnigmaCore (branding), followed by the unique hash.
+                    // "ec" stands for NCDK (branding), followed by the unique hash.
                     _cachedExtension = $".ec{hexHash}";
                 }
 

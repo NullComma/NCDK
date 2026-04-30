@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Static hooks to allow Runtime scripts to access Editor-only registry features without direct assembly references.

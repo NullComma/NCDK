@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class WaterSurface : PhysicsTrigger {
         protected override void StartedCollisionOrTrigger(Transform transf) {
             base.StartedCollisionOrTrigger(transf);

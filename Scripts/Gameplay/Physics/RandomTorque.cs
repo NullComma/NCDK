@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class RandomTorque : AutoTriggerCompBase {
 		
 		[SerializeField] private Vector3 _torqueRangeMin = new Vector3(0f,-1f,0f);

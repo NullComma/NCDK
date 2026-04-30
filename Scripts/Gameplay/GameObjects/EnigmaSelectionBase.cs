@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     /// <summary>
     /// Makes an object be a selection base.
     /// </summary>

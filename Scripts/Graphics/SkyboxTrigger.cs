@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     public class SkyboxTrigger : MonoBehaviour
     {

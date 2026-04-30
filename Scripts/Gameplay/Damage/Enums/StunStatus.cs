@@ -1,4 +1,4 @@
-namespace NullCore.Enums {
+namespace NCDK.Enums {
 	public enum StunStatus {
 		none, lightStun, mediumStun, heavyStun
 	}

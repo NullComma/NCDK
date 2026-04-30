@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace NullCore.SceneVariables
+namespace NCDK.SceneVariables
 {
     public class SceneVariableManager : MonoBehaviour
     {

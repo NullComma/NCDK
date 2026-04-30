@@ -1,7 +1,7 @@
-﻿using UnityEditor;
-using NullCore.SceneVariables;
+using UnityEditor;
+using NCDK.SceneVariables;
 
-namespace NullCore.Editor.SceneVariables
+namespace NCDK.Editor.SceneVariables
 {
     [CustomEditor(typeof(VariableModifier))]
 

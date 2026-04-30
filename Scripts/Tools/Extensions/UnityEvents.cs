@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore {
+namespace NCDK {
     
     [Serializable]
     public class CUnityEvent : UnityEvent {}

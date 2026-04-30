@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 using UnityEditor;
 #endif
 
-namespace NullCore {
+namespace NCDK {
     [System.Obsolete("Use Unity Addressables instead of Resources.")]
     public static class EnigmaAssets {
 

@@ -1,7 +1,7 @@
-﻿
+
 using UnityEngine;
 
-namespace NullCore.UI {
+namespace NCDK.UI {
     public class UIButtonMenuOpener : UIButton {
 
         [SerializeField] View _menuToOpen;

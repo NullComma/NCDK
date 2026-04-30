@@ -1,10 +1,10 @@
-﻿#if FMOD
+#if FMOD
 using System.Linq;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore {
+namespace NCDK {
 	public class FmodLoadedBankTrigger : StudioBankLoader {
         
         [SerializeField] GameObject[] SetActiveOnBankLoaded;

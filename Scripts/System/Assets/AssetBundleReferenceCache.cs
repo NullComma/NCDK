@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Static class to manage AssetBundle memory usage with reference counting.

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method, Inherited = true, AllowMultiple = true)]
     public class InfoBoxAttribute : Attribute

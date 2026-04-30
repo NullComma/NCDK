@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace NullCore {
+namespace NCDK {
 	public static class TransformExtensions {
 
         public static void RotateTowardsDirection(this Transform t, Vector3 dir, float maxDegreesDelta, float timeScale = 1f) {

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class ETimedDestroyTrigger : AutoTriggerCompBase {
 		[SerializeField][Range(0f, 600f)] float _secondsToDestroy = 5f;
         [SerializeField] bool _shouldLog = true;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// A static Service Locator for registering and resolving services basicly without reflection overhead.

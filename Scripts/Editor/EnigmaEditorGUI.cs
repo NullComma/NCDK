@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     public static class EnigmaEditorGUI
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     public class GameObjectCreatorTrigger : AutoTriggerCompBase
     {

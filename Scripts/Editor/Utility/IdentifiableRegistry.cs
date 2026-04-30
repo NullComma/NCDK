@@ -7,7 +7,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     /// <summary>
     /// Centralized registry for all IIdentifiableObject instances in the project.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     /// <summary>
     /// Global cache to track which objects in the scene reference a specific SerializableGuid.

@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 #if FMOD
 using FMODUnity;
 #endif
 
-namespace NullCore.Audio {
+namespace NCDK.Audio {
 	public class SoundAreaGlobalParamTrigger : MonoBehaviour {
 
 		#if FMOD

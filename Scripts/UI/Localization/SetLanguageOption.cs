@@ -1,10 +1,10 @@
 using System;
 using I2.Loc;
-using NullCore.Refs;
+using NCDK.Refs;
 using TMPro;
 using UnityEngine;
 
-namespace NullCore.UI
+namespace NCDK.UI
 {
     public class SetLanguageOption : ValidatedMonoBehaviour
     {

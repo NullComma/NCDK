@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     [CustomPropertyDrawer(typeof(MinMaxSliderAttribute))]
     public class MinMaxSliderDrawer : PropertyDrawer

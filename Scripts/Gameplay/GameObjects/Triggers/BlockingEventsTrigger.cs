@@ -1,8 +1,8 @@
 using System;
-using NullCore;
+using NCDK;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Listens to blocking state changes from <see cref="BlockingEventsManager"/> 

@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class SnapToRaycastPointOnAwake : AutoTriggerCompBase {
 
         [SerializeField] private Vector3 _globalDirection = Vector3.down;

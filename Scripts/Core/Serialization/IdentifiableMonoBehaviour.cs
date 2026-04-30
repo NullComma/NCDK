@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     [DisallowMultipleComponent]
     [DefaultExecutionOrder(-100)]

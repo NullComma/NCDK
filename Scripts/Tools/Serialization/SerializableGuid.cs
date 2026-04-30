@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 #if UNITY_NETCODE
 using Unity.Netcode;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Represents a globally unique identifier (GUID) that is serializable with Unity and usable in game scripts.

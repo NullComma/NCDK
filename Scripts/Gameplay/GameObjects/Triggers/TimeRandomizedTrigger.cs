@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-namespace NullCore {
+namespace NCDK {
     public class ETimeRandomizedTrigger : MonoBehaviour {
 
         [SerializeField, Min(0f)] float _firstMinTime = 5f;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
 	/// <summary>
 	/// Extension methods for AutoRef validation.

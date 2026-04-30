@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace NullCore.Gameplay.Timeline
+namespace NCDK.Gameplay.Timeline
 {
     /// <summary>
     /// Gamified cutscene accelerator. Accelerates playback rate each time a button is pressed ("mashed") and decays back over time.

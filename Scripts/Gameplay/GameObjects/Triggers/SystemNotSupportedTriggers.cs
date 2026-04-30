@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore {
+namespace NCDK {
     public class SystemNotSupportedTriggers : MonoBehaviour {
         
         [Header("Event will be invoked if feature is not supported")]

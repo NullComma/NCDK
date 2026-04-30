@@ -1,8 +1,8 @@
-﻿using System;
-using NullCore.Damage;
+using System;
+using NCDK.Damage;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class PreciseBullet : DamageDealerTrigger {
 
         [Range(1, 20), SerializeField] float autoDestroyAfter = 3f;

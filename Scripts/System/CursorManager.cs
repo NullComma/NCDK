@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     public class CursorManager : IDisposable
     {

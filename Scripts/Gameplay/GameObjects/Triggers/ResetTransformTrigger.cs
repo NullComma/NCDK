@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class ResetTransformTrigger : MonoBehaviour
 	{
 		Vector3 DefaultPosition => Vector3.zero;

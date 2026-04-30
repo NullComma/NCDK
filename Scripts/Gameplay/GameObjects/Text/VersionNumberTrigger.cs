@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 using TMPro;
 
-namespace NullCore {
+namespace NCDK {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class VersionNumberTrigger : MonoBehaviour {
 

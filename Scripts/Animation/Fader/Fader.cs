@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace NullCore {
+namespace NCDK {
 	[Obsolete("Use Fader on timeline instead")]
 	public class Fader : MonoBehaviour {
 

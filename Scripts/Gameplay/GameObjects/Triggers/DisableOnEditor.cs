@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class DisableOnEditor : MonoBehaviour {
         #if UNITY_EDITOR
         void Awake() {

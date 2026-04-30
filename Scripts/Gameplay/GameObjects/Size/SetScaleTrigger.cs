@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-namespace NullCore.GameObjects {
+namespace NCDK.GameObjects {
     public class SetScaleTrigger : MonoBehaviour {
 
         [SerializeField, ReadOnly] Vector3 initialScale;

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace NullCore {
+namespace NCDK {
 	public class SceneReloader : MonoBehaviour {
 		
 		public void ReloadCurrentScene() {

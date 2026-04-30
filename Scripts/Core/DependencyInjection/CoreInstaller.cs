@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Scripting;
 
-namespace NullCore
+namespace NCDK
 {
     [Preserve]
     [DefaultExecutionOrder(int.MinValue)]

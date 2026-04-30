@@ -1,5 +1,5 @@
 using System;
-using NullCore.UI;
+using NCDK.UI;
 using UnityEngine;
 
 #if FMOD
@@ -7,7 +7,7 @@ using FMODUnity;
 #endif
 
 
-namespace NullCore {
+namespace NCDK {
 	public class UISoundsBankSO : ScriptableObject
 	{
 		#if FMOD

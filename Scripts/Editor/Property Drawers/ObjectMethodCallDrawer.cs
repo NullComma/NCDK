@@ -6,7 +6,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     [CustomPropertyDrawer(typeof(ObjectMethodCall))]
     public class ObjectMethodCallDrawer : PropertyDrawer

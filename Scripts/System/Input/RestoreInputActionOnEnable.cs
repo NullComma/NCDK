@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 #if ENABLE_INPUT_SYSTEM
@@ -10,7 +10,7 @@ using UnityEngine.InputSystem.UI;
 using UnityEditor;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     
     /// <summary>

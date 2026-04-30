@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Playables;
 
-namespace NullCore.Timeline {
+namespace NCDK.Timeline {
     public class FadeMixer : PlayableBehaviour {
 
         FadeController _fadeController;

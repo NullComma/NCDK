@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class TagSelectorAttribute : PropertyAttribute {
 		public bool UseDefaultTagFieldDrawer = false;
 	}

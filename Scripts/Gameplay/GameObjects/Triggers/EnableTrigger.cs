@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore {
+namespace NCDK {
 	public class EnableTrigger : MonoBehaviour {
         [SerializeField, Min(0f)] float _delayInSeconds;
         #if ODIN_INSPECTOR

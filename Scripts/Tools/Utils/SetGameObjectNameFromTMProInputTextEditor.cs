@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	[RequireComponent(typeof(TextMeshProUGUI))]
 	public class SetGameObjectNameFromTMProInputTextEditor : MonoBehaviour {
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore {
+namespace NCDK {
 	public class DisableTrigger : MonoBehaviour {
 		[SerializeField] UnityEvent TriggerEvent;
 

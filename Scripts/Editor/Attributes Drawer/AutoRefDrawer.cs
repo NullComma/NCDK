@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
 	/// <summary>
 	/// Locks the field in the inspector if it has an AutoRefAttribute.

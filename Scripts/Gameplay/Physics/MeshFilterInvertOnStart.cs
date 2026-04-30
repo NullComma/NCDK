@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Linq;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class MeshFilterInvertOnStart : MonoBehaviour {
 
         [SerializeField] private MeshFilter[] _meshesToInvert;

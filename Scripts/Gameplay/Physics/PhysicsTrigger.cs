@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class PhysicsTrigger : BasePhysicsTriggers {
         
 		#region <<---------- Triggers ---------->>

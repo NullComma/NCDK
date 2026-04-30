@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 #pragma warning disable CS0414 // Field is assigned but its value is never used
 
-namespace NullCore.Tests.Editor
+namespace NCDK.Tests.Editor
 {
     [TestFixture]
     public class ReflectionHelpersTests

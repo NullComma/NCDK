@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Forces the GameObject to be inactive when saving or entering play mode.
@@ -13,7 +13,7 @@ namespace NullCore
             if (!this.gameObject.activeSelf) return;
             
             this.gameObject.SetActive(false);
-            Debug.Log($"[EnigmaCore] '{this.name}' set to INACTIVE by CSaveAsInactiveGameObject.");
+            Debug.Log($"[NCDK] '{this.name}' set to INACTIVE by CSaveAsInactiveGameObject.");
         }
 #endif
     }

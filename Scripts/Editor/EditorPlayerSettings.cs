@@ -1,7 +1,7 @@
 using System;
 using UnityEditor;
 
-namespace NullCore {
+namespace NCDK {
     public static class EditorPlayerSettings {
 
         public static void RaiseBuildVersion() {

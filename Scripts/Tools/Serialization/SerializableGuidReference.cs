@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Wrapper for a SerializableGuid to allow custom Editor drawing and referencing.

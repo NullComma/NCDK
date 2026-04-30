@@ -1,4 +1,4 @@
-﻿// Original gist: https://gist.github.com/VictorHHT/24e6c3d8e68eb842a024482ca9ea98b0
+// Original gist: https://gist.github.com/VictorHHT/24e6c3d8e68eb842a024482ca9ea98b0
 
 using System;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace NullCore {
+namespace NCDK {
     [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
     public sealed class MinMaxSlider : PropertyAttribute {
         internal Vector2 m_MinmaxLimit;

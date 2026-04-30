@@ -1,5 +1,5 @@
-﻿using System;
-using NullCore;
+using System;
+using NCDK;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -9,7 +9,7 @@ using UnityEditor;
 #endif
 
 
-namespace NullCore {
+namespace NCDK {
     [Obsolete("Callbacks not working as expected.")]
 	public class ETimelineEventsTrigger : MonoBehaviour {
 

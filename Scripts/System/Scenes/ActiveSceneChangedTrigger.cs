@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 
-namespace NullCore {
+namespace NCDK {
 	public class ActiveSceneChangedTrigger : UnityEventTrigger{
 
 		public void OnEnable() {

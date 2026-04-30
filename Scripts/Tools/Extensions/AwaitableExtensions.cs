@@ -1,8 +1,8 @@
-﻿#if UNITY_6000_0_OR_NEWER
+#if UNITY_6000_0_OR_NEWER
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     public static class AwaitableExtensions
     {

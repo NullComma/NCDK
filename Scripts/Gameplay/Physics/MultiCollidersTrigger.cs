@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class MultiCollidersTrigger : PhysicsTrigger {
 
 		[NonSerialized] private List<Transform> _transformsInside;

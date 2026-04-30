@@ -1,9 +1,9 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using NullCore.SceneVariables;
+using NCDK.SceneVariables;
 
-namespace NullCore.Editor.SceneVariables
+namespace NCDK.Editor.SceneVariables
 {
     
     public class VariableComponentBaseEditor : UnityEditor.Editor

@@ -18,7 +18,7 @@ using UnityEditor;
 using FMODUnity;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Handles low-level application configuration, lifecycle events, and environment setup.
@@ -222,7 +222,7 @@ namespace NullCore
             Time.timeScale = 1f;
             UnityEditor.EditorApplication.isPlaying = false;
 #elif UNITY_WEBGL
-            Application.OpenURL("https://enigmaticcomma.com");
+            Application.OpenURL("https://nullcomma.com");
 #else
             Application.Quit(exitCode);
 #endif

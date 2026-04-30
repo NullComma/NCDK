@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public static class SingletonHelper {
         
         public static T CreateInstance<T>(string gameObjectName) where T : MonoBehaviour {

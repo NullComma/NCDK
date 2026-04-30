@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,7 +14,7 @@ using UnityEditor.Experimental.SceneManagement;
 #endif
 #endif
 
-namespace NullCore {
+namespace NCDK {
 	[ExecuteInEditMode]
 	public class SceneAreaAdditiveLoader : MonoBehaviour {
 

@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     [CustomEditor(typeof(MonoBehaviour), true)]
     [CanEditMultipleObjects]

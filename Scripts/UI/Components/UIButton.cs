@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEditor;
 #endif
 
-namespace NullCore.UI {
+namespace NCDK.UI {
 	[RequireComponent(typeof(Button))]
 	public class UIButton : UIInteractable {
 		public Button Button;

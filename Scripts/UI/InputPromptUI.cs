@@ -3,20 +3,20 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
-namespace NullCore.UI
+namespace NCDK.UI
 {
     public class InputPromptUI : MonoBehaviour, IPointerClickHandler
     {
         [Header("References")]
         [SerializeField] private InputActionReference _actionReference;
-        [SerializeField] private NullCore.Input.InputIconMap _iconMap;
+        [SerializeField] private NCDK.Input.InputIconMap _iconMap;
         [SerializeField] private Image _promptImage;
 
         [Header("Events")]
         [SerializeField] private CUnityEventString _onUpdateLabel;
         [SerializeField] private bool _clickToTrigger = false;
 
-        private NullCore.Input.InputIconBinding _currentBinding;
+        private NCDK.Input.InputIconBinding _currentBinding;
         private Sprite[] _currentIcons;
         private bool _hasSetup;
         private float _animationTimer;
@@ -151,7 +151,7 @@ namespace NullCore.UI
             }
         }
 
-        private Sprite[] ResolveIconsArray(InputDeviceType deviceType, NullCore.Input.InputIconBinding binding)
+        private Sprite[] ResolveIconsArray(InputDeviceType deviceType, NCDK.Input.InputIconBinding binding)
         {
             if (deviceType == InputDeviceType.MouseAndKeyboard)
                 return binding.keyboardMouseIcons;

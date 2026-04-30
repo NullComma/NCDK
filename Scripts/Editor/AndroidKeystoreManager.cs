@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     /// <summary>
     /// Editor window and automated routine to manage Android Keystore credentials per package name.

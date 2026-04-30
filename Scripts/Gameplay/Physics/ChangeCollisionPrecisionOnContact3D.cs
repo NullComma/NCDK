@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     [RequireComponent(typeof(Rigidbody), typeof(Collider))]
     public class ChangeCollisionPrecisionOnContact3D : PhysicsTrigger {
 

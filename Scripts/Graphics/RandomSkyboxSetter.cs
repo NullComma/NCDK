@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore.Graphics {
+namespace NCDK.Graphics {
     public class RandomSkyboxSetter : MonoBehaviour {
 
         [SerializeField] private bool _updateGiToo = true;

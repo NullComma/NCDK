@@ -4,7 +4,7 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     /// <summary>
     /// Performs a final check for duplicate SerializableGuids before building the project.

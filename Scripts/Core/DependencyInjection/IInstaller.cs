@@ -1,9 +1,9 @@
 using UnityEngine.Scripting;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
-    /// Interface for modules that register dependencies into the static NullCore.ServiceLocator.
+    /// Interface for modules that register dependencies into the static NCDK.ServiceLocator.
     /// </summary>
     public interface IInstaller
     {
@@ -13,7 +13,7 @@ namespace NullCore
         int Priority { get; }
 
         /// <summary>
-        /// Performs the registration of services using NullCore.ServiceLocator.
+        /// Performs the registration of services using NCDK.ServiceLocator.
         /// </summary>
         void Install();
     }

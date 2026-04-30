@@ -4,9 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace NullCore.Editor.Input
+namespace NCDK.Editor.Input
 {
-    [CustomPropertyDrawer(typeof(NullCore.Input.InputControlPickerAttribute))]
+    [CustomPropertyDrawer(typeof(NCDK.Input.InputControlPickerAttribute))]
     public class InputControlPickerDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

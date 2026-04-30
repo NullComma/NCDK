@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     [CustomPropertyDrawer(typeof(SerializableGuid))]
     public class SerializableGuidDrawer : PropertyDrawer

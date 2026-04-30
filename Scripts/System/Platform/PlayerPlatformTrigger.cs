@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class PlayerPlatformTrigger : AutoTriggerCompBase {
 
         [SerializeField] CUnityEvent _isWebgl;

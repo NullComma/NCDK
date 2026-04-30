@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Base class to execute logic in a specific update loop.

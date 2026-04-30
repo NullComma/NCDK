@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace NullCore {
+namespace NCDK {
 	public class TwoColorsRandomizer : MonoBehaviour {
 
 		[SerializeField] private Color _colorOne = Color.magenta;

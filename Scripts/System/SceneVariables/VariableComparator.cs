@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore.SceneVariables
+namespace NCDK.SceneVariables
 {
     public class VariableComparator : BaseVariable
     {

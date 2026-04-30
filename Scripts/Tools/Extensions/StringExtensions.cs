@@ -1,7 +1,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public static class StringExtensions {
 
 		private static StringBuilder sb = new StringBuilder();

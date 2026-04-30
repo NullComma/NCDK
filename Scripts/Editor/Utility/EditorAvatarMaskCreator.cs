@@ -1,9 +1,9 @@
-﻿/// From @austintaylorx in https://forum.unity.com/threads/how-to-create-an-avatar-mask-for-custom-gameobject-hierarchy-from-scene.574270/#post-4398478
+/// From @austintaylorx in https://forum.unity.com/threads/how-to-create-an-avatar-mask-for-custom-gameobject-hierarchy-from-scene.574270/#post-4398478
 
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor {
+namespace NCDK.Editor {
     public class AvatarMaker {
         [MenuItem(StaticStrings.PrefixTools + "Avatar Mask/Make Avatar Mask")]
         private static void MakeAvatarMask() {

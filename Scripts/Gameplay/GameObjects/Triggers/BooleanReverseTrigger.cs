@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class BooleanReverseTrigger : MonoBehaviour {
 
 		[SerializeField] CUnityEventBool _reversedBoolEvent;

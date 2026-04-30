@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     [DefaultExecutionOrder(351)]
     public class CopyTransformRotation : MonoBehaviourUpdateExecutionLoopTime {
 

@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     /// <summary>
     /// Custom drawer for SerializableGuidReference that uses an AdvancedDropdown.

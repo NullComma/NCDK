@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class LookAtTransform : MonoBehaviourUpdateExecutionLoopTime {
 
 		[SerializeField] private Transform _lookAtTarget;

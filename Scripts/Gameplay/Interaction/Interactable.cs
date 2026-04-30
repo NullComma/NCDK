@@ -1,8 +1,8 @@
 using System;
-using NullCore;
+using NCDK;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class Interactable : MonoBehaviour, IInteractable {
 
 		#region <<---------- Properties and Fields ---------->>

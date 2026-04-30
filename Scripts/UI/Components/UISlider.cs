@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace NullCore.UI {
+namespace NCDK.UI {
 	[RequireComponent(typeof(Slider))]
 	public class UISlider : UIInteractable, IMoveHandler {
 

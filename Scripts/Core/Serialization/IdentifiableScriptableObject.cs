@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     public class IdentifiableScriptableObject : ScriptableObject, IIdentifiableObject
     {

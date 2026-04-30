@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// A float value that can be either a constant or a random range.

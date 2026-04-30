@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	[RequireComponent(typeof(Rigidbody))]
 	public class RigidbodySetVelocityTrigger : AutoTriggerCompBase {
 		[SerializeField] Vector3 _setVelocityAmount = Vector3.forward;

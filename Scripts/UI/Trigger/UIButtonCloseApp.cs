@@ -1,4 +1,4 @@
-namespace NullCore.UI
+namespace NCDK.UI
 {
     public class UIButtonCloseApp : UIButton
     {

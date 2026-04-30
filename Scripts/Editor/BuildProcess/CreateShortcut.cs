@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.IO;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-namespace NullCore {
+namespace NCDK {
     public class CreateShortcut : IPostprocessBuildWithReport {
 
         public int callbackOrder => 1;

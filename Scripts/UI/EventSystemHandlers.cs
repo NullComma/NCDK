@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace NullCore.UI
+namespace NCDK.UI
 {
     public class EventSystemHandlers : MonoBehaviour, ICancelHandler
     {

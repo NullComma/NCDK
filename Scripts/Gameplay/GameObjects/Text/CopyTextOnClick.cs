@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEditor;
 #endif
 
-namespace NullCore.Text
+namespace NCDK.Text
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class CopyTextOnClick : MonoBehaviour, IPointerClickHandler

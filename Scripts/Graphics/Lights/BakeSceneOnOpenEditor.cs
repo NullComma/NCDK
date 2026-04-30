@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
 #endif
 
-namespace NullCore {
+namespace NCDK {
     [ExecuteInEditMode]
     public class BakeSceneOnOpenEditor : MonoBehaviour {
         private void Awake() {

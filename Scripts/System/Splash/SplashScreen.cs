@@ -1,19 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using NullCore;
+using NCDK;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-using NullCore.Refs;
+using NCDK.Refs;
 
 #endif
 
 
-namespace NullCore
+namespace NCDK
 {
     public class SplashScreen : ValidatedMonoBehaviour
     {

@@ -1,11 +1,11 @@
-﻿#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
+#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     public static class WindowsFileAssociation
     {

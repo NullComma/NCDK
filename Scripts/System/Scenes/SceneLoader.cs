@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-namespace NullCore {
+namespace NCDK {
 	public class SceneLoader : MonoBehaviour {
 		
 		public SceneField sceneToLoad;

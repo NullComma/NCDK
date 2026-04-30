@@ -14,7 +14,7 @@ using System.Text;
  
  #endif
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     public static class SceneRefAttributeValidator
     {
@@ -25,7 +25,7 @@ namespace NullCore.Refs
         /// <summary>
         /// Validate all references for every script and every game object in the scene.
         /// </summary>
-        [MenuItem("Tools/NullCore/Validate All Refs")]
+        [MenuItem("Tools/NCDK/Validate All Refs")]
         public static bool ValidateAllRefs()
         {
             var validationSuccess = true;

@@ -7,7 +7,7 @@ using Unity.Linq;
 using UnityEditor;
 #endif
 
-namespace NullCore {
+namespace NCDK {
     public static class GameObjectExtensions {
         
         public static T CGetOrAddComponent<T>(this GameObject go) where T : Component {

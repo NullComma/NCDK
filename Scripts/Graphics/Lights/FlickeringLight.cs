@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,7 +12,7 @@ using FMODUnity;
 using UnityEditor;
 #endif
 
-namespace NullCore.Scripts.Lights {
+namespace NCDK.Scripts.Lights {
     [RequireComponent(typeof(Light))]
     public class FlickeringLight : MonoBehaviour {
         

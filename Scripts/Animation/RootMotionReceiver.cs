@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     [RequireComponent(typeof(Animator))]
     public class RootMotionReceiver : MonoBehaviour

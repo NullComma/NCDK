@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore {
+namespace NCDK {
     public class DestroyTrigger : MonoBehaviour {
 
         public UnityEvent DestroyEvent;

@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using System.Reflection;
 
-namespace NullCore
+namespace NCDK
 {
     [CustomPropertyDrawer(typeof(ProgressBarAttribute))]
     public class ProgressBarDrawer : PropertyDrawer

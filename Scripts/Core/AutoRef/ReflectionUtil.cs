@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     internal static class ReflectionUtil
     {

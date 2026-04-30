@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Forces a list of specific components to be disabled when saving or entering play mode.
@@ -25,7 +25,7 @@ namespace NullCore
 
             if (changed)
             {
-                Debug.Log($"[EnigmaCore] Components on '{this.name}' set to DISABLED by CSaveAsDisabledComponents.");
+                Debug.Log($"[NCDK] Components on '{this.name}' set to DISABLED by CSaveAsDisabledComponents.");
             }
         }
 #endif

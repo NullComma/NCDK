@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NullCore {
+namespace NCDK {
 	public static class EnumExtensions {
 
 		public static IEnumerable<T> CGetValues<T>() {

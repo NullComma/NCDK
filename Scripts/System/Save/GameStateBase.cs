@@ -1,4 +1,4 @@
-﻿#if NEWTONSOFT_JSON
+#if NEWTONSOFT_JSON
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     [JsonObject(MemberSerialization.OptIn)]
     [Serializable]

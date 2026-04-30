@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace NullCore.GameObjects {
+namespace NCDK.GameObjects {
     public class RandomizeScaleOnEnable : MonoBehaviour {
 
         [SerializeField, Min(0.01f)] private float _minValue = 0.01f;

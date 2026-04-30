@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore { 
+namespace NCDK { 
     public class InstantiateTrigger : MonoBehaviour
     {
         [SerializeField] GameObject _prefabToInstantiate;

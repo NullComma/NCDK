@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace NullCore {
+namespace NCDK {
     public static class UnityObjectExtensions {
 
         public static void CDoIfNotNull<T>(this T value, Action<T> actionToDo) {

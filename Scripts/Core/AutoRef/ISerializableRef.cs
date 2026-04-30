@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     internal interface ISerializableRef
     {

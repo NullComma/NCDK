@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     [RequireComponent(typeof(Collider))]
     public class WaterReceiver : MonoBehaviour, ICWaterInteractor {
 

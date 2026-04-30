@@ -1,6 +1,6 @@
-﻿using UnityEngine.Playables;
+using UnityEngine.Playables;
 
-namespace NullCore {
+namespace NCDK {
 	public static class PlayableDirectorExtensions {
 
 		public static PlayableDirector SetAsActiveAndPlay(this PlayableDirector p) {

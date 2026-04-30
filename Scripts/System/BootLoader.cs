@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.IO;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     public static class BootLoader
     {

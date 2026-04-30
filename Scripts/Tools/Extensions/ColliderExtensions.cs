@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public static class ColliderExtensions {
 
         public static void CCloneColliderAsChild(this Collider col, LayerMask newLayer) {

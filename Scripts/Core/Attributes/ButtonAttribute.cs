@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Adds a button to the Inspector that executes the decorated method.

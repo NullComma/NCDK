@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 #endif
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     [CustomPropertyDrawer(typeof(InterfaceRef<>))]
     public class InterfaceRefPropertyDrawer : PropertyDrawer

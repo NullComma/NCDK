@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
-using NullCore;
+using NCDK;
 
-namespace NullCore.Triggers
+namespace NCDK.Triggers
 {
     /// <summary>
     /// Trigger to enable game objects by resolving their Unique ID (SerializableGuid) at runtime.

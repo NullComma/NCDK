@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 
-namespace NullCore.Tests.Editor
+namespace NCDK.Tests.Editor
 {
     [TestFixture]
     public class EncryptionUtilsTests

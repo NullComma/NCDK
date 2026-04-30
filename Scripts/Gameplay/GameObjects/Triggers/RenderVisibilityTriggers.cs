@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Attach to any GameObject that has a Renderer.

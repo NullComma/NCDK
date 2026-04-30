@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NullCore.Timeline {
+namespace NCDK.Timeline {
     [RequireComponent(typeof(Image), typeof(Canvas))]
     public class FadeController : MonoBehaviour {
 

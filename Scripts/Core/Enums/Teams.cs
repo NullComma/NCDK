@@ -1,6 +1,6 @@
 using System;
 
-namespace NullCore {
+namespace NCDK {
 	public enum Teams {
 		NEUTRAL_GAYA = 0,
 		PLAYER = 1,

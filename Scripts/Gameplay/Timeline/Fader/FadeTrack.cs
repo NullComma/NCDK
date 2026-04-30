@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace NullCore.Timeline {
+namespace NCDK.Timeline {
     [TrackClipType(typeof(FadeData))]
     [TrackBindingType(typeof(FadeController))]
     [TrackColor(0f,0f,0f)]

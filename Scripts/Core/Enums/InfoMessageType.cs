@@ -1,4 +1,4 @@
-namespace NullCore
+namespace NCDK
 {
     public enum InfoMessageType
     {

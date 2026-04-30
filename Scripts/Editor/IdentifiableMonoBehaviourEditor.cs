@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     [CustomEditor(typeof(IdentifiableMonoBehaviour))]
     public class IdentifiableMonoBehaviourEditor : UnityEditor.Editor

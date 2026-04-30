@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace NullCore
+namespace NCDK
 {
     public static class GuidExtensions
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events; // Necessário para UnityEvent
 
-namespace NullCore {
+namespace NCDK {
     public class ClockGameObject : MonoBehaviour {
     
        public int seconds = 0;

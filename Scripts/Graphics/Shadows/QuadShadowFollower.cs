@@ -1,7 +1,7 @@
 using UnityEngine;
-using NullCore.Refs;
+using NCDK.Refs;
 
-namespace NullCore
+namespace NCDK
 {
 	/// <summary>
 	/// Projects a simple quad shadow onto the ground using a single raycast.

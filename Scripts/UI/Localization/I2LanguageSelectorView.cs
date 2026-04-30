@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore.UI
+namespace NCDK.UI
 {
     /// <summary>
     /// Language selector view that uses I2 Localization to populate the list of available languages.

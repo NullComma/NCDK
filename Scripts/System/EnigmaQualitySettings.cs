@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using Screen = UnityEngine.Device.Screen;
 
-namespace NullCore {
+namespace NCDK {
     public static class EnigmaQualitySettings {
 
         public static bool GetVsync() {

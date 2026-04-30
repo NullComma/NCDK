@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Text;
 
-namespace NullCore {
+namespace NCDK {
     public static class ETimeSpanExtensions {
         
         public static string CGetTimeSpanFormattedVerbose(this TimeSpan timeSpan) {

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NullCore.SFX {
+namespace NCDK.SFX {
     public class SfxManager : MonoBehaviour {
         
         #region <<---------- Monobehaviour Singleton ---------->>

@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace NullCore.UI {
+namespace NCDK.UI {
     [RequireComponent(typeof(Button))]
     public class UIButtonOpenUrl : MonoBehaviour {
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace NullCore {
+namespace NCDK {
 	public static class ArrayExtensions {
 		
 		public static bool ContainsIndex(this Array array, int index, int dimension) {

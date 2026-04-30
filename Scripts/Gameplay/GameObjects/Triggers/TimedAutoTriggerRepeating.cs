@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore
+namespace NCDK
 {
     public class TimedAutoTriggerRepeating : AutoTriggerCompBase
     {

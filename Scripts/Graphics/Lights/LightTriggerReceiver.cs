@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore.Lights {
+namespace NCDK.Lights {
 	[RequireComponent(typeof(Collider))]
 	public class LightTriggerReceiver : MonoBehaviour {
 		

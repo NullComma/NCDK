@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using NullCore;
+using NCDK;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +9,7 @@ using UnityEditor;
 using System.Reflection;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     [Obsolete("Use BlockingEventsTrigger instead. Please use the 'MIGRATE' button in Inspector.", false)]
     public class CBlockingEventsTrigger : MonoBehaviour

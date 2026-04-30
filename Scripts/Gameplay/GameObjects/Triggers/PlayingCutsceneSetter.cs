@@ -1,8 +1,8 @@
-﻿using System;
-using NullCore;
+using System;
+using NCDK;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     [Obsolete("Use PlayableHelper instead")]
 	public class PlayingCutsceneSetter : MonoBehaviour {
 		[NonSerialized] BlockingEventsManager _blockingEventsManager;

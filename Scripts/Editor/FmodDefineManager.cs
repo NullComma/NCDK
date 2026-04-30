@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Build;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Automatically adds or removes the "FMOD" scripting define symbol

@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace NullCore
+namespace NCDK
 {
     public static class Disposables {
         public static IDisposable Empty { get; } = new EmptyDisposable();

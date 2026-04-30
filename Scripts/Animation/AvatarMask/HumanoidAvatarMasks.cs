@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Linq;
 using UnityEngine;
 
-namespace NullCore.AvatarMask {
+namespace NCDK.AvatarMask {
     public static class HumanoidAvatarMasks {
 
         static AvatarMaskBodyPart[] AllAvatarMaskBodyPart = Enum.GetValues(typeof(AvatarMaskBodyPart)).Cast<AvatarMaskBodyPart>().ToArray();

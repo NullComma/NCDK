@@ -1,4 +1,4 @@
-﻿namespace NullCore.Refs
+namespace NCDK.Refs
 {
     public abstract class SceneRefFilter
     {

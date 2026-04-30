@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     public class StaticRoutinesRunner : MonoBehaviour
     {

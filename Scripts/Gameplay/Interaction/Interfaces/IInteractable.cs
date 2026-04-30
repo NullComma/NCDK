@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public interface IInteractable {
         bool CanBeInteractedWith();
         void OnBecameInteractionTarget(Transform lookingTransform);

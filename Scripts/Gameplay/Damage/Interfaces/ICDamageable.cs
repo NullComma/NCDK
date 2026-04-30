@@ -1,7 +1,7 @@
-using NullCore.Data;
+using NCDK.Data;
 using UnityEngine;
 
-namespace NullCore.Damage {
+namespace NCDK.Damage {
 	public interface ICDamageable {
 		public HealthComponent Health { get; }
 		/// <summary>

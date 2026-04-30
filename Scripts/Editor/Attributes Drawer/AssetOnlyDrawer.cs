@@ -1,8 +1,8 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using System.IO;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
     [CustomPropertyDrawer(typeof(AssetOnlyAttribute))]
     public class AssetOnlyDrawer : PropertyDrawer

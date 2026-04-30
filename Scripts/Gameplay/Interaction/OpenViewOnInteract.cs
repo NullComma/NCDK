@@ -1,8 +1,8 @@
-﻿using NullCore;
-using NullCore.UI;
+using NCDK;
+using NCDK.UI;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class OpenViewOnInteract : Interactable {
 
         [SerializeField] View _viewToOpen;

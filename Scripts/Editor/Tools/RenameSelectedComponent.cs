@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Text.RegularExpressions;
 using System.Linq;
 
-namespace NullCore.Editor 
+namespace NCDK.Editor 
 {
     internal static class RenameSelectedComponent 
     {

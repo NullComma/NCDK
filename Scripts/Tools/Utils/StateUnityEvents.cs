@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// A collection of UnityEvents for handling state changes.

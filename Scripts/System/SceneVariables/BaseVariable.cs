@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace NullCore.SceneVariables
+namespace NCDK.SceneVariables
 {
     public class BaseVariable : MonoBehaviour
     {

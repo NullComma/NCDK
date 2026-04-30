@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NullCore.Audio {
+namespace NCDK.Audio {
 	/// <summary>
 	/// Random audio player that tries to not repeat the played audio as much as possible.
 	/// </summary>

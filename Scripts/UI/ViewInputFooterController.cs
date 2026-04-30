@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace NullCore.UI
+namespace NCDK.UI
 {
     /// <summary>
     /// Controls the visibility of Input Prompts located in a View's footer.

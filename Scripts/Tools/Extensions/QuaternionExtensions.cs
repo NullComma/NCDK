@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public static class QuaternionExtensions {
 
         public static Quaternion CLerp(this Quaternion a, Quaternion b, float t) {

@@ -1,7 +1,7 @@
-using NullCore;
+using NCDK;
 using UnityEngine;
 
-namespace NullCore.Lights {
+namespace NCDK.Lights {
 	[RequireComponent(typeof(Collider))]
 	public class LightTriggerSensor : MonoBehaviour {
 		private void OnTriggerEnter(Collider other) {

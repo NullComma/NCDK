@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace NullCore {
+namespace NCDK {
 	public class HitInfoData : ScriptableObject {
 		
 		public float RawDamage {

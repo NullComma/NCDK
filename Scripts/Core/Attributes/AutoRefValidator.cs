@@ -9,7 +9,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 using Debug = UnityEngine.Debug;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Core validation logic for AutoRef attributes.

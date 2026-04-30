@@ -4,7 +4,7 @@ using UnityEngine;
 
 using System.Linq;
 
-namespace NullCore
+namespace NCDK
 {
     [Serializable]
     public class MethodParameter

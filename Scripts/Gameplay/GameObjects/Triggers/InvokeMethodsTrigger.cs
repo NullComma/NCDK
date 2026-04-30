@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-namespace NullCore.Triggers
+namespace NCDK.Triggers
 {
     /// <summary>
     /// A generic trigger to invoke methods on runtime using Reflection and Target IDs (SerializableGuid).

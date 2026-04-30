@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor {
+namespace NCDK.Editor {
     public static class PrintSelectedObjectLayer {
         [MenuItem("CONTEXT/Component/Print this object layer int value")]
         private static void RenameGameObjectWithThisComponentName(MenuCommand data) {

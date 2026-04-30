@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	[Obsolete]
 	public class FootIK : MonoBehaviour {
 		

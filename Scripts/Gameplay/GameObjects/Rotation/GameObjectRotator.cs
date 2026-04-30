@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Rotates the GameObject. Handles visibility checks for standard Renderers 

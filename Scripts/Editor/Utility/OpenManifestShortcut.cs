@@ -1,6 +1,6 @@
-﻿using UnityEditor;
+using UnityEditor;
 
-namespace NullCore.Editor {
+namespace NCDK.Editor {
     /// <summary>
     /// Adds a menu item that opens the Package Manifest json, bellow the Package Manager button.
     /// </summary>

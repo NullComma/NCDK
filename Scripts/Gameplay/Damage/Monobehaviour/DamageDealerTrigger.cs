@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using NullCore.Damage;
-using NullCore.Data;
+using NCDK.Damage;
+using NCDK.Data;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace NullCore {
+namespace NCDK {
 	public class DamageDealerTrigger : MonoBehaviour, ICDamageDealer {
 
 		#region <<---------- Initializers ---------->>

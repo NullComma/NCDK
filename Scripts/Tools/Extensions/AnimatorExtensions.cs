@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public static class AnimatorExtensions {
 
         /// <summary>

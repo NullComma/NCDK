@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public static class TaskExtensions {
 
 		public static async void Await(this Task task, bool continueOnCapturedContext = true)

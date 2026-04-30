@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace NullCore {
+namespace NCDK {
 	public static class EventSystemExtensions {
 		
 		public static EventSystem GetFirstActiveEventSystem()

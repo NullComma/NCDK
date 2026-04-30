@@ -1,7 +1,7 @@
-﻿using System.Threading;
+using System.Threading;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public static class EnigmaThread {
 
         public static Thread MainThread { get; private set; } 

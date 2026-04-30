@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-namespace NullCore.Renderers {
+namespace NCDK.Renderers {
     [ExecuteInEditMode]
     [RequireComponent(typeof(SkinnedMeshRenderer))]
     public class RealtimeCopyBlendShapeValues : MonoBehaviour {

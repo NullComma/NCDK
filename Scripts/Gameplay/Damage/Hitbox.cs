@@ -1,10 +1,10 @@
-﻿using System;
-using NullCore.Data;
-using NullCore.Damage;
+using System;
+using NCDK.Data;
+using NCDK.Damage;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace NullCore {
+namespace NCDK {
 	public class Hitbox : MonoBehaviour, ICDamageable {
 
 		public const float CriticalMultiplier = 1.5f;

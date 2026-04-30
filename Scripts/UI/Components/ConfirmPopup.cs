@@ -3,7 +3,7 @@ using TMPro;
 
 using UnityEngine;
 
-namespace NullCore.UI {
+namespace NCDK.UI {
 	public class ConfirmPopup : View {
 		
 		[Header("Confirmation")]

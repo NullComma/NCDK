@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace NullCore {
+namespace NCDK {
     [RequireComponent(typeof(Animator))]
     public class AnimatorFrameRate : MonoBehaviour {
 

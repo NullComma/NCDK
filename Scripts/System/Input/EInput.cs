@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.DualShock;
 using UnityEngine.InputSystem.LowLevel;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     public enum InputDeviceType { MouseAndKeyboard, Gamepad }
     
@@ -30,7 +30,7 @@ namespace NullCore
         public static event Action<InputDeviceType> OnDeviceChanged;
         public static event Action OnGamepadLayoutChanged;
 
-        private const string PREF_KEY_GAMEPAD_LAYOUT = "EnigmaCore_GamepadLayout";
+        private const string PREF_KEY_GAMEPAD_LAYOUT = "NCDK_GamepadLayout";
 
 #if ENABLE_INPUT_SYSTEM
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

@@ -4,7 +4,7 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace NullCore.Editor {
+namespace NCDK.Editor {
     
     public class BuildVersionProcessor : IPreprocessBuildWithReport {
         

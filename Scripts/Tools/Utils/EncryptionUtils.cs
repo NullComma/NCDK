@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Provides simple symmetric encryption (AES) helper methods for local data obfuscation.
@@ -77,7 +77,7 @@ namespace NullCore
             }
             catch (Exception e)
             {
-                Debug.LogError($"[EnigmaCore.EncryptionUtils] Encryption Failed: {e.Message}");
+                Debug.LogError($"[NCDK.EncryptionUtils] Encryption Failed: {e.Message}");
                 return null;
             }
         }

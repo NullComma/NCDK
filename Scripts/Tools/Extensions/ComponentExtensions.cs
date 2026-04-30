@@ -3,7 +3,7 @@ using Unity.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace NullCore {
+namespace NCDK {
     public static class ComponentExtensions {
 
         public static T GetComponentInChildrenOrInParent<T>(this Component comp, bool includeInactive = false) {

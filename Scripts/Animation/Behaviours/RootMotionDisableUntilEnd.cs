@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class RootMotionDisableUntilEnd : StateMachineBehaviour
     {
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public static class Texture2DExtensions {
 
 		private static int _windowSize;

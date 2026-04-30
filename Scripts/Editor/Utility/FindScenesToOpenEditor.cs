@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 
-namespace NullCore.Editor {
+namespace NCDK.Editor {
     public class FindScenesToOpenEditor : EditorWindow {
                
         #region <<---------- Properties and Fields ---------->>

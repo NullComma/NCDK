@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     [Serializable]
     public class SceneField : ISerializationCallbackReceiver

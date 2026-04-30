@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using UnityEngine;
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     /// <summary>
     /// RefLoc indicates the expected location of the reference.

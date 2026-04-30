@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public class GameObjectLinearForwardMove : MonoBehaviourUpdateExecutionLoopTime {
 
 		[SerializeField] private float _moveSpeed = 8f;

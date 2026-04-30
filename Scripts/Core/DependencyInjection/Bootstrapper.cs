@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Handles both Global DI Installation and Per-Scene PreLoad logic.

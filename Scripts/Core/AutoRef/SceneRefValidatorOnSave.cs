@@ -5,13 +5,13 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     [InitializeOnLoad]
     public static class SceneRefValidatorOnSave
     {
-        private const string PrefsKey = "NullCore/ValidateRefsOnSave";
-        private const string MenuItemText = "Tools/NullCore/Validate Refs on Save";
+        private const string PrefsKey = "NCDK/ValidateRefsOnSave";
+        private const string MenuItemText = "Tools/NCDK/Validate Refs on Save";
         
         public static bool ValidateRefsOnSave
         {

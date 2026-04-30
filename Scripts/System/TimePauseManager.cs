@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Manages the game's pause state using a retain/release system to set the TimeScale.

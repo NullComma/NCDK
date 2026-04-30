@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
 	/// <summary>
 	/// Automatically scans and validates AutoRef attributes before a build and when entering Play Mode.

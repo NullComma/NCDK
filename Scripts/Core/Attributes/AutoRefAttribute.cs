@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
 	/// <summary>
 	/// Defines the search scope for the auto-assigned reference.

@@ -1,6 +1,6 @@
-using NullCore.Data;
+using NCDK.Data;
 
-namespace NullCore.Damage {
+namespace NCDK.Damage {
 	public interface ICDamageDealer {
 		AttackData AttackData { get; } 
 	}

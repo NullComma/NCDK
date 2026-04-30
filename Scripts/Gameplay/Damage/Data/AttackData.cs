@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace NullCore.Data {
+namespace NCDK.Data {
 	[System.Serializable]
 	public class AttackData {
 

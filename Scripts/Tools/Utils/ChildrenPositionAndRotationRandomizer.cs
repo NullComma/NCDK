@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 using UnityEditor;
 #endif
 
-namespace NullCore {
+namespace NCDK {
 	public class ChildrenPositionAndRotationRandomizer : MonoBehaviour {
 		
 		#region <<---------- Properties and Fields ---------->>

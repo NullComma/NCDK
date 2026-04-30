@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace NullCore.Editor
+namespace NCDK.Editor
 {
 	[InitializeOnLoad]
 	public static class AutoRefHierarchyMonitor

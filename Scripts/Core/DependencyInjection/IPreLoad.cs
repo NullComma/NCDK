@@ -1,4 +1,4 @@
-namespace NullCore
+namespace NCDK
 {
     /// <summary>
     /// Makes an MonoBehaviour respond to Pre-Load events after scene loading on game objects that are not yet Awake.

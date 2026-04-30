@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore {
+namespace NCDK {
     public class SpawnChildrenOnAwake : MonoBehaviour {
         
         [SerializeField] private int _amount = 10;

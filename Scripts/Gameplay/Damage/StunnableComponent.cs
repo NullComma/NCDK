@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using NullCore.Enums;
+using NCDK.Enums;
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	/// <summary>
 	/// Game object with this component can be stunned.
 	/// </summary>

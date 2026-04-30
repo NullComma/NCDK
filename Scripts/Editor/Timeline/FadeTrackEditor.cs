@@ -1,7 +1,7 @@
-﻿using UnityEditor.Timeline;
+using UnityEditor.Timeline;
 using UnityEngine.Timeline;
 
-namespace NullCore.Timeline {
+namespace NCDK.Timeline {
     [CustomTimelineEditor(typeof(FadeData))]
     public class FadeDataEditor : ClipEditor {
 

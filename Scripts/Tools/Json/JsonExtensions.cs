@@ -8,7 +8,7 @@ using Newtonsoft.Json.UnityConverters.Math;
 using UnityEngine;
 using UnityEngine.Scripting;
 
-namespace NullCore {
+namespace NCDK {
     [Preserve]
 	public static class JsonExtensions {
 	

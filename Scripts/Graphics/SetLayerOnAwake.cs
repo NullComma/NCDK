@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
     public class SetLayerOnAwake : MonoBehaviour {
 
         [SerializeField] private LayerMask _layer = -1;

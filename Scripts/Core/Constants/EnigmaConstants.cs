@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore {
+namespace NCDK {
 	public static class EnigmaConstants {
 		public const string EDITOR_SCRIPTABLEOBJECT_CREATION_PREFIX = "ScriptableObject/";
 

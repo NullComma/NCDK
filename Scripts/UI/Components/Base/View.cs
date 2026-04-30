@@ -1,10 +1,10 @@
 using System;
-using NullCore;
+using NCDK;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
-namespace NullCore.UI
+namespace NCDK.UI
 {
     public abstract class View : MonoBehaviour
     {

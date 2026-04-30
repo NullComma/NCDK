@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace NullCore {
+namespace NCDK {
 	[CustomPropertyDrawer(typeof(SceneField))]
 	public class CSceneFieldPropertyDrawer : PropertyDrawer {
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {

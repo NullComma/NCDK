@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using UnityEngine;
-using NullCore;
+using NCDK;
 
-namespace NullCore.Tests.Editor
+namespace NCDK.Tests.Editor
 {
     [TestFixture]
     public class FlexibleNumberTests

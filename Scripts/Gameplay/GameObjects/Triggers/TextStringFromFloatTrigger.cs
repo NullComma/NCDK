@@ -1,11 +1,11 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace NullCore
+namespace NCDK
 {
     [RequireComponent(typeof(TMP_Text))]
     public class TextStringFromFloatTrigger : MonoBehaviour

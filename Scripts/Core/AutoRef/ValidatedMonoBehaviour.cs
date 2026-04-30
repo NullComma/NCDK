@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace NullCore.Refs
+namespace NCDK.Refs
 {
     public class ValidatedMonoBehaviour : MonoBehaviour
     {

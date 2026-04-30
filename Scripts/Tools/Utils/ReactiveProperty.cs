@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NullCore
+namespace NCDK
 {
     [Serializable]
     public class ReactiveProperty<T>

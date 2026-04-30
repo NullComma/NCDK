@@ -3,7 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using System.IO;
 
-namespace EnigmaticComma.Editor
+namespace NCDK.Editor
 {
     /// <summary>
     /// Renders a subtle gradient background for specific project folders.

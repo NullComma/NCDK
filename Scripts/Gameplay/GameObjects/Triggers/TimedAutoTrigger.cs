@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NullCore {
+namespace NCDK {
     public class ETimedAutoTrigger : AutoTriggerCompBase {
 
         [SerializeField, Min(0f)] float _secondsToTrigger = 5f;
