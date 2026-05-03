@@ -10,7 +10,7 @@ namespace NCDK
 {
     [DisallowMultipleComponent]
     [DefaultExecutionOrder(-100)]
-    public class IdentifiableMonoBehaviour : MonoBehaviour, IIdentifiableObject
+    public class IdentifiableMonoBehaviour : MonoBehaviour, IIdentifiableObject, IPreLoad
     {
 
         public SerializableGuid ID => _id;
@@ -33,6 +33,14 @@ namespace NCDK
 #endif
         }
 
+        public void OnPreLoad()
+		{
+			if (_id != SerializableGuid.Empty)
+            {
+                Registry[_id] = this;
+            }
+		}
+
         void Awake()
         {
 #if UNITY_EDITOR
@@ -40,15 +48,7 @@ namespace NCDK
 #endif
         }
 
-        void OnEnable()
-        {
-            if (_id != SerializableGuid.Empty)
-            {
-                Registry[_id] = this;
-            }
-        }
-
-        void OnDisable()
+        void OnDestroy()
         {
             if (_id != SerializableGuid.Empty)
             {
@@ -103,6 +103,7 @@ namespace NCDK
                 }
             }
         }
+
 #endif
-    }
+	}
 }
