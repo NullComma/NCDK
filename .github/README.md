@@ -26,7 +26,7 @@ https://github.com/NullComma/NCDK.git
 ```
 * Or add manually this line on **Packages/manifest.json**:
 ```
-"com.enigmaticcomma.ncdk": "https://github.com/NullComma/NCDK.git",
+"com.nullcomma.ncdk": "https://github.com/NullComma/NCDK.git",
 ```
 
 ### Dependencies
