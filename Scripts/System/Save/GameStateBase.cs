@@ -283,10 +283,10 @@ namespace NCDK
 
             var persistentDataPath = GetApplicationPersistentDataFolder();
 
-            // Default path: .../EnigmaticComma/ApplicationName/save
+            // Default path: .../NullComma/ApplicationName/save
             var folderPath = Path.Combine(persistentDataPath, SavesDirectoryName);
 
-            // Steamworks support: .../EnigmaticComma/ApplicationName/SteamID/save
+            // Steamworks support: .../NullComma/ApplicationName/SteamID/save
             ulong? steamId = GetSteamID();
             if (steamId.HasValue)
             {
@@ -299,53 +299,10 @@ namespace NCDK
                 Directory.CreateDirectory(folderPath);
             }
 
-            CopyOldSaveFiles(folderPath);
-
             _cachedGameStateFolder = folderPath;
             return folderPath;
         }
 
-        private static void CopyOldSaveFiles(string newSavePath)
-        {
-            try
-            {
-                var persistentPath = GetApplicationPersistentDataFolder();
-                // persistentPath is .../AppData/LocalLow/EnigmaticComma/ProductName
-
-                var productDir = new DirectoryInfo(persistentPath);
-                var companyDir = productDir.Parent; // EnigmaticComma
-                var localLowDir = companyDir.Parent; // LocalLow
-
-                var oldCompanyNames = new string[] { "ChrisDBHR", "Enigmatic Comma", companyDir.Name };
-                // logic: check old names + "SavesDir"
-
-                foreach (var oldComp in oldCompanyNames)
-                {
-                    var oldPath = Path.Combine(localLowDir.FullName, oldComp, productDir.Name, "SavesDir");
-
-                    if (Directory.Exists(oldPath))
-                    {
-                        bool copiedAny = false;
-                        foreach (var file in Directory.GetFiles(oldPath))
-                        {
-                            var fileName = Path.GetFileName(file);
-                            var destPath = Path.Combine(newSavePath, fileName);
-
-                            if (!File.Exists(destPath))
-                            {
-                                File.Copy(file, destPath);
-                                copiedAny = true;
-                            }
-                        }
-                        if (copiedAny) Debug.Log($"[Migration] Copied saves from '{oldPath}' to '{newSavePath}'");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"[Migration] Failed to copy old save files: {e.Message}");
-            }
-        }
 
         private static ulong? GetSteamID()
         {

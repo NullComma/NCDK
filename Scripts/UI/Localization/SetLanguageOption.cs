@@ -21,6 +21,11 @@ namespace NCDK.UI
         public void SetLocale()
         {
             LocalizationManager.CurrentLanguage = languageText;
+            var parentView = GetComponentInParent<View>();
+            if (parentView != null)
+            {
+                parentView.Close();
+            }
         }
     }
 }
