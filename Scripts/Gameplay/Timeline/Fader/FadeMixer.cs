@@ -36,8 +36,8 @@ namespace NCDK.Timeline {
         }
 
         public override void OnGraphStop (Playable playable) {
-            if (_fadeController == null) return;
-            _fadeController.SetColor(Color.black, 0f);
+            // Fade cleanup is handled by PlayableHelper.OnStoppedPlaying() after disabling GameObjects,
+            // so the fade stays active until the cutscene is fully cleaned up.
         }
     }
 }
