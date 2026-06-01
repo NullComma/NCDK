@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.EventSystems;
 
 namespace NCDK.UI
@@ -195,9 +197,15 @@ namespace NCDK.UI
             var action = _actionReference.action;
             foreach (var control in action.controls)
             {
-                if (control.device is Keyboard || control.device is Mouse)
+                if (control.device is Keyboard keyboard && control is KeyControl keyControl)
                 {
-                    // Simulate a press and release
+                    InputSystem.QueueStateEvent(keyboard, new KeyboardState(keyControl.keyCode));
+                    InputSystem.QueueStateEvent(keyboard, new KeyboardState());
+                    break;
+                }
+
+                if (control.device is Mouse && control is ButtonControl)
+                {
                     InputSystem.QueueDeltaStateEvent(control, 1f);
                     InputSystem.QueueDeltaStateEvent(control, 0f);
                     break;
