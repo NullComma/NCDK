@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 
 #if UNITY_EDITOR
@@ -10,7 +11,8 @@ namespace NCDK
 {
     [DisallowMultipleComponent]
     [DefaultExecutionOrder(-100)]
-    public class IdentifiableMonoBehaviour : MonoBehaviour, IIdentifiableObject, IPreLoad
+    [AutoStaticsCleanup]
+    public partial class IdentifiableMonoBehaviour : MonoBehaviour, IIdentifiableObject, IPreLoad
     {
 
         public SerializableGuid ID => _id;
