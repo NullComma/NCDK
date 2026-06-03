@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 
 namespace NCDK
@@ -7,7 +8,8 @@ namespace NCDK
     /// Static class to manage AssetBundle memory usage with reference counting.
     /// Prevents the "AssetBundle already loaded" error when multiple objects use the same file.
     /// </summary>
-    public static class AssetBundleReferenceCache
+    [AutoStaticsCleanup]
+    public static partial class AssetBundleReferenceCache
     {
         // Map: File Path -> Loaded Bundle
         private static readonly Dictionary<string, AssetBundle> LoadedBundles = new();

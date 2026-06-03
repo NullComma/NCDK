@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using Unity.Scripting.LifecycleManagement;
 using UnityEngine;
 
 namespace NCDK
@@ -7,7 +8,8 @@ namespace NCDK
     /// <summary>
     /// A static Service Locator for registering and resolving services basicly without reflection overhead.
     /// </summary>
-    public static class ServiceLocator
+    [AutoStaticsCleanup]
+    public static partial class ServiceLocator
 
     {
         static readonly ConcurrentDictionary<Type, object> _instances = new();
