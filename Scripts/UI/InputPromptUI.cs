@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.EventSystems;
+using NCDK.Input;
 
 namespace NCDK.UI
 {
@@ -11,14 +12,14 @@ namespace NCDK.UI
     {
         [Header("References")]
         [SerializeField] private InputActionReference _actionReference;
-        [SerializeField] private NCDK.Input.InputIconMap _iconMap;
+        [SerializeField] private InputIconMap _iconMap;
         [SerializeField] private Image _promptImage;
 
         [Header("Events")]
         [SerializeField] private CUnityEventString _onUpdateLabel;
         [SerializeField] private bool _clickToTrigger = false;
 
-        private NCDK.Input.InputIconBinding _currentBinding;
+        private InputIconBinding _currentBinding;
         private Sprite[] _currentIcons;
         private bool _hasSetup;
         private float _animationTimer;
