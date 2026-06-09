@@ -1,13 +1,16 @@
 using UnityEngine;
 using NCDK.Refs;
+using Random = UnityEngine.Random;
 
 namespace NCDK
 {
     public class SnapRotation90 : ValidatedMonoBehaviour
     {
-        public bool rotateX;
-        public bool rotateY = true;
-        public Vector2 intervalRange = new Vector2(0.3f, 1f);
+        [SerializeField] private bool _rotateX;
+        [SerializeField] private bool _rotateY = true;
+
+        [MinMaxSliderAttribute(0.01f, 10f)]
+        [SerializeField] private Vector2 _intervalRange = new Vector2(0.3f, 1f);
 
         [System.NonSerialized] float _timer;
         [System.NonSerialized] int _lastX = -1;
@@ -16,7 +19,7 @@ namespace NCDK
         void Start()
         {
             PickRandom();
-            _timer = Random.Range(intervalRange.x, intervalRange.y);
+            _timer = Random.Range(_intervalRange.x, _intervalRange.y);
         }
 
         void LateUpdate()
@@ -25,7 +28,7 @@ namespace NCDK
             if (_timer <= 0f)
             {
                 PickRandom();
-                _timer = Random.Range(intervalRange.x, intervalRange.y);
+                _timer = Random.Range(_intervalRange.x, _intervalRange.y);
             }
         }
 
@@ -33,7 +36,7 @@ namespace NCDK
         {
             Vector3 euler = transform.localEulerAngles;
 
-            if (rotateX)
+            if (_rotateX)
             {
                 int next;
                 do { next = Random.Range(0, 4); } while (next == _lastX);
@@ -41,7 +44,7 @@ namespace NCDK
                 _lastX = next;
             }
 
-            if (rotateY)
+            if (_rotateY)
             {
                 int next;
                 do { next = Random.Range(0, 4); } while (next == _lastY);
