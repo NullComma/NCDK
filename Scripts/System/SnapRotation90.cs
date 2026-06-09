@@ -3,17 +3,21 @@ using NCDK.Refs;
 
 namespace NCDK
 {
-    public class RandomRotor : ValidatedMonoBehaviour
+    public class SnapRotation90 : ValidatedMonoBehaviour
     {
         public bool rotateX;
         public bool rotateY = true;
-        public float interval = 0.5f;
+        public Vector2 intervalRange = new Vector2(0.3f, 1f);
 
         [System.NonSerialized] float _timer;
         [System.NonSerialized] int _lastX = -1;
         [System.NonSerialized] int _lastY = -1;
 
-        void Start() => PickRandom();
+        void Start()
+        {
+            PickRandom();
+            _timer = Random.Range(intervalRange.x, intervalRange.y);
+        }
 
         void LateUpdate()
         {
@@ -21,7 +25,7 @@ namespace NCDK
             if (_timer <= 0f)
             {
                 PickRandom();
-                _timer = interval;
+                _timer = Random.Range(intervalRange.x, intervalRange.y);
             }
         }
 
