@@ -29,7 +29,7 @@ namespace NCDK
         {
             if (!_light.enabled) return;
 
-            Graphics.Blit(null, _cookieTexture, _staticMaterial);
+            UnityEngine.Graphics.Blit(null, _cookieTexture, _staticMaterial);
             _light.cookie = _cookieTexture;
         }
     }
