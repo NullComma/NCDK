@@ -1,10 +1,9 @@
 using UnityEngine;
-using NCDK.Refs;
 using Random = UnityEngine.Random;
 
 namespace NCDK
 {
-    public class SnapRotation90 : ValidatedMonoBehaviour
+    public class SnapRotation90 : MonoBehaviour
     {
         [SerializeField] private bool _rotateX;
         [SerializeField] private bool _rotateY = true;
