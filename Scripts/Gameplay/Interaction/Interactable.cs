@@ -14,6 +14,8 @@ namespace NCDK {
 		[SerializeField] GameObject[] _setActiveStateOnBecameInteractionTarget;
 		[SerializeField] CUnityEventTransform InteractEvent = new();
 		[SerializeField] StateUnityEvents BecameTargetEvent = new();
+		/// <summary>Exposes BecameTargetEvent for external subscribers.</summary>
+		public StateUnityEvents BecameTargetEvents => BecameTargetEvent;
 		#endregion <<---------- Properties and Fields ---------->>
 
 

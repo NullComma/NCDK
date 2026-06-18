@@ -20,7 +20,7 @@ namespace NCDK
         void Reset() => SignToEvents();
         void OnValidate() => SignToEvents();
 
-        private void SignToEvents()
+        protected void SignToEvents()
         {
             if (Application.isPlaying) return;
 

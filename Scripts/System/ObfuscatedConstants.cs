@@ -12,7 +12,7 @@ namespace NCDK
         const uint DemoSteamMask = 0xAB85F098u; // 4776780 ^ SteamKey
 
         static readonly byte[] FmodKey = { 75, 51, 121, 70, 48, 114, 70, 77, 48, 68, 51, 110, 99, 33, 46, 46 };
-        static readonly byte[] FmodMask = { 17, 109, 74, 48, 19, 37, 48, 19, 117, 110, 67, 39, 86, 21, 74, 94 };
+        static readonly byte[] FmodMask = { 17, 109, 74, 48, 19, 37, 48, 19, 117, 110, 67, 39, 86, 21, 74, 112 };
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static uint DecodeSteamAppId(bool isDemo)
