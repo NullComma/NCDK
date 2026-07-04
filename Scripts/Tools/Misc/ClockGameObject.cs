@@ -28,6 +28,11 @@ namespace NCDK {
           this.CStartCoroutine(ClockTickRoutine());
        }
 
+       void OnValidate()
+       {
+          UpdateTime();
+       }
+
        IEnumerator ClockTickRoutine() {
           var wait = new WaitForSeconds(1.0f);
           while (enabled) {
@@ -75,6 +80,12 @@ namespace NCDK {
           if(pointerSeconds) pointerSeconds.localEulerAngles = new Vector3(0.0f, 0.0f, rotationSeconds);
           if(pointerMinutes) pointerMinutes.localEulerAngles = new Vector3(0.0f, 0.0f, rotationMinutes);
           if(pointerHours) pointerHours.localEulerAngles = new Vector3(0.0f, 0.0f, rotationHours);
+       }
+
+       public void SetToUseUserTime()
+       {
+          realTime = true;
+          Debug.Log("[ClockGameObject] Set to use user time.");
        }
     }
 }

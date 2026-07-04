@@ -21,7 +21,7 @@ namespace NCDK.Scripts.Lights {
         [MinMaxSliderAttribute(0.01f, 1f)]
         [SerializeField] private Vector2 _intensityMultiplierRange = new Vector2(0.5f, 0.5f);
         
-        [MinMaxSliderAttribute(0.01f, 300f)]
+        [MinMaxSliderAttribute(0.01f, 10f)]
         [SerializeField] private Vector2 _intervalTimeRange = new Vector2(0.1f, 5f);
         
         [MinMaxSliderAttribute(0.01f, 0.2f)]
