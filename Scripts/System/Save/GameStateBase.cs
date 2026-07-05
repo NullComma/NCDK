@@ -47,6 +47,12 @@ namespace NCDK
         }
         [NonSerialized] static Action _onNotifyForExternalModifiedSaveFile;
 
+        /// <summary>
+        /// Fired when a save file exists but is corrupted and no backup is recoverable.
+        /// A fresh save will be created silently afterward.
+        /// </summary>
+        public static event Action OnSaveCorrupted;
+
         [JsonProperty("_appVersionWhenCreated"), SerializeField]
         string _appVersionWhenCreated;
         public Version AppVersionWhenCreated
@@ -102,7 +108,65 @@ namespace NCDK
             // serialized json without hash
             this.SaveHash = Animator.StringToHash(this.GetSerializedJson()).ToString();
             // then serialize again and save with hash and a short name
-            return SaveJsonTextToFile(this.GetSerializedJson(), GetGameStateFilePath(this.SaveIdentifier.ToShortString()));
+            var filePath = GetGameStateFilePath(this.SaveIdentifier.ToShortString());
+            return SaveJsonTextToFileAtomic(this.GetSerializedJson(), filePath);
+        }
+
+        /// <summary>
+        /// Atomically writes JSON to file with a backup (.bak) of the previous version.
+        /// Writes to .tmp first, then renames to final path.
+        /// </summary>
+        static bool SaveJsonTextToFileAtomic(string json, string filePath)
+        {
+            var tempPath = filePath + ".tmp";
+            var backupPath = filePath + ".bak";
+
+            try
+            {
+#if UNITY_EDITOR
+                string contentToWrite = json;
+#else
+                string contentToWrite = EncryptionUtils.Encrypt(json);
+                if (string.IsNullOrEmpty(contentToWrite)) return false;
+#endif
+                // 1. Write to temp file
+                using (var streamWriter = File.CreateText(tempPath))
+                {
+                    streamWriter.Write(contentToWrite);
+                }
+
+                // 2. Replace old backup
+                if (File.Exists(backupPath))
+                    File.Delete(backupPath);
+
+                // 3. Move current file to backup (if exists)
+                if (File.Exists(filePath))
+                    File.Move(filePath, backupPath);
+
+                // 4. Move temp to final path
+                File.Move(tempPath, filePath);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[Save] Atomic write failed: {e.Message}");
+
+                // Try to restore from backup
+                try
+                {
+                    if (!File.Exists(filePath) && File.Exists(backupPath))
+                        File.Move(backupPath, filePath);
+                }
+                catch { }
+
+                return false;
+            }
+            finally
+            {
+                // Clean up temp file if it still exists
+                try { if (File.Exists(tempPath)) File.Delete(tempPath); } catch { }
+            }
         }
 
         string GetSerializedJson()
@@ -154,15 +218,15 @@ namespace NCDK
                 var jsonContent = EncryptionUtils.Decrypt(fileContent);
                 if (string.IsNullOrEmpty(jsonContent))
                 {
-                    Debug.LogError($"Save file at '{filePath}' is corrupted or could not be decrypted.");
-                    return null;
+                    Debug.LogError($"Save file at '{filePath}' is corrupted or could not be decrypted. Trying backup...");
+                    return TryLoadBackup<T>(filePath);
                 }
 
                 var save = DeserializeFile<T>(jsonContent);
                 if (save == null)
                 {
-                    Debug.LogError($"Could not deserialize Save at path '{filePath}'!");
-                    return null;
+                    Debug.LogError($"Could not deserialize Save at path '{filePath}'! Trying backup...");
+                    return TryLoadBackup<T>(filePath);
                 }
 
                 CheckForModifiedFile(save);
@@ -172,10 +236,49 @@ namespace NCDK
             }
             catch (Exception e)
             {
-                Debug.LogError(e);
+                Debug.LogError($"{e.Message}. Trying backup...");
+                return TryLoadBackup<T>(filePath);
+            }
+        }
+
+        static T TryLoadBackup<T>(string filePath) where T : PersistentData
+        {
+            var backupPath = filePath + ".bak";
+            if (!File.Exists(backupPath))
+            {
+                Debug.LogError($"Backup not found at '{backupPath}'. Save data is lost.");
+                OnSaveCorrupted?.Invoke();
+                return null;
             }
 
-            return null;
+            Debug.LogWarning($"Attempting to load backup from '{backupPath}'.");
+            try
+            {
+                var backupContent = File.ReadAllText(backupPath);
+                var jsonContent = EncryptionUtils.Decrypt(backupContent);
+                if (string.IsNullOrEmpty(jsonContent))
+                {
+                    OnSaveCorrupted?.Invoke();
+                    return null;
+                }
+
+                var save = DeserializeFile<T>(jsonContent);
+                if (save == null)
+                {
+                    OnSaveCorrupted?.Invoke();
+                    return null;
+                }
+
+                CheckForModifiedFile(save);
+                Debug.LogWarning($"Loaded from backup '{Path.GetFileName(backupPath)}'. Main save was corrupted.");
+                return save;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Backup also corrupted: {e.Message}");
+                OnSaveCorrupted?.Invoke();
+                return null;
+            }
         }
 
         static T DeserializeFile<T>(string fileContent) where T : PersistentData

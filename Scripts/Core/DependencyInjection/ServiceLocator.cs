@@ -148,5 +148,37 @@ namespace NCDK
         {
             return Resolve<T>();
         }
+
+        /// <summary>
+        /// Tries to resolve type T. Returns default(T) if not registered — no exception thrown.
+        /// </summary>
+        public static T TryResolve<T>()
+        {
+            if (EApplication.IsQuitting)
+                return default;
+
+            var type = typeof(T);
+            if (_instances.TryGetValue(type, out var instance))
+                return (T)instance;
+
+            if (_lazyFactories.TryGetValue(type, out var factory))
+            {
+                var newInstance = (T)factory();
+                _instances[type] = newInstance;
+                _lazyFactories.TryRemove(type, out _);
+                return newInstance;
+            }
+
+            return default;
+        }
+
+        /// <summary>
+        /// Tries to resolve type T. Returns true if the instance was found.
+        /// </summary>
+        public static bool TryResolve<T>(out T instance)
+        {
+            instance = TryResolve<T>();
+            return instance != null;
+        }
     }
 }
