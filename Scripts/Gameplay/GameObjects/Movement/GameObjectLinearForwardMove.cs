@@ -18,7 +18,7 @@ namespace NCDK {
 		protected override void Execute(float deltaTime) {
 			this._timeToAutoDestroy -= deltaTime;
 			if (this._timeToAutoDestroy <= 0f) {
-				this.gameObject.CDestroy();
+				this.gameObject.Destroy();
 				return;
 			}
 

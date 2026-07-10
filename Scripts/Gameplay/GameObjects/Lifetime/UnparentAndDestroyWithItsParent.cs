@@ -17,7 +17,7 @@ namespace NCDK
         }
         void OnPreviousParentDestroyEvent()
         {
-            gameObject.CDestroy();
+            gameObject.Destroy();
         }
 
         void OnValidate()

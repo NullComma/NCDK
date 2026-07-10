@@ -6,7 +6,7 @@ namespace NCDK {
         [SerializeField] bool _shouldLog = true;
 		
 		protected override void TriggerEvent() {
-			gameObject.CDestroy(_shouldLog, _secondsToDestroy);
+			gameObject.Destroy(_shouldLog, _secondsToDestroy);
 		}
 	}
 }

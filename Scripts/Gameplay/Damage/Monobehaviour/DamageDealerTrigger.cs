@@ -81,7 +81,7 @@ namespace NCDK {
 			if(_debug) Debug.Log($"'{name}' starting {nameof(DoDamageOnContact)} in '{go.name}'");
 			if (!go.TryGetComponent<ICDamageable>(out var damageable)) {
 				if (_destroyType == DestroyType.onAnyCollisionOrTrigger) {
-					gameObject.CDestroy();
+					gameObject.Destroy();
 				}
 				return;
 			}
@@ -92,7 +92,7 @@ namespace NCDK {
 				_damageds.Add(damageable);
 				damageable.TakeHit(attackData.data, attackData.AttackerTransform, DamageMultiplier);
 				if (_destroyType == DestroyType.onlyIfDidDamage) {
-					gameObject.CDestroy();
+					gameObject.Destroy();
 				}
 			}
 

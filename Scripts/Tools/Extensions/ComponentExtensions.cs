@@ -68,7 +68,7 @@ namespace NCDK {
 
         public static void DestroyGameObject<T>(this T value, bool shouldLog = false, float time = 0f) where T : Component {
             if (value == null) return;
-            value.gameObject.CDestroy(shouldLog, time);
+            value.gameObject.Destroy(shouldLog, time);
         }
 
     }

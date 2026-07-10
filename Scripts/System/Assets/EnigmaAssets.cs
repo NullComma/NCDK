@@ -55,7 +55,7 @@ namespace NCDK {
                 return;
             }
 
-            goToUnload.CDestroy();
+            goToUnload.Destroy();
             if (releaseAsset) {
                 Resources.UnloadAsset(goToUnload);
             }

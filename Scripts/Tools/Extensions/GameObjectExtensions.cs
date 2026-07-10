@@ -78,7 +78,7 @@ namespace NCDK {
             #endif
             foreach (var child in allChild) {
                 if(child == null) continue;
-                child.gameObject.CDestroy();
+                child.gameObject.Destroy();
             }
         }
 

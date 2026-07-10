@@ -7,7 +7,7 @@ namespace NCDK {
 
 		void Awake() {
 			gameObject.SetActive(_activeStateOnAwake);
-			this.CDestroy();
+			this.Destroy();
 		}
 		
 	}

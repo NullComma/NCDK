@@ -18,13 +18,13 @@ namespace NCDK {
 				return;
 			}
 			Debug.Log($"{nameof(DestroyGameObjectTrigger)} <color=orange>destroying game object</color> '{goToDestroy.name}'.", goToDestroy);
-			goToDestroy.CDestroy();
+			goToDestroy.Destroy();
 		}
 
 		protected override void TriggerEvent() {
 			if (!_destroyThis) return;
 			Debug.Log($"[{nameof(DestroyGameObjectTrigger)}] '{name}' <color=orange>self destroying</color>.");
-			gameObject.CDestroy();
+			gameObject.Destroy();
 		}
 	}
 }

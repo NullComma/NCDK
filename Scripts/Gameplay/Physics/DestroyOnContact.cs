@@ -9,9 +9,9 @@ namespace NCDK {
         protected override void StartedCollisionOrTrigger(Transform other) {
             base.StartedCollisionOrTrigger(other);
             foreach (var o in _otherGameObjectsToDestroy) {
-                o.CDestroy();
+                o.Destroy();
             }
-            this.gameObject.CDestroy();
+            this.gameObject.Destroy();
         }
     }
 }

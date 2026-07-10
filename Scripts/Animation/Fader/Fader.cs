@@ -23,7 +23,7 @@ namespace NCDK {
 		#region <<---------- MonoBehaviour ---------->>
 
 		void Awake() {
-			if (_instance != null) _instance.gameObject.CDestroy();
+			if (_instance != null) _instance.gameObject.Destroy();
 			_instance = this;
 			gameObject.layer = 5; // UI
 			this.DontDestroyOnLoad();
@@ -55,7 +55,7 @@ namespace NCDK {
 		{
 			Application.quitting -= ApplicationOnQuittingEvent;
 			if (this == null) return;
-			gameObject.CDestroy();
+			gameObject.Destroy();
 		}
 
 		void Update() => UpdateOpacity();

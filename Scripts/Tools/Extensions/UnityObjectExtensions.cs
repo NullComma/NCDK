@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 namespace NCDK {
     public static class UnityObjectExtensions {
 
-        public static void CDoIfNotNull<T>(this T value, Action<T> actionToDo) {
+        public static void DoIfNotNull<T>(this T value, Action<T> actionToDo) {
             if (value is Object oValue) {
                 if (oValue == null) return;
             }
@@ -13,7 +13,7 @@ namespace NCDK {
             actionToDo?.Invoke(value);
         }
 
-        public static void CDestroy(this Object value, bool shouldLog = false, float time = 0f) {
+        public static void Destroy(this Object value, bool shouldLog = false, float time = 0f) {
             if (value == null) return;
             if (shouldLog) {
                 Debug.Log("Destroying " + value.name + " - " + value.GetType().Name + " - " + value.GetInstanceID(), value);
@@ -26,7 +26,7 @@ namespace NCDK {
             Object.DestroyImmediate(value, false);
         }
 
-        public static void CDestroyImmediate(this Object value, bool allowDestroyingAssets = false) {
+        public static void DestroyImmediate(this Object value, bool allowDestroyingAssets = false) {
             if (value == null) return;
             Object.DestroyImmediate(value, allowDestroyingAssets);
         }

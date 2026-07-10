@@ -11,14 +11,14 @@ namespace NCDK.Tests.Editor
         public void CDestroy_WithNull_DoesNotThrow()
         {
             Object obj = null;
-            Assert.DoesNotThrow(() => obj.CDestroy());
+            Assert.DoesNotThrow(() => obj.Destroy());
         }
 
         [Test]
         public void CDestroy_DestroysGameObject()
         {
             var go = new GameObject("ToDestroy");
-            go.CDestroy();
+            go.Destroy();
             Assert.IsTrue(go == null);
         }
 
@@ -26,7 +26,7 @@ namespace NCDK.Tests.Editor
         public void CDestroyImmediate_DestroysGameObject()
         {
             var go = new GameObject("ToDestroyImmediate");
-            go.CDestroyImmediate();
+            go.DestroyImmediate();
             Assert.IsTrue(go == null);
         }
 
@@ -34,7 +34,7 @@ namespace NCDK.Tests.Editor
         public void CDestroyImmediate_WithNull_DoesNotThrow()
         {
             Object obj = null;
-            Assert.DoesNotThrow(() => obj.CDestroyImmediate());
+            Assert.DoesNotThrow(() => obj.DestroyImmediate());
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace NCDK.Tests.Editor
         {
             var go = new GameObject("Test");
             bool invoked = false;
-            go.CDoIfNotNull<GameObject>(g => invoked = true);
+            go.DoIfNotNull<GameObject>(g => invoked = true);
             Assert.IsTrue(invoked);
             Object.DestroyImmediate(go);
         }
@@ -52,7 +52,7 @@ namespace NCDK.Tests.Editor
         {
             GameObject nullGo = null;
             bool invoked = false;
-            nullGo.CDoIfNotNull<GameObject>(g => invoked = true);
+            nullGo.DoIfNotNull<GameObject>(g => invoked = true);
             Assert.IsFalse(invoked);
         }
 
@@ -60,7 +60,7 @@ namespace NCDK.Tests.Editor
         public void CDoIfNotNull_WithNullAction_DoesNotThrow()
         {
             var go = new GameObject("Test");
-            Assert.DoesNotThrow(() => go.CDoIfNotNull<GameObject>(null));
+            Assert.DoesNotThrow(() => go.DoIfNotNull<GameObject>(null));
             Object.DestroyImmediate(go);
         }
     }

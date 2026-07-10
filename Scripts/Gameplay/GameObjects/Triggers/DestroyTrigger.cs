@@ -7,7 +7,7 @@ namespace NCDK {
         public UnityEvent DestroyEvent;
         
         public void DestroyGameObject(GameObject go) {
-            go.CDestroy();
+            go.Destroy();
             DestroyEvent?.Invoke();
         }
         

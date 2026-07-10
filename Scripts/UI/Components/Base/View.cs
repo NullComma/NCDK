@@ -147,7 +147,7 @@ namespace NCDK.UI
         /// <summary>
         /// Immediately closes and destroys this view.
         /// </summary>
-        public void Close() => gameObject.CDestroy();
+        public void Close() => gameObject.Destroy();
 
         /// <summary>
         /// Closes all open views in the scene.
