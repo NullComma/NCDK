@@ -73,7 +73,9 @@ Shader "Universal Render Pipeline/2D/Sprite-AngleFade"
             {
                 COMMON_2D_OUTPUTS
                 half4 color : COLOR;
+                #if !defined(DEBUG_DISPLAY)
                 float3 positionWS : TEXCOORD1;
+                #endif
                 float4 projectedPosition : TEXCOORD6;
                 float3 fadeNormalWS : TEXCOORD4;
                 float3 fadeViewDirWS : TEXCOORD5;
@@ -93,8 +95,6 @@ Shader "Universal Render Pipeline/2D/Sprite-AngleFade"
 
             #if defined(_SOFTPARTICLES_ON)
                 TEXTURE2D_X_FLOAT(_CameraDepthTexture);
-                float4 _CameraDepthTexture_TexelSize;
-                #define sampler_CameraDepthTexture sampler_PointClamp
             #endif
 
             Varyings UnlitVertex(Attributes input)
@@ -111,7 +111,9 @@ Shader "Universal Render Pipeline/2D/Sprite-AngleFade"
                 o.projectedPosition.zw = o.positionCS.zw;
 
                 float3 positionWS = TransformObjectToWorld(input.positionOS);
+                #if !defined(DEBUG_DISPLAY)
                 o.positionWS = positionWS;
+                #endif
                 o.fadeNormalWS = TransformObjectToWorldDir(input.normal);
                 o.fadeViewDirWS = GetWorldSpaceViewDir(positionWS);
                 return o;
@@ -139,7 +141,7 @@ Shader "Universal Render Pipeline/2D/Sprite-AngleFade"
                     float2 screenUV = UnityStereoTransformScreenSpaceTex(input.projectedPosition.xy / input.projectedPosition.w);
                     float rawDepth = SAMPLE_TEXTURE2D_X(_CameraDepthTexture, sampler_PointClamp, screenUV).r;
                     float sceneZ = (unity_OrthoParams.w == 0) ? LinearEyeDepth(rawDepth, _ZBufferParams) : LinearDepthToEyeDepth(rawDepth);
-                    float thisZ = LinearEyeDepth(input.projectedPosition.z / input.projectedPosition.w, _ZBufferParams);
+                    float thisZ = (unity_OrthoParams.w == 0) ? LinearEyeDepth(input.projectedPosition.z / input.projectedPosition.w, _ZBufferParams) : LinearDepthToEyeDepth(input.projectedPosition.z / input.projectedPosition.w);
                     color.a *= saturate(_SoftParticleFadeParams.y * (sceneZ - _SoftParticleFadeParams.x - thisZ));
                 #endif
 
