@@ -9,22 +9,30 @@ namespace NCDK
         /// A collider without a Renderer and MeshFilter on the same GameObject has no material to report.
         /// </summary>
         /// <remarks>
-        /// When the submesh cannot be resolved the first material is returned instead of null, which keeps
-        /// callers from treating the surface as unknown: convex MeshColliders never report a triangle
-        /// index (measured: hit.triangleIndex is -1 on ladders_01), and Meshes without Read/Write enabled
-        /// cannot report their triangles either.
+        /// The submesh is read from the MeshCollider mesh when there is one, because hit.triangleIndex
+        /// belongs to it: static batching swaps the MeshFilter mesh for the combined one (measured on a
+        /// static terrain: "Combined Mesh (root: scene)", 12 submeshes, not readable) while the collider
+        /// keeps the original mesh (terrain, 3 submeshes), so looking the triangle up in the combined
+        /// mesh always answered with the first material.
+        /// When the submesh cannot be resolved the first material is returned instead of null: convex
+        /// MeshColliders never report a triangle index (measured: hit.triangleIndex is -1 on a prop with
+        /// a convex collider) and Meshes without Read/Write enabled cannot report their triangles.
         /// </remarks>
         public static Material GetMaterialAtHit(this RaycastHit hit) {
             if (!hit.collider.TryGetComponent(out Renderer renderer) || !hit.collider.TryGetComponent(out MeshFilter meshFilter))
             {
                 return null;
             }
-            if (meshFilter.sharedMesh == null) return null;
+
             var sharedMesh = meshFilter.sharedMesh;
+            if (hit.collider is MeshCollider meshCollider && meshCollider.sharedMesh != null) {
+                sharedMesh = meshCollider.sharedMesh;
+            }
+            if (sharedMesh == null) return null;
 
             var materialId = 0;
 
-            if (sharedMesh.isReadable && hit.collider is MeshCollider) {
+            if (sharedMesh.isReadable) {
                 var triangleIndex = hit.triangleIndex;
                 if (triangleIndex > -1) {
                     var resolvedSubMesh = FindSubMeshOfTriangle(sharedMesh, triangleIndex);
