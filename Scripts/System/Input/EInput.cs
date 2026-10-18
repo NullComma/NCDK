@@ -54,22 +54,72 @@ namespace NCDK
             InputSystem.onEvent -= OnInputReceived;
         }
 
+        /// <summary>Pointer movement (in pixels per frame) required before the mouse claims the active device.</summary>
+        const float MouseMovementThresholdPixels = 2f;
+
+        /// <summary>Stick deflection required before a gamepad claims the active device.</summary>
+        const float GamepadStickThreshold = 0.2f;
+
         private static void OnInputReceived(InputEventPtr eventPtr, InputDevice device)
         {
             if (!eventPtr.IsA<StateEvent>() && !eventPtr.IsA<DeltaStateEvent>()) return;
 
-            bool isMouseOrKeyboard = device is Mouse || device is Keyboard;
-            bool isGamepad = device is Gamepad;
-
-            if (!isMouseOrKeyboard && !isGamepad) return;
-
-            InputDeviceType newDevice = isMouseOrKeyboard ? InputDeviceType.MouseAndKeyboard : InputDeviceType.Gamepad;
+            // Idle devices keep reporting state events (high polling rates, stick drift), so the
+            // active device only switches on *meaningful* input. Otherwise an untouched mouse
+            // silently steals the device from a gamepad the player is using, and the cursor
+            // reappears in menus.
+            InputDeviceType newDevice;
+            if (device is Mouse || device is Keyboard)
+            {
+                if (!HasMeaningfulMouseOrKeyboardInput()) return;
+                newDevice = InputDeviceType.MouseAndKeyboard;
+            }
+            else if (device is Gamepad pad)
+            {
+                if (!HasMeaningfulGamepadInput(pad)) return;
+                newDevice = InputDeviceType.Gamepad;
+            }
+            else
+            {
+                return;
+            }
 
             if (CurrentDevice != newDevice)
             {
                 CurrentDevice = newDevice;
                 OnDeviceChanged?.Invoke(CurrentDevice);
             }
+        }
+
+        private static bool HasMeaningfulMouseOrKeyboardInput()
+        {
+            var mouse = Mouse.current;
+            if (mouse != null)
+            {
+                float threshold = MouseMovementThresholdPixels;
+                if (mouse.delta.ReadValue().sqrMagnitude >= threshold * threshold) return true;
+                if (mouse.leftButton.isPressed || mouse.rightButton.isPressed || mouse.middleButton.isPressed) return true;
+                if (mouse.scroll.ReadValue().sqrMagnitude > 0f) return true;
+            }
+
+            var keyboard = Keyboard.current;
+            return keyboard != null && keyboard.anyKey.isPressed;
+        }
+
+        private static bool HasMeaningfulGamepadInput(Gamepad pad)
+        {
+            float threshold = GamepadStickThreshold;
+            if (pad.leftStick.ReadValue().sqrMagnitude >= threshold * threshold) return true;
+            if (pad.rightStick.ReadValue().sqrMagnitude >= threshold * threshold) return true;
+            if (pad.leftTrigger.ReadValue() >= threshold) return true;
+            if (pad.rightTrigger.ReadValue() >= threshold) return true;
+
+            return pad.buttonSouth.isPressed || pad.buttonEast.isPressed
+                || pad.buttonWest.isPressed || pad.buttonNorth.isPressed
+                || pad.startButton.isPressed || pad.selectButton.isPressed
+                || pad.leftShoulder.isPressed || pad.rightShoulder.isPressed
+                || pad.dpad.up.isPressed || pad.dpad.down.isPressed
+                || pad.dpad.left.isPressed || pad.dpad.right.isPressed;
         }
 #endif
 
