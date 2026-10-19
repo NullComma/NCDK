@@ -1,4 +1,4 @@
-# Views & UI (`NCDK.UI`)
+﻿# Views & UI (`NCDK.UI`)
 
 `View` is the base for every UI panel/menu in the game. Opening a view optionally pauses
 the game and registers "in menu" blocking; a navigation stack manages focus.
@@ -48,7 +48,7 @@ Public surface:
 
 ## Common game views (in `Assets/_game/Scripts/Views/`)
 
-`PauseMenuView`, `GameplaySettingsView` (`ShouldPauseTheGame = false`), `GammaConfigView`,
+`PauseMenuView`, `CameraSettingsView` (`ShouldPauseTheGame = false`), `GammaConfigView`,
 `GameOverView`, `VictoryView`, plus prefabs `Prefabs/View - *.prefab` (Pause Menu, Settings,
 Anomaly Report, Adjust Gamma, Audio Settings, Graphics Settings, Gameplay Settings, Seed Select,
 Select Game Mode, Confirm, I2Loc Select Language).
