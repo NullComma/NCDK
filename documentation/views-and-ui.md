@@ -48,7 +48,7 @@ Public surface:
 
 ## Common game views (in `Assets/_game/Scripts/Views/`)
 
-`PauseMenuView`, `CameraSpeedView` (`ShouldPauseTheGame = false`), `GammaConfigView`,
+`PauseMenuView`, `GameplaySettingsView` (`ShouldPauseTheGame = false`), `GammaConfigView`,
 `GameOverView`, `VictoryView`, plus prefabs `Prefabs/View - *.prefab` (Pause Menu, Settings,
-Anomaly Report, Adjust Gamma, Audio Settings, Graphics Settings, Camera Speed, Seed Select,
+Anomaly Report, Adjust Gamma, Audio Settings, Graphics Settings, Gameplay Settings, Seed Select,
 Select Game Mode, Confirm, I2Loc Select Language).
