@@ -51,8 +51,24 @@ namespace NCDK.UI
             if (_eventSystem == null) _eventSystem = GetComponentInChildren<EventSystem>(true);
         }
 
+        /// <summary>
+        /// Makes this view's EventSystem the one Unity routes input to. uGUI resolves
+        /// <see cref="EventSystem.current"/> from the first entry of an internal list that can keep
+        /// destroyed entries when views open and close, leaving input dead; assigning moves a live
+        /// instance to the front and repairs that state.
+        /// </summary>
+        protected void TakeOverInput()
+        {
+            if (_eventSystem == null || !_eventSystem.isActiveAndEnabled) return;
+            if (EventSystem.current == _eventSystem) return;
+
+            EventSystem.current = _eventSystem;
+        }
+
         protected virtual void OnEnable()
         {
+            TakeOverInput();
+
             // Store which object was selected right before this view opened.
             if (EventSystem.current != null)
                 _lastSelectedObject = EventSystem.current.currentSelectedGameObject;
@@ -90,6 +106,9 @@ namespace NCDK.UI
 
         void LateUpdate()
         {
+            // Keeps input pointed at this view even if another EventSystem was destroyed mid-frame.
+            TakeOverInput();
+
             // This is the failsafe for gamepad navigation.
             // If nothing is selected and a gamepad is connected, it means a mouse user
             // might have deselected everything, breaking controller navigation.
