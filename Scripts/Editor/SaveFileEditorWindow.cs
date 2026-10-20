@@ -23,6 +23,8 @@ namespace NCDK.Editor
         private Vector2 _scrollPos;
         private Vector2 _fileListScrollPos;
         private string _statusMessage;
+        private int _deleteCount = 1;
+        private const string DeleteCountPrefKey = "NCDK.SaveEditor.DeleteCount";
         private Dictionary<Guid, UnityEngine.Object> _guidObjectCache = new Dictionary<Guid, UnityEngine.Object>();
         
         /// <summary>
@@ -32,6 +34,7 @@ namespace NCDK.Editor
         
         private void OnEnable()
         {
+            _deleteCount = EditorPrefs.GetInt(DeleteCountPrefKey, 1);
             ReloadFiles();
             IdentifiableRegistry.MarkDirty();
         }
@@ -87,6 +90,20 @@ namespace NCDK.Editor
             {
                 SaveUnencryptedChanges();
             }
+
+            GUILayout.Space(8);
+            int newDeleteCount = EditorGUILayout.IntField(_deleteCount, EditorStyles.toolbarTextField, GUILayout.Width(32));
+            if (newDeleteCount != _deleteCount)
+            {
+                _deleteCount = Mathf.Max(0, newDeleteCount);
+                EditorPrefs.SetInt(DeleteCountPrefKey, _deleteCount);
+            }
+
+            if (GUILayout.Button("Delete Last N", EditorStyles.toolbarButton))
+            {
+                DeleteLastSaves(_deleteCount);
+            }
+
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
 
@@ -246,8 +263,68 @@ namespace NCDK.Editor
             }
         }
 
-        // --- Recursive JSON Drawing ---
+        /// <summary>
+        /// Deletes the N most recent save files (the sidebar is already sorted newest first),
+        /// together with their .bak/.tmp sidecars, after a confirmation dialog.
+        /// </summary>
+        private void DeleteLastSaves(int count)
+        {
+            if (count <= 0)
+            {
+                _statusMessage = "Set how many saves to delete (1 or more).";
+                return;
+            }
 
+            List<string> victims = _saveFiles.Take(count).ToList();
+            if (victims.Count == 0)
+            {
+                _statusMessage = "No save files to delete.";
+                return;
+            }
+
+            string preview = string.Join("\n", victims.Take(8).Select(Path.GetFileName));
+            if (victims.Count > 8) preview += $"\n... and {victims.Count - 8} more";
+
+            bool confirmed = EditorUtility.DisplayDialog(
+                $"Delete {victims.Count} save file(s)?",
+                $"This removes the {victims.Count} most recent save(s) from disk, plus their .bak/.tmp copies. It cannot be undone.\n\n{preview}",
+                "Delete", "Cancel");
+
+            if (!confirmed) return;
+
+            int deleted = 0;
+            foreach (string file in victims)
+            {
+                try
+                {
+                    if (File.Exists(file))
+                    {
+                        File.Delete(file);
+                        deleted++;
+                    }
+
+                    if (File.Exists(file + ".bak")) File.Delete(file + ".bak");
+                    if (File.Exists(file + ".tmp")) File.Delete(file + ".tmp");
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"[SaveFileEditor] Failed to delete '{file}': {e.Message}");
+                }
+            }
+
+            bool removedSelected = _selectedFilePath != null && victims.Contains(_selectedFilePath);
+            ReloadFiles();
+
+            if (removedSelected)
+            {
+                _selectedFilePath = null;
+                _currentJson = null;
+            }
+
+            _statusMessage = $"Deleted {deleted} save file(s).";
+        }
+
+        // --- Recursive JSON Drawing ---
         private void DrawJToken(JToken token, string label = null)
         {
             if (token == null) return;
