@@ -20,14 +20,18 @@ namespace NCDK {
 
 		/// <summary>
 		/// True while the director is still producing its timeline: playing, or paused because the
-		/// game was paused. Use this for "wait until the cutscene ends" loops — <see cref="IsPlaying"/>
+		/// game itself is paused. Use this for "wait until the cutscene ends" loops — <see cref="IsPlaying"/>
 		/// reports a paused director as not playing, which makes a wait exit while the cutscene is
 		/// merely frozen.
 		/// </summary>
 		public static bool IsRunning(this PlayableDirector playableDirector)
 		{
-			return playableDirector != null
-			       && (playableDirector.state == PlayState.Playing || playableDirector.state == PlayState.Paused);
+			if (playableDirector == null) return false;
+			if (playableDirector.state == PlayState.Playing) return true;
+
+			// Unity also reports Paused for a director that simply is not playing (never started,
+			// or already finished), so a paused state only counts while the game is paused.
+			return playableDirector.state == PlayState.Paused && ETime.IsPaused;
 		}
 		
 	}
