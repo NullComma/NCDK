@@ -6,9 +6,9 @@ namespace NCDK.UI
     /// Language selector view that uses I2 Localization to populate the list of available languages.
     /// Equivalent of UnityLocalizationLanguageSelectorView but for I2.Loc.
     /// </summary>
-#if I2LOC
     public class I2LanguageSelectorView : View
     {
+#if I2LOC
         [SerializeField] SetLanguageOption _languageOptionPrefab;
         [SerializeField] Transform _languageOptionsContainer;
 
@@ -24,9 +24,6 @@ namespace NCDK.UI
                 option.Init(language);
             }
         }
-    }
-#else
-    // Stub so the class exists in all compilation contexts.
-    public class I2LanguageSelectorView : View { }
 #endif
+    }
 }
