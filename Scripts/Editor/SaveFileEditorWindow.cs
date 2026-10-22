@@ -25,6 +25,13 @@ namespace NCDK.Editor
         private string _statusMessage;
         private int _deleteCount = 1;
         private const string DeleteCountPrefKey = "NCDK.SaveEditor.DeleteCount";
+
+        private const string LiveRefreshPrefKey = "NCDK.SaveEditor.LiveRefresh";
+        private bool _liveRefresh = true;
+        private string _lastLoadedJson;
+        private DateTime _lastLoadedWriteUtc;
+        private double _nextLiveCheckTime;
+
         private Dictionary<Guid, UnityEngine.Object> _guidObjectCache = new Dictionary<Guid, UnityEngine.Object>();
         
         /// <summary>
@@ -35,8 +42,62 @@ namespace NCDK.Editor
         private void OnEnable()
         {
             _deleteCount = EditorPrefs.GetInt(DeleteCountPrefKey, 1);
+            _liveRefresh = EditorPrefs.GetBool(LiveRefreshPrefKey, true);
             ReloadFiles();
             IdentifiableRegistry.MarkDirty();
+
+            EditorApplication.update -= LiveRefreshTick;
+            EditorApplication.update += LiveRefreshTick;
+        }
+
+        private void OnDisable()
+        {
+            EditorApplication.update -= LiveRefreshTick;
+        }
+
+        /// <summary>
+        /// True when the window holds edits that were not written to disk yet. Live refresh must not
+        /// overwrite them, so it simply waits until the changes are saved or discarded.
+        /// </summary>
+        private bool HasUnsavedEdits
+        {
+            get
+            {
+                if (_currentJson == null || string.IsNullOrEmpty(_lastLoadedJson)) return false;
+                return _lastLoadedJson != _currentJson.ToString(Formatting.Indented);
+            }
+        }
+
+        /// <summary>
+        /// Hot reload: while Play Mode keeps writing the save, the window reloads the file so the
+        /// anomaly fields can be watched in real time. Skipped while there are unsaved edits.
+        /// </summary>
+        private void LiveRefreshTick()
+        {
+            if (!_liveRefresh || string.IsNullOrEmpty(_selectedFilePath) || _currentJson == null) return;
+            if (EditorApplication.isCompiling || EditorApplication.isUpdating) return;
+
+            double now = EditorApplication.timeSinceStartup;
+            if (now < _nextLiveCheckTime) return;
+            _nextLiveCheckTime = now + 0.5;
+
+            if (HasUnsavedEdits) return;
+
+            DateTime writeUtc;
+            try
+            {
+                if (!File.Exists(_selectedFilePath)) return;
+                writeUtc = File.GetLastWriteTimeUtc(_selectedFilePath);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            if (writeUtc == _lastLoadedWriteUtc) return;
+
+            LoadFile(_selectedFilePath);
+            Repaint();
         }
 
         private void ReloadFiles()
@@ -45,6 +106,8 @@ namespace NCDK.Editor
             _currentJson = null;
             _selectedFilePath = null;
             _statusMessage = string.Empty;
+            _lastLoadedJson = null;
+            _lastLoadedWriteUtc = default;
 
             try
             {
@@ -63,6 +126,28 @@ namespace NCDK.Editor
             {
                 Debug.LogError($"Error listing save files: {e.Message}");
             }
+
+            RestoreLastSelection();
+        }
+
+        /// <summary>
+        /// Reopens the save that was selected last time the window was used. A path that no longer
+        /// exists falls back to "None", so the window never opens pointing at a file that is gone.
+        /// </summary>
+        private void RestoreLastSelection()
+        {
+            if (!SaveEditorSelection.HasSelection) return;
+
+            string lastSelected = SaveEditorSelection.SelectedPath;
+            if (_saveFiles.Contains(lastSelected))
+            {
+                LoadFile(lastSelected);
+                return;
+            }
+
+            SaveEditorSelection.Clear();
+            _statusMessage = "The last selected save no longer exists. Play Mode uses the default (None).";
+            Debug.Log($"[SaveEditor] Selected save not found ('{lastSelected}'); reverted to None.");
         }
 
         // Helper to get folder path, replicating PersistentData logic if needed, 
@@ -89,6 +174,13 @@ namespace NCDK.Editor
             if (GUILayout.Button("Save Unencrypted", EditorStyles.toolbarButton))
             {
                 SaveUnencryptedChanges();
+            }
+
+            bool live = GUILayout.Toggle(_liveRefresh, "Live", EditorStyles.toolbarButton, GUILayout.Width(44));
+            if (live != _liveRefresh)
+            {
+                _liveRefresh = live;
+                EditorPrefs.SetBool(LiveRefreshPrefKey, live);
             }
 
             GUILayout.Space(8);
@@ -205,6 +297,11 @@ namespace NCDK.Editor
                 EditorGUILayout.HelpBox(_statusMessage, MessageType.Info);
             }
 
+            if (_liveRefresh && HasUnsavedEdits)
+            {
+                EditorGUILayout.HelpBox("Live refresh paused: the window has unsaved edits.", MessageType.Warning);
+            }
+
             _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
             
             EditorGUILayout.LabelField("JSON Content", EditorStyles.boldLabel);
@@ -230,12 +327,17 @@ namespace NCDK.Editor
                 }
 
                 _currentJson = JObject.Parse(decrypted);
+
+                // Snapshot used for dirty detection and for the hot-reload timestamp check.
+                _lastLoadedJson = _currentJson.ToString(Formatting.Indented);
+                _lastLoadedWriteUtc = File.GetLastWriteTimeUtc(path);
                 _statusMessage = "File loaded and decrypted successfully.";
             }
             catch (Exception e)
             {
                 Debug.LogError($"Error loading file: {e.Message}");
                 _currentJson = null;
+                _lastLoadedJson = null;
             }
         }
 
