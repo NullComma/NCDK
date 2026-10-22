@@ -23,15 +23,27 @@ namespace NCDK {
                 NetlifyBuildProd(netlifyFolder, "netlify build --prod", true);
             }
             #elif UNITY_EDITOR_WIN
-            var outputPath = buildPath.Replace($"/{Application.productName}.exe", string.Empty);
-            CreateShortcutToApplicationLogsDirectoryOnWindows(outputPath);
+            // Derive folder and product name from the build output itself. PlayerSettings.productName
+            // can already be back to the project default when this postprocess runs (a pre-build
+            // preprocessor reimports ProjectSettings), and then the replace below stripped nothing:
+            // the shortcut was written inside "<exe>.exe\Logs and Save Directory.lnk" and the target
+            // pointed at the wrong LocalLow folder.
+            var outputPath = Path.GetDirectoryName(buildPath);
+            var builtProductName = Path.GetFileNameWithoutExtension(buildPath);
+            CreateShortcutToApplicationLogsDirectoryOnWindows(outputPath, builtProductName);
             #endif
         }
 
-        static void CreateShortcutToApplicationLogsDirectoryOnWindows(string outputPath)
+        static void CreateShortcutToApplicationLogsDirectoryOnWindows(string outputPath, string productName)
         {
-            string targetPath = Path.Combine("%USERPROFILE%\\AppData\\LocalLow", Application.companyName, Application.productName);
+            string targetPath = Path.Combine("%USERPROFILE%\\AppData\\LocalLow", Application.companyName, productName);
             string shortcutPath = Path.Combine(outputPath, "Logs and Save Directory.lnk");
+
+            if (!Directory.Exists(outputPath))
+            {
+                Debug.LogError($"[CreateShortcut] Build output folder not found: '{outputPath}'");
+                return;
+            }
 
             string cmd = $"/c powershell -Command \"$WshShell = New-Object -ComObject WScript.Shell; $Shortcut = $WshShell.CreateShortcut('{shortcutPath}'); $Shortcut.TargetPath = '{targetPath}'; $Shortcut.Save()\"";
 
