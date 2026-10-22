@@ -128,6 +128,24 @@ namespace NCDK.Editor
         private void DrawSidebar()
         {
             EditorGUILayout.LabelField("Save Files", EditorStyles.boldLabel);
+
+            // "None" restores the default Play behaviour: load the most recent save or create a new one.
+            bool noneSelected = !SaveEditorSelection.HasSelection;
+            GUIStyle noneStyle = new GUIStyle(EditorStyles.label);
+            if (noneSelected)
+            {
+                noneStyle.normal.textColor = Color.cyan;
+                noneStyle.fontStyle = FontStyle.Bold;
+            }
+
+            if (GUILayout.Button("None (default)", noneStyle))
+            {
+                SaveEditorSelection.Clear();
+                Repaint();
+            }
+
+            EditorGUILayout.LabelField("▼ used when Play starts", EditorStyles.miniLabel);
+
             _fileListScrollPos = EditorGUILayout.BeginScrollView(_fileListScrollPos);
 
             if (_saveFiles.Count == 0)
@@ -139,20 +157,29 @@ namespace NCDK.Editor
             {
                 string fileName = Path.GetFileName(file);
                 bool isSelected = _selectedFilePath == file;
+                bool isPlaySave = SaveEditorSelection.HasSelection && SaveEditorSelection.SelectedPath == file;
 
                 GUIStyle style = new GUIStyle(EditorStyles.label);
+                if (isPlaySave)
+                {
+                    style.normal.textColor = new Color(0.4f, 0.9f, 0.4f);
+                }
                 if (isSelected)
                 {
                     style.normal.textColor = Color.cyan;
                     style.fontStyle = FontStyle.Bold;
                 }
 
-                if (GUILayout.Button(fileName, style))
+                if (GUILayout.Button(isPlaySave ? "▶ " + fileName : fileName, style))
                 {
+                    // The last save clicked is the one Play Mode starts from, and it is also the one
+                    // opened in the editor.
+                    SaveEditorSelection.SelectedPath = file;
                     if (!isSelected)
                     {
                         LoadFile(file);
                     }
+                    Repaint();
                 }
             }
 
