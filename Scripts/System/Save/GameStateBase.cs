@@ -386,15 +386,19 @@ namespace NCDK
 
             var persistentDataPath = GetApplicationPersistentDataFolder();
 
-            // Default path: .../NullComma/ApplicationName/save
-            var folderPath = Path.Combine(persistentDataPath, SavesDirectoryName);
-
-            // Steamworks support: .../NullComma/ApplicationName/SteamID/save
+            // Steam Cloud is configured to sync .../NullComma/ApplicationName/save, so everything has
+            // to live under that folder. The account id therefore goes INSIDE it:
+            //
+            //   .../NullComma/ApplicationName/save/<steamid>/<file>.ec
+            //
+            // The old layout (.../ApplicationName/<steamid>/save/) was invisible to Steam Cloud and
+            // mixed accounts on a machine shared by two Steam users.
+            var rootFolder = Path.Combine(persistentDataPath, SavesDirectoryName);
             ulong? steamId = GetSteamID();
-            if (steamId.HasValue)
-            {
-                folderPath = Path.Combine(persistentDataPath, steamId.Value.ToString(), SavesDirectoryName);
-            }
+
+            string folderPath = steamId.HasValue
+                ? Path.Combine(rootFolder, steamId.Value.ToString())
+                : rootFolder;
 
             folderPath = folderPath.Replace('\\', '/');
             if (!Directory.Exists(folderPath))
@@ -402,8 +406,21 @@ namespace NCDK
                 Directory.CreateDirectory(folderPath);
             }
 
-            _cachedGameStateFolder = folderPath;
+            // Only cache when the account id was resolved: when Steam is not available yet the folder
+            // is a temporary fallback and must be recomputed later, otherwise the session keeps
+            // writing outside the per-account folder (that is how saves ended up without an id).
+            if (steamId.HasValue)
+            {
+                _cachedGameStateFolder = folderPath;
+            }
+
             return folderPath;
+        }
+
+        /// <summary>Drops the cached folder so the next call re-resolves the Steam account id.</summary>
+        public static void ResetGameStateFolderCache()
+        {
+            _cachedGameStateFolder = null;
         }
 
 
